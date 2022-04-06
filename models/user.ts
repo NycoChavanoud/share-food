@@ -11,7 +11,6 @@ export interface IUser{
 
 
 
-
 const hashingOptions = {
     memoryCost: 2 ** 16,
     timeCost: 5,
@@ -34,3 +33,8 @@ const hashingOptions = {
 export const deleteManyUsers = db.user.deleteMany;
 
 export const deleteOneUser = db.user.delete;
+
+export const findByEmail = (email : string) => db.user.findUnique({where : {email}})
+
+export const emailAlreadyExists =(email:string )=> db.user.findFirst({where: {email}}).then((user)=>!!user)
+
