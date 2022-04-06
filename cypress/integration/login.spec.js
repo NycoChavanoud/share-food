@@ -6,10 +6,10 @@ describe("login", function () {
     cy.contains("s'inscrire");
   });
 
-  it("not goods login informations", function () {
+  it("not goods 'login' informations", function () {
     cy.visit("/login");
     cy.get("[data-cy='email']").type("mail@mail.com");
-    cy.get('[data-cy="password"]').type("azertyuiop");
+    cy.get('[data-cy="password"]').type("aaazzzeeezzz");
     cy.get('[data-cy="formLogin"]').submit();
     cy.get('[data-cy="errorMessage"]').should("not.exist");
     cy.contains("identifiants inexistants - veuillez créer un compte");
@@ -17,7 +17,7 @@ describe("login", function () {
 
   it("login with goods informations", function () {
     cy.visit("/login");
-    cy.get("[data-cy='email']").type("mail@mail.com");
+    cy.get("[data-cy='email']").type("dave.lopper@mail.com");
     cy.get('[data-cy="password"]').type("azertyuiop");
     cy.get('[data-cy="formLogin"]').submit();
     cy.url().should("include", "/dashboard/#user");
