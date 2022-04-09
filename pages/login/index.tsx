@@ -22,11 +22,8 @@ const Login: NextPage = (props) => {
 
   return (
     <>
-      <Head>
-        <title>Identification</title>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
-      </Head>
-      <PublicHeader title="S’identifier" link="/" />
+
+      <PublicHeader title="S’identifier" link="/" titlePage="Identification" />
 
       <form onSubmit={handleSubmit} className={style.formLogin} data-cy="formLogin" >
         <label htmlFor="email" className={style.labelForm} >votre email :</label>
