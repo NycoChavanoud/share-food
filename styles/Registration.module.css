@@ -1,0 +1,24 @@
+.titleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.titleRegister {
+  font-size: 1.7em;
+}
+
+.workInProgress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  height: 80vh;
+  margin: auto auto;
+}
+
+.wipP {
+  margin: 30px;
+  text-align: center;
+}

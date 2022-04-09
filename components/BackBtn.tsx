@@ -1,15 +1,20 @@
 import Image from "next/image";
-import Link from "next/link";
+import Router from "next/router";
 import Arrow from "../public/icons/backArrow.png"
 
 
 
 
-const BackBtn = ({ url }: any) => {
+const BackBtn = () => {
     return (
-        <Link passHref href={url} >
-            <Image src={Arrow} alt="logo-flèche" />
-        </Link>
+
+        <button style={{
+            backgroundColor: 'transparent',
+            border: 'none'
+        }} onClick={() => { Router.back() }}>
+            <Image src={Arrow} width={35} height={35} alt="logo-flèche" />
+        </button>
+
 
     )
 }
