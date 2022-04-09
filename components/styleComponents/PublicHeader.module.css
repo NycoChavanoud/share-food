@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&display=swap");
+
+.headContainer {
+  background-image: url("../../public/img/head.jpg");
+  height: 235px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 1em;
+}
+
+.headTitle {
+  font-family: "Amiko", sans-serif;
+  font-weight: bold;
+  letter-spacing: 5px;
+  color: var(--ligthColor);
+}

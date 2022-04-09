@@ -11,7 +11,7 @@ describe("login", function () {
     cy.get("[data-cy='email']").type("mail@mail.com");
     cy.get('[data-cy="password"]').type("aaazzzeeezzz");
     cy.get('[data-cy="formLogin"]').submit();
-    cy.get('[data-cy="errorMessage"]').should("not.exist");
+    cy.get('[data-cy="errorMessage"]').should("exist");
     cy.contains("identifiants inexistants - veuillez créer un compte");
   });
 
@@ -20,6 +20,6 @@ describe("login", function () {
     cy.get("[data-cy='email']").type("dave.lopper@mail.com");
     cy.get('[data-cy="password"]').type("azertyuiop");
     cy.get('[data-cy="formLogin"]').submit();
-    cy.url().should("include", "/dashboard/#user");
+    cy.url().should("include", "/dashboard");
   });
 });

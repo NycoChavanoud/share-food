@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+
+.formLogin {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 40px auto;
+}
+
+.labelForm {
+  margin: 10px auto 5px;
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+
+.inputForm {
+  border: none;
+  background-color: var(--inputColor);
+  height: 40px;
+  border-radius: 10px;
+  text-align: center;
+  color: var(--ligthColor);
+  font-size: 0.9em;
+  font-weight: 100;
+  letter-spacing: 2px;
+  outline: none;
+}
+
+.inputForm:focus {
+  border: none;
+  outline: none;
+}
+
+.btnForm {
+  margin: 80px auto;
+  width: 55%;
+  height: 40px;
+  border: none;
+  background-color: var(--redColor);
+  color: var(--ligthColor);
+  font-family: "Amiko", sans-serif;
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: 3px;
+  border-radius: 10px;
+}

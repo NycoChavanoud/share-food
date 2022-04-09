@@ -23,7 +23,7 @@ const hashingOptions = {
   
 
 
-  export const createUser = async({email,password,firstname, lastname }: IUser) => {
+  export const createUser = async({email,password,firstname, lastname  }: IUser) => {
     const hashedPassword = await hashPassword(password);
     return db.user.create({
       data: { email, hashedPassword, firstname, lastname },

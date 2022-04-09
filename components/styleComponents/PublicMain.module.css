@@ -1,0 +1,6 @@
+.test {
+  overflow-y: hidden;
+  overflow: hidden;
+  padding: 60px 25px;
+  text-align: justify;
+}
