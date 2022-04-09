@@ -37,8 +37,7 @@ export const deleteManyUsers = db.user.deleteMany;
 
 export const deleteOneUser = db.user.delete;
 
-export const findByEmail = (email : any) => db.user.findUnique({where : {email}})
+export const findByEmail = (email : string) => db.user.findUnique({where : {email}})
 
-export const emailAlreadyExists =(email:any )=> db.user.findFirst({where: {email}}).then((user)=>!!user)
+export const emailAlreadyExists =(email:string )=> db.user.findFirst({where: {email}}).then((user)=>!!user)
 
-// ATTENTION JE DOIS REGLER LE SOUCIS DES ANY AU DESSU.. LE TYPE STRING POSE PROBLEME WHY?? 

@@ -29,12 +29,14 @@ export default NextAuth({
         //fecth mes données DB - find dans la db un user créé depuis seed... (equivalent reset db)
 
         if (user &&
-          
           user.hashedPassword &&
           (await verifyPassword(credentials?.password, user.hashedPassword))) {
           // Any object returned will be saved in `user` property of the JWT
+
           return user;
+
         } else {
+          
           // If you return null then an error will be displayed advising the user to check their details.
           
           return null;

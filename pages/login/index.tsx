@@ -2,8 +2,8 @@ import type { NextPage } from "next";
 import { useState } from "react";
 import PublicHeader from "../../components/PublicHeader";
 import RegisterBtn from "../../components/RegisterBtn";
-import style from "../../styles/Login.module.css"
-import Head from 'next/head'
+import style from "../../styles/Login.module.css";
+
 
 
 const Login: NextPage = (props) => {
@@ -17,8 +17,6 @@ const Login: NextPage = (props) => {
     setMail('')
     setPassword('')
   }
-
-
 
   return (
     <>
@@ -39,3 +37,6 @@ const Login: NextPage = (props) => {
 };
 
 export default Login;
+
+
+
