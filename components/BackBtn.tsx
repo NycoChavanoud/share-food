@@ -12,7 +12,8 @@ const BackBtn = () => {
             data-cy='backBtn'
             style={{
                 backgroundColor: 'transparent',
-                border: 'none'
+                border: 'none',
+                cursor: 'pointer'
             }} onClick={() => { Router.back() }}>
             <Image src={Arrow} width={35} height={35} alt="logo-flèche" />
         </button>
