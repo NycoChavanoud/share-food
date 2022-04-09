@@ -10,9 +10,15 @@
   color: var(--ligthColor);
   position: fixed;
   bottom: 0;
+  cursor: pointer;
+  transition: 0.3s;
 }
 .contentBtn {
   font-family: "Amiko", sans-serif;
   font-weight: bold;
   letter-spacing: 5px;
+}
+
+.registetBtnContainer:hover {
+  color: var(--redColor);
 }

@@ -16,7 +16,7 @@ const Home: NextPage = (props) => {
         <title>Accueil</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
       </Head>
-      <PublicHeader title='Cook of the day' link='/inscription' />
+      <PublicHeader title='Cook of the day' link='/login' />
       <PublicMain />
       <RegisterBtn content='Se connecter ' link='/login' />
 

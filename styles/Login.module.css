@@ -8,11 +8,12 @@
 }
 
 .labelForm {
-  margin: 10px auto 5px;
+  margin: 30px auto 5px;
   text-align: center;
   font-size: 0.8em;
   font-weight: 500;
   letter-spacing: 2px;
+  cursor: pointer;
 }
 
 .inputForm {
@@ -26,6 +27,7 @@
   font-weight: 100;
   letter-spacing: 2px;
   outline: none;
+  cursor: pointer;
 }
 
 .inputForm:focus {
@@ -34,7 +36,7 @@
 }
 
 .btnForm {
-  margin: 80px auto;
+  margin: 55px auto;
   width: 55%;
   height: 40px;
   border: none;
@@ -45,4 +47,10 @@
   font-weight: 600;
   letter-spacing: 3px;
   border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.btnForm:hover {
+  color: var(--darkColor);
 }
