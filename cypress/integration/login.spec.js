@@ -3,7 +3,7 @@ describe("login", function () {
     cy.visit("/");
     cy.contains("Se connecter").click();
     cy.url().should("include", "/login");
-    cy.contains("s'inscrire");
+    cy.contains("S’inscrire");
   });
 
   it("not goods 'login' informations", function () {
