@@ -8,23 +8,28 @@
     "start": "next start",
     "cypress": "cypress open",
     "lint": "next lint",
-    "showDataBase" : "npx prisma studio",
-    "seed" : "npx prisma db seed"
+    "showDataBase": "npx prisma studio",
+    "seed": "npx prisma db seed"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.3",
     "@prisma/client": "^3.11.1",
     "argon2": "^0.28.5",
+    "axios": "^0.26.1",
+    "morgan": "^1.10.0",
     "next": "12.1.2",
     "next-auth": "^4.3.1",
+    "next-connect": "^0.12.2",
     "react": "18.0.0",
     "react-dom": "18.0.0"
   },
   "devDependencies": {
+    "@types/morgan": "^1.9.3",
     "@types/node": "^17.0.23",
     "@types/react": "17.0.43",
     "@types/react-dom": "17.0.14",
     "cypress": "^9.5.3",
+    "cypress-data-session": "^2.0.0",
     "eslint": "8.12.0",
     "eslint-config-next": "12.1.2",
     "prisma": "^3.11.1",

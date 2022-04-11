@@ -1,35 +1,79 @@
-import type { NextPage } from "next";
-import { useState } from "react";
+import type { GetServerSideProps, NextPage } from "next";
+import { useContext, useEffect, useState } from "react";
 import PublicHeader from "../../components/PublicHeader";
 import RegisterBtn from "../../components/RegisterBtn";
 import style from "../../styles/Login.module.css";
-
-
-
+import { signIn, useSession } from "next-auth/react";
+import CurrentUserContext from "../../contexts/currentUserContext";
 
 const Login: NextPage = (props) => {
+  const [mail, setMail] = useState("");
+  const [password, setPassword] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
 
-  const [mail, setMail] = useState('')
-  const [password, setPassword] = useState('')
+  const { data: session } = useSession();
+  const { currentUserProfile } = useContext(CurrentUserContext);
+
+  useEffect(() => {
+    if (currentUserProfile) {
+      setFirstname(currentUserProfile.firstname);
+      setLastname(currentUserProfile.lastname);
+    }
+  }, [currentUserProfile]);
 
   const handleSubmit = (e: any) => {
-    e.preventDefault()
-    console.log(mail, password)
-    setMail('')
-    setPassword('')
+    e.preventDefault();
+    signIn("credentials", { username: mail, password: password });
+    setMail("");
+    setPassword("");
+  };
+
+  if (session) {
+    return (
+      <>
+        <div>
+          Félicitation, vous etes connecté en tant que {firstname} {lastname}
+        </div>
+        <div>A la meilleure appli du monde</div>
+      </>
+    );
   }
 
   return (
     <>
-
       <PublicHeader title="S’identifier" link="/" titlePage="Identification" />
 
-      <form onSubmit={handleSubmit} className={style.formLogin} data-cy="formLogin" >
-        <label htmlFor="email" className={style.labelForm} >votre email :</label>
-        <input type="email" id="email" data-cy='email' className={style.inputForm} autoComplete="off" value={mail} onChange={(e) => setMail(e.target.value)} required />
-        <label htmlFor="password" className={style.labelForm} >mot de passe :</label>
-        <input type="password" id="password" data-cy="password" autoComplete="off" className={style.inputForm} value={password} onChange={(e) => setPassword(e.target.value)} required />
-        <button className={style.btnForm} >Valider</button>
+      <form
+        onSubmit={handleSubmit}
+        className={style.formLogin}
+        data-cy="formLogin"
+      >
+        <label htmlFor="email" className={style.labelForm}>
+          votre email :
+        </label>
+        <input
+          type="email"
+          id="email"
+          data-cy="email"
+          className={style.inputForm}
+          value={mail}
+          onChange={(e) => setMail(e.target.value)}
+          required
+        />
+        <label htmlFor="password" className={style.labelForm}>
+          mot de passe :
+        </label>
+        <input
+          type="password"
+          id="password"
+          data-cy="password"
+          className={style.inputForm}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button className={style.btnForm}>Valider</button>
       </form>
 
       <RegisterBtn content="S’inscrire" link="/registration" />
@@ -37,7 +81,37 @@ const Login: NextPage = (props) => {
   );
 };
 
+const getCsrfTokenAndSetCookies: GetServerSideProps = async ({
+  res,
+  query,
+}) => {
+  // to make it work on Vercel
+  let baseUrl = process.env.NEXTAUTH_URL || `https://${process.env.VERCEL_URL}`;
+  // capturing the callback url if any, which should include the current domain for security ?
+  const callbackUrlIsPresent = typeof query?.callbackUrl === "string";
+  const callbackUrlIsValid =
+    callbackUrlIsPresent && (query?.callbackUrl as string).startsWith(baseUrl);
+  const host = (callbackUrlIsValid ? query?.callbackUrl : baseUrl) as string;
+  const redirectURL = encodeURIComponent(host);
+  // getting both the csrf form token and (next-auth.csrf-token cookie + next-auth.callback-url cookie)
+  const csrfUrl = `${baseUrl}/api/auth/csrf?callbackUrl=${redirectURL}`;
+  const csrfResponse = await fetch(csrfUrl);
+  const { csrfToken } = await csrfResponse.json();
+  const { headers } = csrfResponse;
+  // placing the cookies
+  const [csrfCookie, redirectCookie] =
+    headers?.get("set-cookie")?.split(",") || [];
+  res.setHeader("set-cookie", [csrfCookie, redirectCookie]);
+  // placing form csrf token
+  return csrfToken;
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return {
+    props: {
+      csrfToken: await getCsrfTokenAndSetCookies(context),
+    },
+  };
+};
+
 export default Login;
-
-
-

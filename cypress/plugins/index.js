@@ -1,4 +1,6 @@
 /// <reference types="cypress" />
+const User = require("../../models/user");
+
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
 //
@@ -15,8 +17,15 @@
 /**
  * @type {Cypress.PluginConfig}
  */
+
 // eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
-}
+  on("task", {
+    cleanDb: async () => Promise.all([User.deleteManyUsers()]),
+    deleteAllUsers: User.deleteManyUsers,
+    findUserByEmail: User.findByEmail,
+    createUser: User.createUser,
+    deleteUserByEmail: User.deleteUserByEmail,
+  });
+  return config;
+};

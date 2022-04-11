@@ -23,8 +23,10 @@ export default NextAuth({
       },
 
 
-      async authorize(credentials, req) {
+      async authorize(credentials) {
+        if(!credentials?.username || !credentials?.password ) return null
         // Add logic here to look up the user from the credentials supplied
+
         const user = await findByEmail(credentials?.username)
         //fecth mes données DB - find dans la db un user créé depuis seed... (equivalent reset db)
 
