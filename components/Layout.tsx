@@ -1,6 +1,5 @@
 import { useSession } from "next-auth/react";
 import Head from "next/head";
-//import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import CurrentUserContext from "../contexts/currentUserContext";
 
@@ -10,14 +9,6 @@ type layoutProps = { pageTitle: string; children: React.ReactNode };
 
 const Layout = ({ pageTitle, children }: layoutProps) => {
   const { currentUserProfile } = useContext(CurrentUserContext);
-  const { data: session, status } = useSession();
-  //const router = useRouter();
-
-  // useEffect(() => {
-  //   if (status !== "loading" && !session?.user?.email) {
-  //     router.push("/");
-  //   }
-  // }, [status, session, router]);
 
   return (
     <>
