@@ -29,8 +29,8 @@ Cypress.Commands.add(
   ({
     email = "visitor@website.com",
     password = "verysecure",
-    firstname = "hello",
-    lastname = "world",
+    firstname = "Dave",
+    lastname = "Lopper",
   } = {}) => {
     cy.dataSession({
       name: "userInDb",

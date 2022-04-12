@@ -16,8 +16,6 @@ const Login: NextPage = (props) => {
 
   const { currentUserProfile } = useContext(CurrentUserContext);
 
-  console.log(currentUserProfile);
-
   useEffect(() => {
     if (currentUserProfile) {
       setFirstname(currentUserProfile.firstname);
@@ -35,10 +33,26 @@ const Login: NextPage = (props) => {
   if (session) {
     return (
       <>
+        <PublicHeader title="Bienvenue" link="/" titlePage="Bienvenue" />
         <div>
-          Félicitation, vous etes connecté en tant que {firstname} {lastname}
+          {!currentUserProfile ? (
+            ""
+          ) : (
+            <>
+              <p className={style.connectedStatus}>
+                vous etes connecté en tant que{" "}
+              </p>
+              <h2 className={style.welcomTitle}>
+                {" "}
+                {firstname} {lastname}
+              </h2>
+            </>
+          )}
         </div>
-        <div>A la meilleure appli du monde</div>
+        <p className={style.welcomtext}>
+          Vous pouvez désormais profiter pleinement de l&apos;ensemble de
+          l&apos;application.
+        </p>
       </>
     );
   }

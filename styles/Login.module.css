@@ -54,3 +54,20 @@
 .btnForm:hover {
   color: var(--darkColor);
 }
+
+.connectedStatus {
+  text-align: center;
+  font-size: 0.6em;
+  font-weight: bold;
+}
+
+.welcomTitle {
+  text-align: center;
+  margin: 40px auto;
+}
+
+.welcomtext {
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+}

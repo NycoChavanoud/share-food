@@ -14,6 +14,4 @@ async function handleGet(
   res.send(getSafeAttributes(req.currentUser));
 }
 
-//etendre le type request sur next
-
 export default base().use(requireCurrentUser).get(handleGet);
