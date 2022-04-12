@@ -36,7 +36,7 @@ const Login: NextPage = (props) => {
       <Layout pageTitle="Bienvenue">
         <>
           <PublicHeader title="Bienvenue" link="/" />
-          <div>
+          <div className={style.welcomContainer}>
             {!currentUserProfile ? (
               ""
             ) : (

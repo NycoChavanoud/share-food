@@ -4,3 +4,10 @@
   padding: 60px 25px;
   text-align: justify;
 }
+
+@media only screen and (min-width: 640px) {
+  .test {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+}

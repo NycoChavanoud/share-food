@@ -1,10 +1,22 @@
 .titleContainer {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
   margin-top: 25px;
+}
+.bckBtnContainer {
+  display: flex;
+  justify-content: start;
 }
 
 .titleRegister {
   font-size: 1.7em;
+  width: 100%;
+  text-align: center;
+}
+
+@media only screen and (min-width: 640px) {
+  .titleContainer {
+    max-width: 800px;
+    margin: 0 auto;
+  }
 }

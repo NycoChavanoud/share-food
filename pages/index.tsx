@@ -8,7 +8,7 @@ const Home: NextPage = (props) => {
   return (
     <>
       <Layout pageTitle="Accueil">
-        <PublicHeader title="Cook of the day" link="/login" />
+        <PublicHeader title="Cook of the day" link="/" />
         <PublicMain />
         <RegisterBtn content="Se connecter " link="/login" />
       </Layout>
