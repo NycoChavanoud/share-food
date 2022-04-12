@@ -1,5 +1,5 @@
 import type { GetServerSideProps, NextPage } from "next";
-import { useContext, useEffect, useState } from "react";
+import { SyntheticEvent, useContext, useEffect, useState } from "react";
 import PublicHeader from "../../components/PublicHeader";
 import RegisterBtn from "../../components/RegisterBtn";
 import style from "../../styles/Login.module.css";
@@ -13,7 +13,10 @@ const Login: NextPage = (props) => {
   const [lastname, setLastname] = useState("");
 
   const { data: session } = useSession();
+
   const { currentUserProfile } = useContext(CurrentUserContext);
+
+  console.log(currentUserProfile);
 
   useEffect(() => {
     if (currentUserProfile) {
@@ -22,7 +25,7 @@ const Login: NextPage = (props) => {
     }
   }, [currentUserProfile]);
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
     signIn("credentials", { username: mail, password: password });
     setMail("");
