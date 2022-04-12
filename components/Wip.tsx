@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 const Wip = () => {
   return (
     <>
@@ -8,16 +6,31 @@ const Wip = () => {
         style={{
           display: "flex",
           flexDirection: "column",
-          width: "70%",
+          width: "40%",
           margin: "40px auto",
           textAlign: "center",
         }}
       >
-        <h2 style={{ marginBottom: "15px" }}>Page en construction</h2>
-        <p style={{ marginBottom: "15px", fontSize: "1.5em" }}>
+        <p
+          style={{
+            marginBottom: "15px",
+            textAlign: "center",
+            fontSize: "1.4em",
+          }}
+        >
+          Page en construction
+        </p>
+
+        <img src="https://www.gifgratis.net/gifs_animes/travaux_en_cours/69.gif" />
+        <p
+          style={{
+            marginTop: "25px",
+            fontSize: "1em",
+            textAlign: "center",
+          }}
+        >
           Notre équipe travail pour enrichir votre application
         </p>
-        <img src="https://www.gifgratis.net/gifs_animes/travaux_en_cours/69.gif" />
       </div>
     </>
   );
