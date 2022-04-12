@@ -1,14 +1,14 @@
 import { NextPage } from "next";
 import BackBtn from "../../components/BackBtn";
-import Layout from "../../components/Layout";
+import LayoutCurrentUser from "../../components/LayoutCurrentUser";
 
 const Event: NextPage = (props) => {
   return (
-    <Layout pageTitle="Vos évènements">
+    <LayoutCurrentUser pageTitle="Vos évènements">
       <BackBtn />
 
       <h1>Event Page</h1>
-    </Layout>
+    </LayoutCurrentUser>
   );
 };
 

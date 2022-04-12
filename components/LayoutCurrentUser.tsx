@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import Head from "next/head";
-//import { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import CurrentUserContext from "../contexts/currentUserContext";
 
@@ -8,16 +8,16 @@ import Navbar from "./navbar";
 
 type layoutProps = { pageTitle: string; children: React.ReactNode };
 
-const Layout = ({ pageTitle, children }: layoutProps) => {
+const LayoutCurrentUser = ({ pageTitle, children }: layoutProps) => {
   const { currentUserProfile } = useContext(CurrentUserContext);
   const { data: session, status } = useSession();
-  //const router = useRouter();
+  const router = useRouter();
 
-  // useEffect(() => {
-  //   if (status !== "loading" && !session?.user?.email) {
-  //     router.push("/");
-  //   }
-  // }, [status, session, router]);
+  useEffect(() => {
+    if (status !== "loading" && !session?.user?.email) {
+      router.push("/login");
+    }
+  }, [status, session, router]);
 
   return (
     <>
@@ -35,4 +35,4 @@ const Layout = ({ pageTitle, children }: layoutProps) => {
   );
 };
 
-export default Layout;
+export default LayoutCurrentUser;
