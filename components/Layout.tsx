@@ -1,9 +1,17 @@
+import { useSession } from "next-auth/react";
 import Head from "next/head";
-import type { NextComponentType } from "next";
+import { useRouter } from "next/router";
+import { useContext, useEffect } from "react";
+import CurrentUserContext from "../contexts/currentUserContext";
 
-type layoutProps = { pageTitle: string; children: NextComponentType };
+import Navbar from "./navbar";
+
+type layoutProps = { pageTitle: string; children: React.ReactNode };
 
 const Layout = ({ pageTitle, children }: layoutProps) => {
+  const { currentUserProfile } = useContext(CurrentUserContext);
+  const { data: session, status } = useSession();
+
   return (
     <>
       <Head>
@@ -15,6 +23,7 @@ const Layout = ({ pageTitle, children }: layoutProps) => {
         />
       </Head>
       <main>{children}</main>
+      {!currentUserProfile ? "" : <Navbar />}
     </>
   );
 };

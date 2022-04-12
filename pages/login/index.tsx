@@ -5,6 +5,7 @@ import RegisterBtn from "../../components/RegisterBtn";
 import style from "../../styles/Login.module.css";
 import { signIn, useSession } from "next-auth/react";
 import CurrentUserContext from "../../contexts/currentUserContext";
+import Layout from "../../components/Layout";
 
 const Login: NextPage = (props) => {
   const [mail, setMail] = useState("");
@@ -32,34 +33,36 @@ const Login: NextPage = (props) => {
 
   if (session) {
     return (
-      <>
-        <PublicHeader title="Bienvenue" link="/" titlePage="Bienvenue" />
-        <div>
-          {!currentUserProfile ? (
-            ""
-          ) : (
-            <>
-              <p className={style.connectedStatus}>
-                vous etes connecté en tant que{" "}
-              </p>
-              <h2 className={style.welcomTitle}>
-                {" "}
-                {firstname} {lastname}
-              </h2>
-            </>
-          )}
-        </div>
-        <p className={style.welcomtext}>
-          Vous pouvez désormais profiter pleinement de l&apos;ensemble de
-          l&apos;application.
-        </p>
-      </>
+      <Layout pageTitle="Bienvenue">
+        <>
+          <PublicHeader title="Bienvenue" link="/" />
+          <div>
+            {!currentUserProfile ? (
+              ""
+            ) : (
+              <>
+                <p className={style.connectedStatus}>
+                  vous etes connecté en tant que{" "}
+                </p>
+                <h2 className={style.welcomTitle}>
+                  {" "}
+                  {firstname} {lastname}
+                </h2>
+              </>
+            )}
+          </div>
+          <p className={style.welcomtext}>
+            Vous pouvez désormais profiter pleinement de l&apos;ensemble de
+            l&apos;application.
+          </p>
+        </>
+      </Layout>
     );
   }
 
   return (
     <>
-      <PublicHeader title="S’identifier" link="/" titlePage="Identification" />
+      <PublicHeader title="S’identifier" link="/" />
 
       <form
         onSubmit={handleSubmit}

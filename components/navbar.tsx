@@ -1,7 +1,75 @@
+import style from "./styleComponents/Navbar.module.css";
+import { signOut } from "next-auth/react";
+import Image from "next/image";
+import Router from "next/router";
+import home from "../public/icons/home.png";
+import calendar from "../public/icons/calendar.png";
+import crew from "../public/icons/crew.png";
+import friend from "../public/icons/friend.png";
+import signoutIcon from "../public/icons/signout.png";
+
 const Navbar = () => {
   return (
     <>
-      <div>TEST</div>
+      <div className={style.navbarContainer}>
+        <button
+          className={style.btnIcons}
+          onClick={() => {
+            Router.push("/dashboard");
+          }}
+        >
+          {" "}
+          <Image src={home} width={35} height={35} alt="logo-home" />{" "}
+        </button>
+        <button
+          className={style.btnIcons}
+          onClick={() => {
+            Router.push("/event");
+          }}
+        >
+          {" "}
+          <Image
+            src={calendar}
+            width={35}
+            height={35}
+            alt="logo-calendar"
+          />{" "}
+        </button>
+        <button
+          className={style.btnIcons}
+          onClick={() => {
+            Router.push("/crew");
+          }}
+        >
+          {" "}
+          <Image src={crew} width={35} height={35} alt="logo-crew" />{" "}
+        </button>
+        <button
+          className={style.btnIcons}
+          onClick={() => {
+            Router.push("/friend");
+          }}
+        >
+          {" "}
+          <Image src={friend} width={35} height={35} alt="logo-friend" />{" "}
+        </button>
+        <button
+          className={style.btnIcons}
+          onClick={() =>
+            signOut({
+              callbackUrl: `${window.location.origin}/login`,
+            })
+          }
+        >
+          {" "}
+          <Image
+            src={signoutIcon}
+            width={35}
+            height={35}
+            alt="logo-signout"
+          />{" "}
+        </button>
+      </div>
     </>
   );
 };

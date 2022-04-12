@@ -2,14 +2,14 @@ import { NextPage } from "next";
 import BackBtn from "../../components/BackBtn";
 import Layout from "../../components/Layout";
 
-const Dashboard: NextPage = (props) => {
+const Crew: NextPage = (props) => {
   return (
-    <Layout pageTitle="tableau de bord">
+    <Layout pageTitle="Vos groupes">
       <BackBtn />
 
-      <h1>Dashboard</h1>
+      <h1>Crew Page</h1>
     </Layout>
   );
 };
 
-export default Dashboard;
+export default Crew;
