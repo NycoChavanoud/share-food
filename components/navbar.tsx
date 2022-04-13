@@ -13,6 +13,7 @@ const Navbar = () => {
     <>
       <div className={style.navbarContainer}>
         <button
+          style={{ visibility: "hidden" }}
           className={style.btnIcons}
           onClick={() => {
             Router.push("/dashboard");
@@ -38,6 +39,7 @@ const Navbar = () => {
           />{" "}
         </button>
         <button
+          style={{ visibility: "hidden" }}
           className={style.btnIcons}
           onClick={() => {
             Router.push("/crew");
@@ -48,6 +50,7 @@ const Navbar = () => {
           <Image src={crew} width={35} height={35} alt="logo-crew" />{" "}
         </button>
         <button
+          style={{ visibility: "hidden" }}
           className={style.btnIcons}
           onClick={() => {
             Router.push("/friend");
@@ -61,7 +64,7 @@ const Navbar = () => {
           className={style.btnIcons}
           onClick={() => {
             signOut({
-              callbackUrl: `${window.location.origin}/login`,
+              callbackUrl: `/login`,
             });
           }}
           cy-data="logoLogOut"

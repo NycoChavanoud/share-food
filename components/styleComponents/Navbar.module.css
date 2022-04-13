@@ -8,8 +8,6 @@
   color: var(--ligthColor);
   position: fixed;
   bottom: 0;
-  cursor: pointer;
-  transition: 0.3s;
 }
 
 .btnIcons {

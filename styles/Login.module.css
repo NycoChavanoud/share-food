@@ -1,6 +1,7 @@
 .formLogin {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 80%;
   margin: 40px auto;
 }
@@ -67,6 +68,23 @@
   width: 80%;
   text-align: center;
   margin: 0 auto;
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.noAccountText {
+  text-align: center;
+  font-size: 1em;
+  font-weight: 300;
+  cursor: pointer;
+  bottom: 0;
+  position: absolute;
+  margin: 50px auto;
+  width: 100%;
 }
 
 @media only screen and (min-width: 640px) {

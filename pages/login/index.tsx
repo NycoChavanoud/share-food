@@ -1,20 +1,30 @@
-import type { GetServerSideProps, NextPage } from "next";
+import type {
+  GetServerSideProps,
+  NextPage,
+  InferGetServerSidePropsType,
+} from "next";
 import { SyntheticEvent, useContext, useEffect, useState } from "react";
 import PublicHeader from "../../components/PublicHeader";
 import RegisterBtn from "../../components/RegisterBtn";
 import style from "../../styles/Login.module.css";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import CurrentUserContext from "../../contexts/currentUserContext";
 import Layout from "../../components/Layout";
+import { useRouter } from "next/router";
 
-const Login: NextPage = (props) => {
+const Login: NextPage = (
+  props: InferGetServerSidePropsType<typeof getServerSideProps>
+) => {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
 
-  const { data: session } = useSession();
   const { currentUserProfile } = useContext(CurrentUserContext);
+
+  //identify error on Url
+  const router = useRouter();
+  const errorOnSign = router.asPath.includes("login&error=CredentialsSignin");
 
   useEffect(() => {
     if (currentUserProfile) {
@@ -30,31 +40,61 @@ const Login: NextPage = (props) => {
     setPassword("");
   };
 
-  if (session) {
+  if (errorOnSign) {
+    return (
+      <Layout pageTitle="erreur d'authentification">
+        <PublicHeader title="Bienvenue" link="/" />
+        <div className={style.errorContainer}>
+          <h2 className={style.welcomTitle}>Echec de connexion</h2>
+          <p className={style.welcomtext}>
+            {" "}
+            Une erreur est survenue lors de votre tentative de connexion{" "}
+          </p>
+          <button
+            className={style.btnForm}
+            onClick={() => router.push("/login")}
+          >
+            Réessayer
+          </button>
+        </div>
+        <p
+          className={style.noAccountText}
+          onClick={() => router.push("/registration")}
+        >
+          {" "}
+          Pas encore de compte?
+        </p>
+        <RegisterBtn content="Bientot" link="/login" />
+        {/* 
+         REGISTER BUTTON WHEN REGISTRATION WILL BE OK
+       <RegisterBtn content="S’inscrire" link="/registration" /> */}
+      </Layout>
+    );
+  }
+
+  if (currentUserProfile) {
     return (
       <Layout pageTitle="Bienvenue">
-        <>
-          <PublicHeader title="Bienvenue" link="/" />
-          <div className={style.welcomContainer}>
-            {!currentUserProfile ? (
-              ""
-            ) : (
-              <>
-                <p className={style.connectedStatus}>
-                  vous etes connecté en tant que{" "}
-                </p>
-                <h2 className={style.welcomTitle}>
-                  {" "}
-                  {firstname} {lastname}
-                </h2>
-              </>
-            )}
-          </div>
-          <p className={style.welcomtext}>
-            Vous pouvez désormais profiter pleinement de l&apos;ensemble de
-            l&apos;application.
-          </p>
-        </>
+        <PublicHeader title="Bienvenue" link="/" />
+        <div className={style.welcomContainer}>
+          {!currentUserProfile ? (
+            ""
+          ) : (
+            <>
+              <p className={style.connectedStatus}>
+                vous etes connecté en tant que{" "}
+              </p>
+              <h2 className={style.welcomTitle}>
+                {" "}
+                {firstname} {lastname}
+              </h2>
+            </>
+          )}
+        </div>
+        <p className={style.welcomtext}>
+          Vous pouvez désormais profiter pleinement de l&apos;ensemble de
+          l&apos;application.
+        </p>
       </Layout>
     );
   }
@@ -95,7 +135,7 @@ const Login: NextPage = (props) => {
         <button className={style.btnForm}>Valider</button>
       </form>
 
-      <RegisterBtn content="S’inscrire" link="/registration" />
+      <RegisterBtn content="" link="/registration" />
     </>
   );
 };
