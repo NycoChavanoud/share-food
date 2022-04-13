@@ -14,7 +14,6 @@ const Login: NextPage = (props) => {
   const [lastname, setLastname] = useState("");
 
   const { data: session } = useSession();
-
   const { currentUserProfile } = useContext(CurrentUserContext);
 
   useEffect(() => {

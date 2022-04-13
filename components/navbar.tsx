@@ -59,11 +59,11 @@ const Navbar = () => {
         </button>
         <button
           className={style.btnIcons}
-          onClick={() =>
+          onClick={() => {
             signOut({
               callbackUrl: `${window.location.origin}/login`,
-            })
-          }
+            });
+          }}
           cy-data="logoLogOut"
         >
           {" "}
