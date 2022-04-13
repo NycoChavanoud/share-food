@@ -43,7 +43,7 @@ const Login: NextPage = (
   if (errorOnSign) {
     return (
       <Layout pageTitle="erreur d'authentification">
-        <PublicHeader title="Bienvenue" link="/" />
+        <PublicHeader title="Cook of the day" link="/" />
         <div className={style.errorContainer}>
           <h2 className={style.welcomTitle}>Echec de connexion</h2>
           <p className={style.welcomtext}>
