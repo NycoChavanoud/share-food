@@ -100,7 +100,7 @@ const Login: NextPage = (
   }
 
   return (
-    <>
+    <Layout pageTitle="S’identifier">
       <PublicHeader title="S’identifier" link="/" />
 
       <form
@@ -136,7 +136,7 @@ const Login: NextPage = (
       </form>
 
       <RegisterBtn content="" link="/registration" />
-    </>
+    </Layout>
   );
 };
 
