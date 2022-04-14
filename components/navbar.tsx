@@ -69,13 +69,7 @@ const Navbar = () => {
           }}
           cy-data="logoLogOut"
         >
-          {" "}
-          <Image
-            src={signoutIcon}
-            width={35}
-            height={35}
-            alt="logo-signout"
-          />{" "}
+          <Image src={signoutIcon} width={35} height={35} alt="logo-signout" />
         </button>
       </div>
     </>
