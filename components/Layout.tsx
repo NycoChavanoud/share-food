@@ -1,8 +1,9 @@
 import Head from "next/head";
 import { useContext } from "react";
 import CurrentUserContext from "../contexts/currentUserContext";
-
 import Navbar from "./Navbar";
+
+// CES IMPORTSSSSS ME RENDENT FOU
 
 type layoutProps = { pageTitle: string; children: React.ReactNode };
 
