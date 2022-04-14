@@ -132,6 +132,7 @@ const Login: NextPage = (
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+
         <button className={style.btnForm}>Valider</button>
       </form>
 
