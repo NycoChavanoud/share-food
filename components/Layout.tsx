@@ -1,9 +1,7 @@
-import { useSession } from "next-auth/react";
 import Head from "next/head";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import CurrentUserContext from "../contexts/currentUserContext";
-
-import Navbar from "./Navbar";
+import Navbar from "./navbar";
 
 type layoutProps = { pageTitle: string; children: React.ReactNode };
 
@@ -20,6 +18,7 @@ const Layout = ({ pageTitle, children }: layoutProps) => {
           key="viewport"
         />
       </Head>
+
       <main>{children}</main>
       {!currentUserProfile ? "" : <Navbar />}
     </>
