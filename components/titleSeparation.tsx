@@ -1,4 +1,4 @@
-import style from "./styleComponents/TitleSeparation.module.css";
+import style from "./styleComponents/titleSeparation.module.css";
 
 type titleProps = { content: string; title: string };
 

@@ -1,4 +1,4 @@
-import style from "./styleComponents/Navbar.module.css";
+import style from "./styleComponents/navbar.module.css";
 import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Router from "next/router";
