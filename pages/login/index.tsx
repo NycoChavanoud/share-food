@@ -40,38 +40,6 @@ const Login: NextPage = (
     setPassword("");
   };
 
-  if (errorOnSign) {
-    return (
-      <Layout pageTitle="erreur d'authentification">
-        <PublicHeader title="Cook of the day" link="/" />
-        <div className={style.errorContainer}>
-          <h2 className={style.welcomTitle}>Echec de connexion</h2>
-          <p className={style.welcomtext}>
-            {" "}
-            Une erreur est survenue lors de votre tentative de connexion{" "}
-          </p>
-          <button
-            className={style.btnForm}
-            onClick={() => router.push("/login")}
-          >
-            Réessayer
-          </button>
-        </div>
-        <p
-          className={style.noAccountText}
-          onClick={() => router.push("/registration")}
-        >
-          {" "}
-          Pas encore de compte?
-        </p>
-        <RegisterBtn content="Bientot" link="/login" />
-        {/* 
-         REGISTER BUTTON WHEN REGISTRATION WILL BE OK
-       <RegisterBtn content="S’inscrire" link="/registration" /> */}
-      </Layout>
-    );
-  }
-
   if (currentUserProfile) {
     return (
       <Layout pageTitle="Bienvenue">
@@ -101,13 +69,33 @@ const Login: NextPage = (
 
   return (
     <Layout pageTitle="S’identifier">
-      <PublicHeader title="S’identifier" link="/" />
+      {errorOnSign ? (
+        <PublicHeader title="echec de connection" link="/" />
+      ) : (
+        <PublicHeader title="S’identifier" link="/" />
+      )}
 
       <form
         onSubmit={handleSubmit}
         className={style.formLogin}
         data-cy="formLogin"
       >
+        {errorOnSign ? (
+          <p
+            className={style.welcomtext}
+            style={{
+              fontSize: "0.8em",
+              marginBottom: "-10px",
+              marginTop: "-15px",
+              color: "#9c1309",
+              fontWeight: "bold",
+            }}
+          >
+            Une erreur est survenue lors de votre tentative de connexion{" "}
+          </p>
+        ) : (
+          " "
+        )}
         <label htmlFor="email" className={style.labelForm}>
           votre email :
         </label>

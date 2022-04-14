@@ -1,5 +1,5 @@
 import style from "./styleComponents/RegisterForm.module.css";
-import TitleSeparation from "./titleSeparation";
+import TitleSeparation from "./TitleSeparation";
 
 const RegisterForm = () => {
   return (

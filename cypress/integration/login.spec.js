@@ -5,7 +5,7 @@ describe("login", function () {
       cy.visit("/login");
     });
 
-    it.only("login with goods informations", function () {
+    it.only("login with correct credentials", function () {
       cy.get("[data-cy='email']").type("dave.lopper@mail.com");
       cy.get('[data-cy="password"]').type("azertyuiop");
       cy.get('[data-cy="formLogin"]').submit();
@@ -13,14 +13,14 @@ describe("login", function () {
       cy.contains(" Dave Lopper");
     });
 
-    it("find the login on the home page", function () {
+    it("it is accessible from the homepage", function () {
       cy.visit("/");
       cy.contains("Se connecter").click();
       cy.url().should("include", "/login");
       cy.contains("S’inscrire");
     });
 
-    it("not goods 'login' informations", function () {
+    it("it prints an error with incorrect credentials", function () {
       cy.get("[data-cy='email']").type("mail@mail.com");
       cy.get('[data-cy="password"]').type("aaazzzeeezzz");
       cy.get('[data-cy="formLogin"]').submit();
@@ -30,32 +30,32 @@ describe("login", function () {
   });
 });
 
-//VOIR POUR INTEGRER CES TEST DANS LE CODE CI-DESSUS...?
+//A basculer dans les bonnes pages concernées.
 
-describe("withSession", function () {
-  it("try to go on each pages", function () {
-    cy.visit("/login");
-    cy.get("[data-cy='email']").type("dave.lopper@mail.com");
-    cy.get('[data-cy="password"]').type("azertyuiop");
-    cy.get('[data-cy="formLogin"]').submit();
-    cy.contains(" Dave Lopper");
-    cy.get('[cy-data="logoHome"]').click();
-    cy.url().should("include", "/dashboard");
-    cy.visit("/login");
-    cy.contains(" Dave Lopper");
-    cy.get('[cy-data="logoEvent"]').click();
-    cy.url().should("include", "/event");
-    cy.visit("/login");
-    cy.contains(" Dave Lopper");
-    cy.get('[cy-data="logoCrew"]').click();
-    cy.url().should("include", "/crew");
-    cy.visit("/login");
-    cy.contains(" Dave Lopper");
-    cy.get('[cy-data="logoFriend"]').click();
-    cy.url().should("include", "/friend");
-    cy.visit("/login");
-    cy.contains(" Dave Lopper");
-    cy.get('[cy-data="logoLogOut"]').click();
-    cy.url().should("include", "/login");
-  });
-});
+// describe("withSession", function () {
+//   it("try to go on each pages", function () {
+//     cy.visit("/login");
+//     cy.get("[data-cy='email']").type("dave.lopper@mail.com");
+//     cy.get('[data-cy="password"]').type("azertyuiop");
+//     cy.get('[data-cy="formLogin"]').submit();
+//     cy.contains(" Dave Lopper");
+//     cy.get('[cy-data="logoHome"]').click();
+//     cy.url().should("include", "/dashboard");
+//     cy.visit("/login");
+//     cy.contains(" Dave Lopper");
+//     cy.get('[cy-data="logoEvent"]').click();
+//     cy.url().should("include", "/event");
+//     cy.visit("/login");
+//     cy.contains(" Dave Lopper");
+//     cy.get('[cy-data="logoCrew"]').click();
+//     cy.url().should("include", "/crew");
+//     cy.visit("/login");
+//     cy.contains(" Dave Lopper");
+//     cy.get('[cy-data="logoFriend"]').click();
+//     cy.url().should("include", "/friend");
+//     cy.visit("/login");
+//     cy.contains(" Dave Lopper");
+//     cy.get('[cy-data="logoLogOut"]').click();
+//     cy.url().should("include", "/login");
+//   });
+// });
