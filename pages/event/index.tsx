@@ -7,7 +7,7 @@ const Event: NextPage = (props) => {
   return (
     <LayoutCurrentUser pageTitle="Vos évènements">
       <BackBtn />
-      <h1>Event Page</h1>
+      <h1>Page event</h1>
       <Wip />
     </LayoutCurrentUser>
   );
