@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import CurrentUserContext from "../contexts/currentUserContext";
 
-import Navbar from "./navbar";
+import Navbar from "./Navbar";
 
 type layoutProps = { pageTitle: string; children: React.ReactNode };
 
