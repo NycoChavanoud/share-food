@@ -18,7 +18,7 @@ const HomeCard = ({ title, link, content, secondContent }: publicMainProps) => {
           backgroundPosition: "center",
           backgroundSize: "cover",
         }}
-      ></div>
+      />
       <div className={style.textHome}>
         <p className={style.pHome}>{content}</p>
         <p className={style.pHome}>{secondContent}</p>

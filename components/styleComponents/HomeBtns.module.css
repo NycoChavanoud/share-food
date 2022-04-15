@@ -1,0 +1,33 @@
+.homeBtnContainer {
+  width: 375px;
+  height: 375px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px auto;
+}
+.imgContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto auto;
+  cursor: pointer;
+}
+
+.imgDiv {
+  height: 135px;
+  width: 135px;
+  border-radius: 25px;
+}
+
+.titleImg {
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  font-weight: 300;
+}
+
+@media only screen and (min-width: 860px) {
+  .homeBtnContainer {
+    display: none;
+  }
+}
