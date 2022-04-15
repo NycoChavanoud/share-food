@@ -6,7 +6,7 @@
   align-items: flex-end;
   padding: 1em;
   cursor: pointer;
-  scroll-snap-align: center;
+  scroll-snap-align: start;
 }
 
 .headTitle {
