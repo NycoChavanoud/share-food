@@ -12,7 +12,7 @@ const Event: NextPage = (props) => {
           <BackBtn />
           <h1 className={style.titlePage}>Page event</h1>
         </div>
-        <TitleSeparation content="test" title="testtitle" />
+        <TitleSeparation content="test" title="test title" />
       </div>
     </LayoutCurrentUser>
   );
