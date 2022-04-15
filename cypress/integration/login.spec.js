@@ -29,33 +29,3 @@ describe("login", function () {
     });
   });
 });
-
-//A basculer dans les bonnes pages concernées.
-
-// describe("withSession", function () {
-//   it("try to go on each pages", function () {
-//     cy.visit("/login");
-//     cy.get("[data-cy='email']").type("dave.lopper@mail.com");
-//     cy.get('[data-cy="password"]').type("azertyuiop");
-//     cy.get('[data-cy="formLogin"]').submit();
-//     cy.contains(" Dave Lopper");
-//     cy.get('[cy-data="logoHome"]').click();
-//     cy.url().should("include", "/dashboard");
-//     cy.visit("/login");
-//     cy.contains(" Dave Lopper");
-//     cy.get('[cy-data="logoEvent"]').click();
-//     cy.url().should("include", "/event");
-//     cy.visit("/login");
-//     cy.contains(" Dave Lopper");
-//     cy.get('[cy-data="logoCrew"]').click();
-//     cy.url().should("include", "/crew");
-//     cy.visit("/login");
-//     cy.contains(" Dave Lopper");
-//     cy.get('[cy-data="logoFriend"]').click();
-//     cy.url().should("include", "/friend");
-//     cy.visit("/login");
-//     cy.contains(" Dave Lopper");
-//     cy.get('[cy-data="logoLogOut"]').click();
-//     cy.url().should("include", "/login");
-//   });
-// });
