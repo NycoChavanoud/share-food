@@ -3,7 +3,7 @@
   height: 375px;
   display: flex;
   flex-wrap: wrap;
-  margin: 20px auto;
+  margin: 30px auto 200px;
 }
 .imgContainer {
   display: flex;
