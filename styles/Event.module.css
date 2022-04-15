@@ -1,0 +1,13 @@
+.eventPageContainer {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+}
+
+.titlePage {
+  margin-left: 1.5em;
+}
