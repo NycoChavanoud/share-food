@@ -24,8 +24,8 @@
   border-radius: 10px;
   text-align: center;
   color: var(--ligthColor);
-  font-size: 0.9em;
-  font-weight: 100;
+  font-size: 1em;
+  font-weight: bolder;
   letter-spacing: 2px;
   outline: none;
   cursor: pointer;

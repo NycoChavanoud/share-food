@@ -22,7 +22,6 @@ const Login: NextPage = (
 
   const { currentUserProfile } = useContext(CurrentUserContext);
 
-  //identify error on Url
   const router = useRouter();
   const errorOnSign = router.asPath.includes("login&error=CredentialsSignin");
 
@@ -69,11 +68,7 @@ const Login: NextPage = (
 
   return (
     <Layout pageTitle="S’identifier">
-      {errorOnSign ? (
-        <PublicHeader title="echec de connection" link="/" />
-      ) : (
-        <PublicHeader title="S’identifier" link="/" />
-      )}
+      <PublicHeader title="S’identifier" link="/" />
 
       <form
         onSubmit={handleSubmit}
@@ -85,13 +80,14 @@ const Login: NextPage = (
             className={style.welcomtext}
             style={{
               fontSize: "0.8em",
-              marginBottom: "-10px",
-              marginTop: "-15px",
+              marginBottom: "-5px",
+              marginTop: "-10px",
               color: "#9c1309",
               fontWeight: "bold",
             }}
           >
-            Une erreur est survenue lors de votre tentative de connexion{" "}
+            Échec de connexion - Vos identifiants sont invalides - Merci de
+            réessayer{" "}
           </p>
         ) : (
           " "
