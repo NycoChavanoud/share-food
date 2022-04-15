@@ -1,0 +1,17 @@
+.navbarContainer {
+  background: var(--darkColor);
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: var(--ligthColor);
+  position: fixed;
+  bottom: 0;
+}
+
+.btnIcons {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}

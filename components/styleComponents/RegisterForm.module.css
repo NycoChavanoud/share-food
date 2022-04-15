@@ -1,0 +1,111 @@
+.registerFormContainer {
+  width: 90%;
+  margin: 5px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.labelForm {
+  margin: 9px auto 1px;
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: normal;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.inputForm {
+  border: none;
+  background-color: var(--inputColor);
+  height: 40px;
+  width: 80%;
+  border-radius: 10px;
+  text-align: center;
+  color: var(--ligthColor);
+  font-size: 1em;
+  font-weight: bolder;
+  letter-spacing: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.inputForm:focus,
+.littleInputForm {
+  border: none;
+  outline: none;
+}
+
+.littleInputForm {
+  border: none;
+  background-color: var(--inputColor);
+  height: 40px;
+  width: 90%;
+  border-radius: 10px;
+  text-align: center;
+  color: var(--ligthColor);
+  font-size: 0.9em;
+  font-weight: 100;
+  letter-spacing: 2px;
+  outline: none;
+  cursor: pointer;
+  padding-right: 5px;
+}
+
+.largeInputForm {
+  border: none;
+  background-color: var(--inputColor);
+  height: 40px;
+  width: 96%;
+  border-radius: 10px;
+  text-align: center;
+  color: var(--ligthColor);
+  font-size: 0.9em;
+  font-weight: 100;
+  letter-spacing: 2px;
+  outline: none;
+  cursor: pointer;
+  padding-right: 5px;
+}
+
+.containerMultiInput {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.labelContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.btnForm {
+  margin: 25px auto 0px;
+  width: 55%;
+  height: 40px;
+  border: none;
+  background-color: var(--redColor);
+  color: var(--ligthColor);
+  font-family: "Amiko", sans-serif;
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: 3px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.btnForm:hover {
+  color: var(--darkColor);
+}
+
+@media only screen and (min-width: 640px) {
+  .registerFormContainer {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+}

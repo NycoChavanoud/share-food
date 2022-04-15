@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&display=swap");
+
+.headContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 1em;
+  cursor: pointer;
+}
+
+.headTitle {
+  font-family: "Amiko", sans-serif;
+  font-weight: bold;
+  letter-spacing: 5px;
+  color: var(--ligthColor);
+  text-align: center;
+}

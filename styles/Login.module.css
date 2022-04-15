@@ -1,0 +1,100 @@
+.formLogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+  margin: 40px auto;
+}
+
+.labelForm {
+  margin: 30px auto 5px;
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: 500;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.inputForm {
+  border: none;
+  background-color: var(--inputColor);
+  height: 40px;
+  border-radius: 10px;
+  text-align: center;
+  color: var(--ligthColor);
+  font-size: 1em;
+  font-weight: bolder;
+  letter-spacing: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.inputForm:focus {
+  border: none;
+  outline: none;
+}
+
+.btnForm {
+  margin: 55px auto;
+  width: 55%;
+  height: 40px;
+  border: none;
+  background-color: var(--redColor);
+  color: var(--ligthColor);
+  font-family: "Amiko", sans-serif;
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: 3px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.btnForm:hover {
+  color: var(--darkColor);
+}
+
+.connectedStatus {
+  text-align: center;
+  font-size: 1em;
+}
+
+.welcomTitle {
+  text-align: center;
+  margin: 40px auto;
+}
+
+.welcomtext {
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.noAccountText {
+  text-align: center;
+  font-size: 1em;
+  font-weight: 300;
+  cursor: pointer;
+  bottom: 0;
+  position: absolute;
+  margin: 50px auto;
+  width: 100%;
+}
+
+@media only screen and (min-width: 640px) {
+  .formLogin {
+    max-width: 500px;
+    margin: 50px auto;
+  }
+  .welcomtext,
+  .welcomContainer {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+}

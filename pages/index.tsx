@@ -1,18 +1,19 @@
-import type { NextPage } from 'next'
-import { useState } from 'react'
+import type { NextPage } from "next";
+import Layout from "../components/Layout";
+import PublicHeader from "../components/PublicHeader";
+import PublicMain from "../components/PublicMain";
+import RegisterBtn from "../components/RegisterBtn";
 
-import styles from '../styles/Home.module.css'
-
-const Home: NextPage = () => {
-
-
-
+const Home: NextPage = (props) => {
   return (
-    <div className={styles.container}>
-      TEST
-     
-    </div>
-  )
-}
+    <>
+      <Layout pageTitle="Accueil">
+        <PublicHeader title="Cook of the day" link="/" />
+        <PublicMain />
+        <RegisterBtn content="Se connecter " link="/login" />
+      </Layout>
+    </>
+  );
+};
 
-export default Home
+export default Home;
