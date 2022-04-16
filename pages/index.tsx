@@ -22,7 +22,6 @@ const Home: NextPage = (props) => {
   const [scroll, setScroll] = useState(false);
 
   const topPage = useRef<any>();
-  console.log(scroll);
 
   const topToPage = () => {
     setTop(
