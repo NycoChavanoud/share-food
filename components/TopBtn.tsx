@@ -11,7 +11,7 @@ const TopBtn = ({ scrollFunction }: any) => {
         border: "none",
         cursor: "pointer",
         position: "fixed",
-        bottom: "40px",
+        bottom: "45px",
         right: "10px",
         zIndex: "99",
       }}
