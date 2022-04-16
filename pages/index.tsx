@@ -9,6 +9,8 @@ import crew from "../public/img/crew.jpg";
 import money from "../public/img/money.jpg";
 import calendar from "../public/img/calendar.jpg";
 import HomeBtns from "../components/HomeBtns";
+import { useEffect, useRef, useState } from "react";
+import TopBtn from "../components/TopBtn";
 
 const Home: NextPage = (props) => {
   const srcFood = food.src;
@@ -16,11 +18,20 @@ const Home: NextPage = (props) => {
   const srcMoney = money.src;
   const srcCalendar = calendar.src;
 
+  const [top, setTop] = useState(false);
+
+  const topPage = useRef<any>();
+
+  const topToPage = () => {
+    setTop(topPage.current.scrollIntoView(true));
+  };
+
   return (
     <>
       <div className={style.scrollContainer}>
         <Layout pageTitle="Accueil">
           <PublicHeader title="Cook of the day" link="/" />
+          <div ref={topPage}></div>
 
           <HomeBtns />
           <div className={style.HomeCardContainer}>
@@ -45,6 +56,7 @@ const Home: NextPage = (props) => {
               content="Save the date! Vous avez prévu un évènement ?  Inviter vos groupes ou vos amis en quelques instants avec beaucoup de simplicité."
               secondContent=" Vous recevrez sans doute en retour des invitations pour des moments inoubliables. "
             />
+
             <HomeCard
               title="Vos budgets patagés..."
               link={srcMoney}
@@ -53,6 +65,7 @@ const Home: NextPage = (props) => {
             />
           </div>
 
+          <TopBtn scrollFunction={topToPage} />
           <RegisterBtn content="Se connecter " link="/login" />
         </Layout>
       </div>
