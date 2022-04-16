@@ -9,7 +9,7 @@ import crew from "../public/img/crew.jpg";
 import money from "../public/img/money.jpg";
 import calendar from "../public/img/calendar.jpg";
 import HomeBtns from "../components/HomeBtns";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import TopBtn from "../components/TopBtn";
 
 const Home: NextPage = (props) => {
@@ -19,21 +19,28 @@ const Home: NextPage = (props) => {
   const srcCalendar = calendar.src;
 
   const [top, setTop] = useState();
+  const [scroll, setScroll] = useState(false);
 
   const topPage = useRef<any>();
+  console.log(scroll);
 
   const topToPage = () => {
     setTop(
       topPage.current.scrollIntoView({
         behavior: "smooth",
-        block: "end",
       })
     );
+    setScroll(false);
   };
 
   return (
     <>
-      <div className={style.scrollContainer}>
+      <div
+        className={style.scrollContainer}
+        onScroll={() => {
+          setScroll(true);
+        }}
+      >
         <Layout pageTitle="Accueil">
           <div ref={topPage}></div>
           <PublicHeader title="Cook of the day" link="/" />
@@ -55,6 +62,7 @@ const Home: NextPage = (props) => {
               content="Organisez vos pauses déjeuner avec vos collègues, mais bien plus encore. Un restaurant, un anniversaire ou tout autres évènements. "
               secondContent=" Ne ratez plus une occasion pour partager un moment convivial avec vos proches."
             />
+
             <HomeCard
               title="Plannifier vos repas..."
               link={srcCalendar}
@@ -69,8 +77,8 @@ const Home: NextPage = (props) => {
               secondContent=" Les bons comptes font les bons amis. Mais bien sûr, il est toujours possible d'être grand seigneur. "
             />
           </div>
+          {scroll ? <TopBtn scrollFunction={topToPage} /> : ""}
 
-          <TopBtn scrollFunction={topToPage} />
           <RegisterBtn content="Se connecter " link="/login" />
         </Layout>
       </div>
