@@ -29,7 +29,9 @@ const Home: NextPage = (props) => {
         behavior: "smooth",
       })
     );
-    setScroll(false);
+    setTimeout(() => {
+      setScroll(false);
+    }, 1000);
   };
 
   return (
