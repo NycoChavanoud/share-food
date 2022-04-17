@@ -3,7 +3,7 @@
   flex-direction: column;
   align-items: center;
   margin: 160px auto 260px;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
 }
 .titleHome {
   font-size: 1.4em;
