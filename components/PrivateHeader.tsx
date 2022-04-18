@@ -37,7 +37,7 @@ const PrivateHeader = ({ title, firstname, lastname }: privateHeadProps) => {
       <div className={style.privateInfoContainer}>
         <h1 className={style.nameTitle}>
           {" "}
-          {firstname} {lastname} de la fuente de de de
+          {firstname} {lastname}
         </h1>
         <div className={style.subtitle}>{title}</div>
       </div>

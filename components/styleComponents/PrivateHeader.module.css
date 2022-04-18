@@ -22,10 +22,8 @@
   letter-spacing: 3px;
   color: var(--ligthColor);
   font-size: 1.2em;
-  width: 90%;
-  text-overflow: ellipsis;
+  width: 70%;
   overflow-y: scroll;
-  height: 1.2em;
   text-align: center;
   white-space: nowrap;
 }
