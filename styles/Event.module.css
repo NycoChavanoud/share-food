@@ -1,13 +1,60 @@
 .eventPageContainer {
   width: 90%;
   margin: 0 auto;
-}
-
-.titleContainer {
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
-.titlePage {
-  margin-left: 1.5em;
+.eventPageInfo {
+  max-width: 860px;
+  width: 100%;
+  margin: 30px auto 5px;
+  height: 60vh;
+  overflow: scroll;
+  position: relative;
+}
+
+.eventTitle {
+  width: 90%;
+  max-width: 860px;
+  font-family: "Amiko", sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  letter-spacing: 3px;
+  border-bottom: solid 2px var(--darkColor);
+  text-align: center;
+  position: fixed;
+  margin: 120px auto 0px;
+}
+.separationLine {
+  border-top: solid 2px var(--darkColor);
+  width: 90%;
+  max-width: 860px;
+  margin: 0px auto 15px;
+  position: relative;
+  bottom: 0;
+}
+
+.addBtnContainer {
+  position: absolute;
+  text-align: center;
+  bottom: 0;
+  margin: 25px auto 62px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.addBtn {
+  border: none;
+  background: transparent;
+  font-family: "Poppins", sans-serif;
+  font-weight: medium;
+  font-size: 1em;
+  letter-spacing: 3px;
+  margin-left: 10px;
+  cursor: pointer;
 }
