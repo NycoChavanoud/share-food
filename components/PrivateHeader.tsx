@@ -27,7 +27,7 @@ const PrivateHeader = ({ title, firstname, lastname }: privateHeadProps) => {
         style={{
           border: "none",
           background: "transparent",
-          marginRight: "15px",
+
           cursor: "pointer",
         }}
       >
@@ -37,7 +37,7 @@ const PrivateHeader = ({ title, firstname, lastname }: privateHeadProps) => {
       <div className={style.privateInfoContainer}>
         <h1 className={style.nameTitle}>
           {" "}
-          {firstname} {lastname}
+          {firstname} {lastname} de la fuente de de de
         </h1>
         <div className={style.subtitle}>{title}</div>
       </div>

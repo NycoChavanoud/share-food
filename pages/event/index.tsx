@@ -31,40 +31,17 @@ const Event: NextPage = (props) => {
           <div className={style.eventTitle}> A venir </div>
 
           <div className={style.eventPageInfo}>
-            {/* <div className={style.eventTitle}> A venir </div> */}
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
-            <div>TEST</div>
+            <div>ICI LISTE DES EVENTS DEPUIS LA DB</div>
+            <div>ICI LISTE DES EVENTS DEPUIS LA DB</div>
+            <div>ICI LISTE DES EVENTS DEPUIS LA DB</div>
+            <div>ICI LISTE DES EVENTS DEPUIS LA DB</div>
+            <div>ICI LISTE DES EVENTS DEPUIS LA DB</div>
+            <div>ICI LISTE DES EVENTS DEPUIS LA DB</div>
           </div>
 
           <div className={style.separationLine}></div>
         </div>
-        <div className={style.addBtnContainer}>
+        <div className={style.addBtnContainer} data-cy="createBtn">
           <Image src={plusIcon} width={40} height={40} alt="icon-plus" />
           <button className={style.addBtn}>créer nouvel evenement</button>
         </div>

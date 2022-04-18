@@ -13,14 +13,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .nameTitle {
   font-family: "Amiko", sans-serif;
   font-weight: bold;
-  letter-spacing: 5px;
+  letter-spacing: 3px;
   color: var(--ligthColor);
-  font-size: 1.4em;
+  font-size: 1.2em;
+  width: 90%;
+  text-overflow: ellipsis;
+  overflow-y: scroll;
+  height: 1.2em;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .subtitle {
