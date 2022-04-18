@@ -6,11 +6,14 @@ import CurrentUserContext from "../../contexts/currentUserContext";
 import { useContext, useEffect, useState } from "react";
 import plusIcon from "../../public/icons/plus.png";
 import Image from "next/image";
+import Router, { useRouter } from "next/router";
 
 const Event: NextPage = (props) => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const { currentUserProfile } = useContext(CurrentUserContext);
+
+  const router = useRouter();
 
   useEffect(() => {
     if (currentUserProfile) {
@@ -41,7 +44,11 @@ const Event: NextPage = (props) => {
 
           <div className={style.separationLine}></div>
         </div>
-        <div className={style.addBtnContainer} data-cy="createBtn">
+        <div
+          className={style.addBtnContainer}
+          onClick={() => router.push("/event/create")}
+          data-cy="createBtn"
+        >
           <Image src={plusIcon} width={40} height={40} alt="icon-plus" />
           <button className={style.addBtn}>créer nouvel evenement</button>
         </div>
