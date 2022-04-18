@@ -4,13 +4,24 @@ import Router from "next/router";
 import Image from "next/image";
 import backLight from "../public/icons/backLight.png";
 
+import { useContext, useEffect, useState } from "react";
+import CurrentUserContext from "../contexts/currentUserContext";
+
 type privateHeadProps = {
   title: string;
-  firstname: string;
-  lastname: string;
 };
 
-const PrivateHeader = ({ title, firstname, lastname }: privateHeadProps) => {
+const PrivateHeader = ({ title }: privateHeadProps) => {
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const { currentUserProfile } = useContext(CurrentUserContext);
+
+  useEffect(() => {
+    if (currentUserProfile) {
+      setFirstname(currentUserProfile.firstname);
+      setLastname(currentUserProfile.lastname);
+    }
+  }, [currentUserProfile]);
   return (
     <div
       className={style.privateHeaderContainer}
