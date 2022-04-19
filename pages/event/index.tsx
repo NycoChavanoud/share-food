@@ -50,14 +50,15 @@ const Event: NextPage = (props) => {
           </div>
 
           <div className={style.separationLine}></div>
-        </div>
-        <div
-          className={style.addBtnContainer}
-          onClick={() => router.push("/event/create")}
-          data-cy="createBtn"
-        >
-          <Image src={plusIcon} width={40} height={40} alt="icon-plus" />
-          <button className={style.addBtn}>créer nouvel evenement</button>
+
+          <div
+            className={style.addBtnContainer}
+            onClick={() => router.push("/event/create")}
+            data-cy="createBtn"
+          >
+            <Image src={plusIcon} width={40} height={40} alt="icon-plus" />
+            <button className={style.addBtn}>créer nouvel evenement</button>
+          </div>
         </div>
       </LayoutCurrentUser>
     </>
