@@ -61,6 +61,35 @@ const AddEventForm = () => {
         content="Merci de préciser pour l’ensemnle de vos hotes les détails de votre évènement"
       />
 
+      <label htmlFor="selectEventType" className={style.labelForm}>
+        Type d’évènement :
+      </label>
+      <select
+        className={style.selectInput}
+        name="selectEventType"
+        id="selectEventType"
+      >
+        <option className={style.optionInput}>
+          -- Choisir dans la liste --
+        </option>
+        <option className={style.optionInput}>A la maison</option>
+        <option className={style.optionInput}>Au bureau</option>
+        <option className={style.optionInput}>Au resto</option>
+        <option className={style.optionInput}>Autre...</option>
+      </select>
+
+      <label htmlFor="adress" className={style.labelForm}>
+        Adresse de l’évènement
+      </label>
+      <input
+        type="text"
+        id="adress"
+        data-cy="adress"
+        className={style.largeInputForm}
+        autoComplete="off"
+        required
+      />
+
       {/* <div className={style.containerMultiInput}>
         <div className={style.labelContainer}>
           <label htmlFor="nickName" className={style.labelForm}>

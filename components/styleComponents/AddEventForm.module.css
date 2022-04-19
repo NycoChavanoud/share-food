@@ -45,8 +45,8 @@
   border-radius: 10px;
   text-align: center;
   color: var(--ligthColor);
-  font-size: 0.9em;
-  font-weight: 100;
+  font-size: 1em;
+  font-weight: bolder;
   letter-spacing: 2px;
   outline: none;
   cursor: pointer;
@@ -61,13 +61,30 @@
   border-radius: 10px;
   text-align: center;
   color: var(--ligthColor);
-  font-size: 0.9em;
-  font-weight: 100;
+  font-size: 1em;
+  font-weight: bolder;
   letter-spacing: 2px;
   outline: none;
   cursor: pointer;
   padding-right: 5px;
 }
+
+.selectInput {
+  border: none;
+  background-color: var(--inputColor);
+  height: 40px;
+  width: 96%;
+  border-radius: 10px;
+  text-align: center;
+  color: var(--ligthColor);
+  font-size: 1em;
+  font-weight: bolder;
+  letter-spacing: 2px;
+  outline: none;
+  cursor: pointer;
+  padding-right: 5px;
+}
+
 .textareaForm {
   border: none;
   background-color: var(--inputColor);
@@ -76,12 +93,12 @@
   border-radius: 10px;
   text-align: center;
   color: var(--ligthColor);
-  font-size: 0.9em;
-  font-weight: 100;
+  font-size: 1.5em;
+  font-weight: normal;
   letter-spacing: 2px;
   outline: none;
   cursor: pointer;
-  padding: 5px;
+  padding: 15px;
   resize: none;
 }
 
