@@ -5,7 +5,7 @@ describe("login", function () {
       cy.visit("/login");
     });
 
-    it.only("login with correct credentials", function () {
+    it("login with correct credentials", function () {
       cy.get("[data-cy='email']").type("dave.lopper@mail.com");
       cy.get('[data-cy="password"]').type("azertyuiop");
       cy.get('[data-cy="formLogin"]').submit();
