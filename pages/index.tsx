@@ -53,7 +53,7 @@ const Home: NextPage = (props) => {
               link={srcFood}
               content="Partagez avec vos proches vos meilleures recettes. Liberez votre
           créativité culinaire et faites en profiter l'ensemble de votre
-          comunaute."
+          communauté."
               secondContent=" Developpez un véritable cahier de recette, pour que vos créations ne
           soient jamais oubliées."
             />
