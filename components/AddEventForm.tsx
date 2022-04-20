@@ -1,7 +1,24 @@
+import { useState } from "react";
 import style from "./styleComponents/AddEventForm.module.css";
 import TitleSeparation from "./TitleSeparation";
 
 const AddEventForm = () => {
+  const year = new Date().getFullYear().toString();
+  const month = (new Date().getMonth() + 1).toString();
+  const day = new Date().getDate().toString();
+
+  const dateOfTheDay =
+    parseInt(month, 10) < 10
+      ? `${year}-0${month}-${day}`
+      : `${year}-${month}-${day}`;
+
+  const [title, setTitle] = useState("");
+  const [date, setDate] = useState(dateOfTheDay);
+  const [hour, setHour] = useState("12:30");
+  const [description, setDescription] = useState("");
+  const [typeEvent, setTypeEvent] = useState("");
+  const [adress, setAdress] = useState("");
+
   return (
     <form className={style.addEventFormContainer}>
       <TitleSeparation
@@ -18,6 +35,8 @@ const AddEventForm = () => {
         className={style.largeInputForm}
         autoComplete="off"
         required
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
       />
       <div className={style.containerMultiInput}>
         <div className={style.labelContainer}>
@@ -30,6 +49,9 @@ const AddEventForm = () => {
             data-cy="datePicker"
             className={style.littleInputForm}
             autoComplete="off"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            min={dateOfTheDay}
           />
         </div>
 
@@ -43,6 +65,8 @@ const AddEventForm = () => {
             data-cy="hourPicker"
             className={style.littleInputForm}
             autoComplete="off"
+            value={hour}
+            onChange={(e) => setHour(e.target.value)}
           />
         </div>
       </div>
@@ -54,6 +78,8 @@ const AddEventForm = () => {
         data-cy="description"
         className={style.textareaForm}
         autoComplete="off"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
       />
 
       <TitleSeparation
@@ -68,6 +94,8 @@ const AddEventForm = () => {
         className={style.selectInput}
         name="selectEventType"
         id="selectEventType"
+        value={typeEvent}
+        onChange={(e) => setTypeEvent(e.target.value)}
       >
         <option className={style.optionInput}>
           -- Choisir dans la liste --
@@ -88,75 +116,10 @@ const AddEventForm = () => {
         className={style.largeInputForm}
         autoComplete="off"
         required
+        value={adress}
+        onChange={(e) => setAdress(e.target.value)}
       />
 
-      {/* <div className={style.containerMultiInput}>
-        <div className={style.labelContainer}>
-          <label htmlFor="nickName" className={style.labelForm}>
-            Pseudo* :
-          </label>
-          <input
-            type="text"
-            id="nickName"
-            data-cy="nickName"
-            className={style.littleInputForm}
-            autoComplete="off"
-          />
-        </div>
-
-        <div className={style.labelContainer}>
-          <label htmlFor="datePicker" className={style.labelForm}>
-            Anniversaire :
-          </label>
-          <input
-            type="date"
-            id="datePicker"
-            data-cy="datePicker"
-            className={style.littleInputForm}
-            autoComplete="off"
-          />
-        </div>
-      </div>
-
-      <div className={style.containerMultiInput}>
-        <div className={style.labelContainer}>
-          <label htmlFor="firstname" className={style.labelForm}>
-            Prénom :
-          </label>
-          <input
-            type="text"
-            id="firstname"
-            data-cy="firstname"
-            className={style.littleInputForm}
-            autoComplete="off"
-          />
-        </div>
-
-        <div className={style.labelContainer}>
-          <label htmlFor="datePlastnameicker" className={style.labelForm}>
-            Nom :
-          </label>
-          <input
-            type="text"
-            id="lastname"
-            data-cy="lastname"
-            className={style.littleInputForm}
-            autoComplete="off"
-          />
-        </div>
-      </div>
-
-      <label htmlFor="favoritePlate" className={style.labelForm}>
-        Plat signature :
-      </label>
-      <input
-        type="text"
-        id="favoritePlate"
-        data-cy="favoritePlate"
-        className={style.largeInputForm}
-        autoComplete="off"
-        required
-      /> */}
       <button className={style.btnForm}>Valider</button>
     </form>
   );
