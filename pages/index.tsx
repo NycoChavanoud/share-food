@@ -18,17 +18,14 @@ const Home: NextPage = (props) => {
   const srcMoney = money.src;
   const srcCalendar = calendar.src;
 
-  const [top, setTop] = useState();
   const [scroll, setScroll] = useState(false);
 
   const topPage = useRef<any>();
 
   const topToPage = () => {
-    setTop(
-      topPage.current.scrollIntoView({
-        behavior: "smooth",
-      })
-    );
+    topPage.current.scrollIntoView({
+      behavior: "smooth",
+    });
     setTimeout(() => {
       setScroll(false);
     }, 1000);
@@ -43,7 +40,7 @@ const Home: NextPage = (props) => {
         }}
       >
         <Layout pageTitle="Accueil">
-          <div ref={topPage}></div>
+          <span ref={topPage} />
           <PublicHeader title="Cook of the day" link="/" />
 
           <HomeBtns />
