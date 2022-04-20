@@ -5,7 +5,7 @@ export interface IEvent {
   description: string;
   date: Date;
   hour: Date;
-  type: string;
+  typeEvent: string;
   adress: string;
 }
 
@@ -21,11 +21,11 @@ export const createEvent = async ({
   description,
   date,
   hour,
-  type,
+  typeEvent,
   adress,
 }: IEvent) => {
   return db.event.create({
-    data: { title, description, date, hour, type, adress },
+    data: { title, description, date, hour, typeEvent, adress },
   });
 };
 

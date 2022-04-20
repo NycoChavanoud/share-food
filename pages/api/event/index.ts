@@ -11,7 +11,12 @@ const handlePost = async (
   req: NextApiRequestWithCurrentUser,
   res: NextApiResponse
 ) => {
-  return res.status(201).send(await createEvent(req.body));
+  const { title, date, hour, description, typeEvent, adress } = req.body;
+  return res
+    .status(201)
+    .send(
+      await createEvent({ title, date, hour, description, typeEvent, adress })
+    );
 };
 
 const handleGet = async (

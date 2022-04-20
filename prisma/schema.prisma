@@ -58,13 +58,13 @@ model VerificationToken {
 }
 
 model Event {
-  id          Int      @id @default(autoincrement())
-  title       String   @db.VarChar(255)
-  description String   @db.Text
-  date        DateTime
-  hour        DateTime
-  type        String   @db.VarChar(80)
-  adress      String   @db.VarChar(80)
+  id          Int    @id @default(autoincrement())
+  title       String @db.VarChar(255)
+  description String @db.Text
+  date        String
+  hour        String
+  typeEvent   String @db.VarChar(80)
+  adress      String @db.VarChar(80)
 
 
 }

@@ -1,6 +1,6 @@
 .addEventFormContainer {
   width: 90%;
-
+  max-width: 760px;
   margin: 5px auto 80px;
   display: flex;
   flex-direction: column;

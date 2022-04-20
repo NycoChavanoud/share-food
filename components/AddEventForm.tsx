@@ -1,6 +1,7 @@
 import { useState } from "react";
 import style from "./styleComponents/AddEventForm.module.css";
 import TitleSeparation from "./TitleSeparation";
+import axios from "axios";
 
 const AddEventForm = () => {
   const year = new Date().getFullYear().toString();
@@ -19,8 +20,30 @@ const AddEventForm = () => {
   const [typeEvent, setTypeEvent] = useState("");
   const [adress, setAdress] = useState("");
 
+  const handlePostEvent = (e: any) => {
+    e.preventDefault();
+    axios
+      .post(`/api/event `, {
+        title,
+        date,
+        hour,
+        description,
+        typeEvent,
+        adress,
+      })
+      .then(() => alert("succès"))
+      .then(() => {
+        setTitle("");
+        setDate(dateOfTheDay);
+        setHour("12:30");
+        setDescription("");
+        setTypeEvent("");
+        setAdress("");
+      });
+  };
+
   return (
-    <form className={style.addEventFormContainer}>
+    <form className={style.addEventFormContainer} onSubmit={handlePostEvent}>
       <TitleSeparation
         title="Infos générales"
         content="Veuillez remplir les informations nécessaires à la création de votre évènement"
