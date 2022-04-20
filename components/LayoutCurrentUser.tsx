@@ -27,6 +27,7 @@ const LayoutCurrentUser = ({ pageTitle, children }: layoutProps) => {
           content="initial-scale=1.0, width=device-width"
           key="viewport"
         />
+        <link rel="icon" href="/icons/favicon.png" />
       </Head>
       <main>{children}</main>
       {!currentUserProfile ? "" : <Navbar />}

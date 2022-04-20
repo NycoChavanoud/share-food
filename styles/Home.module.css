@@ -1,0 +1,26 @@
+.scrollContainer {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-snap-align: start;
+}
+.HomeCardContainer {
+  max-width: 1000px;
+  padding-bottom: 50px;
+}
+
+@media only screen and (min-width: 640px) {
+  .HomeCardContainer {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 10px auto;
+  }
+}
+
+@media only screen and (min-width: 980px) {
+  .HomeCardContainer {
+    display: flex;
+    justify-content: center;
+  }
+}
