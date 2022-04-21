@@ -3,8 +3,8 @@ import db from "../lib/prisma";
 export interface IEvent {
   title: string;
   description: string;
-  date: Date;
-  hour: Date;
+  date: string;
+  hour: string;
   typeEvent: string;
   adress: string;
 }
