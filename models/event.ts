@@ -13,7 +13,10 @@ const eventPropsToShow = {
   title: true,
   id: true,
   description: true,
-  mainPictureUrl: true,
+  date: true,
+  hour: true,
+  typeEvent: true,
+  adress: true,
 };
 
 export const createEvent = async ({

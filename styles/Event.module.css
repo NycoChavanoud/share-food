@@ -1,6 +1,6 @@
 .eventPageContainer {
   width: 90%;
-  height: 90vh;
+  height: 100%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -10,13 +10,13 @@
 .eventPageInfo {
   max-width: 860px;
   width: 100%;
-  margin: 10px auto;
+  margin: 10px auto 10px;
   overflow-x: scroll;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 15px;
+  height: 55vh;
 }
 
 .eventTitle {
@@ -29,6 +29,7 @@
   border-bottom: solid 2px var(--darkColor);
   text-align: center;
   position: relative;
+  margin-top: 30px;
 }
 
 .separationLine {
@@ -46,7 +47,7 @@
   justify-content: center;
   cursor: pointer;
   background-color: var(--ligthColor);
-  margin-top: 15px;
+  margin-top: 5px;
 }
 
 .addBtn {
