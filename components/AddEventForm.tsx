@@ -2,6 +2,7 @@ import { useState } from "react";
 import style from "./styleComponents/AddEventForm.module.css";
 import TitleSeparation from "./TitleSeparation";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const AddEventForm = () => {
   const year = new Date().getFullYear().toString();
@@ -19,6 +20,8 @@ const AddEventForm = () => {
   const [description, setDescription] = useState("");
   const [typeEvent, setTypeEvent] = useState("");
   const [adress, setAdress] = useState("");
+
+  const router = useRouter();
 
   const handlePostEvent = (e: any) => {
     e.preventDefault();
@@ -39,7 +42,8 @@ const AddEventForm = () => {
         setDescription("");
         setTypeEvent("");
         setAdress("");
-      });
+      })
+      .then(() => router.push("/event"));
   };
 
   return (
