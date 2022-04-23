@@ -1,0 +1,61 @@
+.HeaderDetailContainer {
+  display: flex;
+  flex-direction: column;
+  font-family: "Amiko", sans-serif;
+}
+
+.woodPlank {
+  height: 50px;
+  width: 100%;
+}
+
+.nameAndBackContainer {
+  height: 50px;
+  width: 100%;
+  background-color: var(--inputColor);
+  color: var(--darkColor);
+  display: flex;
+  align-items: center;
+  padding-top: 4px;
+}
+
+.nameInfo {
+  width: 100%;
+  text-align: center;
+  margin-right: 33px;
+  font-size: 1.6em;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.titleInfo {
+  width: 100%;
+  height: 50px;
+  background-color: var(--darkColor);
+  color: var(--ligthColor);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dateAndAdressContainer {
+  height: 100px;
+  width: 100%;
+  background-color: var(--inputColor);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dateInfo {
+  color: var(--ligthColor);
+  font-weight: 800;
+  margin-bottom: 30px;
+}
+.adressInfo {
+  color: var(--darkColor);
+  letter-spacing: 3px;
+  bottom: 0;
+}

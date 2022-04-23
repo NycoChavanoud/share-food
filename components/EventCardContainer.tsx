@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import EventCard from "./EventCard";
 import style from "./styleComponents/EventCardContainer.module.css";
+import { useRouter } from "next/router";
 
 const EventCardContainer = () => {
   const [eventList, setEventList] = useState<any[]>([]);
+  const router = useRouter();
 
   const fetchEventList = () => {
     axios.get(`/api/event `).then((res) => setEventList(res.data));
@@ -14,17 +16,25 @@ const EventCardContainer = () => {
     fetchEventList();
   }, []);
 
+  console.log(eventList);
+
   if (eventList != []) {
     return (
       <div className={style.cardsContainer}>
         {eventList.map((event, index) => {
           return (
-            <EventCard
+            <div
               key={index}
-              title={event.title}
-              date={event.date}
-              hour={event.hour}
-            />
+              onClick={() => {
+                router.push(`/event/${event.id}`);
+              }}
+            >
+              <EventCard
+                title={event.title}
+                date={event.date}
+                hour={event.hour}
+              />
+            </div>
           );
         })}
       </div>

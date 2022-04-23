@@ -1,10 +1,9 @@
-import { IEvent } from "../../models/event";
 import LayoutCurrentUser from "../../components/LayoutCurrentUser";
-import { getOneEvent, getEvents } from "../../models/event";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import PrivateHeader from "../../components/PrivateHeader";
+
+import EventDetailHeader from "../../components/EventDetailHeader";
 
 const EventDetail = () => {
   const router = useRouter();
@@ -21,13 +20,17 @@ const EventDetail = () => {
 
   if (id) {
     return (
-      <LayoutCurrentUser pageTitle={event.title}>
-        <PrivateHeader title={event.title} />
+      <LayoutCurrentUser pageTitle={`évènement : ${event.title}`}>
+        <EventDetailHeader
+          title={event.title}
+          date={event.date}
+          hour={event.hour}
+          adress={event.adress}
+          id={event.id}
+        />
+
         <div>{event.description}</div>
-        <div>{event.date} </div>
-        <div>{event.hour}</div>
         <div>{event.typeEvent} </div>
-        <div>{event.adress} </div>
       </LayoutCurrentUser>
     );
   }
