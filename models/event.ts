@@ -1,7 +1,7 @@
 import db from "../lib/prisma";
 
 export interface IEvent {
-  id: number;
+  id?: number;
   title: string;
   description: string;
   date: string;

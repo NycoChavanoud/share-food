@@ -16,8 +16,6 @@ const EventCardContainer = () => {
     fetchEventList();
   }, []);
 
-  console.log(eventList);
-
   if (eventList != []) {
     return (
       <div className={style.cardsContainer}>
