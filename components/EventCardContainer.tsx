@@ -3,6 +3,7 @@ import axios from "axios";
 import EventCard from "./EventCard";
 import style from "./styleComponents/EventCardContainer.module.css";
 import { useRouter } from "next/router";
+import { Loading } from "./Loading";
 
 const EventCardContainer = () => {
   const [eventList, setEventList] = useState<any[]>([]);
@@ -38,7 +39,7 @@ const EventCardContainer = () => {
       </div>
     );
   } else {
-    return <span>LOADING</span>;
+    return <Loading />;
   }
 };
 

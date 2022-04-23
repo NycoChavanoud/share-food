@@ -1,9 +1,11 @@
+import style from "../../styles/Event.module.css";
 import LayoutCurrentUser from "../../components/LayoutCurrentUser";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 import EventDetailHeader from "../../components/EventDetailHeader";
+import { Loading } from "../../components/Loading";
 
 const EventDetail = () => {
   const router = useRouter();
@@ -28,11 +30,18 @@ const EventDetail = () => {
           adress={event.adress}
           id={event.id}
         />
-
-        <div>{event.description}</div>
-        <div>{event.typeEvent} </div>
+        <div className={style.descriptionDetailEventContainer}>
+          <div className={style.titleDescription}>Description</div>
+          <div className={style.detailDescription}>{event.description}</div>
+          <div className={style.titleDescription}>Détails</div>
+          <div className={style.detailTypeEvent}>
+            Cela se passe &quot;{event.typeEvent}&quot;
+          </div>
+        </div>
       </LayoutCurrentUser>
     );
+  } else {
+    return <Loading />;
   }
 };
 

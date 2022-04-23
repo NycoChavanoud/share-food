@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   font-family: "Amiko", sans-serif;
+  max-width: 860px;
+  margin: 0 auto;
 }
 
 .woodPlank {

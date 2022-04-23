@@ -60,3 +60,34 @@
   margin-left: 10px;
   cursor: pointer;
 }
+
+.titleDescription {
+  width: 80%;
+  font-size: 1em;
+  margin: 40px auto 10px;
+  text-align: center;
+  letter-spacing: 2px;
+  padding: 5px;
+  border-bottom: solid 2px rgba(39, 36, 33, 0.5);
+  max-width: 860px;
+}
+
+.detailDescription {
+  width: 80%;
+  margin: 5px auto;
+  text-align: justify;
+  padding: 10px;
+  max-width: 860px;
+}
+
+.detailTypeEvent {
+  width: 80%;
+  margin: 5px auto;
+  text-align: center;
+  padding: 10px;
+  max-width: 860px;
+}
+
+.descriptionDetailEventContainer {
+  margin-bottom: 70px;
+}
