@@ -48,10 +48,14 @@ const AddEventForm = () => {
 
   return (
     <form className={style.addEventFormContainer} onSubmit={handlePostEvent}>
-      <TitleSeparation
-        title="Infos générales"
-        content="Veuillez remplir les informations nécessaires à la création de votre évènement"
-      />
+      <div className={style.titleSeparationContainer}>
+        <h3 className={style.titleSeparationTitle}>Infos générales</h3>
+
+        <p className={style.titleSeparationContent}>
+          Veuillez remplir les informations nécessaires à la création de votre
+          évènement
+        </p>
+      </div>
       <label htmlFor="title" className={style.labelForm}>
         Titre de l’évènement*
       </label>

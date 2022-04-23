@@ -32,7 +32,6 @@ export const createEvent = async ({
   });
 };
 
-//Voir avec Pierre...
 export const getEvents = async () => {
   return db.event.findMany({ select: eventPropsToShow });
 };

@@ -1,13 +1,7 @@
 import { IEvent } from "../models/event";
 import style from "./styleComponents/EventCard.module.css";
 
-type cardEventProps = {
-  title: string;
-  date: string;
-  hour: string;
-};
-
-const EventCard = ({ title, date, hour }: cardEventProps) => {
+const EventCard = ({ title, date, hour }: Partial<IEvent>) => {
   return (
     <div className={style.eventCardContainer}>
       <div className={style.dateContainer}>
