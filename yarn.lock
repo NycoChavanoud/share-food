@@ -860,10 +860,10 @@
   dependencies:
     "assert-plus" "^1.0.0"
 
-"dayjs@^1.10.4":
-  "integrity" "sha512-JLC809s6Y948/FuCZPm5IX8rRhQwOiyMb2TfVVQEixG7P8Lm/gt5S7yoQZmC8x1UehI9Pb7sksEt4xx14m+7Ug=="
-  "resolved" "https://registry.npmjs.org/dayjs/-/dayjs-1.11.0.tgz"
-  "version" "1.11.0"
+"dayjs@^1.10.4", "dayjs@^1.11.1":
+  "integrity" "sha512-ER7EjqVAMkRRsxNCC5YqJ9d9VQYuWdGt7aiH2qA5R5wt8ZmWaP2dLUSIK6y/kVzLMlmh1Tvu5xUf4M/wdGJ5KA=="
+  "resolved" "https://registry.npmjs.org/dayjs/-/dayjs-1.11.1.tgz"
+  "version" "1.11.1"
 
 "debug@^2.6.9":
   "integrity" "sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA=="

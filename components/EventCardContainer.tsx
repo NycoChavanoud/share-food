@@ -4,6 +4,8 @@ import EventCard from "./EventCard";
 import style from "./styleComponents/EventCardContainer.module.css";
 import { useRouter } from "next/router";
 import { Loading } from "./Loading";
+import dayjs from "dayjs";
+import "dayjs/locale/fr";
 
 const EventCardContainer = () => {
   const [eventList, setEventList] = useState<any[]>([]);
@@ -21,6 +23,10 @@ const EventCardContainer = () => {
     return (
       <div className={style.cardsContainer}>
         {eventList.map((event, index) => {
+          const dateFormat = dayjs(event.date)
+            .locale("fr")
+            .format("dddd DD MMMM YYYY");
+          console.log("date : ", dateFormat);
           return (
             <div
               key={index}
@@ -30,7 +36,7 @@ const EventCardContainer = () => {
             >
               <EventCard
                 title={event.title}
-                date={event.date}
+                date={dateFormat}
                 hour={event.hour}
               />
             </div>
