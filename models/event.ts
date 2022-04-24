@@ -8,6 +8,7 @@ export interface IEvent {
   hour: string;
   typeEvent: string;
   adress: string;
+  diff?: number;
 }
 
 const eventPropsToShow = {

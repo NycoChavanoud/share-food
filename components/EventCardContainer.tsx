@@ -23,10 +23,17 @@ const EventCardContainer = () => {
     return (
       <div className={style.cardsContainer}>
         {eventList.map((event, index) => {
+          // Date of the format in french to card :
           const dateFormat = dayjs(event.date)
             .locale("fr")
             .format("dddd DD MMMM YYYY");
-          console.log("date : ", dateFormat);
+
+          // compare date to remaining days :
+          const today = Date.now();
+          const eventDate = new Date(event.date).getTime();
+          const diffInms = eventDate - today;
+          const dayRemaining = Math.ceil(diffInms / (1000 * 3600 * 24));
+
           return (
             <div
               key={index}
@@ -38,6 +45,7 @@ const EventCardContainer = () => {
                 title={event.title}
                 date={dateFormat}
                 hour={event.hour}
+                diff={dayRemaining}
               />
             </div>
           );
