@@ -11,14 +11,15 @@ const EventDetail = () => {
   const router = useRouter();
   const { id } = router.query;
   const [event, setEvent] = useState<any>("");
-
-  const fetchOneEvent = (id: any) => {
-    axios.get(`/api/event/${id} `).then((res) => setEvent(res.data));
-  };
+  const [validation, setValidation] = useState(false);
 
   useEffect(() => {
-    fetchOneEvent(id);
+    axios.get(`/api/event/${id} `).then((res) => setEvent(res.data));
   }, [id]);
+
+  const deleteEvent = () => {
+    axios.delete(`/api/event/${id}`).then(() => router.push("/event"));
+  };
 
   if (id) {
     return (
@@ -38,6 +39,7 @@ const EventDetail = () => {
             Cela se passe &quot;{event.typeEvent}&quot;
           </div>
         </div>
+        <button onClick={deleteEvent}>SUPPRIMER</button>
       </LayoutCurrentUser>
     );
   } else {

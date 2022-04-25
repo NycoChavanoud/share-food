@@ -49,3 +49,11 @@ export const getOneEvent = (id: any) => {
     select: eventPropsToShow,
   });
 };
+
+export const deleteOneEvent = (id: any) => {
+  return db.event
+    .delete({
+      where: { id: parseInt(id, 10) },
+    })
+    .catch((_) => false);
+};
