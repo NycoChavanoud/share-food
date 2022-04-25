@@ -16,6 +16,7 @@
   font-weight: bold;
   cursor: pointer;
   letter-spacing: 1px;
+  margin-top: 3px;
 }
 
 .dateContainer {
@@ -38,7 +39,17 @@
 
 .remainingDay {
   margin-right: 10px;
+
   font-size: 1em;
   font-weight: bolder;
   opacity: 0.5;
+}
+
+.today {
+  margin-right: 10px;
+
+  font-size: 0.8em;
+  color: var(--redColor);
+  opacity: 1;
+  font-weight: bolder;
 }

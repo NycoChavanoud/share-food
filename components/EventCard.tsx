@@ -10,7 +10,13 @@ const EventCard = ({ title, date, hour, diff }: Partial<IEvent>) => {
           <span className={style.boldText}> {date}</span> à{" "}
           <span className={style.boldText}> {hour}</span>
         </div>
-        <div className={style.remainingDay}>J -{diff}</div>
+        <div>
+          {diff === 0 ? (
+            <span className={style.today}>Aujourd&apos;hui</span>
+          ) : (
+            <span className={style.remainingDay}> j - {diff}</span>
+          )}
+        </div>
       </div>
       <div className={style.titleEventContainer}>{title}</div>
     </div>
