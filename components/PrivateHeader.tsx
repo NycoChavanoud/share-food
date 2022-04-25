@@ -9,9 +9,10 @@ import CurrentUserContext from "../contexts/currentUserContext";
 
 type privateHeadProps = {
   title: string;
+  router: any;
 };
 
-const PrivateHeader = ({ title }: privateHeadProps) => {
+const PrivateHeader = ({ title, router }: privateHeadProps) => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const { currentUserProfile } = useContext(CurrentUserContext);
@@ -32,9 +33,7 @@ const PrivateHeader = ({ title }: privateHeadProps) => {
       }}
     >
       <button
-        onClick={() => {
-          Router.back();
-        }}
+        onClick={router}
         style={{
           border: "none",
           background: "transparent",

@@ -6,6 +6,7 @@ import plusIcon from "../../public/icons/plus.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import EventCardContainer from "../../components/EventCardContainer";
+import Router from "next/router";
 
 const Event: NextPage = (props) => {
   const router = useRouter();
@@ -14,7 +15,12 @@ const Event: NextPage = (props) => {
     <>
       <LayoutCurrentUser pageTitle="Vos évènements">
         <div className={style.eventPageContainer}>
-          <PrivateHeader title="Planning des évènements" />
+          <PrivateHeader
+            title="Planning des évènements"
+            router={() => {
+              Router.push("/event");
+            }}
+          />
           <div
             className={style.addBtnContainer}
             onClick={() => router.push("/event/create")}
