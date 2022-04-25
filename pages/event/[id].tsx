@@ -11,7 +11,7 @@ import ValidateDelete from "../../components/ValidateDelete";
 import dayjs from "dayjs";
 import "dayjs/locale/fr";
 
-const EventDetail = (props) => {
+const EventDetail = (props: any) => {
   const router = useRouter();
   const { id } = router.query;
   const [event, setEvent] = useState<any>("");
