@@ -11,7 +11,6 @@ const EventDetail = () => {
   const router = useRouter();
   const { id } = router.query;
   const [event, setEvent] = useState<any>("");
-  const [validation, setValidation] = useState(false);
 
   useEffect(() => {
     axios.get(`/api/event/${id} `).then((res) => setEvent(res.data));

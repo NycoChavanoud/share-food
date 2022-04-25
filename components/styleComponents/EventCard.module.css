@@ -17,6 +17,9 @@
   cursor: pointer;
   letter-spacing: 1px;
   margin-top: 3px;
+  overflow-y: scroll;
+
+  padding: 5px;
 }
 
 .dateContainer {
