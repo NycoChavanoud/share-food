@@ -90,4 +90,26 @@
 
 .descriptionDetailEventContainer {
   margin-bottom: 70px;
+  display: flex;
+  flex-direction: column;
+}
+
+.btnDeleteEvent {
+  margin: 35px auto 55px;
+  width: 30%;
+  height: 40px;
+  border: none;
+  background-color: var(--redColor);
+  color: var(--ligthColor);
+  font-family: "Amiko", sans-serif;
+  font-size: 0.8em;
+  font-weight: 600;
+  letter-spacing: 3px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.btnDeleteEvent:hover {
+  color: var(--darkColor);
 }

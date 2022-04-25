@@ -38,8 +38,10 @@ const EventDetail = () => {
           <div className={style.detailTypeEvent}>
             Cela se passe &quot;{event.typeEvent}&quot;
           </div>
+          <button onClick={deleteEvent} className={style.btnDeleteEvent}>
+            SUPPRIMER
+          </button>
         </div>
-        <button onClick={deleteEvent}>SUPPRIMER</button>
       </LayoutCurrentUser>
     );
   } else {

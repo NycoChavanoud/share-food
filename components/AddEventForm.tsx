@@ -111,6 +111,7 @@ const AddEventForm = () => {
         autoComplete="off"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
+        required
       />
 
       <TitleSeparation
