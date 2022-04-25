@@ -20,9 +20,18 @@ const EventCardContainer = () => {
   }, []);
 
   if (eventList != []) {
+    const eventListWithoutPast = eventList.filter((event) => {
+      const today = Date.now();
+      const eventDate = new Date(event.date).getTime();
+      const diffInms = eventDate - today;
+      const dayRemaining = Math.ceil(diffInms / (1000 * 3600 * 24));
+
+      return dayRemaining >= 0;
+    });
+
     return (
       <div className={style.cardsContainer}>
-        {eventList.map((event, index) => {
+        {eventListWithoutPast.map((event, index) => {
           // Date of the format in french to card :
           const dateFormat = dayjs(event.date)
             .locale("fr")
