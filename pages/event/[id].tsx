@@ -8,8 +8,10 @@ import "react-toastify/dist/ReactToastify.css";
 import EventDetailHeader from "../../components/EventDetailHeader";
 import { Loading } from "../../components/Loading";
 import ValidateDelete from "../../components/ValidateDelete";
+import dayjs from "dayjs";
+import "dayjs/locale/fr";
 
-const EventDetail = (props: any) => {
+const EventDetail = (props) => {
   const router = useRouter();
   const { id } = router.query;
   const [event, setEvent] = useState<any>("");
@@ -30,11 +32,10 @@ const EventDetail = (props: any) => {
     axios.get(`/api/event/${id} `).then((res) => setEvent(res.data));
   }, [id]);
 
-  const deleteEvent = () => {
-    axios.delete(`/api/event/${id}`).then(() => router.push("/event"));
-  };
-
   if (id) {
+    const dateFormat = dayjs(event.date)
+      .locale("fr")
+      .format("dddd DD MMMM YYYY");
     return (
       <LayoutCurrentUser pageTitle={`évènement : ${event.title}`}>
         {deleteContainer ? (
@@ -49,7 +50,7 @@ const EventDetail = (props: any) => {
         ) : null}
         <EventDetailHeader
           title={event.title}
-          date={event.date}
+          date={dateFormat}
           hour={event.hour}
           adress={event.adress}
           id={event.id}
