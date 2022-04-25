@@ -68,6 +68,7 @@ const AddEventForm = () => {
         required
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        maxLength={40}
       />
       <div className={style.containerMultiInput}>
         <div className={style.labelContainer}>
@@ -150,6 +151,7 @@ const AddEventForm = () => {
         required
         value={adress}
         onChange={(e) => setAdress(e.target.value)}
+        maxLength={60}
       />
 
       <button className={style.btnForm}>Valider</button>

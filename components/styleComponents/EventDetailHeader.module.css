@@ -39,6 +39,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
+  overflow-y: scroll;
 }
 
 .dateAndAdressContainer {
@@ -60,4 +62,5 @@
   color: var(--darkColor);
   letter-spacing: 3px;
   bottom: 0;
+  text-align: center;
 }
