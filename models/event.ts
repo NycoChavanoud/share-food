@@ -35,7 +35,12 @@ export const createEvent = async ({
 };
 
 export const getEvents = async () => {
-  return db.event.findMany({ select: eventPropsToShow });
+  return db.event.findMany({
+    select: eventPropsToShow,
+    orderBy: {
+      date: "asc",
+    },
+  });
 };
 
 export const getOneEvent = (id: any) => {
