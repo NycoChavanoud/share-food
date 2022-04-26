@@ -2555,7 +2555,7 @@
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
 
-"react-toastify@^8.2.0":
+"react-toastify@^8.1.0":
   "integrity" "sha512-Pg2Ju7NngAamarFvLwqrFomJ57u/Ay6i6zfLurt/qPynWkAkOthu6vxfqYpJCyNhHRhR4hu7+bySSeWWJu6PAg=="
   "resolved" "https://registry.npmjs.org/react-toastify/-/react-toastify-8.2.0.tgz"
   "version" "8.2.0"

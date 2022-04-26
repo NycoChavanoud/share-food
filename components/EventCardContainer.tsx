@@ -32,12 +32,10 @@ const EventCardContainer = () => {
     return (
       <div className={style.cardsContainer}>
         {eventListWithoutPast.map((event, index) => {
-          // Date of the format in french to card :
           const dateFormat = dayjs(event.date)
             .locale("fr")
             .format("dddd DD MMMM YYYY");
 
-          // compare date to remaining days :
           const today = Date.now();
           const eventDate = new Date(event.date).getTime();
           const diffInms = eventDate - today;

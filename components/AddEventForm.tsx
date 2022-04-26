@@ -3,6 +3,8 @@ import style from "./styleComponents/AddEventForm.module.css";
 import TitleSeparation from "./TitleSeparation";
 import axios from "axios";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddEventForm = () => {
   const year = new Date().getFullYear().toString();
@@ -22,6 +24,17 @@ const AddEventForm = () => {
   const [adress, setAdress] = useState("");
 
   const router = useRouter();
+  const notify = () =>
+    toast.success("🦄 Super! tu as ajouté un nouvel évènement", {
+      position: "top-right",
+      autoClose: 4000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
 
   const handlePostEvent = (e: any) => {
     e.preventDefault();
@@ -34,7 +47,7 @@ const AddEventForm = () => {
         typeEvent,
         adress,
       })
-      .then(() => alert("succès"))
+
       .then(() => {
         setTitle("");
         setDate(dateOfTheDay);
@@ -43,6 +56,7 @@ const AddEventForm = () => {
         setTypeEvent("");
         setAdress("");
       })
+      .then(() => notify())
       .then(() => router.push("/event"));
   };
 
@@ -114,12 +128,10 @@ const AddEventForm = () => {
         onChange={(e) => setDescription(e.target.value)}
         required
       />
-
       <TitleSeparation
         title="Détails de l’évènement"
         content="Merci de préciser pour l’ensemnle de vos hotes les détails de votre évènement"
       />
-
       <label htmlFor="selectEventType" className={style.labelForm}>
         Type d’évènement :
       </label>
@@ -138,7 +150,6 @@ const AddEventForm = () => {
         <option className={style.optionInput}>Au resto</option>
         <option className={style.optionInput}>Autre...</option>
       </select>
-
       <label htmlFor="adress" className={style.labelForm}>
         Adresse de l’évènement
       </label>
@@ -151,9 +162,8 @@ const AddEventForm = () => {
         required
         value={adress}
         onChange={(e) => setAdress(e.target.value)}
-        maxLength={60}
+        maxLength={90}
       />
-
       <button className={style.btnForm}>Valider</button>
     </form>
   );
