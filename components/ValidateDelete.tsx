@@ -67,6 +67,7 @@ const ValidateDelete = ({
               border: "none",
               cursor: "pointer",
             }}
+            data-cy="validateBtn"
           >
             <Image
               src={valideIcon}

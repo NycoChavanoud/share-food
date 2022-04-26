@@ -63,6 +63,7 @@ const EventDetail = () => {
               setDeleteContainer(!deleteContainer);
             }}
             className={style.btnDeleteEvent}
+            data-cy="btnDelete"
           >
             SUPPRIMER
           </button>

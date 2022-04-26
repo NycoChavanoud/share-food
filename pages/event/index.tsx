@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import EventCardContainer from "../../components/EventCardContainer";
 import Router from "next/router";
 
-const Event: NextPage = (props) => {
+const Event: NextPage = () => {
   const router = useRouter();
 
   return (

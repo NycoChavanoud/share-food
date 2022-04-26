@@ -56,7 +56,11 @@ const AddEventForm = () => {
   };
 
   return (
-    <form className={style.addEventFormContainer} onSubmit={handlePostEvent}>
+    <form
+      className={style.addEventFormContainer}
+      onSubmit={handlePostEvent}
+      data-cy="formAddEvent"
+    >
       <div className={style.titleSeparationContainer}>
         <h3 className={style.titleSeparationTitle}>Infos générales</h3>
 
@@ -134,6 +138,7 @@ const AddEventForm = () => {
         className={style.selectInput}
         name="selectEventType"
         id="selectEventType"
+        data-cy="selectEventType"
         value={typeEvent}
         onChange={(e) => setTypeEvent(e.target.value)}
       >
@@ -142,7 +147,9 @@ const AddEventForm = () => {
         </option>
         <option className={style.optionInput}>A la maison</option>
         <option className={style.optionInput}>Au bureau</option>
-        <option className={style.optionInput}>Au resto</option>
+        <option className={style.optionInput} data-cy="restoType">
+          Au resto
+        </option>
         <option className={style.optionInput}>Autre...</option>
       </select>
       <label htmlFor="adress" className={style.labelForm}>
