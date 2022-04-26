@@ -14,7 +14,7 @@ function MyApp({
   pageProps: { session, ...pageProps },
 }: CustomAppProps) {
   return (
-    <ToastProvider>
+    <ToastProvider autoDismissTimeout={3000} autoDismiss={true}>
       <SessionProvider session={session}>
         <CurrentUserContextProvider>
           <Component {...pageProps} />
