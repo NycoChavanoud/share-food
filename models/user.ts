@@ -6,6 +6,9 @@ export interface IUser {
   password: string;
   firstname: string;
   lastname: string;
+  nickName: string;
+  birthday: string;
+  favoritePlate: string;
 }
 
 const hashingOptions = {
@@ -25,10 +28,21 @@ export const createUser = async ({
   password,
   firstname,
   lastname,
+  nickName,
+  birthday,
+  favoritePlate,
 }: IUser) => {
   const hashedPassword = await hashPassword(password);
   return db.user.create({
-    data: { email, hashedPassword, firstname, lastname },
+    data: {
+      email,
+      hashedPassword,
+      firstname,
+      lastname,
+      nickName,
+      birthday,
+      favoritePlate,
+    },
   });
 };
 

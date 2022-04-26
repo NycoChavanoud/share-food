@@ -9,6 +9,9 @@ export async function seed() {
       lastname: "Lopper",
       email: "dave.lopper@gmail.com",
       hashedPassword: await hashPassword("azertyuiop"),
+      nickName: "DavidHasseloff",
+      birthday: "1982-06-08",
+      favoritePlate: "pastaBox",
     },
   });
 }
