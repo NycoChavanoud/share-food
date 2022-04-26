@@ -14,34 +14,51 @@ const RegisterForm = () => {
   const [firstname, setFirsname] = useState("");
   const [lastname, setLastname] = useState("");
   const [favoritePlate, setFavoritePlate] = useState("");
+  const [messageError, setMessageError] = useState(false);
+  const [emailExist, setEmailExist] = useState(false);
+  const [notGoodFormat, setNotGoodFormat] = useState(false);
 
   const router = useRouter();
 
   const handleCreateCount = (e: any) => {
     e.preventDefault();
-    axios
-      .post(`/api/register `, {
-        firstname,
-        lastname,
-        email,
-        nickName,
-        birthday,
-        favoritePlate,
-        password,
-      })
+    if (password === confirm) {
+      axios
+        .post(`/api/register `, {
+          firstname,
+          lastname,
+          email,
+          nickName,
+          birthday,
+          favoritePlate,
+          password,
+        })
 
-      .then(() => {
-        setFirsname("");
-        setLastname("");
-        setEmail("");
-        setBirthday("");
-        setConfirm("");
-        setPassword("");
-        setNickName("");
-        setFavoritePlate("");
-      })
+        .then(() => {
+          setFirsname("");
+          setLastname("");
+          setEmail("");
+          setBirthday("");
+          setConfirm("");
+          setPassword("");
+          setNickName("");
+          setFavoritePlate("");
+        })
 
-      .then(() => router.push("/"));
+        .then(() => router.push("/login"))
+        .catch((err) => {
+          if (err.response && err.response.status === 409) setEmailExist(true);
+          if (err.response && err.response.status === 422) {
+            setNotGoodFormat(true);
+            setPassword("");
+            setConfirm("");
+          }
+        });
+    } else {
+      setMessageError(true);
+      setPassword("");
+      setConfirm("");
+    }
   };
 
   return (
@@ -59,6 +76,55 @@ const RegisterForm = () => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
+      {emailExist ? (
+        <p
+          className={style.welcomtext}
+          style={{
+            fontSize: "0.9em",
+            marginBottom: "-15px",
+            marginTop: "5px",
+            color: "#9c1309",
+            fontWeight: "normal",
+          }}
+        >
+          Cet email possède déjà un compte
+        </p>
+      ) : (
+        ""
+      )}
+      {emailExist ? (
+        <p
+          className={style.welcomtext}
+          style={{
+            fontSize: "0.9em",
+            marginBottom: "-15px",
+            marginTop: "5px",
+            color: "#9c1309",
+            fontWeight: "normal",
+          }}
+        >
+          Cet email possède déjà un compte
+        </p>
+      ) : (
+        ""
+      )}
+
+      {notGoodFormat ? (
+        <p
+          className={style.welcomtext}
+          style={{
+            fontSize: "0.9em",
+            marginBottom: "-15px",
+            marginTop: "5px",
+            color: "#9c1309",
+            fontWeight: "normal",
+          }}
+        >
+          votre mot de passe doit contenir 8 caractères
+        </p>
+      ) : (
+        ""
+      )}
 
       <label htmlFor="password" className={style.labelForm}>
         Mot de passe* :
@@ -72,6 +138,7 @@ const RegisterForm = () => {
         required
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        minLength={8}
       />
 
       <label htmlFor="confirmPassword" className={style.labelForm}>
@@ -86,7 +153,24 @@ const RegisterForm = () => {
         required
         value={confirm}
         onChange={(e) => setConfirm(e.target.value)}
+        minLength={8}
       />
+      {messageError ? (
+        <p
+          className={style.welcomtext}
+          style={{
+            fontSize: "0.9em",
+            marginBottom: "-15px",
+            marginTop: "5px",
+            color: "#9c1309",
+            fontWeight: "normal",
+          }}
+        >
+          Vos mots de passes ne sont pas identiques
+        </p>
+      ) : (
+        ""
+      )}
 
       <TitleSeparation
         title="Infos profil"

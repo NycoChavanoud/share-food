@@ -1,5 +1,6 @@
 import db from "../lib/prisma";
 import argon2 from "argon2";
+import Joi from "joi";
 
 export interface IUser {
   email: string;
@@ -63,3 +64,13 @@ export const getSafeAttributes = (user: any) => ({
   ...user,
   hashPassword: undefined,
 });
+
+export const validateUser = (data: any, forUpdate = false) => {
+  const presence = forUpdate ? "optional" : "required";
+  return Joi.object({
+    firstname: Joi.string().max(255).presence(presence),
+    lastname: Joi.string().max(255).presence(presence),
+    email: Joi.string().email().presence(presence),
+    password: Joi.string().min(8).presence(presence),
+  }).validate(data, { abortEarly: false }).error;
+};
