@@ -34,7 +34,7 @@ const ValidateDelete = ({
         .then(() => {
           setDeleteContainer(!deleteContainer);
         })
-        .catch((err) => console.log(err.response.status));
+        .catch((err) => console.error(err.response.status));
     }
   };
 
