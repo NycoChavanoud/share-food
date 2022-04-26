@@ -129,7 +129,7 @@ const AddEventForm = () => {
       />
       <TitleSeparation
         title="Détails de l’évènement"
-        content="Merci de préciser pour l’ensemnle de vos hotes les détails de votre évènement"
+        content="Merci de préciser pour l’ensemble de vos hôtes les détails de votre évènement"
       />
       <label htmlFor="selectEventType" className={style.labelForm}>
         Type d’évènement :
