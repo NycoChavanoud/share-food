@@ -1,6 +1,6 @@
 import axios from "axios";
 import style from "./styleComponents/ValidateDelete.module.css";
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import valideIcon from "../public/icons/valide.png";
 import annuleIcon from "../public/icons/annule.png";

@@ -3,11 +3,10 @@ import LayoutCurrentUser from "../../components/LayoutCurrentUser";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import EventDetailHeader from "../../components/EventDetailHeader";
 import { Loading } from "../../components/Loading";
 import ValidateDelete from "../../components/ValidateDelete";
+import { useToasts } from "react-toast-notifications";
 import dayjs from "dayjs";
 import "dayjs/locale/fr";
 
@@ -16,18 +15,13 @@ const EventDetail = () => {
   const { id } = router.query;
   const [event, setEvent] = useState<any>("");
   const [deleteContainer, setDeleteContainer] = useState(false);
+  const { addToast } = useToasts();
 
-  const notifySuccess = () =>
-    toast.success("🦄 Ton évènement est supprimé", {
-      position: "top-right",
-      autoClose: 4000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
+  const notifySuccess = () => {
+    addToast("🦄 Ton évènement est supprimé", {
+      appearance: "success",
     });
+  };
 
   useEffect(() => {
     axios.get(`/api/event/${id} `).then((res) => setEvent(res.data));

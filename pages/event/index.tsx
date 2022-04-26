@@ -7,7 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import EventCardContainer from "../../components/EventCardContainer";
 import Router from "next/router";
-import { ToastContainer } from "react-toastify";
+
 
 const Event: NextPage = (props) => {
   const router = useRouter();
@@ -38,7 +38,7 @@ const Event: NextPage = (props) => {
 
           <div className={style.separationLine}></div>
         </div>
-        <ToastContainer />
+   
       </LayoutCurrentUser>
     </>
   );

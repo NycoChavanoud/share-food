@@ -3,13 +3,13 @@ import style from "./styleComponents/AddEventForm.module.css";
 import TitleSeparation from "./TitleSeparation";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useToasts } from "react-toast-notifications";
 
 const AddEventForm = () => {
   const year = new Date().getFullYear().toString();
   const month = (new Date().getMonth() + 1).toString();
   const day = new Date().getDate().toString();
+  const { addToast } = useToasts();
 
   const dateOfTheDay =
     parseInt(month, 10) < 10
@@ -24,17 +24,22 @@ const AddEventForm = () => {
   const [adress, setAdress] = useState("");
 
   const router = useRouter();
-  const notify = () =>
-    toast.success("🦄 Super! tu as ajouté un nouvel évènement", {
-      position: "top-right",
-      autoClose: 4000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
+  // const notify = () =>
+  //   toast.success("🦄 Super! tu as ajouté un nouvel évènement", {
+  //     position: "top-right",
+  //     autoClose: 4000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: false,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "dark",
+  //   });
+  const notify = () => {
+    addToast("🦄 Super! tu as ajouté un nouvel évènement", {
+      appearance: "success",
     });
+  };
 
   const handlePostEvent = (e: any) => {
     e.preventDefault();
