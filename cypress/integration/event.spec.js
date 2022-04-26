@@ -8,7 +8,7 @@ describe("event", function () {
       cy.get('[data-cy="formLogin"]').submit();
     });
     it("acces to create event", function () {
-      cy.get('[cy-data="logoEvent"]').click();
+      cy.get('[data-cy="logoEvent"]').click();
       cy.url().should("include", "/event");
       cy.contains("créer nouvel evenement");
       cy.get('[data-cy="createBtn"]').click();

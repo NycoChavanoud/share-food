@@ -18,7 +18,7 @@ const Navbar = () => {
           onClick={() => {
             Router.push("/dashboard");
           }}
-          cy-data="logoHome"
+          data-cy="logoHome"
         >
           {" "}
           <Image src={home} width={35} height={35} alt="logo-home" />{" "}
@@ -28,7 +28,7 @@ const Navbar = () => {
           onClick={() => {
             Router.push("/event");
           }}
-          cy-data="logoEvent"
+          data-cy="logoEvent"
         >
           {" "}
           <Image
@@ -44,7 +44,7 @@ const Navbar = () => {
           onClick={() => {
             Router.push("/crew");
           }}
-          cy-data="logoCrew"
+          data-cy="logoCrew"
         >
           {" "}
           <Image src={crew} width={35} height={35} alt="logo-crew" />{" "}
@@ -55,7 +55,7 @@ const Navbar = () => {
           onClick={() => {
             Router.push("/friend");
           }}
-          cy-data="logoFriend"
+          data-cy="logoFriend"
         >
           {" "}
           <Image src={friend} width={35} height={35} alt="logo-friend" />{" "}
@@ -67,7 +67,7 @@ const Navbar = () => {
               callbackUrl: `/login`,
             });
           }}
-          cy-data="logoLogOut"
+          data-cy="logoLogOut"
         >
           <Image src={signoutIcon} width={35} height={35} alt="logo-signout" />
         </button>

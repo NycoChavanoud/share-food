@@ -24,17 +24,7 @@ const AddEventForm = () => {
   const [adress, setAdress] = useState("");
 
   const router = useRouter();
-  // const notify = () =>
-  //   toast.success("🦄 Super! tu as ajouté un nouvel évènement", {
-  //     position: "top-right",
-  //     autoClose: 4000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: false,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "dark",
-  //   });
+
   const notify = () => {
     addToast("🦄 Super! tu as ajouté un nouvel évènement", {
       appearance: "success",
