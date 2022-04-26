@@ -120,7 +120,7 @@ const Login: NextPage = (
         <button className={style.btnForm}>Valider</button>
       </form>
 
-      <RegisterBtn content="" link="/registration" />
+      <RegisterBtn content="S’inscrire" link="/registration" />
     </Layout>
   );
 };
