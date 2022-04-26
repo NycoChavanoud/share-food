@@ -8,7 +8,6 @@ import { useRouter } from "next/router";
 import EventCardContainer from "../../components/EventCardContainer";
 import Router from "next/router";
 
-
 const Event: NextPage = (props) => {
   const router = useRouter();
 
@@ -19,7 +18,7 @@ const Event: NextPage = (props) => {
           <PrivateHeader
             title="Planning des évènements"
             router={() => {
-              Router.push("/event");
+              Router.push("/");
             }}
           />
           <div
@@ -38,7 +37,6 @@ const Event: NextPage = (props) => {
 
           <div className={style.separationLine}></div>
         </div>
-   
       </LayoutCurrentUser>
     </>
   );
