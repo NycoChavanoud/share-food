@@ -17,8 +17,8 @@ const handleCreateUser = async (req: NextApiRequest, res: NextApiResponse) => {
     password,
   } = req.body;
 
-  //   const validationErrors = await validateUser(req.body);
-  //   if (validationErrors) res.status(422).send(validationErrors);
+  const validationErrors = validateUser(req.body);
+  if (validationErrors) return res.status(422).send(validationErrors);
   const emailExist = await emailAlreadyExists(req.body.email);
   if (emailExist) return res.status(409).send("email already taken");
 

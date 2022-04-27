@@ -62,7 +62,11 @@ const RegisterForm = () => {
   };
 
   return (
-    <form className={style.registerFormContainer} onSubmit={handleCreateCount}>
+    <form
+      className={style.registerFormContainer}
+      onSubmit={handleCreateCount}
+      data-cy="formRegister"
+    >
       <label htmlFor="email" className={style.labelForm}>
         Votre email* :
       </label>
@@ -76,22 +80,6 @@ const RegisterForm = () => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      {emailExist ? (
-        <p
-          className={style.welcomtext}
-          style={{
-            fontSize: "0.9em",
-            marginBottom: "-15px",
-            marginTop: "5px",
-            color: "#9c1309",
-            fontWeight: "normal",
-          }}
-        >
-          Cet email possède déjà un compte
-        </p>
-      ) : (
-        ""
-      )}
       {emailExist ? (
         <p
           className={style.welcomtext}

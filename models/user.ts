@@ -72,5 +72,8 @@ export const validateUser = (data: any, forUpdate = false) => {
     lastname: Joi.string().max(255).presence(presence),
     email: Joi.string().email().presence(presence),
     password: Joi.string().min(8).presence(presence),
+    nickName: Joi.string().max(255),
+    favoritePlate: Joi.string().max(255),
+    birthday: Joi.string().max(255),
   }).validate(data, { abortEarly: false }).error;
 };
