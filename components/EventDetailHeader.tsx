@@ -5,19 +5,10 @@ import Arrow from "../public/icons/backDark.png";
 import Image from "next/image";
 import Router from "next/router";
 import CurrentUserContext from "../contexts/currentUserContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 
-const EventDetailHeader = ({ title, date, hour, adress }: Partial<IEvent>) => {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
+const EventDetailHeader = ({ title, date, hour, address }: Partial<IEvent>) => {
   const { currentUserProfile } = useContext(CurrentUserContext);
-
-  useEffect(() => {
-    if (currentUserProfile) {
-      setFirstname(currentUserProfile.firstname);
-      setLastname(currentUserProfile.lastname);
-    }
-  }, [currentUserProfile]);
 
   return (
     <div className={style.HeaderDetailContainer}>
@@ -46,7 +37,7 @@ const EventDetailHeader = ({ title, date, hour, adress }: Partial<IEvent>) => {
         </button>
         <div className={style.nameInfo}>
           {" "}
-          {firstname} {lastname}
+          {currentUserProfile?.firstname} {currentUserProfile?.lastname}
         </div>
       </div>
 
@@ -56,7 +47,7 @@ const EventDetailHeader = ({ title, date, hour, adress }: Partial<IEvent>) => {
         <div className={style.dateInfo}>
           Le {date} à {hour}
         </div>
-        <div className={style.adressInfo}>{adress}</div>
+        <div className={style.adressInfo}>{address}</div>
       </div>
       <span
         className={style.woodPlank}

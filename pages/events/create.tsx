@@ -7,12 +7,12 @@ import Router from "next/router";
 
 const Create: NextPage = (props) => {
   return (
-    <LayoutCurrentUser pageTitle="création d'évènement">
+    <LayoutCurrentUser pageTitle="Création d'évènement">
       <div className={style.eventCreateContainer}>
         <PrivateHeader
           title="Création d’évènement"
           router={() => {
-            Router.push("/event");
+            Router.push("/events");
           }}
         />
       </div>

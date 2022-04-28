@@ -8,30 +8,23 @@ import dayjs from "dayjs";
 import "dayjs/locale/fr";
 
 const EventCardContainer = () => {
-  const [eventList, setEventList] = useState<any[]>([]);
+  const [eventList, setEventList] = useState<any[] | null>(null);
   const router = useRouter();
 
   const fetchEventList = () => {
-    axios.get(`/api/event `).then((res) => setEventList(res.data));
+    axios.get(`/api/events `).then((res) => setEventList(res.data));
   };
 
   useEffect(() => {
     fetchEventList();
   }, []);
 
-  if (eventList != []) {
-    const eventListWithoutPast = eventList.filter((event) => {
-      const today = Date.now();
-      const eventDate = new Date(event.date).getTime();
-      const diffInms = eventDate - today;
-      const dayRemaining = Math.ceil(diffInms / (1000 * 3600 * 24));
+  if (!eventList) return <Loading />;
 
-      return dayRemaining >= 0;
-    });
-
+  if (eventList.length !== 0) {
     return (
       <div className={style.cardsContainer}>
-        {eventListWithoutPast.map((event, index) => {
+        {eventList.map((event, index) => {
           const dateFormat = dayjs(event.date)
             .locale("fr")
             .format("dddd DD MMMM YYYY");
@@ -45,7 +38,7 @@ const EventCardContainer = () => {
             <div
               key={index}
               onClick={() => {
-                router.push(`/event/${event.id}`);
+                router.push(`/events/${event.id}`);
               }}
             >
               <EventCard
@@ -60,7 +53,22 @@ const EventCardContainer = () => {
       </div>
     );
   } else {
-    return <Loading />;
+    return (
+      <>
+        <p
+          className={style.welcomtext}
+          style={{
+            fontSize: "1.4em",
+
+            marginTop: "45px",
+            color: "#9c1309",
+            fontWeight: "normal",
+          }}
+        >
+          Aucun évènement prévu
+        </p>
+      </>
+    );
   }
 };
 

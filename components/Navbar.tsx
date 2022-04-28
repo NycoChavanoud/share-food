@@ -26,7 +26,7 @@ const Navbar = () => {
         <button
           className={style.btnIcons}
           onClick={() => {
-            Router.push("/event");
+            Router.push("/events");
           }}
           data-cy="logoEvent"
         >

@@ -1,13 +1,13 @@
 import db from "../lib/prisma";
 
 export interface IEvent {
-  id?: number;
+  id: number;
   title: string;
   description: string;
   date: string;
   hour: string;
   typeEvent: string;
-  adress: string;
+  address: string;
   diff?: number;
 }
 
@@ -18,7 +18,7 @@ const eventPropsToShow = {
   date: true,
   hour: true,
   typeEvent: true,
-  adress: true,
+  address: true,
 };
 
 export const createEvent = async ({
@@ -27,18 +27,25 @@ export const createEvent = async ({
   date,
   hour,
   typeEvent,
-  adress,
-}: IEvent) => {
+  address,
+}: Omit<IEvent, "id">) => {
   return db.event.create({
-    data: { title, description, date, hour, typeEvent, adress },
+    data: { title, description, date, hour, typeEvent, address },
   });
 };
 
 export const getEvents = async () => {
+  const dateOfDay = new Date().toISOString().substring(0, 10);
+  console.log("date  :", dateOfDay);
   return db.event.findMany({
     select: eventPropsToShow,
     orderBy: {
       date: "asc",
+    },
+    where: {
+      date: {
+        gte: dateOfDay,
+      },
     },
   });
 };

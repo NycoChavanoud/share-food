@@ -1,43 +1,23 @@
-import axios from "axios";
 import style from "./styleComponents/ValidateDelete.module.css";
-// import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from "next/router";
 import valideIcon from "../public/icons/valide.png";
 import annuleIcon from "../public/icons/annule.png";
 import Image from "next/image";
 
 type validateDeleteProps = {
-  id: any;
+  type: string;
   deleteContainer: any;
   setDeleteContainer: any;
-  notifySuccess: any;
-  type: string;
   message: string;
+  myFn: () => Promise<any>;
 };
 
 const ValidateDelete = ({
-  id,
-  deleteContainer,
-  setDeleteContainer,
-  notifySuccess,
   type,
   message,
+  myFn,
+  deleteContainer,
+  setDeleteContainer,
 }: validateDeleteProps) => {
-  const router = useRouter();
-
-  const handleConfirm = () => {
-    if (id) {
-      axios
-        .delete(`/api/event/${id}`)
-        .then(() => router.push("/event"))
-        .then(() => notifySuccess("Evènement supprimé avec succès"))
-        .then(() => {
-          setDeleteContainer(!deleteContainer);
-        })
-        .catch((err) => console.error(err.response.status));
-    }
-  };
-
   return (
     <div className={style.overlay}>
       <div className={style.deleteContainer}>
@@ -61,7 +41,7 @@ const ValidateDelete = ({
             />
           </button>
           <button
-            onClick={handleConfirm}
+            onClick={myFn}
             style={{
               backgroundColor: "transparent",
               border: "none",

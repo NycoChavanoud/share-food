@@ -21,7 +21,7 @@ const AddEventForm = () => {
   const [hour, setHour] = useState("12:30");
   const [description, setDescription] = useState("");
   const [typeEvent, setTypeEvent] = useState("");
-  const [adress, setAdress] = useState("");
+  const [address, setAddress] = useState("");
 
   const router = useRouter();
 
@@ -34,13 +34,13 @@ const AddEventForm = () => {
   const handlePostEvent = (e: any) => {
     e.preventDefault();
     axios
-      .post(`/api/event `, {
+      .post(`/api/events `, {
         title,
         date,
         hour,
         description,
         typeEvent,
-        adress,
+        address,
       })
 
       .then(() => {
@@ -49,10 +49,10 @@ const AddEventForm = () => {
         setHour("12:30");
         setDescription("");
         setTypeEvent("");
-        setAdress("");
+        setAddress("");
       })
       .then(() => notify())
-      .then(() => router.push("/event"));
+      .then(() => router.push("/events"));
   };
 
   return (
@@ -70,7 +70,7 @@ const AddEventForm = () => {
         </p>
       </div>
       <label htmlFor="title" className={style.labelForm}>
-        Titre de l’évènement*
+        Titre de l&apos;évenement*
       </label>
       <input
         type="text"
@@ -162,8 +162,8 @@ const AddEventForm = () => {
         className={style.largeInputForm}
         autoComplete="off"
         required
-        value={adress}
-        onChange={(e) => setAdress(e.target.value)}
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
         maxLength={90}
       />
       <button className={style.btnForm}>Valider</button>

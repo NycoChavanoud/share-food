@@ -23,7 +23,7 @@ const Event: NextPage = () => {
           />
           <div
             className={style.addBtnContainer}
-            onClick={() => router.push("/event/create")}
+            onClick={() => router.push("/events/create")}
             data-cy="createBtn"
           >
             <Image src={plusIcon} width={40} height={40} alt="icon-plus" />
