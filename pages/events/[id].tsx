@@ -52,7 +52,7 @@ const EventDetail = () => {
         title={event.title}
         date={dateFormat}
         hour={event.hour}
-        address={event.adress}
+        address={event.address}
         id={event.id}
       />
       <div className={style.descriptionDetailEventContainer}>

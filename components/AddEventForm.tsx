@@ -152,13 +152,13 @@ const AddEventForm = () => {
         </option>
         <option className={style.optionInput}>Autre...</option>
       </select>
-      <label htmlFor="adress" className={style.labelForm}>
+      <label htmlFor="address" className={style.labelForm}>
         Adresse de l’évènement
       </label>
       <input
         type="text"
-        id="adress"
-        data-cy="adress"
+        id="address"
+        data-cy="address"
         className={style.largeInputForm}
         autoComplete="off"
         required

@@ -36,7 +36,6 @@ export const createEvent = async ({
 
 export const getEvents = async () => {
   const dateOfDay = new Date().toISOString().substring(0, 10);
-  console.log("date  :", dateOfDay);
   return db.event.findMany({
     select: eventPropsToShow,
     orderBy: {
