@@ -5,7 +5,7 @@ describe("login", function () {
       cy.visit("/login");
     });
 
-    it.only("login with correct credentials", function () {
+    it("login with correct credentials", function () {
       cy.get("[data-cy='email']").type("dave.lopper@mail.com");
       cy.get('[data-cy="password"]').type("azertyuiop");
       cy.get('[data-cy="formLogin"]').submit();
@@ -24,8 +24,7 @@ describe("login", function () {
       cy.get("[data-cy='email']").type("mail@mail.com");
       cy.get('[data-cy="password"]').type("aaazzzeeezzz");
       cy.get('[data-cy="formLogin"]').submit();
-      cy.get('[data-cy="errorMessage"]').should("exist");
-      cy.contains("Echec de connexion");
+      cy.contains("Échec de connexion");
     });
   });
 });

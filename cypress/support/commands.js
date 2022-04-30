@@ -27,7 +27,7 @@
 Cypress.Commands.add(
   "signup",
   ({
-    email = "visitor@website.com",
+    email = "dave.lopper@gmail.com",
     password = "verysecure",
     firstname = "Dave",
     lastname = "Lopper",

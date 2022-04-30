@@ -1,6 +1,6 @@
 describe("register", function () {
   beforeEach(() => {
-    cy.signup({ email: "dave.lopper@mail.com", password: "azertyuiop" });
+    cy.signup({ email: "dave.lopper@gmail.com", password: "azertyuiop" });
     cy.visit("/registration");
   });
   it("find the register since home page", function () {
