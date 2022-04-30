@@ -13,7 +13,6 @@ const Navbar = () => {
     <>
       <div className={style.navbarContainer}>
         <button
-          style={{ visibility: "hidden" }}
           className={style.btnIcons}
           onClick={() => {
             Router.push("/dashboard");
