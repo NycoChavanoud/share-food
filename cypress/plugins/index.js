@@ -1,5 +1,6 @@
 /// <reference types="cypress" />
 const User = require("../../models/user");
+const Event = require("../../models/event");
 
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
@@ -26,6 +27,7 @@ module.exports = (on, config) => {
     findUserByEmail: User.findByEmail,
     createUser: User.createUser,
     deleteUserByEmail: User.deleteUserByEmail,
+    createEvent: Event.createEvent,
   });
   return config;
 };

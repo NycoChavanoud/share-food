@@ -14,7 +14,7 @@ const LayoutCurrentUser = ({ pageTitle, children }: layoutProps) => {
 
   useEffect(() => {
     if (status !== "loading" && !session?.user?.email) {
-      router.push("/login");
+      //router.push("/login");
     }
   }, [status, session, router]);
 
