@@ -38,3 +38,5 @@ describe("event", function () {
     });
   });
 });
+
+// QUAND PAS LOGGU2 PAS ACCES + TESTER LE LISTING ET L4AFFICHAGE? TESTER SI Y A PAS D EVENENEMENT A VENIR .../

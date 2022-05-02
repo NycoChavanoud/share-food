@@ -17,7 +17,6 @@ describe("login", function () {
       cy.visit("/");
       cy.contains("Se connecter").click();
       cy.url().should("include", "/login");
-      cy.contains("S’inscrire");
     });
 
     it("it prints an error with incorrect credentials", function () {
@@ -25,7 +24,7 @@ describe("login", function () {
       cy.get('[data-cy="password"]').type("aaazzzeeezzz");
       cy.get('[data-cy="formLogin"]').submit();
       cy.get('[data-cy="errorMessage"]').should("exist");
-      cy.contains("Echec de connexion");
+      cy.contains("Échec de connexion");
     });
   });
 });
