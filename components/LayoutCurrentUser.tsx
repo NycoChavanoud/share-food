@@ -17,6 +17,14 @@ const LayoutCurrentUser = ({ pageTitle, children }: layoutProps) => {
       router.push("/login");
     }
   }, [status, session, router]);
+  console.log(
+    "seesion : ",
+    session,
+    "status : ",
+    status,
+    "currentuserProfil : ",
+    currentUserProfile
+  );
 
   return (
     <>

@@ -18,6 +18,11 @@ model User {
   lastname       String?
   email          String?   @unique
   hashedPassword String?
+  nickName       String?
+  birthday       String?
+  favoritePlate  String?
+  city           String?
+  description    String?
   Account        Account[]
   Session        Session[]
 }
@@ -55,4 +60,14 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Event {
+  id          Int    @id @default(autoincrement())
+  title       String @db.VarChar(255)
+  description String @db.Text
+  date        String
+  hour        String
+  typeEvent   String @db.VarChar(80)
+  address     String @db.VarChar(80)
 }
