@@ -1,3 +1,9 @@
+.load {
+  font-size: 0.8em;
+  font-weight: 600;
+  margin-top: 35px;
+}
+
 .dots {
   width: 3em;
   height: 3em;
@@ -6,7 +12,7 @@
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
   align-items: center;
-  margin-top: 45px;
+  margin-top: 15px;
 }
 
 .dots > div {

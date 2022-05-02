@@ -63,3 +63,5 @@ export const deleteOneEvent = (id: any) => {
     })
     .catch((_) => false);
 };
+
+export const deleteManyEvents = db.event.deleteMany;

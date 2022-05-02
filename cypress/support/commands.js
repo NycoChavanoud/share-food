@@ -124,6 +124,7 @@ Cypress.Commands.add(
         cy.login({ email, password });
         cy.get("@userSession").then((session) => session.user);
       },
+      validate: () => false,
     });
   }
 );

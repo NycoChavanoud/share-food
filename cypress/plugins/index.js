@@ -28,6 +28,7 @@ module.exports = (on, config) => {
     createUser: User.createUser,
     deleteUserByEmail: User.deleteUserByEmail,
     createEvent: Event.createEvent,
+    deleteAllEvents: Event.deleteManyEvents,
   });
   return config;
 };

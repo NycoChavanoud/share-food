@@ -11,6 +11,7 @@ export async function seed() {
       hashedPassword: await hashPassword("azertyuiop"),
     },
   });
+  await db.event.deleteMany();
 }
 
 seed();

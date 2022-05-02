@@ -12,7 +12,10 @@ const EventCardContainer = () => {
   const router = useRouter();
 
   const fetchEventList = () => {
-    axios.get(`/api/events `).then((res) => setEventList(res.data));
+    axios
+      .get(`/api/events `)
+      .then((res) => setEventList(res.data))
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {
