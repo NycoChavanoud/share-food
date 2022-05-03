@@ -42,7 +42,6 @@ const EventDetail = () => {
 
   const dateFormat = dayjs(event.date).locale("fr").format("dddd DD MMMM YYYY");
 
-  console.log("email usercontext", currentUserProfile?.id);
   return (
     <LayoutCurrentUser pageTitle={`évènement : ${event.title}`}>
       {deleteContainer ? (
@@ -69,7 +68,7 @@ const EventDetail = () => {
         <div className={style.detailTypeEvent}>
           Cela se passe &quot;{event.typeEvent}&quot;
         </div>
-        {event.authorId === currentUserProfile?.id ? (
+        {event.authorId === currentUserProfile?.id && (
           <button
             onClick={() => {
               setDeleteContainer(!deleteContainer);
@@ -79,8 +78,6 @@ const EventDetail = () => {
           >
             SUPPRIMER
           </button>
-        ) : (
-          ""
         )}
       </div>
     </LayoutCurrentUser>

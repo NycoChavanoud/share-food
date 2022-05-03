@@ -76,7 +76,7 @@ describe("event", function () {
         cy.url().should("include", "/events");
       });
     });
-    it("don't see delete btn with othe user", function () {
+    it("does not show the delete button when the event belongs to another user", function () {
       cy.task("deleteAllEvents");
       cy.get("@currentUser").then((user) => {
         cy.task("deleteAllEvents");
@@ -120,7 +120,7 @@ describe("event", function () {
   });
 
   describe("without session", function () {
-    it("impossible to accès page event", function () {
+    it("impossible to access page event", function () {
       cy.task("deleteAllUsers");
       cy.visit("/events");
       cy.url().should("include", "/login");
@@ -134,7 +134,6 @@ describe("event", function () {
     });
     it("message if no events", function () {
       cy.task("deleteAllEvents");
-      cy.signup({ email: "dave.lopper@gmail.com", password: "azertyuiop" });
       cy.visit("/events");
       cy.contains("chargement des données");
       cy.get('[data-cy="loader"]').should("exist");

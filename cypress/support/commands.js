@@ -86,7 +86,6 @@ Cypress.Commands.add(
           });
       },
       validate: (saved) => {
-        cy.log("saved", saved);
         return cy
           .request({
             url: "/api/profile",

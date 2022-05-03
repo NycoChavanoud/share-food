@@ -2,7 +2,6 @@ describe("login", function () {
   describe("withoutSession", function () {
     beforeEach(() => {
       cy.task("deleteAllUsers");
-      cy.signup({ email: "dave.lopper@gmail.com", password: "azertyuiop" });
       cy.visit("/login");
     });
 

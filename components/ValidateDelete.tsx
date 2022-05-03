@@ -41,7 +41,7 @@ const ValidateDelete = ({
             />
           </button>
           <button
-            onClick={myFn}
+            onClick={myFunc}
             style={{
               backgroundColor: "transparent",
               border: "none",

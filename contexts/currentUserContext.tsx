@@ -47,7 +47,6 @@ export const CurrentUserContextProvider = ({
     }
   }, [status, getProfile]);
 
-  console.log(status);
   return (
     <CurrentUserContext.Provider value={{ currentUserProfile }}>
       {children}
