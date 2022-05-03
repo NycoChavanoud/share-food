@@ -8,13 +8,13 @@ type validateDeleteProps = {
   deleteContainer: any;
   setDeleteContainer: any;
   message: string;
-  myFn: () => Promise<any>;
+  myFunc: () => Promise<any>;
 };
 
 const ValidateDelete = ({
   type,
   message,
-  myFn,
+  myFunc,
   deleteContainer,
   setDeleteContainer,
 }: validateDeleteProps) => {

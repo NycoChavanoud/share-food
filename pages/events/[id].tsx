@@ -51,7 +51,7 @@ const EventDetail = () => {
           setDeleteContainer={setDeleteContainer}
           type={"cet évènement"}
           message={"cette action est irréversible et supprimera l’évènement"}
-          myFn={handleConfirm}
+          myFunc={handleConfirm}
         />
       ) : null}
 
