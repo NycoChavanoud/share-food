@@ -140,7 +140,7 @@ describe("event", function () {
       cy.contains("Aucun évènement prévu");
     });
 
-    it.only("list of events", function () {
+    it("list of events", function () {
       cy.get("@currentUser").then((user) => {
         cy.task("deleteAllEvents");
         cy.task("createEvent", {
