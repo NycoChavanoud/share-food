@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import style from "./styleComponents/AddEventForm.module.css";
 import TitleSeparation from "./TitleSeparation";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useToasts } from "react-toast-notifications";
+import CurrentUserContext from "../contexts/currentUserContext";
 
 const AddEventForm = () => {
   const year = new Date().getFullYear().toString();
   const month = (new Date().getMonth() + 1).toString();
   const day = new Date().getDate().toString();
   const { addToast } = useToasts();
+  const { currentUserProfile } = useContext(CurrentUserContext);
 
   const dateOfTheDay =
     parseInt(month, 10) < 10
@@ -22,6 +24,7 @@ const AddEventForm = () => {
   const [description, setDescription] = useState("");
   const [typeEvent, setTypeEvent] = useState("");
   const [address, setAddress] = useState("");
+  const authorId = currentUserProfile?.id;
 
   const router = useRouter();
 
@@ -41,6 +44,7 @@ const AddEventForm = () => {
         description,
         typeEvent,
         address,
+        authorId,
       })
 
       .then(() => {

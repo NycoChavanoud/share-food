@@ -2,12 +2,12 @@ describe("login", function () {
   describe("withoutSession", function () {
     beforeEach(() => {
       cy.task("deleteAllUsers");
-      cy.signup({ email: "dave.lopper@mail.com", password: "azertyuiop" });
+      cy.signup({ email: "dave.lopper@gmail.com", password: "azertyuiop" });
       cy.visit("/login");
     });
 
     it("login with correct credentials", function () {
-      cy.get("[data-cy='email']").type("dave.lopper@mail.com");
+      cy.get("[data-cy='email']").type("dave.lopper@gmail.com");
       cy.get('[data-cy="password"]').type("azertyuiop");
       cy.get('[data-cy="formLogin"]').submit();
       cy.contains("connecté en tant que");

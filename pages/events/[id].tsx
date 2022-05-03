@@ -1,13 +1,14 @@
 import style from "../../styles/Event.module.css";
 import LayoutCurrentUser from "../../components/LayoutCurrentUser";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import EventDetailHeader from "../../components/EventDetailHeader";
 import ValidateDelete from "../../components/ValidateDelete";
 import { useToasts } from "react-toast-notifications";
 import dayjs from "dayjs";
 import "dayjs/locale/fr";
+import CurrentUserContext from "../../contexts/currentUserContext";
 
 const EventDetail = () => {
   const router = useRouter();
@@ -15,6 +16,7 @@ const EventDetail = () => {
   const [event, setEvent] = useState<any>("");
   const [deleteContainer, setDeleteContainer] = useState(false);
   const { addToast } = useToasts();
+  const { currentUserProfile } = useContext(CurrentUserContext);
 
   const notifySuccess = () => {
     addToast("🦄 Ton évènement est supprimé", {
@@ -36,6 +38,8 @@ const EventDetail = () => {
   };
 
   const dateFormat = dayjs(event.date).locale("fr").format("dddd DD MMMM YYYY");
+
+  console.log("email usercontext", currentUserProfile?.id);
   return (
     <LayoutCurrentUser pageTitle={`évènement : ${event.title}`}>
       {deleteContainer ? (
@@ -62,16 +66,19 @@ const EventDetail = () => {
         <div className={style.detailTypeEvent}>
           Cela se passe &quot;{event.typeEvent}&quot;
         </div>
-
-        <button
-          onClick={() => {
-            setDeleteContainer(!deleteContainer);
-          }}
-          className={style.btnDeleteEvent}
-          data-cy="btnDelete"
-        >
-          SUPPRIMER
-        </button>
+        {event.authorId === currentUserProfile?.id ? (
+          <button
+            onClick={() => {
+              setDeleteContainer(!deleteContainer);
+            }}
+            className={style.btnDeleteEvent}
+            data-cy="btnDelete"
+          >
+            SUPPRIMER
+          </button>
+        ) : (
+          ""
+        )}
       </div>
     </LayoutCurrentUser>
   );

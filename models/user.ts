@@ -2,6 +2,7 @@ import db from "../lib/prisma";
 import argon2 from "argon2";
 
 export interface IUser {
+  id: string;
   email: string;
   password: string;
   firstname: string;

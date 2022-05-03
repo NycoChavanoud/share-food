@@ -39,6 +39,7 @@ const EventCardContainer = () => {
 
           return (
             <div
+              data-cy="listEvent"
               key={index}
               onClick={() => {
                 router.push(`/events/${event.id}`);

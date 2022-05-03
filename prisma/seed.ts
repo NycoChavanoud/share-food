@@ -1,9 +1,11 @@
 import db from "../lib/prisma";
 import { hashPassword } from "../models/user";
 
+const dateOfDay = new Date().toISOString();
+
 export async function seed() {
   await db.user.deleteMany();
-  await db.user.create({
+  const user = await db.user.create({
     data: {
       firstname: "Dave",
       lastname: "Lopper",
@@ -12,6 +14,17 @@ export async function seed() {
     },
   });
   await db.event.deleteMany();
+  await db.event.create({
+    data: {
+      title: "event of the day",
+      description: "lorem ipsum patatum et tatadoum ",
+      date: dateOfDay,
+      hour: "12:30",
+      address: "50 rue de la soif, LYON",
+      typeEvent: "Au bureau",
+      authorId: user.id,
+    },
+  });
 }
 
 seed();

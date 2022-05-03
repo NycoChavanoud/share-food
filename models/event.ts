@@ -9,6 +9,7 @@ export interface IEvent {
   typeEvent: string;
   address: string;
   diff?: number;
+  authorId: string;
 }
 
 const eventPropsToShow = {
@@ -19,6 +20,7 @@ const eventPropsToShow = {
   hour: true,
   typeEvent: true,
   address: true,
+  authorId: true,
 };
 
 export const createEvent = async ({
@@ -28,9 +30,10 @@ export const createEvent = async ({
   hour,
   typeEvent,
   address,
+  authorId,
 }: Omit<IEvent, "id">) => {
   return db.event.create({
-    data: { title, description, date, hour, typeEvent, address },
+    data: { title, description, date, hour, typeEvent, address, authorId },
   });
 };
 

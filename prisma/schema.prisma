@@ -20,6 +20,7 @@ model User {
   hashedPassword String?
   Account        Account[]
   Session        Session[]
+  Event          Event[]
 }
 
 model Account {
@@ -65,6 +66,8 @@ model Event {
   hour        String
   typeEvent   String @db.VarChar(80)
   address     String @db.VarChar(80)
+  authorId    String
+  User        User?  @relation(fields: [authorId], references: [id])
 
-
+  @@index([authorId], name: "author")
 }
