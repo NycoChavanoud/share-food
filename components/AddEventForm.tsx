@@ -6,18 +6,12 @@ import { useRouter } from "next/router";
 import { useToasts } from "react-toast-notifications";
 
 const AddEventForm = () => {
-  const year = new Date().getFullYear().toString();
-  const month = (new Date().getMonth() + 1).toString();
-  const day = new Date().getDate().toString();
   const { addToast } = useToasts();
 
-  const dateOfTheDay =
-    parseInt(month, 10) < 10
-      ? `${year}-0${month}-${day}`
-      : `${year}-${month}-${day}`;
+  const dateOfDay = new Date().toISOString().substring(0, 10);
 
   const [title, setTitle] = useState("");
-  const [date, setDate] = useState(dateOfTheDay);
+  const [date, setDate] = useState(dateOfDay);
   const [hour, setHour] = useState("12:30");
   const [description, setDescription] = useState("");
   const [typeEvent, setTypeEvent] = useState("");
@@ -98,7 +92,7 @@ const AddEventForm = () => {
             autoComplete="off"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            min={dateOfTheDay}
+            min={dateOfDay}
           />
         </div>
 
