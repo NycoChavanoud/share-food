@@ -21,6 +21,7 @@ const dateOfPast = () => {
 describe("event", function () {
   describe("create event", function () {
     beforeEach(() => {
+      cy.task("deleteAllUsers");
       cy.setupCurrentUser();
     });
 
@@ -74,6 +75,47 @@ describe("event", function () {
         cy.contains("Ton évènement est supprimé");
         cy.url().should("include", "/events");
       });
+    });
+    it("don't see delete btn with othe user", function () {
+      cy.task("deleteAllEvents");
+      cy.get("@currentUser").then((user) => {
+        cy.task("deleteAllEvents");
+        cy.task("createEvent", {
+          title: "tu va réussir à m'effacer ? ",
+          description: "lorem ipsum patatum et tatadoum ",
+          date: dateOfDay,
+          hour: "12:30",
+          address: "40 rue de la soif, LYON",
+          typeEvent: "Au resto",
+          authorId: user.id,
+        });
+      });
+      cy.task("createUser", {
+        firstname: "toto",
+        lastname: "titolaccini",
+        email: "titototi@gmail.com",
+        password: "passwordhard",
+      }).then((otherUser) => {
+        cy.task("createEvent", {
+          title: "tu va essayé de m'effacer",
+          description: "lorem ipsum patatum et tatadoum ",
+          date: dateOfDay,
+          hour: "12:30",
+          address: "50 rue de la soif, LYON",
+          typeEvent: "Au resto",
+          authorId: otherUser.id,
+        });
+      });
+      cy.visit("/events");
+      cy.get('[data-cy="listEvent"]')
+        .contains("tu va réussir à m'effacer ?")
+        .click();
+      cy.get('[data-cy="btnDelete"]').should("exist");
+      cy.visit("/events");
+      cy.get('[data-cy="listEvent"]')
+        .contains("tu va essayé de m'effacer")
+        .click();
+      cy.get('[data-cy="btnDelete"]').should("not.exist");
     });
   });
 
