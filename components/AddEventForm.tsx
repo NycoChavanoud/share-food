@@ -1,17 +1,15 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import style from "./styleComponents/AddEventForm.module.css";
 import TitleSeparation from "./TitleSeparation";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useToasts } from "react-toast-notifications";
-import CurrentUserContext from "../contexts/currentUserContext";
 
 const AddEventForm = () => {
   const year = new Date().getFullYear().toString();
   const month = (new Date().getMonth() + 1).toString();
   const day = new Date().getDate().toString();
   const { addToast } = useToasts();
-  const { currentUserProfile } = useContext(CurrentUserContext);
 
   const dateOfTheDay =
     parseInt(month, 10) < 10
@@ -24,13 +22,18 @@ const AddEventForm = () => {
   const [description, setDescription] = useState("");
   const [typeEvent, setTypeEvent] = useState("");
   const [address, setAddress] = useState("");
-  const authorId = currentUserProfile?.id;
 
   const router = useRouter();
 
   const notify = () => {
     addToast("🦄 Super! tu as ajouté un nouvel évènement", {
       appearance: "success",
+    });
+  };
+
+  const faild = () => {
+    addToast("bad news! ton évènement n'a pas été posté...", {
+      appearance: "error",
     });
   };
 
@@ -44,19 +47,14 @@ const AddEventForm = () => {
         description,
         typeEvent,
         address,
-        authorId,
       })
 
-      .then(() => {
-        setTitle("");
-        setDate(dateOfTheDay);
-        setHour("12:30");
-        setDescription("");
-        setTypeEvent("");
-        setAddress("");
-      })
       .then(() => notify())
-      .then(() => router.push("/events"));
+      .then(() => router.push("/events"))
+      .catch((err) => {
+        console.error(err);
+        faild();
+      });
   };
 
   return (

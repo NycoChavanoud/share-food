@@ -25,7 +25,10 @@ const EventDetail = () => {
   };
 
   useEffect(() => {
-    axios.get(`/api/events/${id} `).then((res) => setEvent(res.data));
+    axios
+      .get(`/api/events/${id} `)
+      .then((res) => setEvent(res.data))
+      .catch(console.error);
   }, [id]);
 
   const handleConfirm = () => {
