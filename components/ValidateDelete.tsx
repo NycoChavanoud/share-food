@@ -8,13 +8,13 @@ type validateDeleteProps = {
   deleteContainer: any;
   setDeleteContainer: any;
   message: string;
-  myFunc: () => Promise<any>;
+  handleDelete: () => Promise<any>;
 };
 
 const ValidateDelete = ({
   type,
   message,
-  myFunc,
+  handleDelete,
   deleteContainer,
   setDeleteContainer,
 }: validateDeleteProps) => {
@@ -41,7 +41,7 @@ const ValidateDelete = ({
             />
           </button>
           <button
-            onClick={myFunc}
+            onClick={handleDelete}
             style={{
               backgroundColor: "transparent",
               border: "none",

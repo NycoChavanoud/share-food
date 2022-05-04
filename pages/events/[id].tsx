@@ -6,6 +6,7 @@ import axios from "axios";
 import EventDetailHeader from "../../components/EventDetailHeader";
 import ValidateDelete from "../../components/ValidateDelete";
 import { useToasts } from "react-toast-notifications";
+
 import dayjs from "dayjs";
 import "dayjs/locale/fr";
 import CurrentUserContext from "../../contexts/currentUserContext";
@@ -50,7 +51,7 @@ const EventDetail = () => {
           setDeleteContainer={setDeleteContainer}
           type={"cet évènement"}
           message={"cette action est irréversible et supprimera l’évènement"}
-          myFunc={handleConfirm}
+          handleDelete={handleConfirm}
         />
       ) : null}
 
@@ -69,15 +70,17 @@ const EventDetail = () => {
           Cela se passe &quot;{event.typeEvent}&quot;
         </div>
         {event.authorId === currentUserProfile?.id && (
-          <button
-            onClick={() => {
-              setDeleteContainer(!deleteContainer);
-            }}
-            className={style.btnDeleteEvent}
-            data-cy="btnDelete"
-          >
-            SUPPRIMER
-          </button>
+          <>
+            <button
+              onClick={() => {
+                setDeleteContainer(!deleteContainer);
+              }}
+              className={style.btnDeleteEvent}
+              data-cy="btnDelete"
+            >
+              SUPPRIMER
+            </button>
+          </>
         )}
       </div>
     </LayoutCurrentUser>
