@@ -25,7 +25,6 @@ const handleDelete = async (
 ) => {
   const event = await getOneEvent(id);
   const authorId = event?.authorId;
-
   if (currentUser.id !== authorId)
     return res.status(403).send("Nein Nein Nein. Es ist Verbotton");
   if (await deleteOneEvent(id)) return res.status(204).send("event deleted");
