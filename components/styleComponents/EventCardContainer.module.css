@@ -1,0 +1,9 @@
+.cardsContainer {
+  height: 100%;
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.cardsContainer::-webkit-scrollbar {
+  display: none;
+}

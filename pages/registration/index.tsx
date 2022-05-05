@@ -5,7 +5,7 @@ import RegisterForm from "../../components/RegisterForm";
 
 import style from "../../styles/Registration.module.css";
 
-const Registration: NextPage = (props) => {
+const Registration: NextPage = () => {
   return (
     <Layout pageTitle="S'inscrire">
       <div className={style.titleContainer}>

@@ -20,6 +20,7 @@ model User {
   hashedPassword String?
   Account        Account[]
   Session        Session[]
+  Event          Event[]
 }
 
 model Account {
@@ -55,4 +56,18 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Event {
+  id          Int    @id @default(autoincrement())
+  title       String @db.VarChar(255)
+  description String @db.Text
+  date        String
+  hour        String
+  typeEvent   String @db.VarChar(80)
+  address     String @db.VarChar(80)
+  authorId    String
+  User        User?  @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([authorId], name: "author")
 }

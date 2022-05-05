@@ -1,0 +1,58 @@
+.eventCardContainer {
+  width: 100%;
+  margin: 0px auto 20px;
+}
+
+.titleEventContainer {
+  width: 100%;
+  height: 45px;
+  color: var(--ligthColor);
+  background-color: var(--darkColor);
+  border-radius: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Amiko", "sans-serif";
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 1px;
+  margin-top: 3px;
+  overflow-y: scroll;
+
+  padding: 5px;
+}
+
+.dateContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: -4px;
+}
+
+.dateEventCard {
+  margin-left: 7px;
+  font-size: 0.8em;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+.boldText {
+  font-weight: 900;
+}
+
+.remainingDay {
+  margin-right: 10px;
+
+  font-size: 1em;
+  font-weight: bolder;
+  opacity: 0.5;
+}
+
+.today {
+  margin-right: 10px;
+
+  font-size: 0.8em;
+  color: var(--redColor);
+  opacity: 1;
+  font-weight: bolder;
+}

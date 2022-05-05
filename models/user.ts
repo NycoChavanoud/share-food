@@ -2,6 +2,7 @@ import db from "../lib/prisma";
 import argon2 from "argon2";
 
 export interface IUser {
+  id: string;
   email: string;
   password: string;
   firstname: string;
@@ -37,7 +38,7 @@ export const deleteManyUsers = db.user.deleteMany;
 export const deleteOneUser = db.user.delete;
 
 export const findByEmail = (email: string) =>
-  db.user.findUnique({ where: { email } });
+  db.user.findUnique({ where: { email } }).catch(() => null);
 
 export const emailAlreadyExists = (email: string) =>
   db.user.findFirst({ where: { email } }).then((user) => !!user);

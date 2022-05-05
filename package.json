@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:test": "next dev",
     "build": "next build",
     "start": "next start",
     "cypress": "cypress open",
@@ -16,20 +17,23 @@
     "@prisma/client": "^3.11.1",
     "argon2": "^0.28.5",
     "axios": "^0.26.1",
+    "dayjs": "^1.11.1",
+    "joi": "^17.6.0",
     "morgan": "^1.10.0",
     "next": "12.1.2",
     "next-auth": "^4.3.1",
     "next-connect": "^0.12.2",
     "react": "18.0.0",
     "react-dom": "18.0.0",
-    "react-toastify": "^8.2.0"
+    "react-hot-toast": "^2.2.0",
+    "react-toast-notifications": "^2.5.1"
   },
   "devDependencies": {
     "@types/morgan": "^1.9.3",
     "@types/node": "^17.0.23",
     "@types/react": "17.0.43",
     "@types/react-dom": "17.0.14",
-    "cypress": "^9.5.3",
+    "cypress": "^9.6.0",
     "cypress-data-session": "^2.0.0",
     "eslint": "8.12.0",
     "eslint-config-next": "12.1.2",
