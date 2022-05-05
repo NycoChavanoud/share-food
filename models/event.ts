@@ -76,7 +76,9 @@ export const validateEvent = (data: any, forUpdate = false) => {
     title: Joi.string().max(255).presence(presence),
     description: Joi.string().max(65000).presence(presence),
     date: Joi.string().max(60).presence(presence),
-    typeEvent: Joi.string().max(60).presence(presence),
-    address: Joi.string().max(255).presence(presence),
+    hour: Joi.string().max(60).presence(presence),
+    typeEvent: Joi.string().max(60),
+    address: Joi.string().max(255),
+    authorId: Joi.string().max(255),
   }).validate(data, { abortEarly: false }).error;
 };
