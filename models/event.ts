@@ -1,4 +1,5 @@
 import db from "../lib/prisma";
+import Joi from "joi";
 
 export interface IEvent {
   id: number;
@@ -68,3 +69,14 @@ export const deleteOneEvent = (id: any) => {
 };
 
 export const deleteManyEvents = db.event.deleteMany;
+
+export const validateEvent = (data: any, forUpdate = false) => {
+  const presence = forUpdate ? "optional" : "required";
+  return Joi.object({
+    title: Joi.string().max(255).presence(presence),
+    description: Joi.string().max(65000).presence(presence),
+    date: Joi.string().max(60).presence(presence),
+    typeEvent: Joi.string().max(60).presence(presence),
+    address: Joi.string().max(255).presence(presence),
+  }).validate(data, { abortEarly: false }).error;
+};

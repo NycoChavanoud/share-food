@@ -1,7 +1,12 @@
 import base from "../../../middlewares/common";
 import requireCurrentUser from "../../../middlewares/requireCurrentUser";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { createEvent, getEvents, IEvent } from "../../../models/event";
+import {
+  createEvent,
+  getEvents,
+  IEvent,
+  validateEvent,
+} from "../../../models/event";
 import { IUser } from "../../../models/user";
 
 type NextApiRequestWithCurrentUser = NextApiRequest & {
@@ -16,6 +21,10 @@ const handlePost = async (
 ) => {
   const { title, date, hour, description, typeEvent, address }: ReqBodyIEvent =
     req.body;
+
+  const validationErrors = validateEvent(req.body);
+  if (validationErrors) return res.status(422).send(validationErrors);
+
   return res.status(201).send(
     await createEvent({
       title,
