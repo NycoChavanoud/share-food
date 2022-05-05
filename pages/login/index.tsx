@@ -78,6 +78,7 @@ const Login: NextPage = (
         {errorOnSign ? (
           <p
             className={style.welcomtext}
+            data-cy="errorMessage"
             style={{
               fontSize: "0.8em",
               marginBottom: "-5px",

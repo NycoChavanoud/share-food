@@ -36,7 +36,6 @@ Cypress.Commands.add(
       name: "userInDb",
       setup: () => {
         cy.task("deleteUserByEmail", email);
-        cy.log("test");
         cy.task("createUser", {
           email,
           password,
@@ -56,7 +55,6 @@ Cypress.Commands.add(
   }
 );
 
-/*
 Cypress.Commands.add(
   "login",
   ({ email = "visitor@website.com", password = "verysecure" } = {}) => {
@@ -64,10 +62,10 @@ Cypress.Commands.add(
       name: "userSession",
       setup: () => {
         cy.visit("/login");
-        cy.get("#username").type(email);
-        cy.get("#password").type(password);
-        cy.get("form").submit();
-        cy.get('[data-cy="currentUserMenu"]').should("be.visible");
+        cy.get('[ data-cy="email"]').type(email);
+        cy.get('[ data-cy="password"]').type(password);
+        cy.get('[data-cy="formLogin"]').submit();
+        cy.contains("connecté");
         cy.getCookie("next-auth.session-token")
           .should("exist")
           .then((cookie) => {
@@ -114,20 +112,18 @@ Cypress.Commands.add(
   "setupCurrentUser",
   ({
     email = "visitor@website.com",
-    role = "visitor",
-    name = "Visitor",
+    password = "verysecure",
+    firstname = "Dave",
+    lastname = "Lopper",
   } = {}) => {
     cy.dataSession({
       name: "currentUser",
       setup: () => {
-        cy.signup({ name, role, email });
-        cy.login({ email });
+        cy.signup({ email, password, firstname, lastname });
+        cy.login({ email, password });
         cy.get("@userSession").then((session) => session.user);
       },
+      validate: () => false,
     });
   }
 );
-
-
-
-*/

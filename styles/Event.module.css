@@ -1,0 +1,115 @@
+.eventPageContainer {
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.eventPageInfo {
+  max-width: 860px;
+  width: 100%;
+  margin: 10px auto 10px;
+  overflow-x: scroll;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 55vh;
+}
+
+.eventTitle {
+  width: 90%;
+  max-width: 860px;
+  font-family: "Amiko", sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  letter-spacing: 3px;
+  border-bottom: solid 2px rgba(39, 36, 33, 0.3);
+  text-align: center;
+  position: relative;
+  margin-top: 30px;
+}
+
+.separationLine {
+  border-top: solid 2px rgba(39, 36, 33, 0.3);
+  width: 90%;
+  max-width: 860px;
+}
+
+.addBtnContainer {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: var(--ligthColor);
+  margin-top: 5px;
+}
+
+.addBtn {
+  border: none;
+  background: transparent;
+  font-family: "Poppins", sans-serif;
+  font-weight: medium;
+  font-size: 1em;
+  letter-spacing: 3px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.titleDescription {
+  width: 80%;
+  font-size: 1em;
+  margin: 40px auto 10px;
+  text-align: center;
+  letter-spacing: 2px;
+  padding: 5px;
+  border-bottom: solid 2px rgba(39, 36, 33, 0.5);
+  max-width: 860px;
+}
+
+.detailDescription {
+  width: 80%;
+  margin: 5px auto;
+  text-align: justify;
+  padding: 10px;
+  max-width: 860px;
+}
+
+.detailTypeEvent {
+  width: 80%;
+  margin: 5px auto;
+  text-align: center;
+  padding: 10px;
+  max-width: 860px;
+}
+
+.descriptionDetailEventContainer {
+  margin-bottom: 70px;
+  display: flex;
+  flex-direction: column;
+}
+
+.btnDeleteEvent {
+  margin: 35px auto 55px;
+  width: 30%;
+  height: 40px;
+  border: none;
+  background-color: var(--redColor);
+  color: var(--ligthColor);
+  font-family: "Amiko", sans-serif;
+  font-size: 0.8em;
+  font-weight: 600;
+  letter-spacing: 3px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.btnDeleteEvent:hover {
+  color: var(--darkColor);
+}
