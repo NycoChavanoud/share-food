@@ -8,6 +8,7 @@ import {
 
 const handleCreateUser = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
+    id,
     firstname,
     lastname,
     email,
@@ -24,6 +25,7 @@ const handleCreateUser = async (req: NextApiRequest, res: NextApiResponse) => {
 
   return res.status(201).send(
     await createUser({
+      id,
       firstname,
       lastname,
       email,

@@ -1,5 +1,5 @@
 import db from "../lib/prisma";
-import Joi from "joi";
+import Joi, { optional } from "joi";
 
 export interface IEvent {
   id: number;
@@ -77,7 +77,7 @@ export const validateEvent = (data: any, forUpdate = false) => {
     description: Joi.string().max(65000).presence(presence),
     date: Joi.string().max(60).presence(presence),
     hour: Joi.string().max(60).presence(presence),
-    typeEvent: Joi.string().max(60),
+    typeEvent: Joi.string().max(60).presence("optional"),
     address: Joi.string().max(255),
     authorId: Joi.string().max(255),
   }).validate(data, { abortEarly: false }).error;
