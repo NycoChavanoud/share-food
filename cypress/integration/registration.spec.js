@@ -1,5 +1,6 @@
 describe("register", function () {
   beforeEach(() => {
+    cy.task("deleteAllUsers");
     cy.signup({ email: "dave.lopper@gmail.com", password: "azertyuiop" });
     cy.visit("/registration");
   });
@@ -20,7 +21,7 @@ describe("register", function () {
   });
 
   it("create a account ", function () {
-    cy.get("[data-cy='email']").type("dave@mail.com");
+    cy.get("[data-cy='email']").type("dave@gmail.com");
     cy.get('[data-cy="password"]').type("azertyuiop");
     cy.get('[data-cy="confirmPassword"]').type("azertyuiop");
     cy.get('[data-cy="nickName"]').type("Jo la Frite ");
@@ -48,7 +49,7 @@ describe("register", function () {
 
   it("le mail de l'utilisateur existe déja", function () {
     cy.visit("/registration");
-    cy.get("[data-cy='email']").type("dave.lopper@mail.com");
+    cy.get("[data-cy='email']").type("dave.lopper@gmail.com");
     cy.get('[data-cy="password"]').type("azertyuiop");
     cy.get('[data-cy="confirmPassword"]').type("azertyuiop");
     cy.get('[data-cy="nickName"]').type("Jo la Frite ");
