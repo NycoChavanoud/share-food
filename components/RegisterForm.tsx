@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import style from "./styleComponents/RegisterForm.module.css";
 import TitleSeparation from "./TitleSeparation";
-
+import { useToasts } from "react-toast-notifications";
 import axios from "axios";
 
 const RegisterForm = () => {
@@ -17,8 +17,20 @@ const RegisterForm = () => {
   const [messageError, setMessageError] = useState(false);
   const [emailExist, setEmailExist] = useState(false);
   const [notGoodFormat, setNotGoodFormat] = useState(false);
-
+  const { addToast } = useToasts();
   const router = useRouter();
+
+  const notify = () => {
+    addToast("🦄 Super! tu as ajouté un nouvel évènement", {
+      appearance: "success",
+    });
+  };
+
+  const faild = () => {
+    addToast("bad news! ton évènement n'a pas été posté...", {
+      appearance: "error",
+    });
+  };
 
   const handleCreateCount = (e: any) => {
     e.preventDefault();
@@ -34,24 +46,17 @@ const RegisterForm = () => {
           password,
         })
 
-        .then(() => {
-          setFirsname("");
-          setLastname("");
-          setEmail("");
-          setBirthday("");
-          setConfirm("");
-          setPassword("");
-          setNickName("");
-          setFavoritePlate("");
-        })
+        .then(() => notify())
 
         .then(() => router.push("/login"))
         .catch((err) => {
-          if (err.response && err.response.status === 409) setEmailExist(true);
+          if (err.response && err.response.status === 409) {
+            setEmailExist(true);
+            faild();
+          }
           if (err.response && err.response.status === 422) {
             setNotGoodFormat(true);
-            setPassword("");
-            setConfirm("");
+            faild();
           }
         });
     } else {
