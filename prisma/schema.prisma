@@ -69,11 +69,8 @@ model Event {
   hour        String
   typeEvent   String @db.VarChar(80)
   address     String @db.VarChar(80)
-<<<<<<< HEAD
-=======
   authorId    String
   User        User?  @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
   @@index([authorId], name: "author")
->>>>>>> dev
 }
