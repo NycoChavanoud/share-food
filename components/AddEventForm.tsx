@@ -14,7 +14,7 @@ const AddEventForm = () => {
   const [date, setDate] = useState(dateOfDay);
   const [hour, setHour] = useState("12:30");
   const [description, setDescription] = useState("");
-  const [typeEvent, setTypeEvent] = useState("");
+  const [typeEvent, setTypeEvent] = useState(" ");
   const [address, setAddress] = useState("");
 
   const router = useRouter();

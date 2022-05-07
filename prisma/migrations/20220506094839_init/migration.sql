@@ -1,13 +1,17 @@
-/*
-  Warnings:
+-- CreateTable
+CREATE TABLE `User` (
+    `id` VARCHAR(191) NOT NULL,
+    `firstname` VARCHAR(191) NULL,
+    `lastname` VARCHAR(191) NULL,
+    `email` VARCHAR(191) NULL,
+    `hashedPassword` VARCHAR(191) NULL,
+    `nickName` VARCHAR(191) NULL,
+    `birthday` VARCHAR(191) NULL,
+    `favoritePlate` VARCHAR(191) NULL,
 
-  - The primary key for the `User` table will be changed. If it partially fails, the table could be left without primary key constraint.
-
-*/
--- AlterTable
-ALTER TABLE `User` DROP PRIMARY KEY,
-    MODIFY `id` VARCHAR(191) NOT NULL,
-    ADD PRIMARY KEY (`id`);
+    UNIQUE INDEX `User_email_key`(`email`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `Account` (
@@ -49,8 +53,17 @@ CREATE TABLE `VerificationToken` (
     UNIQUE INDEX `VerificationToken_identifier_token_key`(`identifier`, `token`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
--- AddForeignKey
-ALTER TABLE `Account` ADD CONSTRAINT `Account_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- CreateTable
+CREATE TABLE `Event` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `title` VARCHAR(255) NOT NULL,
+    `description` TEXT NOT NULL,
+    `date` VARCHAR(191) NOT NULL,
+    `hour` VARCHAR(191) NOT NULL,
+    `typeEvent` VARCHAR(80) NOT NULL,
+    `address` VARCHAR(80) NOT NULL,
+    `authorId` VARCHAR(191) NOT NULL,
 
--- AddForeignKey
-ALTER TABLE `Session` ADD CONSTRAINT `Session_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+    INDEX `author`(`authorId`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

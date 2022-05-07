@@ -18,6 +18,9 @@ model User {
   lastname       String?
   email          String?   @unique
   hashedPassword String?
+  nickName       String?
+  birthday       String?
+  favoritePlate  String?
   Account        Account[]
   Session        Session[]
   Event          Event[]

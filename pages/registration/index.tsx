@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import BackBtn from "../../components/BackBtn";
 import Layout from "../../components/Layout";
 import RegisterForm from "../../components/RegisterForm";
-
 import style from "../../styles/Registration.module.css";
 
 const Registration: NextPage = () => {
