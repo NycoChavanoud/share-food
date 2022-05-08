@@ -1,14 +1,14 @@
 .profilCardContainer {
   height: 140px;
   width: 100%;
-  margin: 10px auto;
+  margin: 10px auto 40px;
   border-radius: 25px;
   background-color: var(--darkColor);
   color: var(--ligthColor);
   padding: 5px 15px;
   display: flex;
   justify-content: space-around;
-  /* max-width: 450px; */
+  box-shadow: 0px 3px 5px var(--inputColor);
 }
 .infoContainer {
   width: 60%;
