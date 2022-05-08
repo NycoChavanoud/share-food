@@ -43,7 +43,10 @@ const Home: NextPage = (props) => {
           <span ref={topPage} />
           <PublicHeader title="Cook of the day" link="/" />
 
-          <HomeBtns />
+          <span className={style.HomeBtnContainer}>
+            {" "}
+            <HomeBtns />{" "}
+          </span>
           <div className={style.HomeCardContainer}>
             <HomeCard
               title="C’est vous le chef..."

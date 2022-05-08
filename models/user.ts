@@ -11,6 +11,8 @@ export interface IUser {
   nickName: string;
   birthday: string;
   favoritePlate: string;
+  city: string;
+  description: string;
 }
 
 const hashingOptions = {
