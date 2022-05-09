@@ -43,6 +43,8 @@ const EventDetail = () => {
 
   const dateFormat = dayjs(event.date).locale("fr").format("dddd DD MMMM YYYY");
 
+  console.log(event);
+
   return (
     <LayoutCurrentUser pageTitle={`évènement : ${event.title}`}>
       {deleteContainer ? (
@@ -61,6 +63,7 @@ const EventDetail = () => {
         hour={event.hour}
         address={event.address}
         id={event.id}
+        author={event.author}
       />
       <div className={style.descriptionDetailEventContainer}>
         <div className={style.titleDescription}>Description</div>

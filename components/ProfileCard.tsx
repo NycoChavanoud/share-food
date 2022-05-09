@@ -12,13 +12,11 @@ const ProfileCard = () => {
       <div className={style.infoContainer}>
         <div className={style.infoTitle}>Voir son profil</div>
         <div className={style.cityContainer}>
-          {currentUserProfile?.city ? (
+          {currentUserProfile?.city && (
             <>
               <img src={mark.src} alt="mark-icon" className={style.icon} />
               <div className={style.textCity}>{currentUserProfile?.city}</div>
             </>
-          ) : (
-            ""
           )}
         </div>
       </div>
