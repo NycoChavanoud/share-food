@@ -21,6 +21,8 @@ model User {
   nickName       String?
   birthday       String?
   favoritePlate  String?
+  city           String?
+  description    String?   @db.Text
   Account        Account[]
   Session        Session[]
   Event          Event[]

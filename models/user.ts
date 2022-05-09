@@ -78,5 +78,7 @@ export const validateUser = (data: any, forUpdate = false) => {
     nickName: Joi.string().max(255),
     favoritePlate: Joi.string().max(255),
     birthday: Joi.string().max(255),
+    city: Joi.string().max(255),
+    description: Joi.string(),
   }).validate(data, { abortEarly: false }).error;
 };

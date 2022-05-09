@@ -12,7 +12,6 @@ const Dashboard: NextPage = () => {
   const router = useRouter();
   const { currentUserProfile } = useContext(CurrentUserContext);
 
-  console.log(currentUserProfile);
   return (
     <LayoutCurrentUser pageTitle="tableau de bord">
       <div className={style.dashboardPageContainer}>
