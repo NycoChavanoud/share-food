@@ -8,9 +8,10 @@ import CurrentUserContext from "../contexts/currentUserContext";
 type privateHeadProps = {
   title: string;
   router: any;
+  rightElement?: React.ReactElement | boolean;
 };
 
-const PrivateHeader = ({ title, router }: privateHeadProps) => {
+const PrivateHeader = ({ title, router, rightElement }: privateHeadProps) => {
   const { currentUserProfile } = useContext(CurrentUserContext);
 
   return (
@@ -41,6 +42,7 @@ const PrivateHeader = ({ title, router }: privateHeadProps) => {
         </h1>
         <div className={style.subtitle}>{title}</div>
       </div>
+      <div>{rightElement}</div>
     </div>
   );
 };

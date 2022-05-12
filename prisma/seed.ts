@@ -19,6 +19,20 @@ export async function seed() {
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis facilis exercitationem laborum molestias natus reprehenderit earum vero non, neque minus at aut commodi recusandae possimus amet delectus? Beatae, tempora quae! Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis facilis exercitationem laborum molestias natus reprehenderit earum vero non, neque minus at aut commodi recusandae possimus amet delectus? Beatae, tempora quae!",
     },
   });
+  const otherUser = await db.user.create({
+    data: {
+      firstname: "Nico",
+      lastname: "Chavanoud",
+      email: "nico@gmail.com",
+      hashedPassword: await hashPassword("azertyuiop"),
+      nickName: "Creator",
+      birthday: "1982-06-08",
+      favoritePlate: "kebab",
+      city: "Lyon",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis facilis exercitationem laborum molestias natus reprehenderit earum vero non, neque minus at aut commodi recusandae possimus amet delectus? Beatae, tempora quae! Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis facilis exercitationem laborum molestias natus reprehenderit earum vero non, neque minus at aut commodi recusandae possimus amet delectus? Beatae, tempora quae!",
+    },
+  });
   await db.event.deleteMany();
   await db.event.create({
     data: {

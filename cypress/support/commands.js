@@ -27,10 +27,15 @@
 Cypress.Commands.add(
   "signup",
   ({
-    email = "dave.lopper@gmail.com",
+    email = "visitor@website.com",
     password = "verysecure",
     firstname = "Dave",
     lastname = "Lopper",
+    nickName = "DavidHasseloff",
+    birthday = "1982-06-08",
+    favoritePlate = "pastaBox",
+    city = "Lyon",
+    description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis facilis exercitationem laborum molestias natus reprehenderit earum vero non, neque minus at aut commodi recusandae possimus amet delectus? Beatae, tempora quae! Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis facilis exercitationem laborum molestias natus reprehenderit earum vero non, neque minus at aut commodi recusandae possimus amet delectus? Beatae, tempora quae!",
   } = {}) => {
     cy.dataSession({
       name: "userInDb",
@@ -41,6 +46,11 @@ Cypress.Commands.add(
           password,
           firstname,
           lastname,
+          birthday,
+          city,
+          favoritePlate,
+          description,
+          nickName,
         }).then((user) => {
           return Promise.resolve(user);
         });
@@ -115,11 +125,26 @@ Cypress.Commands.add(
     password = "verysecure",
     firstname = "Dave",
     lastname = "Lopper",
+    nickName = "DavidHasseloff",
+    birthday = "1982-06-08",
+    favoritePlate = "pastaBox",
+    city = "Lyon",
+    description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis facilis exercitationem laborum molestias natus reprehenderit earum vero non, neque minus at aut commodi recusandae possimus amet delectus? Beatae, tempora quae! Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis facilis exercitationem laborum molestias natus reprehenderit earum vero non, neque minus at aut commodi recusandae possimus amet delectus? Beatae, tempora quae!",
   } = {}) => {
     cy.dataSession({
       name: "currentUser",
       setup: () => {
-        cy.signup({ email, password, firstname, lastname });
+        cy.signup({
+          email,
+          password,
+          firstname,
+          lastname,
+          birthday,
+          city,
+          favoritePlate,
+          description,
+          nickName,
+        });
         cy.login({ email, password });
         cy.get("@userSession").then((session) => session.user);
       },

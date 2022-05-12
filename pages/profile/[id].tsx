@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import style from "../../styles/Profile.module.css";
 import LayoutCurrentUser from "../../components/LayoutCurrentUser";
 import PrivateHeader from "../../components/PrivateHeader";
@@ -11,13 +11,18 @@ import avatar from "../../public/img/avatar.jpeg";
 import bol from "../../public/icons/bol.png";
 import mark from "../../public/icons/mark.png";
 import balloon from "../../public/icons/ballon.png";
+import editIcon from "../../public/icons/edit.png";
+import editDarkIcon from "../../public/icons/editDark.png";
+import Link from "next/link";
 
 const Profile: NextPage = (props) => {
+  const [userProfile, setUserProfile] = useState("");
   const router = useRouter();
   const { currentUserProfile } = useContext(CurrentUserContext);
   const birthday = dayjs(currentUserProfile?.birthday)
     .locale("fr")
     .format(" DD MMMM YYYY");
+  const { id } = router.query;
 
   return (
     <LayoutCurrentUser pageTitle="Votre profil">
@@ -25,6 +30,18 @@ const Profile: NextPage = (props) => {
         <PrivateHeader
           router={() => router.push("/dashboard")}
           title={currentUserProfile ? currentUserProfile?.nickName : "profil"}
+          rightElement={
+            id === "me" && (
+              <Link href="/profile/edit/">
+                <img
+                  src={editIcon.src}
+                  alt="edit-icon"
+                  className={style.editIcon}
+                  style={{ cursor: "pointer" }}
+                />
+              </Link>
+            )
+          }
         />
 
         <div className={style.userInfoContainer}>
@@ -32,7 +49,20 @@ const Profile: NextPage = (props) => {
             <img src={avatar.src} alt="avatar" className={style.avatar} />
           </div>
           <div className={style.userInfoCard}>
-            <div className={style.titleInfoCard}> A propos</div>
+            <div className={style.titleInfoCard}>
+              <div className={style.textTitle}>A propos</div>
+
+              {/* {id === "me" && (
+                <Link href="/profile/edit/">
+                  <img
+                    src={editIcon.src}
+                    alt="edit-icon"
+                    className={style.editIcon}
+                    style={{ cursor: "pointer" }}
+                  />
+                </Link>
+              )} */}
+            </div>
             <div className={style.detailInfoCard}>
               <img
                 src={balloon.src}
@@ -57,14 +87,29 @@ const Profile: NextPage = (props) => {
         </div>
 
         <div className={style.descriptionContainer}>
-          <div className={style.titleDescription}>Qui suis-je ?</div>
+          <div className={style.titleDescription}>
+            <span className={style.textTitleDescription}> Qui suis-je ?</span>
+            {id === "me" && (
+              <Link href="/profile/edit/">
+                <img
+                  src={editDarkIcon.src}
+                  alt="edit-icon"
+                  className={style.editDarkIcon}
+                  style={{ cursor: "pointer" }}
+                />
+              </Link>
+            )}
+          </div>
           <div className={style.contentDescription}>
             {currentUserProfile?.description}
           </div>
         </div>
 
         <div className={style.shareContainer}>
-          <div className={style.titleDescription}>Mes partages...</div>
+          <div className={style.titleDescription}>
+            {" "}
+            <span className={style.textTitleDescription}>Mes partages...</span>
+          </div>
           <div style={{ textAlign: "center", marginBottom: "80px" }}>
             coming soon
           </div>

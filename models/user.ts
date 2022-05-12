@@ -11,8 +11,8 @@ export interface IUser {
   nickName: string;
   birthday: string;
   favoritePlate: string;
-  city: string;
-  description: string;
+  city?: string;
+  description?: string;
 }
 
 const hashingOptions = {
@@ -35,6 +35,8 @@ export const createUser = async ({
   nickName,
   birthday,
   favoritePlate,
+  city,
+  description,
 }: IUser) => {
   const hashedPassword = await hashPassword(password);
   return db.user.create({
@@ -46,6 +48,8 @@ export const createUser = async ({
       nickName,
       birthday,
       favoritePlate,
+      city,
+      description,
     },
   });
 };
@@ -56,6 +60,14 @@ export const deleteOneUser = db.user.delete;
 
 export const findByEmail = (email: string) =>
   db.user.findUnique({ where: { email } }).catch(() => null);
+
+export const findById = (id: any) => {
+  return db.user
+    .findUnique({
+      where: { id },
+    })
+    .catch(() => null);
+};
 
 export const emailAlreadyExists = (email: string) =>
   db.user.findFirst({ where: { email } }).then((user) => !!user);

@@ -8,7 +8,7 @@ import Link from "next/link";
 const ProfileCard = () => {
   const { currentUserProfile } = useContext(CurrentUserContext);
   return (
-    <Link href="/profile">
+    <Link href="/profile/me">
       <div className={style.profilCardContainer}>
         <div className={style.infoContainer}>
           <div className={style.infoTitle}>Voir son profil</div>

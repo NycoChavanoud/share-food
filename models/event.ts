@@ -34,7 +34,7 @@ export const createEvent = async ({
   typeEvent,
   address,
   authorId,
-}: Omit<IEvent, "id">) => {
+}: Omit<IEvent, "id" | "author">) => {
   return db.event.create({
     data: { title, description, date, hour, typeEvent, address, authorId },
   });

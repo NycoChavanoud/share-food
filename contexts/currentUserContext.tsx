@@ -30,7 +30,7 @@ export const CurrentUserContextProvider = ({
 
   const getProfile = useCallback(() => {
     axios
-      .get("/api/profile")
+      .get("/api/profile/me")
       .then(({ data }) => {
         setCurrentUserProfile(data);
       })
