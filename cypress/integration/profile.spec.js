@@ -2,7 +2,7 @@ describe("profile", function () {
   describe("withoutSession", function () {
     it("impossible to acces profile", function () {
       cy.task("deleteAllUsers");
-      cy.visit("/profile");
+      cy.visit("/profile/me");
       cy.url().should("include", "/login");
     });
   });
@@ -13,7 +13,7 @@ describe("profile", function () {
     });
 
     it("the current user info are available", function () {
-      cy.visit("/profile");
+      cy.visit("/profile/me");
       cy.contains("Dave Lopper");
       cy.contains("08 juin 1982");
       cy.contains("Lyon");
@@ -23,8 +23,14 @@ describe("profile", function () {
       );
     });
 
-    it("does show the update button on the current user profil", function () {
-      cy.visit("/profile");
+    it("can acces to edit page", function () {
+      cy.visit("/profile/me");
+      cy.get('[data-cy="editLink"]').click();
+      cy.url().should("include", "/profile/edit");
+    });
+
+    it("can edit my profil", function () {
+      cy.visit("/profile/edit");
     });
   });
 });

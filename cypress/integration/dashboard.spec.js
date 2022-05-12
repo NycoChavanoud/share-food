@@ -22,6 +22,7 @@ describe("dashboard", function () {
       cy.visit("/dashboard");
       cy.contains("Lyon");
       cy.contains("Voir son profil").click();
+      cy.url().should("include", "/profile/me");
     });
   });
 });
