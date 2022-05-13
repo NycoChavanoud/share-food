@@ -16,7 +16,7 @@ import editDarkIcon from "../../public/icons/editDark.png";
 import Link from "next/link";
 import axios from "axios";
 
-const Profile: NextPage = () => {
+const Profile: NextPage = (props) => {
   const [userProfile, setUserProfile] = useState<any>(" ");
 
   const router = useRouter();
@@ -33,7 +33,10 @@ const Profile: NextPage = () => {
         .then((res) => setUserProfile(res.data))
         .catch(console.error);
     } else {
-      router.push("/login");
+      axios
+        .get(`/api/profile/${id}`)
+        .then((res) => setUserProfile(res.data))
+        .catch(console.error);
     }
   }, []);
 

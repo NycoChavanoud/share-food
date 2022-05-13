@@ -1,0 +1,7 @@
+.editFormContainer {
+  max-width: 860px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

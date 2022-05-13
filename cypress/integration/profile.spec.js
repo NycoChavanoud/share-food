@@ -31,6 +31,31 @@ describe("profile", function () {
 
     it("can edit my profil", function () {
       cy.visit("/profile/edit");
+      cy.get("[data-cy='firstname']").type("Pepito");
+      cy.get("[data-cy='lastname']").type("Mi Corazon");
+      cy.get("[data-cy='nickname']").type("King Biscuit");
+      cy.get("[data-cy='birthday']").type("1990-05-01", { force: true });
+      cy.get("[data-cy='location']").type("Mexico");
+      cy.get("[data-cy='favoritePlate']").type("Tacos");
+      cy.get("[data-cy='description']").type("Je change ma desription");
+      cy.get('[data-cy="formEditProfile"]').submit();
+      cy.url().should("include", "/profile/me");
+      cy.contains("Pepito"),
+        cy.contains("Mi Corazon"),
+        cy.contains("King Biscuit"),
+        cy.contains("Mexico"),
+        cy.contains("Tacos"),
+        cy.contains("01 mai"),
+        cy.contains("Je change ma desription");
+    });
+
+    it("can delete my profil", function () {
+      cy.visit("/profile/edit");
+      cy.get('[data-cy="btnDelete"]').click();
+      cy.contains("Etes-vous certain de vouloir supprimer votre compte");
+      cy.get('[data-cy="validateBtn"]').click();
+      cy.contains("Ton compte est supprimé");
+      cy.url().should("include", "/");
     });
   });
 });

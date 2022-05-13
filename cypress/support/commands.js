@@ -81,7 +81,7 @@ Cypress.Commands.add(
           .then((cookie) => {
             return cy
               .request({
-                url: "/api/profile",
+                url: "/api/profile/me",
                 failOnStatusCode: false,
                 headers: {
                   Cookie: `next-auth.session-token=${cookie.value}`,
@@ -98,7 +98,7 @@ Cypress.Commands.add(
       validate: (saved) => {
         return cy
           .request({
-            url: "/api/profile",
+            url: "/api/profile/me",
             failOnStatusCode: false,
             headers: {
               Cookie: `next-auth.session-token=${saved.cookie.value}`,
