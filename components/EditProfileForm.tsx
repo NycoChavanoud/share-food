@@ -1,14 +1,26 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import dayjs from "dayjs";
-import "dayjs/locale/fr";
 import style from "./styleComponents/EditProfileForm.module.css";
 import avatar from "../public/img/avatar.jpeg";
 import { useRouter } from "next/router";
+import { useToasts } from "react-toast-notifications";
 
 const EditProfileForm = () => {
   const [userProfile, setUserProfile] = useState<any>(" ");
   const router = useRouter();
+  const { addToast } = useToasts();
+
+  const notify = () => {
+    addToast("🦄 Super! tu as mis à jour ton profil", {
+      appearance: "success",
+    });
+  };
+
+  const faild = () => {
+    addToast("bad news! ton profil n'a pas été mis à jour...", {
+      appearance: "error",
+    });
+  };
 
   useEffect(() => {
     axios
@@ -20,9 +32,9 @@ const EditProfileForm = () => {
   const handlePatchProfile = (e: any) => {
     e.preventDefault();
     axios
-      .put(`/api/profile/me`, {
+      .patch(`/api/profile/me`, {
         id: userProfile.id,
-        firsname: userProfile.firstname,
+        firstname: userProfile.firstname,
         lastname: userProfile.lastname,
         nickName: userProfile.nickName,
         birthday: userProfile.birthday,
@@ -30,14 +42,13 @@ const EditProfileForm = () => {
         city: userProfile.city,
         description: userProfile.description,
       })
-      .then(() => router.push("/profile/me"));
+      .then(() => notify())
+      .then(() => router.push("/profile/me"))
+      .catch((err) => {
+        console.error(err);
+        faild();
+      });
   };
-
-  const birthday = dayjs(userProfile.birthday)
-    .locale("fr")
-    .format(" yyyy-MM-dd");
-
-  console.log(userProfile);
 
   return (
     <form

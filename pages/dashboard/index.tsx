@@ -8,7 +8,7 @@ import CurrentUserContext from "../../contexts/currentUserContext";
 import HomeBtns from "../../components/HomeBtns";
 import ProfileCard from "../../components/ProfileCard";
 
-const Dashboard: NextPage = () => {
+const Dashboard: NextPage = (props) => {
   const router = useRouter();
   const { currentUserProfile } = useContext(CurrentUserContext);
 
@@ -16,6 +16,8 @@ const Dashboard: NextPage = () => {
     <LayoutCurrentUser pageTitle="tableau de bord">
       <div className={style.dashboardPageContainer}>
         <PrivateHeader
+          firstname={currentUserProfile ? currentUserProfile?.firstname : ""}
+          lastname={currentUserProfile ? currentUserProfile?.lastname : ""}
           title={
             currentUserProfile
               ? currentUserProfile?.nickName

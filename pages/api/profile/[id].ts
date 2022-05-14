@@ -32,9 +32,9 @@ const handlePatch = async (
   res: NextApiResponse
 ) => {
   const newData = { ...body };
-  console.log("newDATA : ", newData);
+  id = body.id;
   const profileUpdated = await updateUser(id, newData);
-  if (newData) res.send(profileUpdated);
+  if (typeof profileUpdated) res.send({ profileUpdated });
   else res.status(404).send("not found");
 };
 

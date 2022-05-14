@@ -6,15 +6,20 @@ import plusIcon from "../../public/icons/plus.png";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import EventCardContainer from "../../components/EventCardContainer";
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/currentUserContext";
 
 const Event: NextPage = (props) => {
   const router = useRouter();
+  const { currentUserProfile } = useContext(CurrentUserContext);
 
   return (
     <>
       <LayoutCurrentUser pageTitle="Vos évènements">
         <div className={style.eventPageContainer}>
           <PrivateHeader
+            firstname={currentUserProfile?.firstname}
+            lastname={currentUserProfile?.lastname}
             title="Planning des évènements"
             router={() => {
               router.push("/dashboard");

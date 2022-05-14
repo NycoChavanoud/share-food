@@ -99,7 +99,15 @@ export const updateUser = (id: any, data: IUser) => {
   db.user
     .update({
       where: { id },
-      data,
+      data: {
+        firstname: data.firstname,
+        lastname: data.lastname,
+        nickName: data.nickName,
+        birthday: data.birthday,
+        favoritePlate: data.favoritePlate,
+        city: data.city,
+        description: data.description,
+      },
     })
     .catch(() => null);
 };

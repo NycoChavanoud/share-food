@@ -44,6 +44,8 @@ const Profile: NextPage = (props) => {
     <LayoutCurrentUser pageTitle="Votre profil">
       <div className={style.profilPageContainer}>
         <PrivateHeader
+          firstname={userProfile.firstname}
+          lastname={userProfile.lastname}
           router={() => router.push("/dashboard")}
           title={userProfile ? userProfile?.nickName : "profil"}
           rightElement={

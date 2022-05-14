@@ -1,12 +1,6 @@
 import { signOut, useSession } from "next-auth/react";
 import axios from "axios";
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import { IUser } from "../models/user";
 
 interface IContextProviderProps {

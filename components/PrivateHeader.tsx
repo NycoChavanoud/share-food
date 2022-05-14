@@ -9,9 +9,17 @@ type privateHeadProps = {
   title: string;
   router: any;
   rightElement?: React.ReactElement | boolean;
+  firstname?: string;
+  lastname?: string;
 };
 
-const PrivateHeader = ({ title, router, rightElement }: privateHeadProps) => {
+const PrivateHeader = ({
+  title,
+  router,
+  rightElement,
+  firstname,
+  lastname,
+}: privateHeadProps) => {
   const { currentUserProfile } = useContext(CurrentUserContext);
 
   return (
@@ -38,7 +46,7 @@ const PrivateHeader = ({ title, router, rightElement }: privateHeadProps) => {
       <div className={style.privateInfoContainer}>
         <h1 className={style.nameTitle}>
           {" "}
-          {currentUserProfile?.firstname} {currentUserProfile?.lastname}
+          {firstname} {lastname}
         </h1>
         <div className={style.subtitle}>{title}</div>
       </div>
