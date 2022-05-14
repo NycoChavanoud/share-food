@@ -33,9 +33,9 @@ describe("profile", function () {
       cy.visit("/profile/edit");
       cy.get("[data-cy='firstname']").type("Pepito");
       cy.get("[data-cy='lastname']").type("Mi Corazon");
-      cy.get("[data-cy='nickname']").type("King Biscuit");
+      cy.get("[data-cy='nickName']").type("King Biscuit");
       cy.get("[data-cy='birthday']").type("1990-05-01", { force: true });
-      cy.get("[data-cy='location']").type("Mexico");
+      cy.get("[data-cy='city']").type("Mexico");
       cy.get("[data-cy='favoritePlate']").type("Tacos");
       cy.get("[data-cy='description']").type("Je change ma desription");
       cy.get('[data-cy="formEditProfile"]').submit();
