@@ -231,6 +231,27 @@
   transition: 0.5s;
 }
 
+.backBtn {
+  height: 40px;
+  width: 25%;
+  margin: 14px auto;
+  border: none;
+  background-color: var(--darkColor);
+  color: var(--ligthColor);
+  font-family: "Amiko", sans-serif;
+  font-size: 0.9em;
+  font-weight: 600;
+  letter-spacing: 3px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.btnContainer {
+  display: flex;
+  width: 100%;
+}
+
 @media only screen and (min-width: 740px) {
   .labelDescriptionForm {
     margin: 0px auto 1px;

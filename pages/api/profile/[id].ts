@@ -1,5 +1,6 @@
 import requireCurrentUser from "../../../middlewares/requireCurrentUser";
 import {
+  deleteUserById,
   findById,
   getSafeAttributes,
   IUser,
@@ -38,4 +39,20 @@ const handlePatch = async (
   else res.status(404).send("not found");
 };
 
-export default base().use(requireCurrentUser).get(handleGet).patch(handlePatch);
+const handleDelete = async (
+  { query: { id }, currentUser }: requestProfileType,
+  res: NextApiResponse
+) => {
+  console.log("id du delete api :", id);
+  if (id !== currentUser.id) {
+    return res.status(403).send("Forbidden");
+  }
+  if (await deleteUserById(id)) return res.status(204).send("user deleted");
+  res.status(404).send("not deleted");
+};
+
+export default base()
+  .use(requireCurrentUser)
+  .get(handleGet)
+  .patch(handlePatch)
+  .delete(handleDelete);

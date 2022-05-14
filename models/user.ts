@@ -58,6 +58,16 @@ export const deleteManyUsers = db.user.deleteMany;
 
 export const deleteOneUser = db.user.delete;
 
+export const deleteUserById = (id: any) => {
+  return db.user
+    .delete({
+      where: { id },
+    })
+    .catch(() => null);
+};
+export const deleteUserByEmail = (email: string) =>
+  db.user.delete({ where: { email } }).catch(() => false);
+
 export const findByEmail = (email: string) =>
   db.user.findUnique({ where: { email } }).catch(() => null);
 
@@ -71,9 +81,6 @@ export const findById = (id: any) => {
 
 export const emailAlreadyExists = (email: string) =>
   db.user.findFirst({ where: { email } }).then((user) => !!user);
-
-export const deleteUserByEmail = (email: string) =>
-  db.user.delete({ where: { email } }).catch(() => false);
 
 export const getSafeAttributes = (user: any) => ({
   ...user,
