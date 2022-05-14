@@ -1,7 +1,256 @@
 .editFormContainer {
-  max-width: 860px;
+  max-width: 760px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.userInfoContainer {
+  background-color: var(--darkColor);
+  margin: 20px auto;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px 15px;
+  border-radius: 25px;
+  box-shadow: 0px 3px 5px var(--inputColor);
+}
+
+.labelForm {
+  color: var(--ligthColor);
+  margin: 9px auto 1px;
+  width: 95%;
+  text-align: left;
+  font-size: 0.8em;
+  font-weight: 300;
+  letter-spacing: 3px;
+  cursor: pointer;
+}
+
+.largeInputForm {
+  border: none;
+  background-color: var(--inputColor);
+  height: 28px;
+  width: 100%;
+  border-radius: 10px;
+  text-align: center;
+  color: var(--darkColor);
+  font-family: "Amiko", sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  letter-spacing: 3px;
+  outline: none;
+  cursor: pointer;
+  padding-right: 5px;
+}
+
+.inptuNickNameContainer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.labelLightForm {
+  color: var(--ligthColor);
+  margin: 20px 11px 1px;
+  text-align: left;
+  font-size: 0.8em;
+  font-weight: 300;
+  letter-spacing: 3px;
+  cursor: pointer;
+}
+
+.lightInput {
+  border: none;
+  background-color: var(--inputColor);
+  height: 18px;
+  margin: 20px auto 1px;
+  width: 70%;
+  border-radius: 5px;
+  text-align: center;
+  color: var(--darkColor);
+  font-family: "Amiko", sans-serif;
+  font-weight: bold;
+  font-size: 0.8em;
+  letter-spacing: 3px;
+  outline: none;
+  cursor: pointer;
+  padding-right: 5px;
+}
+
+.infoDetailsContainer {
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.avatar {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  background-color: var(--ligthColor);
+}
+
+.imageContainer {
+  height: 125px;
+  width: 125px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.uploadAvatarBtn {
+  width: 125px;
+  height: 56px;
+  margin: 14px auto;
+  border: none;
+  background-color: var(--redColor);
+  color: var(--ligthColor);
+  font-family: "Amiko", sans-serif;
+  font-size: 0.8em;
+  font-weight: 600;
+  letter-spacing: 3px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.uploadAvatarBtn:hover {
+  color: var(--darkColor);
+}
+
+.userInfoCard {
+  background-color: var(--darkColor);
+  color: var(--ligthColor);
+  height: 200px;
+  width: 60%;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: 0px 3px 5px var(--inputColor);
+}
+
+.titleInfoCard {
+  font-weight: 600;
+  font-size: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0 auto;
+  width: 90%;
+}
+.textTitle {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.labelInfoDetails {
+  color: var(--ligthColor);
+  text-align: left;
+  font-size: 0.8em;
+  font-weight: 300;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.infoDetailsInput {
+  border: none;
+  background-color: var(--inputColor);
+  height: 18px;
+  margin-bottom: 10px;
+  width: 70%;
+  border-radius: 5px;
+  text-align: center;
+  color: var(--darkColor);
+  font-family: "Amiko", sans-serif;
+  font-weight: bold;
+  font-size: 0.8em;
+  letter-spacing: 2px;
+  outline: none;
+  cursor: pointer;
+  padding-right: 5px;
+}
+
+.textDescriptionContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.labelDescriptionForm {
+  color: var(--darkColor);
+  margin: 25px auto 1px;
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: normal;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.textareaForm {
+  border: none;
+  background-color: var(--inputColor);
+  height: 200px;
+  width: 100%;
+  min-width: 350px;
+  border-radius: 25px;
+  color: var(--darkColor);
+  font-size: 0.8em;
+  font-weight: normal;
+  outline: none;
+  cursor: pointer;
+  padding: 15px;
+  resize: none;
+  font-family: "Amiko", sans-serif;
+}
+.validationBtn {
+  width: 100%;
+  height: 40px;
+  margin: 14px auto;
+  border: none;
+  background-color: var(--redColor);
+  color: var(--ligthColor);
+  font-family: "Amiko", sans-serif;
+  font-size: 1em;
+  font-weight: 600;
+  letter-spacing: 3px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+@media only screen and (min-width: 740px) {
+  .labelDescriptionForm {
+    margin: 0px auto 1px;
+  }
+  .textDescriptionContainer {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
+
+  .userInfoCard {
+    background-color: var(--darkColor);
+    color: var(--ligthColor);
+    height: 200px;
+    width: 200px;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0px 3px 5px var(--inputColor);
+  }
 }

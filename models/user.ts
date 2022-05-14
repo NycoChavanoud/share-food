@@ -94,3 +94,12 @@ export const validateUser = (data: any, forUpdate = false) => {
     description: Joi.string(),
   }).validate(data, { abortEarly: false }).error;
 };
+
+export const updateUser = (id: any, data: IUser) => {
+  db.user
+    .update({
+      where: { id },
+      data,
+    })
+    .catch(() => null);
+};
