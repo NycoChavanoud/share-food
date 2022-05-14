@@ -49,12 +49,12 @@ describe("profile", function () {
         cy.contains("Je change ma desription");
     });
 
-    it("can delete my profil", function () {
+    it("can delete my profil/account", function () {
       cy.visit("/profile/edit");
+      cy.get('[data-cy="deleteQuestion"]').click();
       cy.get('[data-cy="btnDelete"]').click();
       cy.contains("Etes-vous certain de vouloir supprimer votre compte");
       cy.get('[data-cy="validateBtn"]').click();
-      cy.contains("Ton compte est supprimé");
       cy.url().should("include", "/");
     });
   });

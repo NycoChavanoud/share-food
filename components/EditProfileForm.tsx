@@ -184,11 +184,10 @@ const EditProfileForm = () => {
 
         <button className={style.validationBtn}>Valider</button>
       </form>
-      <div className={style.btnContainer}>
-        <button className={style.backBtn} onClick={() => router.back()}>
-          annuler
-        </button>
-      </div>
+
+      <button className={style.backBtn} onClick={() => router.back()}>
+        retour
+      </button>
     </>
   );
 };

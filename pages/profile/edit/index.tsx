@@ -41,6 +41,7 @@ const index = () => {
       {openDelete && (
         <button
           className={style.deleteAccountBtn}
+          data-cy="btnDelete"
           onClick={() => {
             setDeleteContainer(!deleteContainer);
           }}
@@ -77,7 +78,10 @@ const index = () => {
               Ne pas supprimer mon compte
             </span>
           ) : (
-            <span> Vous souhaitez supprimer définitivement votre compte?</span>
+            <span data-cy="deleteQuestion">
+              {" "}
+              Vous souhaitez supprimer définitivement votre compte?
+            </span>
           )}
         </div>
       </div>
