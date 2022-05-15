@@ -7,7 +7,6 @@ import ValidateDelete from "../../../components/ValidateDelete";
 import { useToasts } from "react-toast-notifications";
 import axios from "axios";
 import { signOut } from "next-auth/react";
-import { spawn } from "child_process";
 
 const index = () => {
   const [openDelete, setOpenDelete] = useState(false);

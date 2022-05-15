@@ -111,7 +111,7 @@ const EditProfileForm = () => {
             <div className={style.imageContainer}>
               <img src={avatar.src} alt="avatar" className={style.avatar} />
             </div>
-            <button className={style.uploadAvatarBtn}>
+            <button type="button" className={style.uploadAvatarBtn}>
               Modifier votre avatar
             </button>
           </div>
