@@ -56,6 +56,7 @@ const EditProfileForm = () => {
       })
       .then(() => notify())
       .then(() => router.push("/profile/me"))
+      .then(() => window.location.reload())
       .catch((err) => {
         console.error(err);
         faild();
