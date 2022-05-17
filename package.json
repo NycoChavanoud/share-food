@@ -28,6 +28,7 @@
     "react-dom": "18.0.0",
     "react-hot-toast": "^2.2.0",
     "react-toast-notifications": "^2.5.1"
+   
   },
   "devDependencies": {
     "@types/morgan": "^1.9.3",

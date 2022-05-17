@@ -28,7 +28,8 @@ const LayoutCurrentUser = ({ pageTitle, children }: layoutProps) => {
           key="viewport"
         />
         <link rel="icon" href="/icons/favicon.png" />
-        <script>UPLOADCARE_PUBLIC_KEY ='de18c964b99537f5f750'</script>
+
+        <script>{`UPLOADCARE_PUBLIC_KEY = '${process.env.NEXT_PUBLIC_UPLOADCARE_KEY}'`}</script>
       </Head>
       <main>{children}</main>
       {!currentUserProfile ? "" : <Navbar />}

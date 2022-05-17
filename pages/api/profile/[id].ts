@@ -43,7 +43,6 @@ const handleDelete = async (
   { query: { id }, currentUser }: requestProfileType,
   res: NextApiResponse
 ) => {
-  console.log("id du delete api :", id);
   if (id !== currentUser.id) {
     return res.status(403).send("Forbidden");
   }

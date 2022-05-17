@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const ProfileCard = () => {
   const { currentUserProfile } = useContext(CurrentUserContext);
-  console.log("current user :", currentUserProfile);
+
   return (
     <Link href="/profile/me">
       <div className={style.profilCardContainer}>

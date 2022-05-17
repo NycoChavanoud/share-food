@@ -11,6 +11,16 @@ const EditProfileForm = () => {
   const router = useRouter();
   const { addToast } = useToasts();
 
+  const alterLocale = () => ({
+    buttons: {
+      choose: {
+        files: {
+          one: "Modifier votre avatar",
+        },
+      },
+    },
+  });
+
   const notify = () => {
     addToast("🦄 Super! tu as mis à jour ton profil", {
       appearance: "success",
@@ -42,6 +52,7 @@ const EditProfileForm = () => {
         favoritePlate: userProfile.favoritePlate,
         city: userProfile.city,
         description: userProfile.description,
+        avatarUrl: userProfile.avartUrl,
       })
       .then(() => notify())
       .then(() => router.push("/profile/me"))
@@ -118,15 +129,13 @@ const EditProfileForm = () => {
             </div>
             {/* <button type="button" className={style.uploadAvatarBtn}>
               Modifier votre avatar
-            </button>
-           */}
-            <div className={style.widgetContainer}>
-              <Widget
-                publicKey={process.env.NEXT_PUBLIC_UPLOADCARE_KEY || ""}
-                locale="fr"
-                crop="150x150"
-              />
-            </div>
+            </button> */}
+
+            <Widget
+              publicKey={process.env.NEXT_PUBLIC_UPLOADCARE_KEY || ""}
+              crop="150x150"
+              localeTranslations={alterLocale()}
+            />
           </div>
 
           <div className={style.userInfoCard}>

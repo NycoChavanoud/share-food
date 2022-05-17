@@ -42,3 +42,37 @@ h2 {
   font-weight: bold;
   letter-spacing: 5px;
 }
+
+.uploadcare--widget__button.uploadcare--widget__button_type_open {
+  background-color: var(--redColor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  width: 125px;
+  height: 56px;
+  margin: 14px auto;
+  font-size: 0.8em;
+  white-space: normal;
+  letter-spacing: 3px;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0px;
+}
+
+.uploadcare--widget__button {
+  font-family: "Amiko", sans-serif;
+  font-size: 0.8em;
+  font-weight: 600;
+
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.uploadcare--widget__button.uploadcare--widget__button_type_open:hover {
+  color: var(--darkColor);
+  background-color: var(--redColor);
+  font-size: 0.8em;
+}

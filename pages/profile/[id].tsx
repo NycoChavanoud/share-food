@@ -39,7 +39,6 @@ const Profile: NextPage = (props) => {
         .catch(console.error);
     }
   }, []);
-  console.log("userProfile :", userProfile);
 
   return (
     <LayoutCurrentUser pageTitle="Votre profil">
