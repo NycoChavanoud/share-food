@@ -13,6 +13,7 @@ export interface IUser {
   favoritePlate: string;
   city?: string;
   description?: string;
+  avatarUrl?: string;
 }
 
 const hashingOptions = {
@@ -37,6 +38,7 @@ export const createUser = async ({
   favoritePlate,
   city,
   description,
+  avatarUrl,
 }: IUser) => {
   const hashedPassword = await hashPassword(password);
   return db.user.create({
@@ -50,6 +52,7 @@ export const createUser = async ({
       favoritePlate,
       city,
       description,
+      avatarUrl,
     },
   });
 };
@@ -99,6 +102,7 @@ export const validateUser = (data: any, forUpdate = false) => {
     birthday: Joi.string().max(255),
     city: Joi.string().max(255),
     description: Joi.string(),
+    avatarUrl: Joi.string(),
   }).validate(data, { abortEarly: false }).error;
 };
 
@@ -114,6 +118,7 @@ export const updateUser = (id: any, data: IUser) => {
         favoritePlate: data.favoritePlate,
         city: data.city,
         description: data.description,
+        avatarUrl: data.avatarUrl,
       },
     })
     .catch(() => null);

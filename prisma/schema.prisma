@@ -23,6 +23,7 @@ model User {
   favoritePlate  String?
   city           String?
   description    String?   @db.Text
+  avatarUrl      String?
   Account        Account[]
   Session        Session[]
   Event          Event[]

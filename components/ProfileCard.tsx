@@ -1,5 +1,5 @@
 import style from "./styleComponents/ProfileCard.module.css";
-import avatar from "../public/img/avatar.jpeg";
+import avatar from "../public/img/avatar.png";
 import mark from "../public/icons/mark.png";
 import CurrentUserContext from "../contexts/currentUserContext";
 import { useContext } from "react";
@@ -7,6 +7,7 @@ import Link from "next/link";
 
 const ProfileCard = () => {
   const { currentUserProfile } = useContext(CurrentUserContext);
+  console.log("current user :", currentUserProfile);
   return (
     <Link href="/profile/me">
       <div className={style.profilCardContainer}>
@@ -22,7 +23,15 @@ const ProfileCard = () => {
           </div>
         </div>
         <div className={style.imageContainer}>
-          <img src={avatar.src} alt="avatar" className={style.avatar} />
+          <img
+            src={
+              currentUserProfile?.avatarUrl
+                ? currentUserProfile.avatarUrl
+                : avatar.src
+            }
+            alt="avatar"
+            className={style.avatar}
+          />
         </div>
       </div>
     </Link>

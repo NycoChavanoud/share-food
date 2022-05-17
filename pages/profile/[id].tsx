@@ -7,7 +7,7 @@ import PrivateHeader from "../../components/PrivateHeader";
 
 import dayjs from "dayjs";
 import "dayjs/locale/fr";
-import avatar from "../../public/img/avatar.jpeg";
+import avatar from "../../public/img/avatar.png";
 import bol from "../../public/icons/bol.png";
 import mark from "../../public/icons/mark.png";
 import balloon from "../../public/icons/ballon.png";
@@ -39,6 +39,7 @@ const Profile: NextPage = (props) => {
         .catch(console.error);
     }
   }, []);
+  console.log("userProfile :", userProfile);
 
   return (
     <LayoutCurrentUser pageTitle="Votre profil">
@@ -65,7 +66,11 @@ const Profile: NextPage = (props) => {
 
         <div className={style.userInfoContainer}>
           <div className={style.imageContainer}>
-            <img src={avatar.src} alt="avatar" className={style.avatar} />
+            <img
+              src={userProfile.avatarUrl ? userProfile.avatarUrl : avatar.src}
+              alt="avatar"
+              className={style.avatar}
+            />
           </div>
           <div className={style.userInfoCard}>
             <div className={style.titleInfoCard}>

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import style from "./styleComponents/EditProfileForm.module.css";
-import avatar from "../public/img/avatar.jpeg";
+import avatar from "../public/img/avatar.png";
 import { useRouter } from "next/router";
 import { useToasts } from "react-toast-notifications";
 import { Widget } from "@uploadcare/react-widget";
@@ -110,17 +110,23 @@ const EditProfileForm = () => {
         <div className={style.infoDetailsContainer}>
           <div>
             <div className={style.imageContainer}>
-              <img src={avatar.src} alt="avatar" className={style.avatar} />
+              <img
+                src={userProfile.avatarUrl ? userProfile.avatarUrl : avatar.src}
+                alt="avatar"
+                className={style.avatar}
+              />
             </div>
-            <button type="button" className={style.uploadAvatarBtn}>
+            {/* <button type="button" className={style.uploadAvatarBtn}>
               Modifier votre avatar
             </button>
-            <p>
-              <label htmlFor="file">Your file:</label>
+           */}
+            <div className={style.widgetContainer}>
               <Widget
                 publicKey={process.env.NEXT_PUBLIC_UPLOADCARE_KEY || ""}
+                locale="fr"
+                crop="150x150"
               />
-            </p>
+            </div>
           </div>
 
           <div className={style.userInfoCard}>
