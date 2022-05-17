@@ -78,5 +78,5 @@ h2 {
 }
 
 .uploadcare--widget__text {
-  display: none;
+  font-size: 0.6em;
 }

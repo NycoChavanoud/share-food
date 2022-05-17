@@ -128,16 +128,18 @@ const EditProfileForm = () => {
               />
             </div>
 
-            <Widget
-              publicKey={process.env.NEXT_PUBLIC_UPLOADCARE_KEY || ""}
-              crop="150x150"
-              multiple={false}
-              localeTranslations={alterLocale()}
-              value={userProfile.avartUrl || ""}
-              onChange={(file) => {
-                setUserProfile({ ...userProfile, avartUrl: file.cdnUrl });
-              }}
-            />
+            <div className={style.widgetContainer}>
+              <Widget
+                publicKey={process.env.NEXT_PUBLIC_UPLOADCARE_KEY || ""}
+                crop="150x150"
+                multiple={false}
+                localeTranslations={alterLocale()}
+                value={userProfile.avartUrl || ""}
+                onChange={(file) => {
+                  setUserProfile({ ...userProfile, avartUrl: file.cdnUrl });
+                }}
+              />
+            </div>
           </div>
 
           <div className={style.userInfoCard}>
