@@ -127,14 +127,16 @@ const EditProfileForm = () => {
                 className={style.avatar}
               />
             </div>
-            {/* <button type="button" className={style.uploadAvatarBtn}>
-              Modifier votre avatar
-            </button> */}
 
             <Widget
               publicKey={process.env.NEXT_PUBLIC_UPLOADCARE_KEY || ""}
               crop="150x150"
+              multiple={false}
               localeTranslations={alterLocale()}
+              value={userProfile.avartUrl || ""}
+              onChange={(file) => {
+                setUserProfile({ ...userProfile, avartUrl: file.cdnUrl });
+              }}
             />
           </div>
 

@@ -76,3 +76,7 @@ h2 {
   background-color: var(--redColor);
   font-size: 0.8em;
 }
+
+.uploadcare--widget__text {
+  display: none;
+}
