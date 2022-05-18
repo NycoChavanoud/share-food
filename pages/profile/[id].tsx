@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from "../../styles/Profile.module.css";
 import LayoutCurrentUser from "../../components/LayoutCurrentUser";
 import PrivateHeader from "../../components/PrivateHeader";
@@ -14,27 +14,21 @@ import editIcon from "../../public/icons/edit.png";
 import editDarkIcon from "../../public/icons/editDark.png";
 import Link from "next/link";
 import axios from "axios";
-import CurrentUserContext from "../../contexts/currentUserContext";
 import { Loading } from "../../components/Loading";
 
 const Profile: NextPage = () => {
   const [userProfile, setUserProfile] = useState<any>("");
-  const { currentUserProfile } = useContext(CurrentUserContext);
+
   const router = useRouter();
   const { id } = router.query;
-  const firstname =
-    id === "me" ? currentUserProfile?.firstname : userProfile.firstname;
-  const lastname =
-    id === "me" ? currentUserProfile?.lastname : userProfile.lastname;
-  const nickName =
-    id === "me" ? currentUserProfile?.nickName : userProfile.nickName;
-  const avatarUrl =
-    id === "me" ? currentUserProfile?.avatarUrl : userProfile.avatarUrl;
-  const city = id === "me" ? currentUserProfile?.city : userProfile.city;
-  const favoritePlate =
-    id === "me" ? currentUserProfile?.favoritePlate : userProfile.favoritePlate;
-  const description =
-    id === "me" ? currentUserProfile?.description : userProfile.description;
+
+  const firstname = userProfile.firstname;
+  const lastname = userProfile.lastname;
+  const nickName = userProfile.nickName;
+  const avatarUrl = userProfile.avatarUrl;
+  const city = userProfile.city;
+  const favoritePlate = userProfile.favoritePlate;
+  const description = userProfile.description;
 
   const birthday = dayjs(userProfile.birthday)
     .locale("fr")
@@ -42,8 +36,9 @@ const Profile: NextPage = () => {
 
   useEffect(() => {
     if (id === "me" || !id) {
+      const id = "me";
       axios
-        .get(`/api/profile/me`)
+        .get(`/api/profile/${id}`)
         .then((res) => setUserProfile(res.data))
         .catch(console.error);
     } else {
@@ -54,9 +49,8 @@ const Profile: NextPage = () => {
     }
   }, [id]);
 
-  if (!currentUserProfile && !userProfile) {
-    return <Loading />;
-  } else {
+  console.log(userProfile, id);
+  if (userProfile) {
     return (
       <LayoutCurrentUser pageTitle="Votre profil">
         <div className={style.profilPageContainer}>
@@ -64,7 +58,7 @@ const Profile: NextPage = () => {
             firstname={firstname}
             lastname={lastname}
             router={() => router.push("/dashboard")}
-            title={currentUserProfile ? nickName : "profil"}
+            title={userProfile ? nickName : "profil"}
             rightElement={
               id === "me" && (
                 <Link href="/profile/edit/">
@@ -143,6 +137,8 @@ const Profile: NextPage = () => {
       </LayoutCurrentUser>
     );
   }
+
+  return <Loading />;
 };
 
 export default Profile;
