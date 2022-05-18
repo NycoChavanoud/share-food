@@ -54,89 +54,95 @@ const Profile: NextPage = () => {
     }
   }, [id]);
 
-  return (
-    <LayoutCurrentUser pageTitle="Votre profil">
-      <div className={style.profilPageContainer}>
-        <PrivateHeader
-          firstname={firstname}
-          lastname={lastname}
-          router={() => router.push("/dashboard")}
-          title={currentUserProfile ? nickName : "profil"}
-          rightElement={
-            id === "me" && (
-              <Link href="/profile/edit/">
-                <img
-                  src={editIcon.src}
-                  alt="edit-icon"
-                  className={style.editIcon}
-                  style={{ cursor: "pointer" }}
-                  data-cy="editLink"
-                />
-              </Link>
-            )
-          }
-        />
+  if (!currentUserProfile && !userProfile && id === "me") {
+    return <Loading />;
+  } else {
+    return (
+      <LayoutCurrentUser pageTitle="Votre profil">
+        <div className={style.profilPageContainer}>
+          <PrivateHeader
+            firstname={firstname}
+            lastname={lastname}
+            router={() => router.push("/dashboard")}
+            title={currentUserProfile ? nickName : "profil"}
+            rightElement={
+              id === "me" && (
+                <Link href="/profile/edit/">
+                  <img
+                    src={editIcon.src}
+                    alt="edit-icon"
+                    className={style.editIcon}
+                    style={{ cursor: "pointer" }}
+                    data-cy="editLink"
+                  />
+                </Link>
+              )
+            }
+          />
 
-        <div className={style.userInfoContainer}>
-          <div className={style.imageContainer}>
-            <img
-              src={currentUserProfile?.avatarUrl ? avatarUrl : avatar.src}
-              alt="avatar"
-              className={style.avatar}
-            />
-          </div>
-          <div className={style.userInfoCard}>
-            <div className={style.titleInfoCard}>
-              <div className={style.textTitle}>A propos</div>
-            </div>
-            <div className={style.detailInfoCard}>
+          <div className={style.userInfoContainer}>
+            <div className={style.imageContainer}>
               <img
-                src={balloon.src}
-                alt="balloon-icon"
-                className={style.icon}
+                src={userProfile?.avatarUrl ? avatarUrl : avatar.src}
+                alt="avatar"
+                className={style.avatar}
               />
-              <span className={style.textDetail}>{birthday}</span>
             </div>
-            <div className={style.detailInfoCard}>
-              <img src={mark.src} alt="mark-icon" className={style.icon} />
-              <span className={style.textDetail}>{city}</span>
-            </div>
-            <div className={style.detailInfoCard}>
-              <img src={bol.src} alt="bol-icon" className={style.icon} />{" "}
-              <span className={style.textDetail}>{favoritePlate}</span>
-            </div>
-          </div>
-        </div>
-
-        <div className={style.descriptionContainer}>
-          <div className={style.titleDescription}>
-            <span className={style.textTitleDescription}> Qui suis-je ?</span>
-            {id === "me" && (
-              <Link href="/profile/edit/">
+            <div className={style.userInfoCard}>
+              <div className={style.titleInfoCard}>
+                <div className={style.textTitle}>A propos</div>
+              </div>
+              <div className={style.detailInfoCard}>
                 <img
-                  src={editDarkIcon.src}
-                  alt="edit-icon"
-                  className={style.editDarkIcon}
-                  style={{ cursor: "pointer" }}
+                  src={balloon.src}
+                  alt="balloon-icon"
+                  className={style.icon}
                 />
-              </Link>
-            )}
+                <span className={style.textDetail}>{birthday}</span>
+              </div>
+              <div className={style.detailInfoCard}>
+                <img src={mark.src} alt="mark-icon" className={style.icon} />
+                <span className={style.textDetail}>{city}</span>
+              </div>
+              <div className={style.detailInfoCard}>
+                <img src={bol.src} alt="bol-icon" className={style.icon} />{" "}
+                <span className={style.textDetail}>{favoritePlate}</span>
+              </div>
+            </div>
           </div>
-          <div className={style.contentDescription}>{description}</div>
-        </div>
 
-        <div className={style.shareContainer}>
-          <div className={style.titleDescription}>
-            {" "}
-            <span className={style.textTitleDescription}>Mes partages...</span>
+          <div className={style.descriptionContainer}>
+            <div className={style.titleDescription}>
+              <span className={style.textTitleDescription}> Qui suis-je ?</span>
+              {id === "me" && (
+                <Link href="/profile/edit/">
+                  <img
+                    src={editDarkIcon.src}
+                    alt="edit-icon"
+                    className={style.editDarkIcon}
+                    style={{ cursor: "pointer" }}
+                  />
+                </Link>
+              )}
+            </div>
+            <div className={style.contentDescription}>{description}</div>
           </div>
-          <div style={{ textAlign: "center", marginBottom: "80px" }}>
-            coming soon
+
+          <div className={style.shareContainer}>
+            <div className={style.titleDescription}>
+              {" "}
+              <span className={style.textTitleDescription}>
+                Mes partages...
+              </span>
+            </div>
+            <div style={{ textAlign: "center", marginBottom: "80px" }}>
+              coming soon
+            </div>
           </div>
         </div>
-      </div>
-    </LayoutCurrentUser>
-  );
+      </LayoutCurrentUser>
+    );
+  }
 };
 
 export default Profile;
