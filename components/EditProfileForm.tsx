@@ -1,15 +1,18 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import style from "./styleComponents/EditProfileForm.module.css";
 import avatar from "../public/img/avatar.png";
 import { useRouter } from "next/router";
 import { useToasts } from "react-toast-notifications";
 import { Widget } from "@uploadcare/react-widget";
+import CurrentUserContext from "../contexts/currentUserContext";
 
 const EditProfileForm = () => {
   const [userProfile, setUserProfile] = useState<any>(" ");
   const router = useRouter();
   const { addToast } = useToasts();
+  const { currentUserProfile, setCurrentUserProfile } =
+    useContext(CurrentUserContext);
 
   const alterLocale = () => ({
     buttons: {
@@ -55,8 +58,10 @@ const EditProfileForm = () => {
         avatarUrl: userProfile.avartUrl,
       })
       .then(() => notify())
+      .then(() =>
+        setCurrentUserProfile({ ...currentUserProfile, ...userProfile })
+      )
       .then(() => router.push("/profile/me"))
-      .then(() => window.location.reload())
       .catch((err) => {
         console.error(err);
         faild();

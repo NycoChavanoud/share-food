@@ -8,10 +8,13 @@ interface IContextProviderProps {
 }
 interface CurrentUserContextValue {
   currentUserProfile: IUser | null;
+
+  setCurrentUserProfile: (profile: IUser | null) => void;
 }
 
 const CurrentUserContext = createContext<CurrentUserContextValue>({
   currentUserProfile: null,
+  setCurrentUserProfile: () => {},
 });
 
 export const CurrentUserContextProvider = ({
@@ -42,7 +45,9 @@ export const CurrentUserContextProvider = ({
   }, [status, getProfile]);
 
   return (
-    <CurrentUserContext.Provider value={{ currentUserProfile }}>
+    <CurrentUserContext.Provider
+      value={{ currentUserProfile, setCurrentUserProfile }}
+    >
       {children}
     </CurrentUserContext.Provider>
   );

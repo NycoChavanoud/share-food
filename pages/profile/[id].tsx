@@ -16,7 +16,7 @@ import editDarkIcon from "../../public/icons/editDark.png";
 import Link from "next/link";
 import axios from "axios";
 
-const Profile: NextPage = (props) => {
+const Profile: NextPage = () => {
   const [userProfile, setUserProfile] = useState<any>(" ");
 
   const router = useRouter();
@@ -27,6 +27,7 @@ const Profile: NextPage = (props) => {
   const { id } = router.query;
 
   useEffect(() => {
+    console.log("my id :", id);
     if (id === "me") {
       axios
         .get(`/api/profile/me`)
@@ -38,7 +39,7 @@ const Profile: NextPage = (props) => {
         .then((res) => setUserProfile(res.data))
         .catch(console.error);
     }
-  }, []);
+  }, [id]);
 
   return (
     <LayoutCurrentUser pageTitle="Votre profil">

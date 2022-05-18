@@ -40,13 +40,13 @@ describe("profile", function () {
       cy.get("[data-cy='description']").type("Je change ma desription");
       cy.get('[data-cy="formEditProfile"]').submit();
       cy.url().should("include", "/profile/me");
-      cy.contains("Pepito"),
-        cy.contains("Mi Corazon"),
-        cy.contains("King Biscuit"),
-        cy.contains("Mexico"),
-        cy.contains("Tacos"),
-        cy.contains("01 mai"),
-        cy.contains("Je change ma desription");
+      cy.contains("Pepito");
+      cy.contains("Mi Corazon");
+      cy.contains("King Biscuit");
+      cy.contains("Mexico");
+      cy.contains("Tacos");
+      cy.contains("01 mai");
+      cy.contains("Je change ma desription");
     });
 
     it("can delete my profil/account", function () {
