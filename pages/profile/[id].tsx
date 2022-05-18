@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import style from "../../styles/Profile.module.css";
 import LayoutCurrentUser from "../../components/LayoutCurrentUser";
 import PrivateHeader from "../../components/PrivateHeader";
-
 import dayjs from "dayjs";
 import "dayjs/locale/fr";
 import avatar from "../../public/img/avatar.png";
@@ -16,8 +15,8 @@ import editDarkIcon from "../../public/icons/editDark.png";
 import Link from "next/link";
 import axios from "axios";
 
-const Profile: NextPage = (props) => {
-  const [userProfile, setUserProfile] = useState<any>(" ");
+const Profile: NextPage = () => {
+  const [userProfile, setUserProfile] = useState<any>("");
 
   const router = useRouter();
 
@@ -27,7 +26,6 @@ const Profile: NextPage = (props) => {
   const { id } = router.query;
 
   useEffect(() => {
-    console.log("my id :", id);
     if (id === "me" || !id) {
       axios
         .get(`/api/profile/me`)

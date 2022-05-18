@@ -8,7 +8,6 @@ interface IContextProviderProps {
 }
 interface CurrentUserContextValue {
   currentUserProfile: IUser | null;
-
   setCurrentUserProfile: (profile: IUser | null) => void;
 }
 
