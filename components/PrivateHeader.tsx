@@ -2,8 +2,6 @@ import style from "./styleComponents/PrivateHeader.module.css";
 import fondBois from "../public/img/fond-bois.jpg";
 import Image from "next/image";
 import backLight from "../public/icons/backLight.png";
-import { useContext } from "react";
-import CurrentUserContext from "../contexts/currentUserContext";
 
 type privateHeadProps = {
   title: string;
@@ -20,8 +18,6 @@ const PrivateHeader = ({
   firstname,
   lastname,
 }: privateHeadProps) => {
-  const { currentUserProfile } = useContext(CurrentUserContext);
-
   return (
     <div
       className={style.privateHeaderContainer}

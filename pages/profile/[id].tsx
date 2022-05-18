@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import style from "../../styles/Profile.module.css";
 import LayoutCurrentUser from "../../components/LayoutCurrentUser";
 import PrivateHeader from "../../components/PrivateHeader";
@@ -14,24 +14,21 @@ import editIcon from "../../public/icons/edit.png";
 import editDarkIcon from "../../public/icons/editDark.png";
 import Link from "next/link";
 import axios from "axios";
+import CurrentUserContext from "../../contexts/currentUserContext";
 
 const Profile: NextPage = () => {
   const [userProfile, setUserProfile] = useState<any>("");
+  const { currentUserProfile } = useContext(CurrentUserContext);
 
   const router = useRouter();
 
-  const birthday = dayjs(userProfile.birthday)
+  const birthday = dayjs(currentUserProfile?.birthday)
     .locale("fr")
     .format(" DD MMMM YYYY");
   const { id } = router.query;
 
   useEffect(() => {
-    if (id === "me" || !id) {
-      axios
-        .get(`/api/profile/me`)
-        .then((res) => setUserProfile(res.data))
-        .catch(console.error);
-    } else {
+    if (id !== "me") {
       axios
         .get(`/api/profile/${id}`)
         .then((res) => setUserProfile(res.data))
@@ -39,14 +36,15 @@ const Profile: NextPage = () => {
     }
   }, [id]);
 
+  console.log(currentUserProfile, " vs ", userProfile);
   return (
     <LayoutCurrentUser pageTitle="Votre profil">
       <div className={style.profilPageContainer}>
         <PrivateHeader
-          firstname={userProfile.firstname}
-          lastname={userProfile.lastname}
+          firstname={currentUserProfile?.firstname}
+          lastname={currentUserProfile?.lastname}
           router={() => router.push("/dashboard")}
-          title={userProfile ? userProfile?.nickName : "profil"}
+          title={currentUserProfile ? currentUserProfile.nickName : "profil"}
           rightElement={
             id === "me" && (
               <Link href="/profile/edit/">
@@ -65,7 +63,11 @@ const Profile: NextPage = () => {
         <div className={style.userInfoContainer}>
           <div className={style.imageContainer}>
             <img
-              src={userProfile.avatarUrl ? userProfile.avatarUrl : avatar.src}
+              src={
+                currentUserProfile?.avatarUrl
+                  ? currentUserProfile.avatarUrl
+                  : avatar.src
+              }
               alt="avatar"
               className={style.avatar}
             />
@@ -84,12 +86,14 @@ const Profile: NextPage = () => {
             </div>
             <div className={style.detailInfoCard}>
               <img src={mark.src} alt="mark-icon" className={style.icon} />
-              <span className={style.textDetail}>{userProfile?.city}</span>
+              <span className={style.textDetail}>
+                {currentUserProfile?.city}
+              </span>
             </div>
             <div className={style.detailInfoCard}>
               <img src={bol.src} alt="bol-icon" className={style.icon} />{" "}
               <span className={style.textDetail}>
-                {userProfile?.favoritePlate}
+                {currentUserProfile?.favoritePlate}
               </span>
             </div>
           </div>
@@ -110,7 +114,7 @@ const Profile: NextPage = () => {
             )}
           </div>
           <div className={style.contentDescription}>
-            {userProfile?.description}
+            {currentUserProfile?.description}
           </div>
         </div>
 
