@@ -9,6 +9,7 @@ import CurrentUserContext from "../contexts/currentUserContext";
 
 const EditProfileForm = () => {
   const [userProfile, setUserProfile] = useState<any>(" ");
+
   const router = useRouter();
   const { addToast } = useToasts();
   const { currentUserProfile, setCurrentUserProfile } =
@@ -57,11 +58,13 @@ const EditProfileForm = () => {
         description: userProfile.description,
         avatarUrl: userProfile.avartUrl,
       })
-      .then(() => notify())
+
       .then(() =>
         setCurrentUserProfile({ ...currentUserProfile, ...userProfile })
       )
+      .then(() => notify())
       .then(() => router.push("/profile/me"))
+
       .catch((err) => {
         console.error(err);
         faild();

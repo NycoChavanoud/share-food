@@ -29,7 +29,7 @@ describe("profile", function () {
       cy.url().should("include", "/profile/edit");
     });
 
-    it("can edit my profil", function () {
+    it.only("can edit my profil", function () {
       cy.visit("/profile/edit");
       cy.get("[data-cy='firstname']").type("Pepito");
       cy.get("[data-cy='lastname']").type("Mi Corazon");
