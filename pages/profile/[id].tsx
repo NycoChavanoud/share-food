@@ -54,7 +54,7 @@ const Profile: NextPage = () => {
     }
   }, [id]);
 
-  if (!currentUserProfile && !userProfile && id === "me") {
+  if (!currentUserProfile && !userProfile) {
     return <Loading />;
   } else {
     return (

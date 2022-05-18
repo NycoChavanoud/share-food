@@ -1,6 +1,6 @@
 describe("profile", function () {
   describe("withoutSession", function () {
-    it("impossible to acces profile", function () {
+    xit("impossible to acces profile", function () {
       cy.task("deleteAllUsers");
       cy.visit("/profile/me");
       cy.url().should("include", "/login");
