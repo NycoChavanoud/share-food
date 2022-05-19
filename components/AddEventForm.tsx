@@ -4,7 +4,7 @@ import TitleSeparation from "./TitleSeparation";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useToasts } from "react-toast-notifications";
-import { IUser } from "../models/user";
+import Select from "react-select";
 
 const AddEventForm = () => {
   const { addToast } = useToasts();
@@ -57,6 +57,11 @@ const AddEventForm = () => {
       setAllUsers(res.data);
     });
   }, []);
+
+  const optionToCheck = allUsers?.map((user) => ({
+    value: user.id,
+    label: `${user.firstname} ${user.lastname}`,
+  }));
   console.log(usersInvited);
   return (
     <form
@@ -176,23 +181,16 @@ const AddEventForm = () => {
       <label htmlFor="selectMembers" className={style.labelForm}>
         Membres :
       </label>
-      <select
-        className={style.selectInput}
-        name="selectMembers"
-        id="selectMembers"
-        data-cy="selectMembers"
-        value={usersInvited}
-        multiple
-        onChange={(e) => setUserInvited([...usersInvited, e.target.value])}
-      >
-        {allUsers?.map((user, index) => {
-          return (
-            <input type="checkbox" key={index} value={user.id}>
-              {user.firstname} {user.lastname}
-            </input>
-          );
-        })}
-      </select>
+      <Select
+        id="selectbox"
+        instanceId="selectbox"
+        isMulti
+        options={optionToCheck}
+        onChange={(e) => {
+          setUserInvited([...usersInvited, e]);
+        }}
+      />
+
       <button className={style.btnForm}>Valider</button>
     </form>
   );
