@@ -21,6 +21,9 @@ model User {
   nickName       String?
   birthday       String?
   favoritePlate  String?
+  city           String?
+  description    String?   @db.Text
+  avatarUrl      String?
   Account        Account[]
   Session        Session[]
   Event          Event[]
@@ -39,8 +42,7 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -70,7 +72,7 @@ model Event {
   typeEvent   String @db.VarChar(80)
   address     String @db.VarChar(80)
   authorId    String
-  User        User?  @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  author      User?  @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
   @@index([authorId], name: "author")
 }
