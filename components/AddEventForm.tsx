@@ -15,7 +15,7 @@ const AddEventForm = () => {
   const [description, setDescription] = useState("");
   const [typeEvent, setTypeEvent] = useState(" ");
   const [address, setAddress] = useState("");
-  const [usersInvited, setUserInvited] = useState([]);
+  const [usersInvited, setUserInvited] = useState<any | null>([]);
   const router = useRouter();
 
   const [allUsers, setAllUsers] = useState<any[] | null>(null);
@@ -54,11 +54,9 @@ const AddEventForm = () => {
 
   useEffect(() => {
     axios.get(`/api/users `).then((res) => {
-      console.log("res.data : ", res.data);
       setAllUsers(res.data);
     });
   }, []);
-
   console.log(usersInvited);
   return (
     <form
@@ -185,14 +183,13 @@ const AddEventForm = () => {
         data-cy="selectMembers"
         value={usersInvited}
         multiple
-        //onChange={(e) => [...usersInvited, setUserInvited(e.target.value)]}
-        //onChange={(e) => setUserInvited(...usersInvited, e.target.value)}
+        onChange={(e) => setUserInvited([...usersInvited, e.target.value])}
       >
         {allUsers?.map((user, index) => {
           return (
-            <option key={index} value={user.id}>
+            <input type="checkbox" key={index} value={user.id}>
               {user.firstname} {user.lastname}
-            </option>
+            </input>
           );
         })}
       </select>

@@ -38,10 +38,10 @@ const Navbar = () => {
           />{" "}
         </button>
         <button
-          style={{ visibility: "hidden" }}
+          style={{ opacity: "0.5", cursor: "not-allowed" }}
           className={style.btnIcons}
           onClick={() => {
-            Router.push("/crew");
+            //Router.push("/crew");
           }}
           data-cy="logoCrew"
         >
@@ -49,10 +49,10 @@ const Navbar = () => {
           <Image src={crew} width={35} height={35} alt="logo-crew" />{" "}
         </button>
         <button
-          style={{ visibility: "hidden" }}
+          style={{ opacity: "0.3", cursor: "not-allowed" }}
           className={style.btnIcons}
           onClick={() => {
-            Router.push("/friend");
+            //Router.push("/friend");
           }}
           data-cy="logoFriend"
         >
