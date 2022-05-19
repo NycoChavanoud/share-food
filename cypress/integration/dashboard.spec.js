@@ -12,7 +12,7 @@ describe("dashboard", function () {
       cy.setupCurrentUser();
     });
 
-    it("accès to the dashboard with navbar", function () {
+    it("access to the dashboard with navbar", function () {
       cy.visit("/");
       cy.get('[data-cy="logoHome"]').click();
       cy.url().should("include", "/dashboard");
