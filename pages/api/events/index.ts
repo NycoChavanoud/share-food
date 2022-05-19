@@ -13,7 +13,7 @@ type NextApiRequestWithCurrentUser = NextApiRequest & {
   currentUser: IUser;
 };
 
-type ReqBodyIEvent = Omit<IEvent, "id">;
+type ReqBodyIEvent = Omit<IEvent, "id" | "author">;
 
 const handlePost = async (
   req: NextApiRequestWithCurrentUser,

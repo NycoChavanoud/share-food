@@ -1,5 +1,6 @@
 import db from "../lib/prisma";
 import Joi, { optional } from "joi";
+import { IUser } from "./user";
 
 export interface IEvent {
   id: number;
@@ -11,6 +12,7 @@ export interface IEvent {
   address: string;
   diff?: number;
   authorId: string;
+  author: IUser;
 }
 
 const eventPropsToShow = {
@@ -32,7 +34,7 @@ export const createEvent = async ({
   typeEvent,
   address,
   authorId,
-}: Omit<IEvent, "id">) => {
+}: Omit<IEvent, "id" | "author">) => {
   return db.event.create({
     data: { title, description, date, hour, typeEvent, address, authorId },
   });
@@ -56,7 +58,10 @@ export const getEvents = async () => {
 export const getOneEvent = (id: any) => {
   return db.event.findUnique({
     where: { id: parseInt(id, 10) },
-    select: eventPropsToShow,
+
+    include: {
+      author: true,
+    },
   });
 };
 

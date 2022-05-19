@@ -17,6 +17,11 @@
     margin: 10px auto;
   }
 }
+@media only screen and (min-width: 860px) {
+  .HomeBtnContainer {
+    display: none;
+  }
+}
 
 @media only screen and (min-width: 980px) {
   .HomeCardContainer {

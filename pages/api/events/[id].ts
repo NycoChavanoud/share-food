@@ -4,14 +4,14 @@ import requireCurrentUser from "../../../middlewares/requireCurrentUser";
 import { NextApiResponse } from "next";
 import { IUser } from "../../../models/user";
 
-type requestType = {
+type requestEventType = {
   query: any;
   id: any;
   currentUser: IUser;
 };
 
 const handleGet = async (
-  { query: { id } }: requestType,
+  { query: { id } }: requestEventType,
   res: NextApiResponse
 ) => {
   const event = await getOneEvent(id);
@@ -20,7 +20,7 @@ const handleGet = async (
 };
 
 const handleDelete = async (
-  { query: { id }, currentUser }: requestType,
+  { query: { id }, currentUser }: requestEventType,
   res: NextApiResponse
 ) => {
   const event = await getOneEvent(id);

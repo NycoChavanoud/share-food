@@ -61,6 +61,7 @@ const EventDetail = () => {
         hour={event.hour}
         address={event.address}
         id={event.id}
+        author={event.author}
       />
       <div className={style.descriptionDetailEventContainer}>
         <div className={style.titleDescription}>Description</div>

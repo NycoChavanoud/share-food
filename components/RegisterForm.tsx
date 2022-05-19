@@ -173,7 +173,7 @@ const RegisterForm = () => {
       <div className={style.containerMultiInput}>
         <div className={style.labelContainer}>
           <label htmlFor="nickName" className={style.labelForm}>
-            Pseudo* :
+            Pseudo :
           </label>
           <input
             type="text"
@@ -183,6 +183,7 @@ const RegisterForm = () => {
             autoComplete="off"
             value={nickName}
             onChange={(e) => setNickName(e.target.value)}
+            maxLength={40}
           />
         </div>
 
@@ -215,6 +216,7 @@ const RegisterForm = () => {
             autoComplete="off"
             value={firstname}
             onChange={(e) => setFirsname(e.target.value)}
+            maxLength={40}
           />
         </div>
 
@@ -230,6 +232,7 @@ const RegisterForm = () => {
             autoComplete="off"
             value={lastname}
             onChange={(e) => setLastname(e.target.value)}
+            maxLength={40}
           />
         </div>
       </div>
@@ -243,9 +246,9 @@ const RegisterForm = () => {
         data-cy="favoritePlate"
         className={style.largeInputForm}
         autoComplete="off"
-        required
         value={favoritePlate}
         onChange={(e) => setFavoritePlate(e.target.value)}
+        maxLength={40}
       />
       <button className={style.btnForm}>Valider</button>
     </form>

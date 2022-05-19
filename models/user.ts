@@ -11,6 +11,9 @@ export interface IUser {
   nickName: string;
   birthday: string;
   favoritePlate: string;
+  city?: string;
+  description?: string;
+  avatarUrl?: string;
 }
 
 const hashingOptions = {
@@ -33,6 +36,9 @@ export const createUser = async ({
   nickName,
   birthday,
   favoritePlate,
+  city,
+  description,
+  avatarUrl,
 }: IUser) => {
   const hashedPassword = await hashPassword(password);
   return db.user.create({
@@ -44,6 +50,9 @@ export const createUser = async ({
       nickName,
       birthday,
       favoritePlate,
+      city,
+      description,
+      avatarUrl,
     },
   });
 };
@@ -52,21 +61,36 @@ export const deleteManyUsers = db.user.deleteMany;
 
 export const deleteOneUser = db.user.delete;
 
-export const findByEmail = (email: string) =>
-  db.user.findUnique({ where: { email } }).catch(() => null);
-
-export const emailAlreadyExists = (email: string) =>
-  db.user.findFirst({ where: { email } }).then((user) => !!user);
-
+export const deleteUserById = (id: string) => {
+  return db.user
+    .delete({
+      where: { id },
+    })
+    .catch(() => null);
+};
 export const deleteUserByEmail = (email: string) =>
   db.user.delete({ where: { email } }).catch(() => false);
 
-export const getSafeAttributes = (user: any) => ({
+export const findByEmail = (email: string) =>
+  db.user.findUnique({ where: { email } }).catch(() => null);
+
+export const findById = (id: string) => {
+  return db.user
+    .findUnique({
+      where: { id },
+    })
+    .catch(() => null);
+};
+
+export const emailAlreadyExists = (email: string) =>
+  db.user.findFirst({ where: { email } }).then((user: any) => !!user);
+
+export const getSafeAttributes = (user: IUser) => ({
   ...user,
   hashPassword: undefined,
 });
 
-export const validateUser = (data: any, forUpdate = false) => {
+export const validateUser = (data: Partial<IUser>, forUpdate = false) => {
   const presence = forUpdate ? "optional" : "required";
   return Joi.object({
     firstname: Joi.string().max(255).presence(presence),
@@ -76,5 +100,25 @@ export const validateUser = (data: any, forUpdate = false) => {
     nickName: Joi.string().max(255),
     favoritePlate: Joi.string().max(255),
     birthday: Joi.string().max(255),
+    city: Joi.string().max(255),
+    description: Joi.string(),
+    avatarUrl: Joi.string(),
   }).validate(data, { abortEarly: false }).error;
 };
+
+export const updateUser = (id: string, data: Partial<IUser>) =>
+  db.user
+    .update({
+      where: { id },
+      data: {
+        firstname: data.firstname,
+        lastname: data.lastname,
+        nickName: data.nickName,
+        birthday: data.birthday,
+        favoritePlate: data.favoritePlate,
+        city: data.city,
+        description: data.description,
+        avatarUrl: data.avatarUrl,
+      },
+    })
+    .catch(() => null);

@@ -1,23 +1,19 @@
-import { signOut, useSession } from "next-auth/react";
-import axios from "axios";
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
-import { IUser } from "../models/user";
+import { signOut, useSession } from 'next-auth/react';
+import axios from 'axios';
+import { createContext, useCallback, useEffect, useState } from 'react';
+import { IUser } from '../models/user';
 
 interface IContextProviderProps {
   children: React.ReactNode;
 }
 interface CurrentUserContextValue {
   currentUserProfile: IUser | null;
+  setCurrentUserProfile: (profile: IUser | null) => void;
 }
 
 const CurrentUserContext = createContext<CurrentUserContextValue>({
   currentUserProfile: null,
+  setCurrentUserProfile: () => {},
 });
 
 export const CurrentUserContextProvider = ({
@@ -30,7 +26,7 @@ export const CurrentUserContextProvider = ({
 
   const getProfile = useCallback(() => {
     axios
-      .get("/api/profile")
+      .get('/api/profile/me')
       .then(({ data }) => {
         setCurrentUserProfile(data);
       })
@@ -40,15 +36,17 @@ export const CurrentUserContextProvider = ({
   }, []);
 
   useEffect(() => {
-    if (status === "authenticated") {
+    if (status === 'authenticated') {
       getProfile();
-    } else if (status === "unauthenticated") {
+    } else if (status === 'unauthenticated') {
       setCurrentUserProfile(null);
     }
   }, [status, getProfile]);
 
   return (
-    <CurrentUserContext.Provider value={{ currentUserProfile }}>
+    <CurrentUserContext.Provider
+      value={{ currentUserProfile, setCurrentUserProfile }}
+    >
       {children}
     </CurrentUserContext.Provider>
   );
