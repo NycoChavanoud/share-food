@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import CurrentUserContext from "../contexts/currentUserContext";
 import Navbar from "./Navbar";
+import Script from "next/script";
 
 type layoutProps = { pageTitle: string; children: React.ReactNode };
 
@@ -29,6 +30,7 @@ const LayoutCurrentUser = ({ pageTitle, children }: layoutProps) => {
         />
         <link rel="icon" href="/icons/favicon.png" />
       </Head>
+      <Script>{`UPLOADCARE_PUBLIC_KEY = '${process.env.NEXT_PUBLIC_UPLOADCARE_KEY}'`}</Script>
       <main>{children}</main>
       {!currentUserProfile ? "" : <Navbar />}
     </>

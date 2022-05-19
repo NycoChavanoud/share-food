@@ -3,8 +3,11 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import {
   createUser,
   emailAlreadyExists,
+  IUser,
   validateUser,
 } from "../../../models/user";
+
+type ReqBodyIUser = Omit<IUser, "city" | "description">;
 
 const handleCreateUser = async (req: NextApiRequest, res: NextApiResponse) => {
   const {
@@ -16,7 +19,7 @@ const handleCreateUser = async (req: NextApiRequest, res: NextApiResponse) => {
     birthday,
     favoritePlate,
     password,
-  } = req.body;
+  }: ReqBodyIUser = req.body;
 
   const validationErrors = validateUser(req.body);
   if (validationErrors) return res.status(422).send(validationErrors);

@@ -2,17 +2,22 @@ import style from "./styleComponents/PrivateHeader.module.css";
 import fondBois from "../public/img/fond-bois.jpg";
 import Image from "next/image";
 import backLight from "../public/icons/backLight.png";
-import { useContext } from "react";
-import CurrentUserContext from "../contexts/currentUserContext";
 
 type privateHeadProps = {
-  title: string;
+  title?: string;
   router: any;
+  rightElement?: React.ReactElement | boolean;
+  firstname?: string;
+  lastname?: string;
 };
 
-const PrivateHeader = ({ title, router }: privateHeadProps) => {
-  const { currentUserProfile } = useContext(CurrentUserContext);
-
+const PrivateHeader = ({
+  title,
+  router,
+  rightElement,
+  firstname,
+  lastname,
+}: privateHeadProps) => {
   return (
     <div
       className={style.privateHeaderContainer}
@@ -37,10 +42,11 @@ const PrivateHeader = ({ title, router }: privateHeadProps) => {
       <div className={style.privateInfoContainer}>
         <h1 className={style.nameTitle}>
           {" "}
-          {currentUserProfile?.firstname} {currentUserProfile?.lastname}
+          {firstname} {lastname}
         </h1>
         <div className={style.subtitle}>{title}</div>
       </div>
+      <div>{rightElement}</div>
     </div>
   );
 };
