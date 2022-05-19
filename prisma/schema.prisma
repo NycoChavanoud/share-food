@@ -64,15 +64,22 @@ model VerificationToken {
 }
 
 model Event {
-  id          Int    @id @default(autoincrement())
-  title       String @db.VarChar(255)
-  description String @db.Text
+  id          Int     @id @default(autoincrement())
+  title       String  @db.VarChar(255)
+  description String  @db.Text
   date        String
   hour        String
-  typeEvent   String @db.VarChar(80)
-  address     String @db.VarChar(80)
+  typeEvent   String  @db.VarChar(80)
+  address     String  @db.VarChar(80)
   authorId    String
-  author      User?  @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  author      User?   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  Guest       Guest[]
 
   @@index([authorId], name: "author")
+}
+
+model Guest {
+  id      Int    @id @default(autoincrement())
+  Event   Event? @relation(fields: [eventId], references: [id])
+  eventId Int?
 }
