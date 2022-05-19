@@ -13,6 +13,17 @@ export interface IUser {
   favoritePlate: string;
 }
 
+const eventPropsToShow = {
+  id: true,
+  email: true,
+  password: true,
+  firstname: true,
+  lastname: true,
+  nickName: true,
+  birthday: true,
+  favoritePlate: true,
+};
+
 const hashingOptions = {
   memoryCost: 2 ** 16,
   timeCost: 5,
@@ -60,6 +71,8 @@ export const emailAlreadyExists = (email: string) =>
 
 export const deleteUserByEmail = (email: string) =>
   db.user.delete({ where: { email } }).catch(() => false);
+
+export const getAllUsers = () => db.user.findMany();
 
 export const getSafeAttributes = (user: any) => ({
   ...user,

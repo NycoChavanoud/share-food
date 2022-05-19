@@ -1,23 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import style from "./styleComponents/AddEventForm.module.css";
 import TitleSeparation from "./TitleSeparation";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useToasts } from "react-toast-notifications";
+import { IUser } from "../models/user";
 
 const AddEventForm = () => {
   const { addToast } = useToasts();
-
   const dateOfDay = new Date().toISOString().substring(0, 10);
-
   const [title, setTitle] = useState("");
   const [date, setDate] = useState(dateOfDay);
   const [hour, setHour] = useState("12:30");
   const [description, setDescription] = useState("");
   const [typeEvent, setTypeEvent] = useState(" ");
   const [address, setAddress] = useState("");
-
+  const [usersInvited, setUserInvited] = useState([]);
   const router = useRouter();
+
+  const [allUsers, setAllUsers] = useState<any[] | null>(null);
 
   const notify = () => {
     addToast("🦄 Super! tu as ajouté un nouvel évènement", {
@@ -51,6 +52,14 @@ const AddEventForm = () => {
       });
   };
 
+  useEffect(() => {
+    axios.get(`/api/users `).then((res) => {
+      console.log("res.data : ", res.data);
+      setAllUsers(res.data);
+    });
+  }, []);
+
+  console.log(usersInvited);
   return (
     <form
       className={style.addEventFormContainer}
@@ -162,6 +171,31 @@ const AddEventForm = () => {
         onChange={(e) => setAddress(e.target.value)}
         maxLength={90}
       />
+      <TitleSeparation
+        title="Invitation des membres"
+        content="Merci de sélectionner les membres que vous souhaitez inviter"
+      />
+      <label htmlFor="selectMembers" className={style.labelForm}>
+        Membres :
+      </label>
+      <select
+        className={style.selectInput}
+        name="selectMembers"
+        id="selectMembers"
+        data-cy="selectMembers"
+        value={usersInvited}
+        multiple
+        //onChange={(e) => [...usersInvited, setUserInvited(e.target.value)]}
+        //onChange={(e) => setUserInvited(...usersInvited, e.target.value)}
+      >
+        {allUsers?.map((user, index) => {
+          return (
+            <option key={index} value={user.id}>
+              {user.firstname} {user.lastname}
+            </option>
+          );
+        })}
+      </select>
       <button className={style.btnForm}>Valider</button>
     </form>
   );
