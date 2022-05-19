@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useToasts } from "react-toast-notifications";
 import Select from "react-select";
+import { IUser } from "../models/user";
 
 const AddEventForm = () => {
   const { addToast } = useToasts();
@@ -62,7 +63,7 @@ const AddEventForm = () => {
     value: user.id,
     label: `${user.firstname} ${user.lastname}`,
   }));
-  console.log(usersInvited);
+
   return (
     <form
       className={style.addEventFormContainer}
@@ -187,7 +188,7 @@ const AddEventForm = () => {
         isMulti
         options={optionToCheck}
         onChange={(e) => {
-          setUserInvited([...usersInvited, e]);
+          setUserInvited(e);
         }}
       />
 
