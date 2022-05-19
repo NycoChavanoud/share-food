@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from "../../styles/Profile.module.css";
 import LayoutCurrentUser from "../../components/LayoutCurrentUser";
 import PrivateHeader from "../../components/PrivateHeader";
@@ -14,24 +14,15 @@ import editIcon from "../../public/icons/edit.png";
 import editDarkIcon from "../../public/icons/editDark.png";
 import Link from "next/link";
 import axios from "axios";
-import CurrentUserContext from "../../contexts/currentUserContext";
+
 import { IUser } from "../../models/user";
+import { Loading } from "../../components/Loading";
 
 const Profile: NextPage = (props) => {
   const [userProfile, setUserProfile] = useState<Partial<IUser | null>>();
 
-  const { currentUserProfile } = useContext(CurrentUserContext);
-
   const router = useRouter();
   const { id } = router.query;
-
-  const firstname = userProfile?.firstname || " ";
-  const lastname = userProfile?.lastname || " ";
-  const nickName = userProfile?.nickName || " ";
-  const avatarUrl = userProfile?.avatarUrl || " ";
-  const city = userProfile?.city || " ";
-  const favoritePlate = userProfile?.favoritePlate || " ";
-  const description = userProfile?.description || " ";
 
   const birthday =
     dayjs(userProfile?.birthday).locale("fr").format(" DD MMMM YYYY") || null;
@@ -50,15 +41,17 @@ const Profile: NextPage = (props) => {
     }
   }, [id]);
 
-  const fetchObjectOnString = JSON.stringify(userProfile);
-  const contextObjectOnString = JSON.stringify(currentUserProfile);
-  if (fetchObjectOnString !== contextObjectOnString) {
-    console.log("ça match pas");
-  } else {
-    console.log("okkkk");
-  }
+  if (!userProfile) return <Loading />;
 
-  console.log(userProfile, currentUserProfile);
+  const {
+    firstname,
+    lastname,
+    nickName,
+    avatarUrl,
+    city,
+    favoritePlate,
+    description,
+  } = userProfile;
 
   return (
     <LayoutCurrentUser pageTitle="Votre profil">
@@ -67,7 +60,7 @@ const Profile: NextPage = (props) => {
           firstname={firstname}
           lastname={lastname}
           router={() => router.push("/dashboard")}
-          title={userProfile ? nickName : "profil"}
+          title={nickName}
           rightElement={
             id === "me" && (
               <Link href="/profile/edit/">

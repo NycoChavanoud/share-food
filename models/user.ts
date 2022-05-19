@@ -61,7 +61,7 @@ export const deleteManyUsers = db.user.deleteMany;
 
 export const deleteOneUser = db.user.delete;
 
-export const deleteUserById = (id: any) => {
+export const deleteUserById = (id: string) => {
   return db.user
     .delete({
       where: { id },
@@ -74,7 +74,7 @@ export const deleteUserByEmail = (email: string) =>
 export const findByEmail = (email: string) =>
   db.user.findUnique({ where: { email } }).catch(() => null);
 
-export const findById = (id: any) => {
+export const findById = (id: string) => {
   return db.user
     .findUnique({
       where: { id },
@@ -83,14 +83,14 @@ export const findById = (id: any) => {
 };
 
 export const emailAlreadyExists = (email: string) =>
-  db.user.findFirst({ where: { email } }).then((user) => !!user);
+  db.user.findFirst({ where: { email } }).then((user: any) => !!user);
 
-export const getSafeAttributes = (user: any) => ({
+export const getSafeAttributes = (user: IUser) => ({
   ...user,
   hashPassword: undefined,
 });
 
-export const validateUser = (data: any, forUpdate = false) => {
+export const validateUser = (data: Partial<IUser>, forUpdate = false) => {
   const presence = forUpdate ? "optional" : "required";
   return Joi.object({
     firstname: Joi.string().max(255).presence(presence),
@@ -106,7 +106,7 @@ export const validateUser = (data: any, forUpdate = false) => {
   }).validate(data, { abortEarly: false }).error;
 };
 
-export const updateUser = (id: any, data: IUser) => {
+export const updateUser = (id: string, data: Partial<IUser>) =>
   db.user
     .update({
       where: { id },
@@ -122,4 +122,3 @@ export const updateUser = (id: any, data: IUser) => {
       },
     })
     .catch(() => null);
-};

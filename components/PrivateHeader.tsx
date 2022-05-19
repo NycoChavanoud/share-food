@@ -4,7 +4,7 @@ import Image from "next/image";
 import backLight from "../public/icons/backLight.png";
 
 type privateHeadProps = {
-  title: string;
+  title?: string;
   router: any;
   rightElement?: React.ReactElement | boolean;
   firstname?: string;

@@ -24,7 +24,7 @@ const handleGet = async (
     return res.send(getSafeAttributes(currentUser));
   }
   const profile = await findById(id);
-  if (profile) res.send(getSafeAttributes(profile));
+  if (profile) res.send(getSafeAttributes(profile as any));
   else res.status(404).send("not found");
 };
 
@@ -33,7 +33,7 @@ const handlePatch = async (
   res: NextApiResponse
 ) => {
   const profileUpdated = await updateUser(currentUser.id, body);
-  if (typeof profileUpdated) res.send({ profileUpdated });
+  if (profileUpdated) res.send({ profileUpdated });
   else res.status(404).send("not found");
 };
 
