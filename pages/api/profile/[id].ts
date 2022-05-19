@@ -29,12 +29,10 @@ const handleGet = async (
 };
 
 const handlePatch = async (
-  { query: { id }, body }: requestProfileType,
+  { body, currentUser }: requestProfileType,
   res: NextApiResponse
 ) => {
-  const newData = { ...body };
-  id = body.id;
-  const profileUpdated = await updateUser(id, newData);
+  const profileUpdated = await updateUser(currentUser.id, body);
   if (typeof profileUpdated) res.send({ profileUpdated });
   else res.status(404).send("not found");
 };
