@@ -14,7 +14,7 @@ const Layout = ({ pageTitle, children }: layoutProps) => {
         <title>{pageTitle}</title>
         <meta
           name="viewport"
-          content="initial-scale=1.0, width=device-width"
+          content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
           key="viewport"
         />
         <link rel="icon" href="/icons/favicon.png" />
