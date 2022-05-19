@@ -1,7 +1,7 @@
-import { signOut, useSession } from "next-auth/react";
-import axios from "axios";
-import { createContext, useCallback, useEffect, useState } from "react";
-import { IUser } from "../models/user";
+import { signOut, useSession } from 'next-auth/react';
+import axios from 'axios';
+import { createContext, useCallback, useEffect, useState } from 'react';
+import { IUser } from '../models/user';
 
 interface IContextProviderProps {
   children: React.ReactNode;
@@ -26,7 +26,7 @@ export const CurrentUserContextProvider = ({
 
   const getProfile = useCallback(() => {
     axios
-      .get("/api/profile/me")
+      .get('/api/profile/me')
       .then(({ data }) => {
         setCurrentUserProfile(data);
       })
@@ -36,9 +36,9 @@ export const CurrentUserContextProvider = ({
   }, []);
 
   useEffect(() => {
-    if (status === "authenticated") {
+    if (status === 'authenticated') {
       getProfile();
-    } else if (status === "unauthenticated") {
+    } else if (status === 'unauthenticated') {
       setCurrentUserProfile(null);
     }
   }, [status, getProfile]);
