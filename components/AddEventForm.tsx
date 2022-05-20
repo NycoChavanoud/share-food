@@ -5,7 +5,6 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useToasts } from "react-toast-notifications";
 import Select from "react-select";
-import { IUser } from "../models/user";
 
 const AddEventForm = () => {
   const { addToast } = useToasts();
@@ -18,8 +17,34 @@ const AddEventForm = () => {
   const [address, setAddress] = useState("");
   const [usersInvited, setUserInvited] = useState<any | null>([]);
   const router = useRouter();
-
   const [allUsers, setAllUsers] = useState<any[] | null>(null);
+
+  const customStyles = {
+    container: () => ({
+      color: "red",
+    }),
+    option: () => ({}),
+    input: () => ({
+      color: "var(--darkColor)",
+      backgroundColor: "var(--ligthColor)",
+      borderRadius: "5px",
+      width: "100%",
+    }),
+    menu: () => ({
+      border: "solid 1px var(--darkColor)",
+      borderRadius: "5px",
+    }),
+    button: () => ({
+      backgroundColor: "red",
+    }),
+
+    control: () => ({
+      width: "300px",
+      color: "red",
+      backgroundColor: "var(--inputColor)",
+      borderRadius: "5px",
+    }),
+  };
 
   const notify = () => {
     addToast("🦄 Super! tu as ajouté un nouvel évènement", {
@@ -63,6 +88,8 @@ const AddEventForm = () => {
     value: user.id,
     label: `${user.firstname} ${user.lastname}`,
   }));
+
+  console.log(usersInvited);
 
   return (
     <form
@@ -182,6 +209,7 @@ const AddEventForm = () => {
       <label htmlFor="selectMembers" className={style.labelForm}>
         Membres :
       </label>
+
       <Select
         id="selectbox"
         instanceId="selectbox"
@@ -190,6 +218,7 @@ const AddEventForm = () => {
         onChange={(e) => {
           setUserInvited(e);
         }}
+        styles={customStyles}
       />
 
       <button className={style.btnForm}>Valider</button>

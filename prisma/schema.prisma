@@ -13,20 +13,21 @@ datasource db {
 }
 
 model User {
-  id             String    @id @default(cuid())
+  id             String       @id @default(cuid())
   firstname      String?
   lastname       String?
-  email          String?   @unique
+  email          String?      @unique
   hashedPassword String?
   nickName       String?
   birthday       String?
   favoritePlate  String?
   city           String?
-  description    String?   @db.Text
+  description    String?      @db.Text
   avatarUrl      String?
   Account        Account[]
   Session        Session[]
   Event          Event[]
+  Invitation     Invitation[]
 }
 
 model Account {
@@ -64,22 +65,32 @@ model VerificationToken {
 }
 
 model Event {
-  id          Int     @id @default(autoincrement())
-  title       String  @db.VarChar(255)
-  description String  @db.Text
+  id          Int          @id @default(autoincrement())
+  title       String       @db.VarChar(255)
+  description String       @db.Text
   date        String
   hour        String
-  typeEvent   String  @db.VarChar(80)
-  address     String  @db.VarChar(80)
+  typeEvent   String       @db.VarChar(80)
+  address     String       @db.VarChar(80)
   authorId    String
-  author      User?   @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  Guest       Guest[]
+  author      User?        @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  invitations Invitation[]
 
   @@index([authorId], name: "author")
 }
 
-model Guest {
-  id      Int    @id @default(autoincrement())
-  Event   Event? @relation(fields: [eventId], references: [id])
+enum InvitaitonStatus {
+  PENDING
+  ACCEPTED
+  REFUSED
+}
+
+model Invitation {
+  id      Int              @id @default(autoincrement())
+  guest   User             @relation(fields: [guestId], references: [id], onDelete: Cascade)
+  guestId String
+  event   Event?           @relation(fields: [eventId], references: [id], onDelete: Cascade)
   eventId Int?
+  status  InvitaitonStatus
+
 }
