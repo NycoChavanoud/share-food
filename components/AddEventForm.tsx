@@ -5,6 +5,7 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import { useToasts } from "react-toast-notifications";
 import Select from "react-select";
+import { IUser } from "../models/user";
 
 const AddEventForm = () => {
   const { addToast } = useToasts();
@@ -16,6 +17,7 @@ const AddEventForm = () => {
   const [typeEvent, setTypeEvent] = useState(" ");
   const [address, setAddress] = useState("");
   const [usersInvited, setUserInvited] = useState<any | null>([]);
+  //const [invitations, setInvitation] = useState<any | null>([]);
   const router = useRouter();
   const [allUsers, setAllUsers] = useState<any[] | null>(null);
 
@@ -30,6 +32,10 @@ const AddEventForm = () => {
       appearance: "error",
     });
   };
+  const invitations = usersInvited.map((user: { value: IUser }) => ({
+    guestId: user.value,
+    status: "PENDING",
+  }));
 
   const handlePostEvent = (e: any) => {
     e.preventDefault();
@@ -41,6 +47,7 @@ const AddEventForm = () => {
         description,
         typeEvent,
         address,
+        invitations,
       })
 
       .then(() => notify())
@@ -68,6 +75,7 @@ const AddEventForm = () => {
     }
   }, [allUsers]);
 
+  console.log(invitations);
   return (
     <form
       className={style.addEventFormContainer}

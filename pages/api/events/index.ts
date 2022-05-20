@@ -13,14 +13,23 @@ type NextApiRequestWithCurrentUser = NextApiRequest & {
   currentUser: IUser;
 };
 
-type ReqBodyIEvent = Omit<IEvent, "id" | "author">;
+type ReqBodyIEvent = Omit<IEvent, "id" | "author" | "">;
 
 const handlePost = async (
   req: NextApiRequestWithCurrentUser,
   res: NextApiResponse
 ) => {
-  const { title, date, hour, description, typeEvent, address }: ReqBodyIEvent =
-    req.body;
+  const {
+    title,
+    date,
+    hour,
+    description,
+    typeEvent,
+    address,
+    invitations,
+    guestId,
+    status,
+  }: ReqBodyIEvent = req.body;
 
   const validationErrors = validateEvent(req.body);
   if (validationErrors) return res.status(422).send(validationErrors);
@@ -34,6 +43,9 @@ const handlePost = async (
       typeEvent,
       address,
       authorId: req.currentUser.id,
+      guestId,
+      status,
+      invitations,
     })
   );
 };

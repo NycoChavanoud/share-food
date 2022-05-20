@@ -2,6 +2,11 @@ import db from "../lib/prisma";
 import Joi, { optional } from "joi";
 import { IUser } from "./user";
 
+// export interface IInvite {
+//   guestID: IUser;
+//   status: string;
+// }
+
 export interface IEvent {
   id: number;
   title: string;
@@ -13,6 +18,9 @@ export interface IEvent {
   diff?: number;
   authorId: string;
   author: IUser;
+  guestId: string;
+  status: any;
+  invitations: any;
 }
 
 const eventPropsToShow = {
@@ -34,11 +42,21 @@ export const createEvent = async ({
   typeEvent,
   address,
   authorId,
-}: Omit<IEvent, "id" | "author">) => {
-  return db.event.create({
-    data: { title, description, date, hour, typeEvent, address, authorId },
+  guestId,
+  status,
+}: Omit<IEvent, "id" | "author">) =>
+  db.event.create({
+    data: {
+      invitations: { create: [guestId, status] },
+      title,
+      description,
+      date,
+      hour,
+      typeEvent,
+      address,
+      authorId,
+    },
   });
-};
 
 export const getEvents = async () => {
   const dateOfDay = new Date().toISOString().substring(0, 10);
@@ -85,5 +103,6 @@ export const validateEvent = (data: any, forUpdate = false) => {
     typeEvent: Joi.string().max(60).presence("optional"),
     address: Joi.string().max(255),
     authorId: Joi.string().max(255),
+    invitations: Joi.array(),
   }).validate(data, { abortEarly: false }).error;
 };

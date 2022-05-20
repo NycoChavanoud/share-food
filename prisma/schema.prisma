@@ -87,11 +87,12 @@ enum InvitationStatus {
 
 model Invitation {
   id      Int              @id @default(autoincrement())
-  guest   User             @relation(fields: [guestId], references: [id], onDelete: Cascade)
+  guest   User?            @relation(fields: [guestId], references: [id], onDelete: Cascade)
   guestId String
   event   Event?           @relation(fields: [eventId], references: [id], onDelete: Cascade)
   eventId Int?
   status  InvitationStatus
 
   @@unique([eventId, guestId])
+  @@index([guestId], name: "guest")
 }
