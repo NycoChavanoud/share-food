@@ -79,7 +79,7 @@ model Event {
   @@index([authorId], name: "author")
 }
 
-enum InvitaitonStatus {
+enum InvitationStatus {
   PENDING
   ACCEPTED
   REFUSED
@@ -91,6 +91,7 @@ model Invitation {
   guestId String
   event   Event?           @relation(fields: [eventId], references: [id], onDelete: Cascade)
   eventId Int?
-  status  InvitaitonStatus
+  status  InvitationStatus
 
+  @@unique([eventId, guestId])
 }

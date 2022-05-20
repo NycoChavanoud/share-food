@@ -19,33 +19,6 @@ const AddEventForm = () => {
   const router = useRouter();
   const [allUsers, setAllUsers] = useState<any[] | null>(null);
 
-  const customStyles = {
-    container: () => ({
-      color: "red",
-    }),
-    option: () => ({}),
-    input: () => ({
-      color: "var(--darkColor)",
-      backgroundColor: "var(--ligthColor)",
-      borderRadius: "5px",
-      width: "100%",
-    }),
-    menu: () => ({
-      border: "solid 1px var(--darkColor)",
-      borderRadius: "5px",
-    }),
-    button: () => ({
-      backgroundColor: "red",
-    }),
-
-    control: () => ({
-      width: "300px",
-      color: "red",
-      backgroundColor: "var(--inputColor)",
-      borderRadius: "5px",
-    }),
-  };
-
   const notify = () => {
     addToast("🦄 Super! tu as ajouté un nouvel évènement", {
       appearance: "success",
@@ -89,7 +62,11 @@ const AddEventForm = () => {
     label: `${user.firstname} ${user.lastname}`,
   }));
 
-  console.log(usersInvited);
+  useEffect(() => {
+    if (optionToCheck) {
+      setUserInvited(optionToCheck);
+    }
+  }, [allUsers]);
 
   return (
     <form
@@ -204,7 +181,7 @@ const AddEventForm = () => {
       />
       <TitleSeparation
         title="Invitation des membres"
-        content="Merci de sélectionner les membres que vous souhaitez inviter"
+        content="Selectionnez les membres que vous souhaitez inviter à cet évènement"
       />
       <label htmlFor="selectMembers" className={style.labelForm}>
         Membres :
@@ -215,11 +192,21 @@ const AddEventForm = () => {
         instanceId="selectbox"
         isMulti
         options={optionToCheck}
+        value={usersInvited}
         onChange={(e) => {
           setUserInvited(e);
         }}
-        styles={customStyles}
+        className="basic-multi-select"
+        classNamePrefix="select"
       />
+
+      {/* <button
+        onClick={() => {
+          setUserInvited(optionToCheck);
+        }}
+      >
+        X
+      </button> */}
 
       <button className={style.btnForm}>Valider</button>
     </form>
