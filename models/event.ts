@@ -1,11 +1,6 @@
 import db from "../lib/prisma";
-import Joi, { optional } from "joi";
+import Joi from "joi";
 import { IUser } from "./user";
-
-// export interface IInvite {
-//   guestID: IUser;
-//   status: string;
-// }
 
 export interface IEvent {
   id: number;
@@ -18,8 +13,8 @@ export interface IEvent {
   diff?: number;
   authorId: string;
   author: IUser;
-  guestId: string;
-  status: any;
+  guestId: IUser;
+  status: string;
   invitations: any;
 }
 
@@ -42,21 +37,23 @@ export const createEvent = async ({
   typeEvent,
   address,
   authorId,
-  guestId,
-  status,
-}: Omit<IEvent, "id" | "author">) =>
-  db.event.create({
+  invitations,
+}: Omit<IEvent, "id" | "author" | " ">) => {
+  return await db.event.create({
     data: {
-      invitations: { create: [guestId, status] },
+      invitations: {
+        create: invitations,
+      },
       title,
-      description,
       date,
       hour,
+      description,
       typeEvent,
       address,
       authorId,
     },
   });
+};
 
 export const getEvents = async () => {
   const dateOfDay = new Date().toISOString().substring(0, 10);

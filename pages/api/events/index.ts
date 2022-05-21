@@ -13,7 +13,7 @@ type NextApiRequestWithCurrentUser = NextApiRequest & {
   currentUser: IUser;
 };
 
-type ReqBodyIEvent = Omit<IEvent, "id" | "author" | "">;
+type ReqBodyIEvent = Omit<IEvent, "id" | "author">;
 
 const handlePost = async (
   req: NextApiRequestWithCurrentUser,
@@ -26,9 +26,9 @@ const handlePost = async (
     description,
     typeEvent,
     address,
-    invitations,
     guestId,
     status,
+    invitations,
   }: ReqBodyIEvent = req.body;
 
   const validationErrors = validateEvent(req.body);

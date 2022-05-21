@@ -17,7 +17,7 @@ const AddEventForm = () => {
   const [typeEvent, setTypeEvent] = useState(" ");
   const [address, setAddress] = useState("");
   const [usersInvited, setUserInvited] = useState<any | null>([]);
-  //const [invitations, setInvitation] = useState<any | null>([]);
+
   const router = useRouter();
   const [allUsers, setAllUsers] = useState<any[] | null>(null);
 
