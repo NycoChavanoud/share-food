@@ -75,7 +75,6 @@ const AddEventForm = () => {
     }
   }, [allUsers]);
 
-  console.log(invitations);
   return (
     <form
       className={style.addEventFormContainer}
