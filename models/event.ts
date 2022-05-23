@@ -55,8 +55,9 @@ export const createEvent = async ({
   });
 };
 
-export const getEvents = async () => {
+export const getEvents = async (currentUser: any) => {
   const dateOfDay = new Date().toISOString().substring(0, 10);
+  const currentUserId = currentUser.id;
   return db.event.findMany({
     select: eventPropsToShow,
     orderBy: {
@@ -66,6 +67,18 @@ export const getEvents = async () => {
       date: {
         gte: dateOfDay,
       },
+      OR: [
+        {
+          authorId: currentUserId,
+        },
+        {
+          invitations: {
+            some: {
+              guestId: currentUserId,
+            },
+          },
+        },
+      ],
     },
   });
 };

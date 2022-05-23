@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import style from "./styleComponents/AddEventForm.module.css";
 import TitleSeparation from "./TitleSeparation";
 import axios from "axios";
@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useToasts } from "react-toast-notifications";
 import Select from "react-select";
 import { IUser } from "../models/user";
+import CurrentUserContext from "../contexts/currentUserContext";
 
 const AddEventForm = () => {
   const { addToast } = useToasts();
@@ -17,6 +18,8 @@ const AddEventForm = () => {
   const [typeEvent, setTypeEvent] = useState(" ");
   const [address, setAddress] = useState("");
   const [usersInvited, setUserInvited] = useState<any | null>([]);
+
+  const { currentUserProfile } = useContext(CurrentUserContext);
 
   const router = useRouter();
   const [allUsers, setAllUsers] = useState<any[] | null>(null);
@@ -64,10 +67,12 @@ const AddEventForm = () => {
     });
   }, []);
 
-  const optionToCheck = allUsers?.map((user) => ({
-    value: user.id,
-    label: `${user.firstname} ${user.lastname}`,
-  }));
+  const optionToCheck = allUsers
+    ?.filter((user) => user.id !== currentUserProfile?.id)
+    .map((user) => ({
+      value: user.id,
+      label: `${user.firstname} ${user.lastname}`,
+    }));
 
   useEffect(() => {
     if (optionToCheck) {
@@ -207,13 +212,25 @@ const AddEventForm = () => {
         classNamePrefix="select"
       />
 
-      {/* <button
-        onClick={() => {
-          setUserInvited(optionToCheck);
-        }}
-      >
-        X
-      </button> */}
+      {usersInvited.length === 0 && (
+        <button
+          type="button"
+          onClick={() => {
+            setUserInvited(optionToCheck);
+          }}
+          style={{
+            backgroundColor: "transparent",
+            border: "none",
+            cursor: "pointer",
+            fontFamily: "Amiko",
+            color: "var(--redColor)",
+            margin: "10px auto",
+            fontWeight: "600",
+          }}
+        >
+          ajouter tous les membres de ma liste
+        </button>
+      )}
 
       <button className={style.btnForm}>Valider</button>
     </form>
