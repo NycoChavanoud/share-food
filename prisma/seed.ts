@@ -165,42 +165,39 @@ export async function seed() {
       },
     ],
   });
-  console.log(
-    await db.event.findUnique({
-      where: { id: event.id },
 
-      include: {
-        author: true,
-        invitations: true,
-      },
-    })
-  );
+  await db.event.findUnique({
+    where: { id: event.id },
 
-  console.log(
-    await db.event.create({
-      data: {
-        invitations: {
-          create: [
-            {
-              guestId: secondUser.id,
-              status: "ACCEPTED",
-            },
-            {
-              guestId: user.id,
-              status: "PENDING",
-            },
-          ],
-        },
-        title: "test",
-        description: "lorem ipsum patatum ezeffezfezfzefzeft tatadoum ",
-        date: dateOfDay,
-        hour: "12:30",
-        address: "50 rue de la soif, LYON",
-        typeEvent: "Au bureau",
-        authorId: user.id,
+    include: {
+      author: true,
+      invitations: true,
+    },
+  });
+
+  await db.event.create({
+    data: {
+      invitations: {
+        create: [
+          {
+            guestId: secondUser.id,
+            status: "ACCEPTED",
+          },
+          {
+            guestId: user.id,
+            status: "PENDING",
+          },
+        ],
       },
-    })
-  );
+      title: "test",
+      description: "lorem ipsum patatum ezeffezfezfzefzeft tatadoum ",
+      date: dateOfDay,
+      hour: "12:30",
+      address: "50 rue de la soif, LYON",
+      typeEvent: "Au bureau",
+      authorId: user.id,
+    },
+  });
 }
 
 seed();

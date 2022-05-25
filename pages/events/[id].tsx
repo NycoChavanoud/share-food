@@ -10,6 +10,7 @@ import { useToasts } from "react-toast-notifications";
 import dayjs from "dayjs";
 import "dayjs/locale/fr";
 import CurrentUserContext from "../../contexts/currentUserContext";
+import InvitationsCard from "../../components/InvitationsCard";
 
 const EventDetail = () => {
   const router = useRouter();
@@ -70,6 +71,9 @@ const EventDetail = () => {
         <div className={style.detailTypeEvent}>
           Cela se passe &quot;{event.typeEvent}&quot;
         </div>
+
+        <InvitationsCard />
+
         {event.authorId === currentUserProfile?.id && (
           <>
             <button
