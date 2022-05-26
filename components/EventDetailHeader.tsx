@@ -5,13 +5,24 @@ import Arrow from "../public/icons/backDark.png";
 import Image from "next/image";
 import Router from "next/router";
 
+type EventDetailHeaderProps = {
+  id: IEvent;
+  title: IEvent;
+  date: string;
+  hour: IEvent;
+  address: IEvent;
+  author: any;
+  rightElement?: React.ReactElement | boolean;
+};
+
 const EventDetailHeader = ({
   title,
   date,
   hour,
   address,
   author,
-}: Partial<IEvent>) => {
+  rightElement,
+}: EventDetailHeaderProps) => {
   return (
     <div className={style.HeaderDetailContainer}>
       <span
@@ -37,9 +48,11 @@ const EventDetailHeader = ({
         >
           <Image src={Arrow} width={35} height={35} alt="logo-flèche" />
         </button>
+
         <div className={style.nameInfo}>
-          {author?.firstname} {author?.lastname}
+          {author?.firstname} {author?.lastname}{" "}
         </div>
+        <div className={style.rightContainer}> {rightElement}</div>
       </div>
 
       <div className={style.titleInfo}>{title}</div>
@@ -48,6 +61,7 @@ const EventDetailHeader = ({
         <div className={style.dateInfo}>
           Le {date} à {hour}
         </div>
+
         <div className={style.adressInfo}>{address}</div>
       </div>
       <span

@@ -18,7 +18,7 @@ import axios from "axios";
 import { IUser } from "../../models/user";
 import { Loading } from "../../components/Loading";
 
-const Profile: NextPage = (props) => {
+const Profile: NextPage = () => {
   const [userProfile, setUserProfile] = useState<Partial<IUser | null>>();
 
   const router = useRouter();

@@ -2,6 +2,8 @@ import style from "../../styles/Event.module.css";
 import LayoutCurrentUser from "../../components/LayoutCurrentUser";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
+import editDarkIcon from "../../public/icons/editDark.png";
+import Link from "next/link";
 import axios from "axios";
 import EventDetailHeader from "../../components/EventDetailHeader";
 import ValidateDelete from "../../components/ValidateDelete";
@@ -75,6 +77,22 @@ const EventDetail = () => {
         address={event.address}
         id={event.id}
         author={event.author}
+        rightElement={
+          event.authorId === currentUserProfile?.id && (
+            <img
+              src={editDarkIcon.src}
+              alt="edit-icon"
+              className={style.editIcon}
+              style={{
+                cursor: "pointer",
+                height: "30px",
+                width: "30px",
+                opacity: "0.5",
+              }}
+              data-cy="editLink"
+            />
+          )
+        }
       />
       <div className={style.descriptionDetailEventContainer}>
         <div className={style.titleDescription}>Description</div>
