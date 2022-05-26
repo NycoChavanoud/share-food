@@ -9,7 +9,7 @@ import EventCardContainer from "../../components/EventCardContainer";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/currentUserContext";
 
-const Event: NextPage = (props) => {
+const Event: NextPage = () => {
   const router = useRouter();
   const { currentUserProfile } = useContext(CurrentUserContext);
 

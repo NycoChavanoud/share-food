@@ -85,13 +85,12 @@ export const deleteUserByEmail = (email: string) =>
 export const findByEmail = (email: string) =>
   db.user.findUnique({ where: { email } }).catch(() => null);
 
-export const findById = (id: string) => {
-  return db.user
+export const findById = async (id: string) =>
+  db.user
     .findUnique({
       where: { id },
     })
     .catch(() => null);
-};
 
 export const emailAlreadyExists = (email: string) =>
   db.user.findFirst({ where: { email } }).then((user: any) => !!user);

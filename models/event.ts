@@ -89,6 +89,7 @@ export const getOneEvent = (id: any) => {
 
     include: {
       author: true,
+      invitations: true,
     },
   });
 };

@@ -9,18 +9,13 @@ export interface IInvitation {
   status: string;
 }
 
-// const eventPropsToShow = {
-//   id: true,
-//   guestId: true,
-//   eventId: true,
-//   status: true,
-// };
-
-export const getInvitations = async () => {
+export const getInvitations = async (currentEvent: any) => {
+  const currentEventId = currentEvent;
   return db.invitation.findMany({
     include: {
       event: true,
       guest: true,
     },
+    where: { eventId: currentEventId },
   });
 };

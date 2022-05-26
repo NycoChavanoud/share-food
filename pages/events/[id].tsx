@@ -6,7 +6,6 @@ import axios from "axios";
 import EventDetailHeader from "../../components/EventDetailHeader";
 import ValidateDelete from "../../components/ValidateDelete";
 import { useToasts } from "react-toast-notifications";
-
 import dayjs from "dayjs";
 import "dayjs/locale/fr";
 import CurrentUserContext from "../../contexts/currentUserContext";
@@ -16,6 +15,7 @@ const EventDetail = () => {
   const router = useRouter();
   const { id } = router.query;
   const [event, setEvent] = useState<any>("");
+  const [guests, setGuests] = useState<any[] | null>(null);
   const [deleteContainer, setDeleteContainer] = useState(false);
   const { addToast } = useToasts();
   const { currentUserProfile } = useContext(CurrentUserContext);
@@ -43,6 +43,19 @@ const EventDetail = () => {
   };
 
   const dateFormat = dayjs(event.date).locale("fr").format("dddd DD MMMM YYYY");
+
+  const fetchGuestList = () => {
+    axios
+      .get(`/api/invitations`)
+      .then((res) => setGuests(res.data))
+      .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    fetchGuestList();
+  }, []);
+
+  console.log(guests);
 
   return (
     <LayoutCurrentUser pageTitle={`évènement : ${event.title}`}>
