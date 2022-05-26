@@ -113,7 +113,16 @@ const EventDetail = () => {
             </div>
           </>
         ) : (
-          <div> aucuns invités</div>
+          <div
+            style={{
+              width: "100%",
+              margin: "10px auto 50px",
+              textAlign: "center",
+            }}
+          >
+            {" "}
+            aucuns invités
+          </div>
         )}
 
         {event.authorId === currentUserProfile?.id && (
