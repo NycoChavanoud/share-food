@@ -60,6 +60,14 @@
   margin-left: 10px;
   cursor: pointer;
 }
+.invitationsContainer {
+  height: 200px;
+  width: 80%;
+  border-bottom: solid 2px rgba(39, 36, 33, 0.5);
+  overflow-x: scroll;
+  margin: 10px auto 50px;
+  max-width: 860px;
+}
 
 .titleDescription {
   width: 80%;
@@ -95,7 +103,7 @@
 }
 
 .btnDeleteEvent {
-  margin: 35px auto 55px;
+  margin: 5px auto 55px;
   width: 30%;
   height: 40px;
   border: none;

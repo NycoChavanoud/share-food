@@ -10,6 +10,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/fr";
 import CurrentUserContext from "../../contexts/currentUserContext";
 import InvitationsCard from "../../components/InvitationsCard";
+import defaultAvatar from "../../public/img/avatar.png";
 
 const EventDetail = () => {
   const router = useRouter();
@@ -53,9 +54,7 @@ const EventDetail = () => {
 
   useEffect(() => {
     fetchGuestList();
-  }, []);
-
-  console.log(guests);
+  }, [event]);
 
   return (
     <LayoutCurrentUser pageTitle={`évènement : ${event.title}`}>
@@ -81,11 +80,41 @@ const EventDetail = () => {
         <div className={style.titleDescription}>Description</div>
         <div className={style.detailDescription}>{event.description}</div>
         <div className={style.titleDescription}>Détails</div>
-        <div className={style.detailTypeEvent}>
-          Cela se passe &quot;{event.typeEvent}&quot;
-        </div>
+        {event.typeEvent !== " " ? (
+          <div className={style.detailTypeEvent}>
+            Cela se passe &quot;{event.typeEvent}&quot;
+          </div>
+        ) : (
+          <div className={style.detailTypeEvent}>
+            {" "}
+            auncun détails particuliers pour cet évènements
+          </div>
+        )}
 
-        <InvitationsCard />
+        {guests?.length !== 0 ? (
+          <>
+            <div className={style.titleDescription}>Membres invités</div>
+            <div className={style.invitationsContainer}>
+              {guests?.map((guest, index) => {
+                return (
+                  <InvitationsCard
+                    key={index}
+                    firstname={guest.guest.firstname}
+                    lastname={guest.guest.lastname}
+                    id={guest.guest.id}
+                    avatarUrl={
+                      !guest.guest.avatarUrl
+                        ? defaultAvatar.src
+                        : guest.guest.avatarUrl
+                    }
+                  />
+                );
+              })}
+            </div>
+          </>
+        ) : (
+          <div> aucuns invités</div>
+        )}
 
         {event.authorId === currentUserProfile?.id && (
           <>

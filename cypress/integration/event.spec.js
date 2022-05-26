@@ -76,7 +76,7 @@ describe("event", function () {
         cy.url().should("include", "/events");
       });
     });
-    it("does not show the delete button when the event belongs to another user", function () {
+    xit("does not show the delete button when the event belongs to another user", function () {
       cy.task("deleteAllEvents");
       cy.get("@currentUser").then((user) => {
         cy.task("deleteAllEvents");
