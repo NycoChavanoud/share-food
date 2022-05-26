@@ -40,7 +40,7 @@ export async function seed() {
     },
   });
 
-  const manyUsers = await db.user.createMany({
+  await db.user.createMany({
     data: [
       {
         firstname: "Nico",
@@ -104,7 +104,6 @@ export async function seed() {
       },
     ],
   });
-  console.log(manyUsers);
 
   await db.event.deleteMany();
   const event = await db.event.create({
