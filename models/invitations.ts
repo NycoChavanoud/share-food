@@ -4,8 +4,8 @@ import { IUser } from "./user";
 
 export interface IInvitation {
   id: number;
-  guestId: IUser;
-  eventId: IEvent;
+  guestId: string;
+  eventId: number;
   status: string;
 }
 

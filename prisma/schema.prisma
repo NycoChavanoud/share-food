@@ -93,6 +93,7 @@ model Invitation {
   eventId Int?
   status  InvitationStatus
 
+
   @@unique([eventId, guestId])
   @@index([guestId], name: "guest")
 }

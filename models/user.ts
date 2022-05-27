@@ -72,8 +72,8 @@ export const deleteManyUsers = db.user.deleteMany;
 
 export const deleteOneUser = db.user.delete;
 
-export const deleteUserById = (id: string) => {
-  return db.user
+export const deleteUserById = async (id: string) => {
+  return await db.user
     .delete({
       where: { id },
     })

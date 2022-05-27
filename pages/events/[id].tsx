@@ -13,8 +13,9 @@ import "dayjs/locale/fr";
 import CurrentUserContext from "../../contexts/currentUserContext";
 import InvitationsCard from "../../components/InvitationsCard";
 import defaultAvatar from "../../public/img/avatar.png";
+import { NextPage } from "next";
 
-const EventDetail = () => {
+const EventDetail: NextPage = (props) => {
   const router = useRouter();
   const { id } = router.query;
   const [event, setEvent] = useState<any>("");
@@ -79,18 +80,20 @@ const EventDetail = () => {
         author={event.author}
         rightElement={
           event.authorId === currentUserProfile?.id && (
-            <img
-              src={editDarkIcon.src}
-              alt="edit-icon"
-              className={style.editIcon}
-              style={{
-                cursor: "pointer",
-                height: "30px",
-                width: "30px",
-                opacity: "0.5",
-              }}
-              data-cy="editLink"
-            />
+            <Link href={`/events/edit/${id}`}>
+              <img
+                src={editDarkIcon.src}
+                alt="edit-icon"
+                className={style.editIcon}
+                style={{
+                  cursor: "pointer",
+                  height: "30px",
+                  width: "30px",
+                  opacity: "0.5",
+                }}
+                data-cy="editLink"
+              />
+            </Link>
           )
         }
       />
