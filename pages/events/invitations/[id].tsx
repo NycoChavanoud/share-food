@@ -7,33 +7,41 @@ import TitleSeparation from "../../../components/TitleSeparation";
 import { useContext, useEffect, useState } from "react";
 import style from "../../../styles/EditEvent.module.css";
 import axios from "axios";
+import { IEvent } from "../../../models/event";
 
 const EditInvitations: NextPage = (props) => {
   const router = useRouter();
   const { id } = router.query;
   const { currentUserProfile } = useContext(CurrentUserContext);
   const [guestList, setGuestList] = useState();
-  const [title, setTitle] = useState();
+  const [event, setEvent] = useState<IEvent | null>();
 
   const fetchGuestList = () => {
     axios
       .get(`/api/invitations/${id}`)
       .then((res) => {
         setGuestList(res.data);
-        setTitle(res.data[0].event.title);
+      })
+      .catch(console.error);
+  };
+
+  const fetchEvent = () => {
+    axios
+      .get(`/api/events/${id}`)
+      .then((res) => {
+        setEvent(res.data);
       })
       .catch(console.error);
   };
 
   useEffect(() => {
     fetchGuestList();
+    fetchEvent();
   }, [id]);
-
-  console.log(title, guestList);
 
   return (
     <LayoutCurrentUser
-      pageTitle={`invitations : ${title ? title : "de l'évènement"} `}
+      pageTitle={`invitations : ${event ? event.title : "de l'évènement"} `}
     >
       <div className={style.editEventPageContainer}>
         <PrivateHeader
@@ -44,9 +52,12 @@ const EditInvitations: NextPage = (props) => {
             router.back();
           }}
         />
+
         <TitleSeparation
           title="Détails de l’évènement"
-          content="Merci de préciser pour l’ensemble de vos hôtes les détails de votre évènement"
+          content={`Merci de préciser pour l’ensemble de vos hôtes pour ${
+            event ? event.title : " votre évènement"
+          } `}
         />
       </div>
     </LayoutCurrentUser>

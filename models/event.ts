@@ -1,7 +1,7 @@
 import db from "../lib/prisma";
 import Joi from "joi";
 import { IUser } from "./user";
-import invitations from "../pages/api/invitations";
+
 import { IInvitation } from "./invitations";
 
 export interface IEvent {
@@ -122,11 +122,6 @@ export const validateEvent = (data: any, forUpdate = false) => {
 
 export const updateEvent = async (data: Partial<IEvent>) => {
   const id = data.id;
-  const guests = data.invitations.map((i: IInvitation) => ({
-    eventId_guestId: { eventId: id, guestId: i.guestId },
-  }));
-
-  console.log("GUESTSSS   :", guests, "ETTTTTTT", data);
 
   return await db.event.update({
     where: { id },
@@ -138,32 +133,6 @@ export const updateEvent = async (data: Partial<IEvent>) => {
       description: data.description,
       typeEvent: data.typeEvent,
       address: data.address,
-
-      // invitations: {
-      //set: [{ eventId_guestId: { eventId: id, guestId: data. } }]                   ,
-      //set: guests,
-      // },
-      // invitations: {
-      //   create: {
-      //     where: {},
-      //     data: data.invitations,
-      //   },
-      // },
-
-      // invitations: {
-      //   update: {
-      //     where: {
-      //       id: data.invitations.id,
-      //       eventId_guestId: data.invitations.eventId_guestId,
-      //     },
-      //     data: data.invitations,
-      //   },
-      // },
-
-      // invitations: data.invitations,
-      // invitations: {
-      //   update: data.invitations,
-      // },
     },
   });
 };

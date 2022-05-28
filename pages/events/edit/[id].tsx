@@ -41,6 +41,8 @@ const EditEvent: NextPage = (props) => {
       .catch(console.error);
   };
 
+  console.log(event);
+
   return (
     <LayoutCurrentUser pageTitle={`modifier : ${event.title}`}>
       <div className={style.editEventPageContainer}>
