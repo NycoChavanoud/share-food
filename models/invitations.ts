@@ -1,6 +1,4 @@
 import db from "../lib/prisma";
-import { IEvent } from "./event";
-import { IUser } from "./user";
 
 export interface IInvitation {
   id: number;
@@ -16,6 +14,6 @@ export const getInvitations = async (currentEvent: any) => {
       event: true,
       guest: true,
     },
-    where: { eventId: currentEventId },
+    where: { eventId: parseInt(currentEventId, 10) },
   });
 };

@@ -121,3 +121,26 @@
 .btnDeleteEvent:hover {
   color: var(--darkColor);
 }
+
+.addInvite {
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  margin: 10px auto 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.editIcon {
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+}
+.titleWithEditContainer {
+  display: flex;
+}
+.titleMembers {
+  width: 95%;
+  margin-left: 5%;
+}

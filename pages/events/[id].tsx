@@ -3,6 +3,7 @@ import LayoutCurrentUser from "../../components/LayoutCurrentUser";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import editDarkIcon from "../../public/icons/editDark.png";
+import add from "../../public/icons/plus.png";
 import Link from "next/link";
 import axios from "axios";
 import EventDetailHeader from "../../components/EventDetailHeader";
@@ -50,7 +51,7 @@ const EventDetail: NextPage = (props) => {
 
   const fetchGuestList = () => {
     axios
-      .get(`/api/invitations`)
+      .get(`/api/invitations/${id}`)
       .then((res) => setGuests(res.data))
       .catch((err) => console.error(err));
   };
@@ -85,12 +86,6 @@ const EventDetail: NextPage = (props) => {
                 src={editDarkIcon.src}
                 alt="edit-icon"
                 className={style.editIcon}
-                style={{
-                  cursor: "pointer",
-                  height: "30px",
-                  width: "30px",
-                  opacity: "0.5",
-                }}
                 data-cy="editLink"
               />
             </Link>
@@ -114,7 +109,23 @@ const EventDetail: NextPage = (props) => {
 
         {guests?.length !== 0 ? (
           <>
-            <div className={style.titleDescription}>Membres invités</div>
+            <div className={style.titleDescription}>
+              <Link href={`/events/invitations/${id}`}>
+                <div className={style.titleWithEditContainer}>
+                  <div className={style.titleMembers}> Membres invités</div>
+                  <img
+                    src={editDarkIcon.src}
+                    alt="edit-icon"
+                    style={{
+                      height: "25px",
+                      width: "25px",
+                      opacity: "0.5",
+                    }}
+                    data-cy="editLink"
+                  />
+                </div>
+              </Link>
+            </div>
             <div className={style.invitationsContainer}>
               {guests?.map((guest, index) => {
                 return (
@@ -134,16 +145,22 @@ const EventDetail: NextPage = (props) => {
             </div>
           </>
         ) : (
-          <div
-            style={{
-              width: "100%",
-              margin: "10px auto 50px",
-              textAlign: "center",
-            }}
-          >
-            {" "}
-            aucuns invités
-          </div>
+          <Link href={`/events/invitations/${id}`}>
+            <div className={style.addInvite}>
+              aucuns invités :
+              <img
+                src={add.src}
+                alt="edit-icon"
+                className={style.editIcon}
+                style={
+                  {
+                    // opacity: "0.5",
+                  }
+                }
+                data-cy="addInvitLink"
+              />
+            </div>
+          </Link>
         )}
 
         {event.authorId === currentUserProfile?.id && (

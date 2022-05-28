@@ -7,14 +7,11 @@ import LayoutCurrentUser from "../../../components/LayoutCurrentUser";
 import PrivateHeader from "../../../components/PrivateHeader";
 import CurrentUserContext from "../../../contexts/currentUserContext";
 import TitleSeparation from "../../../components/TitleSeparation";
-import Select from "react-select";
 
-const EditEvent: NextPage = () => {
+const EditEvent: NextPage = (props) => {
   const router = useRouter();
   const { id } = router.query;
   const [event, setEvent] = useState<any>("");
-  const [usersInvited, setUserInvited] = useState<any | null>();
-  const [allUsers, setAllUsers] = useState<any[] | null>(null);
   const { currentUserProfile } = useContext(CurrentUserContext);
   const dateOfDay = new Date().toISOString().substring(0, 10);
 
@@ -26,25 +23,6 @@ const EditEvent: NextPage = () => {
       })
       .catch(console.error);
   }, [id]);
-
-  useEffect(() => {
-    axios.get(`/api/users `).then((res) => {
-      setAllUsers(res.data);
-    });
-  }, []);
-
-  const optionToCheck = allUsers
-    ?.filter((user) => user.id !== currentUserProfile?.id)
-    .map((user) => ({
-      value: user.id,
-      label: `${user.firstname} ${user.lastname}`,
-    }));
-
-  useEffect(() => {
-    if (optionToCheck) {
-      setUserInvited(optionToCheck);
-    }
-  }, [allUsers]);
 
   const handlePatchEvent = (e: any) => {
     e.preventDefault();
@@ -58,11 +36,9 @@ const EditEvent: NextPage = () => {
         typeEvent: event.typeEvent,
         address: event.address,
         authorId: event.authorId,
-        invitations: usersInvited.map((i: { value: any }) => ({
-          guestId: i.value,
-        })),
       })
-      .then(() => router.push(`/events/${id}`));
+      .then(() => router.push(`/events/${id}`))
+      .catch(console.error);
   };
 
   return (
@@ -188,46 +164,6 @@ const EditEvent: NextPage = () => {
             onChange={(e) => setEvent({ ...event, address: e.target.value })}
             maxLength={90}
           />
-          <TitleSeparation
-            title="Invitation des membres"
-            content="Selectionnez les membres que vous souhaitez inviter à cet évènement"
-          />
-          <label htmlFor="selectMembers" className={style.labelForm}>
-            Membres :
-          </label>
-
-          <Select
-            id="selectbox"
-            instanceId="selectbox"
-            isMulti
-            options={optionToCheck}
-            value={usersInvited}
-            onChange={(e) => {
-              setUserInvited(e);
-            }}
-            className="basic-multi-select"
-            classNamePrefix="select"
-          />
-
-          {/* {usersInvited.length === 0 && (
-            <button
-              type="button"
-              onClick={() => {
-                setUserInvited(optionToCheck);
-              }}
-              style={{
-                backgroundColor: "transparent",
-                border: "none",
-                cursor: "pointer",
-                fontFamily: "Amiko",
-                color: "var(--redColor)",
-                margin: "10px auto",
-                fontWeight: "600",
-              }}
-            >
-              ajouter tous les membres de ma liste
-            </button>
-          )} */}
 
           <button className={style.btnForm}>Valider</button>
         </form>
