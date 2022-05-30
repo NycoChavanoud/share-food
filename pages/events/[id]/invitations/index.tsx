@@ -12,6 +12,8 @@ import defaultAvatar from "../../../../public/img/avatar.png";
 import InvitationsCard from "../../../../components/InvitationsCard";
 import deleteIcon from "../../../../public/icons/deleteIcon.png";
 import addIcon from "../../../../public/icons/plus.png";
+import addAll from "../../../../public/icons/addAll.png";
+import delAll from "../../../../public/icons/delAll.png";
 import Image from "next/image";
 import { IUser } from "../../../../models/user";
 
@@ -164,8 +166,21 @@ const EditInvitations: NextPage = (props) => {
 
         {usersCanInvite?.length !== 0 ? (
           <>
-            <div className={style.titleSeparationTitle}>
-              Gestion des invités
+            <div className={style.addAllContainer}>
+              <div className={style.titleSeparationAddAll}>
+                Gestion des invités
+              </div>
+              <button
+                className={style.btnHandleList}
+                style={{ visibility: "hidden" }}
+              >
+                <Image
+                  src={addAll}
+                  width={35}
+                  height={35}
+                  alt="logo-ajout-membre"
+                />
+              </button>
             </div>
             <div className={style.invitationTextContent}>
               ajouter des invités pour votre évènement. Seul les membres invités
