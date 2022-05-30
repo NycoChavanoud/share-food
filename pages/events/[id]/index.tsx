@@ -1,19 +1,19 @@
-import style from "../../styles/Event.module.css";
-import LayoutCurrentUser from "../../components/LayoutCurrentUser";
+import style from "../../../styles/Event.module.css";
+import LayoutCurrentUser from "../../../components/LayoutCurrentUser";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-import editDarkIcon from "../../public/icons/editDark.png";
-import add from "../../public/icons/plus.png";
+import editDarkIcon from "../../../public/icons/editDark.png";
+import add from "../../../public/icons/plus.png";
 import Link from "next/link";
 import axios from "axios";
-import EventDetailHeader from "../../components/EventDetailHeader";
-import ValidateDelete from "../../components/ValidateDelete";
+import EventDetailHeader from "../../../components/EventDetailHeader";
+import ValidateDelete from "../../../components/ValidateDelete";
 import { useToasts } from "react-toast-notifications";
 import dayjs from "dayjs";
 import "dayjs/locale/fr";
-import CurrentUserContext from "../../contexts/currentUserContext";
-import InvitationsCard from "../../components/InvitationsCard";
-import defaultAvatar from "../../public/img/avatar.png";
+import CurrentUserContext from "../../../contexts/currentUserContext";
+import InvitationsCard from "../../../components/InvitationsCard";
+import defaultAvatar from "../../../public/img/avatar.png";
 import { NextPage } from "next";
 
 const EventDetail: NextPage = (props) => {
@@ -103,28 +103,29 @@ const EventDetail: NextPage = (props) => {
         ) : (
           <div className={style.detailTypeEvent}>
             {" "}
-            auncun détails particuliers pour cet évènements
+            auncun détail particulier pour cet évènement
           </div>
         )}
 
         {guests?.length !== 0 ? (
           <>
             <div className={style.titleDescription}>
-              <Link href={`/events/invitations/${id}`}>
-                <div className={style.titleWithEditContainer}>
-                  <div className={style.titleMembers}> Membres invités</div>
-                  <img
-                    src={editDarkIcon.src}
-                    alt="edit-icon"
-                    style={{
-                      height: "25px",
-                      width: "25px",
-                      opacity: "0.5",
-                    }}
-                    data-cy="editLink"
-                  />
+              <div className={style.titleWithEditContainer}>
+                <div className={style.titleMembers}>
+                  {" "}
+                  Membres invités : {guests?.length}
                 </div>
-              </Link>
+                {event.authorId === currentUserProfile?.id && (
+                  <Link href={`/events/${id}/invitations`}>
+                    <img
+                      src={editDarkIcon.src}
+                      className={style.editDarkIcon}
+                      alt="edit-icon"
+                      data-cy="editLink"
+                    />
+                  </Link>
+                )}
+              </div>
             </div>
             <div className={style.invitationsContainer}>
               {guests?.map((guest, index) => {
@@ -145,22 +146,19 @@ const EventDetail: NextPage = (props) => {
             </div>
           </>
         ) : (
-          <Link href={`/events/invitations/${id}`}>
-            <div className={style.addInvite}>
-              aucuns invités :
-              <img
-                src={add.src}
-                alt="edit-icon"
-                className={style.editIcon}
-                style={
-                  {
-                    // opacity: "0.5",
-                  }
-                }
-                data-cy="addInvitLink"
-              />
-            </div>
-          </Link>
+          event.authorId === currentUserProfile?.id && (
+            <Link href={`/events/${id}/invitations`}>
+              <div className={style.addInvite}>
+                aucun invités :
+                <img
+                  src={add.src}
+                  alt="edit-icon"
+                  className={style.editIcon}
+                  data-cy="addInvitLink"
+                />
+              </div>
+            </Link>
+          )
         )}
 
         {event.authorId === currentUserProfile?.id && (

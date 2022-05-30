@@ -137,6 +137,11 @@
   height: 30px;
   width: 30px;
 }
+.editDarkIcon {
+  cursor: pointer;
+  height: 25px;
+  width: 25px;
+}
 .titleWithEditContainer {
   display: flex;
 }

@@ -25,6 +25,7 @@
   font-weight: normal;
   letter-spacing: 2px;
   cursor: pointer;
+  max-width: 95%;
 }
 
 .inputForm {
@@ -170,6 +171,45 @@
   letter-spacing: 1px;
   font-weight: 500;
   width: 90%;
+}
+.listGuestsContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.invitationsContainer {
+  height: 220px;
+  width: 90%;
+  border-bottom: solid 2px rgba(39, 36, 33, 0.5);
+  overflow-x: scroll;
+  margin: 10px auto 50px;
+  max-width: 860px;
+}
+
+.deleteBtn {
+  height: 30px;
+  width: 30px;
+}
+
+.invitationTitle {
+  margin: 9px auto 1px;
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: normal;
+  letter-spacing: 2px;
+  cursor: pointer;
+  max-width: 95%;
+  margin-bottom: 40px;
+}
+.invitationTextContent {
+  margin: 9px auto 1px;
+  text-align: center;
+  font-size: 0.6em;
+  font-weight: normal;
+  letter-spacing: 2px;
+  cursor: pointer;
+  max-width: 95%;
+  margin-bottom: 40px;
 }
 
 @media only screen and (min-width: 640px) {

@@ -1,21 +1,37 @@
 import base from "../../../middlewares/common";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { IEvent } from "../../../models/event";
-import { getInvitations, IInvitation } from "../../../models/invitations";
+import {
+  deleteInvitationbyEventId,
+  getInvitations,
+  IInvitation,
+} from "../../../models/invitations";
+import requireCurrentUser from "../../../middlewares/requireCurrentUser";
 
 type NextApiRequestwithCurrentEvent = NextApiRequest & {
-  eventId: IEvent;
-  query: any;
+  query: {
+    id: number;
+  };
   body: IInvitation;
-  id: number;
 };
 
 const handleGet = async (
-  { query: { id }, body }: NextApiRequestwithCurrentEvent,
+  { query: { id } }: NextApiRequestwithCurrentEvent,
   res: NextApiResponse
 ) => {
   const invitations = await getInvitations(id);
   if (invitations) return res.send(invitations);
 };
 
-export default base().get(handleGet);
+const handleDelete = async (
+  { query: { id } }: NextApiRequestwithCurrentEvent,
+  res: NextApiResponse
+) => {
+  const invitationToDelete = await deleteInvitationbyEventId(id);
+
+  if (invitationToDelete) return res.send(invitationToDelete);
+};
+
+export default base()
+  .use(requireCurrentUser)
+  .get(handleGet)
+  .delete(handleDelete);

@@ -11,12 +11,11 @@ const InvitationsCard = ({
   return (
     <Link href={`/profile/${id}`}>
       <div className={style.invitationsCardContainer}>
-        <div className={style.nameContainer}>
-          {firstname} {lastname}
-        </div>
-        <div className={style.imageContainer}></div>
         <div className={style.imageContainer}>
           <img src={avatarUrl} alt={lastname} className={style.avatar} />
+        </div>
+        <div className={style.nameContainer}>
+          {firstname} {lastname}
         </div>
       </div>
     </Link>

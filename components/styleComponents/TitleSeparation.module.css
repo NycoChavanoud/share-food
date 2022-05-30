@@ -5,6 +5,7 @@
   align-items: center;
   margin: 30px auto 5px;
   border-top: solid 2px rgba(39, 36, 33, 0.5);
+  width: 85%;
 }
 
 .titleSeparationTitle {
@@ -13,6 +14,7 @@
   font-size: 1.2em;
   letter-spacing: 3px;
   margin-top: 5px;
+  text-align: center;
 }
 
 .titleSeparationContent {
