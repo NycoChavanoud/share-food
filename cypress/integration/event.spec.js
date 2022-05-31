@@ -76,7 +76,7 @@ describe("event", function () {
         cy.url().should("include", "/events");
       });
     });
-    xit("does not show the delete button when the event belongs to another user", function () {
+    it("does not show the delete button when the event belongs to another user", function () {
       cy.task("deleteAllEvents");
       cy.get("@currentUser").then((user) => {
         cy.task("deleteAllEvents");
@@ -88,6 +88,12 @@ describe("event", function () {
           address: "40 rue de la soif, LYON",
           typeEvent: "Au resto",
           authorId: user.id,
+        }).then((e) => {
+          cy.task("createInvit", {
+            guestId: user.id,
+            eventId: e.id,
+            status: "PENDING",
+          });
         });
       });
       cy.task("createUser", {
@@ -104,6 +110,17 @@ describe("event", function () {
           address: "50 rue de la soif, LYON",
           typeEvent: "Au resto",
           authorId: otherUser.id,
+        }).then((e) => {
+          cy.task("getAllUsers").then(
+            async (users) =>
+              await users.map((u) => {
+                cy.task("createInvit", {
+                  guestId: u.id,
+                  eventId: e.id,
+                  status: "PENDING",
+                });
+              })
+          );
         });
       });
       cy.visit("/events");
