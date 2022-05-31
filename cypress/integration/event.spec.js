@@ -23,6 +23,11 @@ describe("event", function () {
     beforeEach(() => {
       cy.task("deleteAllUsers");
       cy.setupCurrentUser();
+      Cypress.on("uncaught:exception", (err, runnable) => {
+        // returning false here prevents Cypress from
+        // failing the test
+        return false;
+      });
     });
 
     it("acces to create event", function () {
