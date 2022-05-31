@@ -129,7 +129,7 @@ const EditInvitations: NextPage = (props) => {
                       <button
                         className={style.deleteBtn}
                         onClick={() => handleDelete(invit.id)}
-                        data-cy="deleteBtn"
+                        data-cy={`deleteBtn${index}`}
                         style={{
                           backgroundColor: "transparent",
                           border: "none",
@@ -204,7 +204,7 @@ const EditInvitations: NextPage = (props) => {
                       <button
                         className={style.deleteBtn}
                         onClick={() => handleCreate(inviting.id)}
-                        data-cy="addBtn"
+                        data-cy={`addBtn${index}`}
                         style={{
                           backgroundColor: "transparent",
                           border: "none",
