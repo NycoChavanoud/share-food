@@ -27,6 +27,17 @@ export const getInvitations = async (currentEvent: any) => {
   });
 };
 
+export const getOneInvite = (id: any) => {
+  return db.invitation.findUnique({
+    where: { id: parseInt(id, 10) },
+
+    include: {
+      event: true,
+      guest: true,
+    },
+  });
+};
+
 export const deleteInvitationbyEventId = async (id: any) => {
   return await db.invitation.delete({
     where: {
