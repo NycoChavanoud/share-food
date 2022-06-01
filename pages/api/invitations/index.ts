@@ -16,6 +16,7 @@ const handleCreateOne = async (
 ) => {
   const invitationToCreate = await createOneGuestForEvent(req.body);
   if (invitationToCreate) return res.status(201).send(invitationToCreate);
+  else res.status(404).send("not found");
 };
 
 export default base().use(requireCurrentUser).post(handleCreateOne);

@@ -70,7 +70,7 @@ describe("invitations", function () {
       cy.contains("Membres invités : ");
     });
 
-    it.only("can manage invitation", function () {
+    it("can manage invitation", function () {
       cy.task("findUserByEmail", "visitor@website.com").then((u) => {
         cy.task("createEvent", {
           title: "evenement currentUser",
