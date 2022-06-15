@@ -16,8 +16,7 @@ const invitPropsToShow = {
   status: true,
 };
 
-export const getInvitations = async (currentEvent: any) => {
-  const currentEventId = currentEvent;
+export const getInvitations = async (currentEventId: string) => {
   return await db.invitation.findMany({
     include: {
       event: true,
@@ -27,7 +26,7 @@ export const getInvitations = async (currentEvent: any) => {
   });
 };
 
-export const getOneInvite = (id: any) => {
+export const getOneInvite = (id: string) => {
   return db.invitation.findUnique({
     where: { id: parseInt(id, 10) },
 
@@ -38,7 +37,7 @@ export const getOneInvite = (id: any) => {
   });
 };
 
-export const deleteInvitationbyEventId = async (id: any) => {
+export const deleteInvitationbyEventId = async (id: string) => {
   return await db.invitation.delete({
     where: {
       id: parseInt(id, 10),

@@ -17,7 +17,7 @@ export interface IEvent {
   author: IUser;
   guestId: IUser;
   status: string;
-  invitations: any;
+  invitations: IInvitation;
 }
 
 const eventPropsToShow = {
@@ -57,7 +57,7 @@ export const createEvent = async ({
   });
 };
 
-export const getEvents = async (currentUser: any) => {
+export const getEvents = async (currentUser: IUser) => {
   const dateOfDay = new Date().toISOString().substring(0, 10);
   const currentUserId = currentUser.id;
   return db.event.findMany({
@@ -85,7 +85,7 @@ export const getEvents = async (currentUser: any) => {
   });
 };
 
-export const getOneEvent = (id: any) => {
+export const getOneEvent = (id: string) => {
   return db.event.findUnique({
     where: { id: parseInt(id, 10) },
 
@@ -96,7 +96,7 @@ export const getOneEvent = (id: any) => {
   });
 };
 
-export const deleteOneEvent = (id: any) => {
+export const deleteOneEvent = (id: string) => {
   return db.event
     .delete({
       where: { id: parseInt(id, 10) },

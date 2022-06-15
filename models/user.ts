@@ -16,17 +16,6 @@ export interface IUser {
   avatarUrl?: string;
 }
 
-const eventPropsToShow = {
-  id: true,
-  email: true,
-  password: true,
-  firstname: true,
-  lastname: true,
-  nickName: true,
-  birthday: true,
-  favoritePlate: true,
-};
-
 const hashingOptions = {
   memoryCost: 2 ** 16,
   timeCost: 5,
@@ -72,8 +61,8 @@ export const deleteManyUsers = db.user.deleteMany;
 
 export const deleteOneUser = db.user.delete;
 
-export const deleteUserById = async (id: string) => {
-  return await db.user
+export const deleteUserById = (id: string) => {
+  return db.user
     .delete({
       where: { id },
     })
