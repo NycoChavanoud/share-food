@@ -38,30 +38,27 @@ describe("invitations", function () {
         lastname: "creator",
         email: "creator@gmail.com",
         password: "creatorpass",
-      })
-        .then((user) => {
-          cy.task("createEvent", {
-            title: "mon event test",
-            description: "lorem ipsum patatum et tatadoum ",
-            date: dateOfDay,
-            hour: "12:30",
-            address: "50 rue de la soif, LYON",
-            typeEvent: "Au resto",
-            authorId: user.id,
+      }).then((user) => {
+        cy.task("createEvent", {
+          title: "mon event test",
+          description: "lorem ipsum patatum et tatadoum ",
+          date: dateOfDay,
+          hour: "12:30",
+          address: "50 rue de la soif, LYON",
+          typeEvent: "Au resto",
+          authorId: user.id,
+        }).then((e) => {
+          cy.task("getAllUsers").then((users) => {
+            users.forEach((u) => {
+              cy.task("createInvit", {
+                guestId: u.id,
+                eventId: e.id,
+                status: "PENDING",
+              });
+            });
           });
-        })
-        .then((e) => {
-          cy.task("getAllUsers").then(
-            async (users) =>
-              await users.map((u) => {
-                cy.task("createInvit", {
-                  guestId: u.id,
-                  eventId: e.id,
-                  status: "PENDING",
-                });
-              })
-          );
         });
+      });
     });
 
     it(" can't acces to update invitations on event", function () {
@@ -73,7 +70,7 @@ describe("invitations", function () {
     it("can manage invitation", function () {
       cy.task("findUserByEmail", "visitor@website.com").then((u) => {
         cy.task("createEvent", {
-          title: "evenement currentUser",
+          title: "evenement créé par currentUser",
           description: "lorem ipsum patatum et tatadoum ",
           date: dateOfDay,
           hour: "12:30",
@@ -82,7 +79,7 @@ describe("invitations", function () {
           authorId: u.id,
         }).then((e) => {
           cy.visit("/events");
-          cy.contains("evenement currentUser").click();
+          cy.contains("evenement créé par currentUser").click();
           cy.get('[data-cy="addInvitLink"]').click();
           cy.url().should("include", `/events/${e.id}/invitations`);
           cy.contains("aucun invité pour votre évènement");

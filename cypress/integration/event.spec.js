@@ -116,15 +116,14 @@ describe("event", function () {
           typeEvent: "Au resto",
           authorId: otherUser.id,
         }).then((e) => {
-          cy.task("getAllUsers").then(
-            async (users) =>
-              await users.map((u) => {
-                cy.task("createInvit", {
-                  guestId: u.id,
-                  eventId: e.id,
-                  status: "PENDING",
-                });
-              })
+          cy.task("getAllUsers").then((users) =>
+            users.forEach((u) => {
+              cy.task("createInvit", {
+                guestId: u.id,
+                eventId: e.id,
+                status: "PENDING",
+              });
+            })
           );
         });
       });

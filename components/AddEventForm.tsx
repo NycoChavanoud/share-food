@@ -8,6 +8,11 @@ import Select from "react-select";
 import { IUser } from "../models/user";
 import CurrentUserContext from "../contexts/currentUserContext";
 
+export interface SelectableUserOption {
+  value: string;
+  label: string;
+}
+
 const AddEventForm = () => {
   const { addToast } = useToasts();
   const dateOfDay = new Date().toISOString().substring(0, 10);
@@ -17,12 +22,12 @@ const AddEventForm = () => {
   const [description, setDescription] = useState("");
   const [typeEvent, setTypeEvent] = useState(" ");
   const [address, setAddress] = useState("");
-  const [usersInvited, setUserInvited] = useState<any | null>([]);
+  const [usersInvited, setUserInvited] = useState<SelectableUserOption[]>([]);
 
   const { currentUserProfile } = useContext(CurrentUserContext);
 
   const router = useRouter();
-  const [allUsers, setAllUsers] = useState<any[] | null>(null);
+  const [allUsers, setAllUsers] = useState<IUser[]>([]);
 
   const notify = () => {
     addToast("🦄 Super! tu as ajouté un nouvel évènement", {
@@ -35,7 +40,7 @@ const AddEventForm = () => {
       appearance: "error",
     });
   };
-  const invitations = usersInvited.map((user: { value: IUser }) => ({
+  const invitations = usersInvited.map((user: { value: string }) => ({
     guestId: user.value,
     status: "PENDING",
   }));
@@ -67,7 +72,7 @@ const AddEventForm = () => {
     });
   }, []);
 
-  const optionToCheck = allUsers
+  const selectableUsersToCheck = allUsers
     ?.filter((user) => user.id !== currentUserProfile?.id)
     .map((user) => ({
       value: user.id,
@@ -75,8 +80,8 @@ const AddEventForm = () => {
     }));
 
   useEffect(() => {
-    if (optionToCheck) {
-      setUserInvited(optionToCheck);
+    if (selectableUsersToCheck) {
+      setUserInvited(selectableUsersToCheck);
     }
   }, [allUsers]);
 
@@ -203,10 +208,10 @@ const AddEventForm = () => {
         id="selectbox"
         instanceId="selectbox"
         isMulti
-        options={optionToCheck}
+        options={selectableUsersToCheck}
         value={usersInvited}
         onChange={(e) => {
-          setUserInvited(e);
+          setUserInvited(e as SelectableUserOption[]);
         }}
         className="basic-multi-select"
         classNamePrefix="select"
@@ -216,17 +221,9 @@ const AddEventForm = () => {
         <button
           type="button"
           onClick={() => {
-            setUserInvited(optionToCheck);
+            setUserInvited(selectableUsersToCheck);
           }}
-          style={{
-            backgroundColor: "transparent",
-            border: "none",
-            cursor: "pointer",
-            fontFamily: "Amiko",
-            color: "var(--redColor)",
-            margin: "10px auto",
-            fontWeight: "600",
-          }}
+          className={style.btnOnForm}
         >
           ajouter tous les membres de ma liste
         </button>

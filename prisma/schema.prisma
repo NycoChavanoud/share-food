@@ -28,6 +28,10 @@ model User {
   Session        Session[]
   Event          Event[]
   Invitation     Invitation[]
+  Guested        Friends[]    @relation("guested")
+  Friends        Friends[]    @relation("isFriend")
+  Crew           Crew[]
+  Members        Members[]
 }
 
 model Account {
@@ -96,4 +100,50 @@ model Invitation {
 
   @@unique([eventId, guestId])
   @@index([guestId], name: "guest")
+}
+
+enum friendlyStatus {
+  PENDING
+  ACCEPTED
+  REFUSED
+}
+
+model Friends {
+  id          Int            @id @default(autoincrement())
+  guestedby   User           @relation("guested", fields: [guestedById], references: [id], onDelete: Cascade)
+  guestedById String
+  friend      User           @relation("isFriend", fields: [friendId], references: [id], onDelete: Cascade)
+  friendId    String
+  status      friendlyStatus
+
+
+  @@unique([friendId, guestedById])
+  @@index([friendId], name: "IsFriend")
+}
+
+model Crew {
+  id          Int       @id @default(autoincrement())
+  title       String    @db.VarChar(255)
+  description String    @db.Text
+  creatorId   String
+  creator     User?     @relation(fields: [creatorId], references: [id], onDelete: Cascade)
+  Members     Members[]
+}
+
+enum membersStatus {
+  PENDING
+  ACCEPTED
+  REFUSED
+}
+
+model Members {
+  id      Int           @id @default(autoincrement())
+  guest   User          @relation(fields: [guestId], references: [id], onDelete: Cascade)
+  guestId String
+  crew    Crew          @relation(fields: [crewId], references: [id], onDelete: Cascade)
+  crewId  Int
+  status  membersStatus
+
+
+  @@unique([guestId, crewId])
 }

@@ -6,11 +6,11 @@ import Image from "next/image";
 import Router from "next/router";
 
 type EventDetailHeaderProps = {
-  id: IEvent;
-  title: IEvent;
+  id: string;
+  title: string;
   date: string;
-  hour: IEvent;
-  address: IEvent;
+  hour: string;
+  address: string;
   author: any;
   rightElement?: React.ReactElement | boolean;
 };
