@@ -4,6 +4,7 @@ import fondBois from "../public/img/fond-bois.jpg";
 import Arrow from "../public/icons/backDark.png";
 import Image from "next/image";
 import Router from "next/router";
+import { IUser } from "../models/user";
 
 type EventDetailHeaderProps = {
   id: string;
@@ -11,7 +12,7 @@ type EventDetailHeaderProps = {
   date: string;
   hour: string;
   address: string;
-  author: any;
+  author: IUser;
   rightElement?: React.ReactElement | boolean;
 };
 

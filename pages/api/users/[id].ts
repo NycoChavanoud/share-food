@@ -5,7 +5,7 @@ import { findById } from "../../../models/user";
 
 type requestUserType = {
   query: any;
-  id: any;
+  id: string;
 };
 
 const handleGetOne = async (
