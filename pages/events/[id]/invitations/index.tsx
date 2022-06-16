@@ -25,7 +25,7 @@ const EditInvitations: NextPage = (props) => {
   const [event, setEvent] = useState<IEvent | null>();
   const [numberOfGuest, setNumberOfGuest] = useState<number>(0);
   const [allUsers, setAllUsers] = useState<IUser[] | null>([]);
-  const [usersCanInvite, setUserCanInvite] = useState<any[] | null>([]);
+  const [usersCanInvite, setUserCanInvite] = useState<IUser[] | null>([]);
 
   const idToFilter = guests?.map((g: IEvent) => g.guestId);
   const listTofilter: any | null = allUsers?.filter(
@@ -68,7 +68,7 @@ const EditInvitations: NextPage = (props) => {
     }
   }, [guests, allUsers]);
 
-  const handleDelete = async (invitId: IEvent) => {
+  const handleDelete = async (invitId: number) => {
     await axios
       .delete(`/api/invitations/${invitId}`)
       .then(() => fetchGuestList());
@@ -226,7 +226,7 @@ const EditInvitations: NextPage = (props) => {
           </>
         ) : (
           <div className={style.invitationTextContent}>
-            Tous vos amis sont déjà ivités à cet évènement.
+            Tous vos amis sont déjà invités à cet évènement.
           </div>
         )}
       </div>
