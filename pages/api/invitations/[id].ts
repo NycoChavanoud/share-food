@@ -21,7 +21,8 @@ const handleGet = async (
   { query: { id } }: NextApiRequestwithCurrentEvent,
   res: NextApiResponse
 ) => {
-  const invitations = await getInvitations(id);
+  const idToGet = id.toString();
+  const invitations = await getInvitations(idToGet);
   if (invitations) return res.send(invitations);
   else res.status(404).send("not found");
 };
@@ -30,11 +31,12 @@ const handleDelete = async (
   { query: { id }, currentUser }: NextApiRequestwithCurrentEvent,
   res: NextApiResponse
 ) => {
-  const invitation = await getOneInvite(id);
+  const idTodelete = id.toString();
+  const invitation = await getOneInvite(idTodelete);
   if (invitation) {
     if (invitation.event?.authorId !== currentUser.id)
       return res.status(403).send("Forbidden");
-    const invitationToDelete = await deleteInvitationbyEventId(id);
+    const invitationToDelete = await deleteInvitationbyEventId(idTodelete);
     if (invitationToDelete) return res.send(invitationToDelete);
     else res.status(404).send("not found");
   }

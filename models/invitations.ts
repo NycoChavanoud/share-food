@@ -16,19 +16,19 @@ const invitPropsToShow = {
   status: true,
 };
 
-export const getInvitations = async (currentEventId: number) => {
+export const getInvitations = async (currentEventId: string) => {
   return await db.invitation.findMany({
     include: {
       event: true,
       guest: true,
     },
-    where: { eventId: currentEventId },
+    where: { eventId: parseInt(currentEventId, 10) },
   });
 };
 
-export const getOneInvite = (id: number) => {
+export const getOneInvite = (id: string) => {
   return db.invitation.findUnique({
-    where: { id },
+    where: { id: parseInt(id, 10) },
 
     include: {
       event: true,
@@ -37,10 +37,10 @@ export const getOneInvite = (id: number) => {
   });
 };
 
-export const deleteInvitationbyEventId = async (id: number) => {
+export const deleteInvitationbyEventId = async (id: string) => {
   return await db.invitation.delete({
     where: {
-      id,
+      id: parseInt(id, 10),
     },
   });
 };
