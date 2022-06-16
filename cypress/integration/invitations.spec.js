@@ -98,7 +98,7 @@ describe("invitations", function () {
           cy.contains("nombre d'invités : 4");
           cy.get('[data-cy="addBtn0"]').click();
           cy.contains("nombre d'invités : 5");
-          cy.contains("Tous vos amis sont déjà ivités à cet évènement.");
+          cy.contains("Tous vos amis sont déjà invités à cet évènement.");
           cy.get('[data-cy="deleteBtn0"]').click();
           cy.contains("nombre d'invités : 4");
           cy.get('[data-cy="deleteBtn0"]').click();
