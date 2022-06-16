@@ -112,9 +112,9 @@ const EditInvitations: NextPage = (props) => {
         {guests?.length !== 0 ? (
           <>
             <div className={style.invitationsContainer}>
-              {guests?.map((invit: any, index: any) => {
+              {guests?.map((invit: any, index: number) => {
                 return (
-                  <div key={index} className={style.listGuestsContainer}>
+                  <div key={invit.id} className={style.listGuestsContainer}>
                     <InvitationsCard
                       firstname={invit.guest.firstname}
                       lastname={invit.guest.lastname}

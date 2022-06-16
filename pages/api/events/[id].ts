@@ -11,7 +11,7 @@ import { IUser } from "../../../models/user";
 
 type requestEventType = {
   query: any;
-  id: any;
+  id: number;
   currentUser: IUser;
   body: IEvent;
 };
