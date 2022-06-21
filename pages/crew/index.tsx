@@ -6,6 +6,7 @@ const Crew: NextPage = (props) => {
   return (
     <LayoutCurrentUser pageTitle="Vos groupes">
       <BackBtn />
+      <div>THE CREW</div>
     </LayoutCurrentUser>
   );
 };

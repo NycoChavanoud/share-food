@@ -13,7 +13,7 @@ const EventCardContainer = () => {
 
   const fetchEventList = () => {
     axios
-      .get(`/api/events `)
+      .get(`/api/events`)
       .then((res) => setEventList(res.data))
       .catch((err) => console.error(err));
   };

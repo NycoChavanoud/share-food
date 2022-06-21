@@ -74,18 +74,19 @@ export const deleteUserByEmail = (email: string) =>
 export const findByEmail = (email: string) =>
   db.user.findUnique({ where: { email } }).catch(() => null);
 
-export const findById = (id: string) => {
-  return db.user
+export const findById = async (id: string) =>
+  db.user
     .findUnique({
       where: { id },
     })
     .catch(() => null);
-};
 
 export const emailAlreadyExists = (email: string) =>
   db.user.findFirst({ where: { email } }).then((user: any) => !!user);
 
-export const getSafeAttributes = (user: IUser) => ({
+export const getAllUsers = () => db.user.findMany();
+
+export const getSafeAttributes = (user: any) => ({
   ...user,
   hashPassword: undefined,
 });

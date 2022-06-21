@@ -23,6 +23,11 @@ describe("event", function () {
     beforeEach(() => {
       cy.task("deleteAllUsers");
       cy.setupCurrentUser();
+      Cypress.on("uncaught:exception", (err, runnable) => {
+        // returning false here prevents Cypress from
+        // failing the test
+        return false;
+      });
     });
 
     it("acces to create event", function () {
@@ -88,6 +93,12 @@ describe("event", function () {
           address: "40 rue de la soif, LYON",
           typeEvent: "Au resto",
           authorId: user.id,
+        }).then((e) => {
+          cy.task("createInvit", {
+            guestId: user.id,
+            eventId: e.id,
+            status: "PENDING",
+          });
         });
       });
       cy.task("createUser", {
@@ -104,6 +115,16 @@ describe("event", function () {
           address: "50 rue de la soif, LYON",
           typeEvent: "Au resto",
           authorId: otherUser.id,
+        }).then((e) => {
+          cy.task("getAllUsers").then((users) =>
+            users.forEach((u) => {
+              cy.task("createInvit", {
+                guestId: u.id,
+                eventId: e.id,
+                status: "PENDING",
+              });
+            })
+          );
         });
       });
       cy.visit("/events");

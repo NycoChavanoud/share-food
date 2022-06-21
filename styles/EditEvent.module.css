@@ -1,3 +1,14 @@
+.editEventPageContainer {
+  width: 95%;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 860px;
+  padding-bottom: 30px;
+}
+
 .addEventFormContainer {
   width: 90%;
   max-width: 760px;
@@ -15,6 +26,7 @@
   font-weight: normal;
   letter-spacing: 2px;
   cursor: pointer;
+  max-width: 95%;
 }
 
 .inputForm {
@@ -161,15 +173,66 @@
   font-weight: 500;
   width: 90%;
 }
+.listGuestsContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.invitationsContainer {
+  height: 220px;
+  width: 90%;
+  border-bottom: solid 2px rgba(39, 36, 33, 0.5);
+  overflow-x: scroll;
+  margin: 10px auto 50px;
+  max-width: 860px;
+}
 
-.btnOnForm {
+.deleteBtn {
+  height: 30px;
+  width: 30px;
+}
+
+.invitationTitle {
+  margin: 9px auto 1px;
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: normal;
+  letter-spacing: 2px;
+  cursor: pointer;
+  max-width: 95%;
+  margin-bottom: 40px;
+}
+.invitationTextContent {
+  margin: 9px auto 1px;
+  text-align: center;
+  font-size: 0.6em;
+  font-weight: normal;
+  letter-spacing: 2px;
+  cursor: pointer;
+  max-width: 90%;
+}
+
+.titleSeparationAddAll {
+  font-family: "Amiko", sans-serif;
+  font-weight: bold;
+  font-size: 1.2em;
+  letter-spacing: 3px;
+  width: 90%;
+  text-align: center;
+}
+
+.addAllContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.btnHandleList {
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-family: "Amiko", sans-serif;
-  color: var(--redColor);
-  margin: 10px auto;
-  font-weight: 600;
 }
 
 @media only screen and (min-width: 640px) {

@@ -80,3 +80,36 @@ h2 {
 .uploadcare--widget__text {
   font-size: 0.6em;
 }
+
+.basic-multi-select {
+  width: 96%;
+  height: auto;
+  border-radius: 5px;
+  border: solid 1px var(--inputColor);
+}
+.select__control {
+  background-color: var(--inputColor);
+  border: none;
+}
+
+.select__value-container {
+  background-color: var(--inputColor);
+  padding: 5px;
+  border: none;
+}
+
+.select__indicators {
+  background: var(--darkColor);
+  border-radius: 0px 5px 5px 0px;
+  border: none;
+}
+
+.select__menu {
+  color: var(--darkColor);
+  background: var(--inputColor);
+}
+
+.select__menu-list {
+  background: var(--inputColor);
+  margin-bottom: 50px;
+}
