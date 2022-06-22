@@ -11,7 +11,7 @@ import { NextApiResponse } from "next";
 
 type requestProfileType = {
   query: any;
-  id: any;
+  id: string;
   currentUser: IUser;
   body: IUser;
 };
