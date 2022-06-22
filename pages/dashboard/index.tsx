@@ -7,6 +7,7 @@ import { useContext } from "react";
 import CurrentUserContext from "../../contexts/currentUserContext";
 import HomeBtns from "../../components/HomeBtns";
 import ProfileCard from "../../components/ProfileCard";
+import DashboardBtns from "../../components/DashboardBtns";
 
 const Dashboard: NextPage = (props) => {
   const router = useRouter();
@@ -30,7 +31,7 @@ const Dashboard: NextPage = (props) => {
         <h2 className={style.titlesOnDashboard}>Infos profil</h2>
         <ProfileCard />
         <h2 className={style.titlesOnDashboard}>Mes activités</h2>
-        <HomeBtns />
+        <DashboardBtns />
       </div>
     </LayoutCurrentUser>
   );

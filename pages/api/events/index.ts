@@ -19,8 +19,17 @@ const handlePost = async (
   req: NextApiRequestWithCurrentUser,
   res: NextApiResponse
 ) => {
-  const { title, date, hour, description, typeEvent, address }: ReqBodyIEvent =
-    req.body;
+  const {
+    title,
+    date,
+    hour,
+    description,
+    typeEvent,
+    address,
+    guestId,
+    status,
+    invitations,
+  }: ReqBodyIEvent = req.body;
 
   const validationErrors = validateEvent(req.body);
   if (validationErrors) return res.status(422).send(validationErrors);
@@ -34,6 +43,9 @@ const handlePost = async (
       typeEvent,
       address,
       authorId: req.currentUser.id,
+      guestId,
+      status,
+      invitations,
     })
   );
 };
@@ -42,7 +54,7 @@ const handleGet = async (
   req: NextApiRequestWithCurrentUser,
   res: NextApiResponse
 ) => {
-  res.send(await getEvents());
+  res.send(await getEvents(req.currentUser));
 };
 
 export default base().use(requireCurrentUser).post(handlePost).get(handleGet);

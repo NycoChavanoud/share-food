@@ -1,23 +1,34 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import style from "./styleComponents/AddEventForm.module.css";
 import TitleSeparation from "./TitleSeparation";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useToasts } from "react-toast-notifications";
+import Select from "react-select";
+import { IUser } from "../models/user";
+import CurrentUserContext from "../contexts/currentUserContext";
+import { IEvent } from "../models/event";
+
+export interface SelectableUserOption {
+  value: string;
+  label: string;
+}
 
 const AddEventForm = () => {
   const { addToast } = useToasts();
-
   const dateOfDay = new Date().toISOString().substring(0, 10);
-
   const [title, setTitle] = useState("");
   const [date, setDate] = useState(dateOfDay);
   const [hour, setHour] = useState("12:30");
   const [description, setDescription] = useState("");
   const [typeEvent, setTypeEvent] = useState(" ");
   const [address, setAddress] = useState("");
+  const [usersInvited, setUserInvited] = useState<SelectableUserOption[]>([]);
+
+  const { currentUserProfile } = useContext(CurrentUserContext);
 
   const router = useRouter();
+  const [allUsers, setAllUsers] = useState<IUser[]>([]);
 
   const notify = () => {
     addToast("🦄 Super! tu as ajouté un nouvel évènement", {
@@ -30,6 +41,10 @@ const AddEventForm = () => {
       appearance: "error",
     });
   };
+  const invitations = usersInvited.map((user: { value: string }) => ({
+    guestId: user.value,
+    status: "PENDING",
+  }));
 
   const handlePostEvent = (e: any) => {
     e.preventDefault();
@@ -41,6 +56,7 @@ const AddEventForm = () => {
         description,
         typeEvent,
         address,
+        invitations,
       })
 
       .then(() => notify())
@@ -50,6 +66,25 @@ const AddEventForm = () => {
         faild();
       });
   };
+
+  useEffect(() => {
+    axios.get(`/api/users `).then((res) => {
+      setAllUsers(res.data);
+    });
+  }, []);
+
+  const selectableUsersToCheck = allUsers
+    ?.filter((user) => user.id !== currentUserProfile?.id)
+    .map((user) => ({
+      value: user.id,
+      label: `${user.firstname} ${user.lastname}`,
+    }));
+
+  useEffect(() => {
+    if (selectableUsersToCheck) {
+      setUserInvited(selectableUsersToCheck);
+    }
+  }, [allUsers]);
 
   return (
     <form
@@ -162,6 +197,39 @@ const AddEventForm = () => {
         onChange={(e) => setAddress(e.target.value)}
         maxLength={90}
       />
+      <TitleSeparation
+        title="Invitation des membres"
+        content="Selectionnez les membres que vous souhaitez inviter à cet évènement"
+      />
+      <label htmlFor="selectMembers" className={style.labelForm}>
+        Membres :
+      </label>
+
+      <Select
+        id="selectbox"
+        instanceId="selectbox"
+        isMulti
+        options={selectableUsersToCheck}
+        value={usersInvited}
+        onChange={(e) => {
+          setUserInvited(e as SelectableUserOption[]);
+        }}
+        className="basic-multi-select"
+        classNamePrefix="select"
+      />
+
+      {usersInvited.length === 0 && (
+        <button
+          type="button"
+          onClick={() => {
+            setUserInvited(selectableUsersToCheck);
+          }}
+          className={style.btnOnForm}
+        >
+          ajouter tous les membres de ma liste
+        </button>
+      )}
+
       <button className={style.btnForm}>Valider</button>
     </form>
   );

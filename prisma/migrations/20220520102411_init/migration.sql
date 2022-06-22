@@ -8,6 +8,9 @@ CREATE TABLE `User` (
     `nickName` VARCHAR(191) NULL,
     `birthday` VARCHAR(191) NULL,
     `favoritePlate` VARCHAR(191) NULL,
+    `city` VARCHAR(191) NULL,
+    `description` TEXT NULL,
+    `avatarUrl` VARCHAR(191) NULL,
 
     UNIQUE INDEX `User_email_key`(`email`),
     PRIMARY KEY (`id`)
@@ -65,5 +68,15 @@ CREATE TABLE `Event` (
     `authorId` VARCHAR(191) NOT NULL,
 
     INDEX `author`(`authorId`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Invitation` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `guestId` VARCHAR(191) NOT NULL,
+    `eventId` INTEGER NULL,
+    `status` ENUM('PENDING', 'ACCEPTED', 'REFUSED') NOT NULL,
+
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
