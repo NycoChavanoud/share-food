@@ -32,8 +32,8 @@ const EditInvitations: NextPage = (props) => {
     (u: IUser) => u.id !== currentUserProfile?.id
   );
 
-  const fetchGuestList = () => {
-    axios
+  const fetchGuestList = async () => {
+    return await axios
       .get(`/api/invitations/${id}`)
       .then((res) => {
         setGuests(res.data);
