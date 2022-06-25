@@ -90,16 +90,14 @@ export const getEvents = async (currentUser: IUser) => {
 };
 
 export const getOneEvent = (id: string) => {
-  return db.event
-    .findUnique({
-      where: { id: parseInt(id, 10) },
+  return db.event.findUnique({
+    where: { id: parseInt(id, 10) },
 
-      include: {
-        author: true,
-        invitations: true,
-      },
-    })
-    .catch((_) => false);
+    include: {
+      author: true,
+      invitations: true,
+    },
+  });
 };
 
 export const deleteOneEvent = (id: string) => {

@@ -29,16 +29,14 @@ export const getInvitations = async (currentEventId: string) => {
 };
 
 export const getOneInvite = (id: string) => {
-  return db.invitation
-    .findUnique({
-      where: { id: parseInt(id, 10) },
+  return db.invitation.findUnique({
+    where: { id: parseInt(id, 10) },
 
-      include: {
-        event: true,
-        guest: true,
-      },
-    })
-    .catch((_) => false);
+    include: {
+      event: true,
+      guest: true,
+    },
+  });
 };
 
 export const deleteInvitationbyEventId = async (id: string) => {
