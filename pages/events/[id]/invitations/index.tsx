@@ -23,9 +23,8 @@ const EditInvitations: NextPage = (props) => {
   const { currentUserProfile } = useContext(CurrentUserContext);
   const [guests, setGuests] = useState<IEvent[]>([]);
   const [event, setEvent] = useState<IEvent | null>();
-  const [numberOfGuest, setNumberOfGuest] = useState<number>(0);
   const [allUsers, setAllUsers] = useState<IUser[] | null>([]);
-  const [usersCanInvite, setUserCanInvite] = useState<IUser[]>([]);
+  const [usersCanInvite, setUserCanInvite] = useState<IUser[] | null>([]);
 
   const idToFilter = guests?.map((g: IEvent) => g.guestId);
   const listTofilter: any | null = allUsers?.filter(
@@ -33,7 +32,7 @@ const EditInvitations: NextPage = (props) => {
   );
 
   const fetchGuestList = async () => {
-    return await axios
+    await axios
       .get(`/api/invitations/${id}`)
       .then((res) => {
         setGuests(res.data);
@@ -56,44 +55,34 @@ const EditInvitations: NextPage = (props) => {
   }, []);
 
   useEffect(() => {
-    axios.get(`/api/users`).then((res) => setAllUsers(res.data));
+    axios
+      .get(`/api/users`)
+      .then((res) => setAllUsers(res.data))
+      .catch(console.error);
   }, []);
 
   useEffect(() => {
     if (guests) {
-      setNumberOfGuest(guests.length);
       setUserCanInvite(
         listTofilter.filter((i: any) => !idToFilter?.includes(i.id))
       );
     }
-  }, [guests, allUsers]);
+  }, [guests]);
 
-  const handleDelete = async (invitId: number) => {
-    await axios.delete(`/api/invitations/${invitId}`).then(() => {
-      const deletedUser = guests?.filter((g: any) => {
-        return g.id !== invitId;
-      });
-      setGuests(deletedUser);
-    });
+  const handleDelete = (invitId: number) => {
+    axios.delete(`/api/invitations/${invitId}`).catch(console.error);
   };
 
-  const handleCreate = async (userId: string) => {
-    await axios
+  const handleCreate = (userId: string) => {
+    axios
       .post(`/api/invitations/`, {
         eventId: event?.id,
         guestId: userId,
         status: "PENDING",
       })
-      .then(() => fetchGuestList());
+      .then(() => fetchGuestList())
+      .catch(console.error);
   };
-  console.log(
-    "guests :, ",
-    guests,
-    "allusers :",
-    allUsers,
-    "userscznInvite :",
-    usersCanInvite
-  );
 
   return (
     <LayoutCurrentUser
@@ -112,7 +101,7 @@ const EditInvitations: NextPage = (props) => {
         <TitleSeparation
           title={
             guests?.length !== 0
-              ? `nombre d'invités : ${numberOfGuest} `
+              ? `nombre d'invités : ${guests.length} `
               : "aucun invité pour votre évènement"
           }
           content={
@@ -139,7 +128,14 @@ const EditInvitations: NextPage = (props) => {
                     {event?.authorId === currentUserProfile?.id && (
                       <button
                         className={style.deleteBtn}
-                        onClick={() => handleDelete(invit.id)}
+                        onClick={() => {
+                          handleDelete(invit.id);
+                          setGuests(
+                            guests?.filter((g: any) => {
+                              return g.id !== invit.id;
+                            })
+                          );
+                        }}
                         data-cy={`deleteBtn${index}`}
                         style={{
                           backgroundColor: "transparent",
@@ -214,7 +210,14 @@ const EditInvitations: NextPage = (props) => {
                     {event?.authorId === currentUserProfile?.id && (
                       <button
                         className={style.deleteBtn}
-                        onClick={() => handleCreate(inviting.id)}
+                        onClick={() => {
+                          handleCreate(inviting.id);
+                          setUserCanInvite(
+                            usersCanInvite?.filter((u) => {
+                              return u.id !== inviting.id;
+                            })
+                          );
+                        }}
                         data-cy={`addBtn${index}`}
                         style={{
                           backgroundColor: "transparent",
