@@ -41,59 +41,65 @@ export const createEvent = async ({
   authorId,
   invitations,
 }: Omit<IEvent, "id" | "author" | " ">) => {
-  return await db.event.create({
-    data: {
-      invitations: {
-        create: invitations,
+  return await db.event
+    .create({
+      data: {
+        invitations: {
+          create: invitations,
+        },
+        title,
+        date,
+        hour,
+        description,
+        typeEvent,
+        address,
+        authorId,
       },
-      title,
-      date,
-      hour,
-      description,
-      typeEvent,
-      address,
-      authorId,
-    },
-  });
+    })
+    .catch((_) => false);
 };
 
 export const getEvents = async (currentUser: IUser) => {
   const dateOfDay = new Date().toISOString().substring(0, 10);
   const currentUserId = currentUser.id;
-  return db.event.findMany({
-    select: eventPropsToShow,
-    orderBy: {
-      date: "asc",
-    },
-    where: {
-      date: {
-        gte: dateOfDay,
+  return db.event
+    .findMany({
+      select: eventPropsToShow,
+      orderBy: {
+        date: "asc",
       },
-      OR: [
-        {
-          authorId: currentUserId,
+      where: {
+        date: {
+          gte: dateOfDay,
         },
-        {
-          invitations: {
-            some: {
-              guestId: currentUserId,
+        OR: [
+          {
+            authorId: currentUserId,
+          },
+          {
+            invitations: {
+              some: {
+                guestId: currentUserId,
+              },
             },
           },
-        },
-      ],
-    },
-  });
+        ],
+      },
+    })
+    .catch((_) => false);
 };
 
 export const getOneEvent = (id: string) => {
-  return db.event.findUnique({
-    where: { id: parseInt(id, 10) },
+  return db.event
+    .findUnique({
+      where: { id: parseInt(id, 10) },
 
-    include: {
-      author: true,
-      invitations: true,
-    },
-  });
+      include: {
+        author: true,
+        invitations: true,
+      },
+    })
+    .catch((_) => false);
 };
 
 export const deleteOneEvent = (id: string) => {
@@ -123,16 +129,18 @@ export const validateEvent = (data: any, forUpdate = false) => {
 export const updateEvent = async (data: Partial<IEvent>) => {
   const id = data.id;
 
-  return await db.event.update({
-    where: { id },
-    data: {
-      id: data.id,
-      title: data.title,
-      date: data.date,
-      hour: data.hour,
-      description: data.description,
-      typeEvent: data.typeEvent,
-      address: data.address,
-    },
-  });
+  return await db.event
+    .update({
+      where: { id },
+      data: {
+        id: data.id,
+        title: data.title,
+        date: data.date,
+        hour: data.hour,
+        description: data.description,
+        typeEvent: data.typeEvent,
+        address: data.address,
+      },
+    })
+    .catch((_) => false);
 };

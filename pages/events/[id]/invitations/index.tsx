@@ -86,6 +86,14 @@ const EditInvitations: NextPage = (props) => {
       })
       .then(() => fetchGuestList());
   };
+  console.log(
+    "guests :, ",
+    guests,
+    "allusers :",
+    allUsers,
+    "userscznInvite :",
+    usersCanInvite
+  );
 
   return (
     <LayoutCurrentUser
