@@ -184,6 +184,7 @@ const RegisterForm = () => {
             value={nickName}
             onChange={(e) => setNickName(e.target.value)}
             maxLength={40}
+            required
           />
         </div>
 
@@ -199,6 +200,7 @@ const RegisterForm = () => {
             autoComplete="off"
             value={birthday}
             onChange={(e) => setBirthday(e.target.value)}
+            required
           />
         </div>
       </div>
@@ -217,6 +219,7 @@ const RegisterForm = () => {
             value={firstname}
             onChange={(e) => setFirsname(e.target.value)}
             maxLength={40}
+            required
           />
         </div>
 
@@ -233,6 +236,7 @@ const RegisterForm = () => {
             value={lastname}
             onChange={(e) => setLastname(e.target.value)}
             maxLength={40}
+            required
           />
         </div>
       </div>
@@ -249,6 +253,7 @@ const RegisterForm = () => {
         value={favoritePlate}
         onChange={(e) => setFavoritePlate(e.target.value)}
         maxLength={40}
+        required
       />
       <button className={style.btnForm}>Valider</button>
     </form>

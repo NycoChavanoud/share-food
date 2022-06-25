@@ -13,7 +13,7 @@ import InvitationsCard from "../../../../components/InvitationsCard";
 import deleteIcon from "../../../../public/icons/deleteIcon.png";
 import addIcon from "../../../../public/icons/plus.png";
 import addAll from "../../../../public/icons/addAll.png";
-import delAll from "../../../../public/icons/delAll.png";
+
 import Image from "next/image";
 import { IUser } from "../../../../models/user";
 
@@ -21,11 +21,11 @@ const EditInvitations: NextPage = (props) => {
   const router = useRouter();
   const { id } = router.query;
   const { currentUserProfile } = useContext(CurrentUserContext);
-  const [guests, setGuests] = useState<IEvent[] | null>([]);
+  const [guests, setGuests] = useState<IEvent[]>([]);
   const [event, setEvent] = useState<IEvent | null>();
   const [numberOfGuest, setNumberOfGuest] = useState<number>(0);
   const [allUsers, setAllUsers] = useState<IUser[] | null>([]);
-  const [usersCanInvite, setUserCanInvite] = useState<IUser[] | null>([]);
+  const [usersCanInvite, setUserCanInvite] = useState<IUser[]>([]);
 
   const idToFilter = guests?.map((g: IEvent) => g.guestId);
   const listTofilter: any | null = allUsers?.filter(
@@ -69,9 +69,12 @@ const EditInvitations: NextPage = (props) => {
   }, [guests, allUsers]);
 
   const handleDelete = async (invitId: number) => {
-    await axios
-      .delete(`/api/invitations/${invitId}`)
-      .then(() => fetchGuestList());
+    await axios.delete(`/api/invitations/${invitId}`).then(() => {
+      const deletedUser = guests?.filter((g: any) => {
+        return g.id !== invitId;
+      });
+      setGuests(deletedUser);
+    });
   };
 
   const handleCreate = async (userId: string) => {
