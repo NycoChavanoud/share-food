@@ -80,6 +80,8 @@ const EditInvitations: NextPage = (props) => {
         guestId: userId,
         status: "PENDING",
       })
+
+      .then((i) => setGuests([...guests, i.data]))
       .then(() => fetchGuestList())
       .catch(console.error);
   };
@@ -116,13 +118,13 @@ const EditInvitations: NextPage = (props) => {
                 return (
                   <div key={invit.id} className={style.listGuestsContainer}>
                     <InvitationsCard
-                      firstname={invit.guest.firstname}
-                      lastname={invit.guest.lastname}
-                      id={invit.guest.id}
+                      firstname={invit.guest?.firstname}
+                      lastname={invit.guest?.lastname}
+                      id={invit.guest?.id}
                       avatarUrl={
-                        !invit.guest.avatarUrl
+                        !invit.guest?.avatarUrl
                           ? defaultAvatar.src
-                          : invit.guest.avatarUrl
+                          : invit.guest?.avatarUrl
                       }
                     />
                     {event?.authorId === currentUserProfile?.id && (
