@@ -80,9 +80,10 @@ const EditInvitations: NextPage = (props) => {
         guestId: userId,
         status: "PENDING",
       })
-
-      .then((i) => setGuests([...guests, i.data]))
-      .then(() => fetchGuestList())
+      .then((res) => axios.get(`/api/invitations/${res.data.id}`))
+      .then((i) => {
+        setGuests([...guests, i.data]);
+      })
       .catch(console.error);
   };
 

@@ -28,8 +28,9 @@ export const getInvitations = async (currentEventId: string) => {
     .catch((_) => false);
 };
 
-export const getOneInvite = (id: string) => {
-  return db.invitation.findUnique({
+export const getOneInvite = async (id: string) => {
+  console.log("RRRRRRRRRR", id.toString());
+  return await db.invitation.findUnique({
     where: { id: parseInt(id, 10) },
 
     include: {
