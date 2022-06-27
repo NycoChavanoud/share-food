@@ -73,8 +73,8 @@ const EditInvitations: NextPage = (props) => {
     axios.delete(`/api/invitations/${invitId}`).catch(console.error);
   };
 
-  const handleCreate = (userId: string) => {
-    axios
+  const handleCreate = async (userId: string) => {
+    await axios
       .post(`/api/invitations/`, {
         eventId: event?.id,
         guestId: userId,
