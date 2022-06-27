@@ -17,16 +17,6 @@ type NextApiRequestwithCurrentEvent = NextApiRequest & {
   currentUser: IUser;
 };
 
-const handleGet = async (
-  { query: { id } }: NextApiRequestwithCurrentEvent,
-  res: NextApiResponse
-) => {
-  const idToGet = id.toString();
-  const invitations = await getInvitations(idToGet);
-  if (invitations) return res.send(invitations);
-  else res.status(404).send("not found");
-};
-
 const handleDelete = async (
   { query: { id }, currentUser }: NextApiRequestwithCurrentEvent,
   res: NextApiResponse
@@ -42,7 +32,4 @@ const handleDelete = async (
   }
 };
 
-export default base()
-  .use(requireCurrentUser)
-  .get(handleGet)
-  .delete(handleDelete);
+export default base().use(requireCurrentUser).delete(handleDelete);

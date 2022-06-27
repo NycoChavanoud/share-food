@@ -33,7 +33,7 @@ const EditInvitations: NextPage = (props) => {
 
   const fetchGuestList = async () => {
     await axios
-      .get(`/api/invitations/${id}`)
+      .get(`/api/events/${id}/invitations`)
       .then((res) => {
         setGuests(res.data);
       })
