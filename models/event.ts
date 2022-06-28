@@ -15,7 +15,7 @@ export interface IEvent {
   diff?: number;
   authorId: string;
   author: IUser;
-  guestId: IUser;
+  guestId: string;
   status: string;
   invitations: IInvitation;
 }

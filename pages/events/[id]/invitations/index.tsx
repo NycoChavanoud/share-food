@@ -8,31 +8,37 @@ import React, { useContext, useEffect, useState } from "react";
 import style from "../../../../styles/EditEvent.module.css";
 import axios from "axios";
 import { IEvent } from "../../../../models/event";
+import { IUser } from "../../../../models/user";
 import defaultAvatar from "../../../../public/img/avatar.png";
 import InvitationsCard from "../../../../components/InvitationsCard";
 import deleteIcon from "../../../../public/icons/deleteIcon.png";
 import addIcon from "../../../../public/icons/plus.png";
 import addAll from "../../../../public/icons/addAll.png";
-
 import Image from "next/image";
-import { IUser } from "../../../../models/user";
+import { IInvitation } from "../../../../models/invitations";
 
 const EditInvitations: NextPage = (props) => {
   const router = useRouter();
   const { id } = router.query;
   const { currentUserProfile } = useContext(CurrentUserContext);
-  const [guests, setGuests] = useState<IEvent[]>([]);
-  const [event, setEvent] = useState<IEvent | null>();
-  const [allUsers, setAllUsers] = useState<IUser[] | null>([]);
-  const [usersCanInvite, setUserCanInvite] = useState<IUser[] | null>([]);
+  const [guests, setGuests] = useState<IInvitation[]>([]);
+  const [event, setEvent] = useState<IEvent>();
+  const [allUsers, setAllUsers] = useState<IUser[]>([]);
+  const [usersCanInvite, setUserCanInvite] = useState<IInvitation[]>([]);
 
-  const idToFilter = guests?.map((g: IEvent) => g.guestId);
-  const listTofilter: any | null = allUsers?.filter(
-    (u: IUser) => u.id !== currentUserProfile?.id
-  );
+  const fetchAllUsersWithourCurrentUser = () => {
+    axios
+      .get(`/api/users`)
+      .then((res) =>
+        setAllUsers(
+          res.data.filter((u: IUser) => u.id !== currentUserProfile?.id)
+        )
+      )
+      .catch(console.error);
+  };
 
-  const fetchGuestList = async () => {
-    await axios
+  const fetchGuestList = () => {
+    axios
       .get(`/api/events/${id}/invitations`)
       .then((res) => {
         setGuests(res.data);
@@ -51,39 +57,41 @@ const EditInvitations: NextPage = (props) => {
 
   useEffect(() => {
     fetchGuestList();
+    fetchAllUsersWithourCurrentUser();
     fetchEvent();
   }, []);
 
-  useEffect(() => {
-    axios
-      .get(`/api/users`)
-      .then((res) => setAllUsers(res.data))
-      .catch(console.error);
-  }, []);
+  const handleAllUsersToShowListLikeGuests = allUsers?.map((u, index) => {
+    return {
+      id: index,
+      guestId: u.id,
+      eventId: event?.id,
+      guests: { firstname: u.firstname, lastname: u.lastname },
+    };
+  });
+  const filterList = handleAllUsersToShowListLikeGuests.filter((invit) => {
+    console.log("EEEEEEE", invit);
+    return invit.guestId !== guests.guestId;
+  });
 
   useEffect(() => {
-    if (guests) {
-      setUserCanInvite(
-        listTofilter.filter((i: any) => !idToFilter?.includes(i.id))
-      );
-    }
+    setUserCanInvite(filterList);
   }, [guests]);
+  // const handleDelete = (invitId: number) => {
+  //   axios.delete(`/api/invitations/${invitId}`).catch(console.error);
+  // };
 
-  const handleDelete = (invitId: number) => {
-    axios.delete(`/api/invitations/${invitId}`).catch(console.error);
-  };
-
-  const handleCreate = (userId: string) => {
-    axios
-      .post(`/api/invitations/`, {
-        eventId: event?.id,
-        guestId: userId,
-        status: "PENDING",
-      })
-      .then((res) => setGuests([...guests, res.data]))
-      .catch(console.error);
-  };
-
+  // const handleCreate = (userId: string) => {
+  //   axios
+  //     .post(`/api/invitations/`, {
+  //       eventId: event?.id,
+  //       guestId: userId,
+  //       status: "PENDING",
+  //     })
+  //     .then((res) => setGuests([...guests, res.data]))
+  //     .catch(console.error);
+  // };
+  console.log(event, guests, "&&", handleAllUsersToShowListLikeGuests);
   return (
     <LayoutCurrentUser
       pageTitle={`invitations : ${event ? event.title : "de l'évènement"} `}
@@ -128,14 +136,14 @@ const EditInvitations: NextPage = (props) => {
                     {event?.authorId === currentUserProfile?.id && (
                       <button
                         className={style.deleteBtn}
-                        onClick={() => {
-                          handleDelete(invit.id);
-                          setGuests(
-                            guests?.filter((g: any) => {
-                              return g.id !== invit.id;
-                            })
-                          );
-                        }}
+                        // onClick={() => {
+                        //   handleDelete(invit.id);
+                        //   setGuests(
+                        //     guests?.filter((g: any) => {
+                        //       return g.id !== invit.id;
+                        //     })
+                        //   );
+                        // }}
                         data-cy={`deleteBtn${index}`}
                         style={{
                           backgroundColor: "transparent",
@@ -195,11 +203,13 @@ const EditInvitations: NextPage = (props) => {
             </div>
             <div className={style.invitationsContainer}>
               {usersCanInvite?.map((inviting: IUser, index: any) => {
+                console.log("OOOOOKEKEKEKEK :", inviting?.guests.firstname);
+
                 return (
                   <div key={index} className={style.listGuestsContainer}>
                     <InvitationsCard
-                      firstname={inviting.firstname}
-                      lastname={inviting.lastname}
+                      firstname={inviting.guests.firstname}
+                      lastname={inviting.guests.lastname}
                       avatarUrl={
                         !inviting.avatarUrl
                           ? defaultAvatar.src
@@ -210,14 +220,14 @@ const EditInvitations: NextPage = (props) => {
                     {event?.authorId === currentUserProfile?.id && (
                       <button
                         className={style.deleteBtn}
-                        onClick={() => {
-                          handleCreate(inviting.id);
-                          setUserCanInvite(
-                            usersCanInvite?.filter((u) => {
-                              return u.id !== inviting.id;
-                            })
-                          );
-                        }}
+                        // onClick={() => {
+                        //   handleCreate(inviting.id);
+                        //   setUserCanInvite(
+                        //     usersCanInvite?.filter((u) => {
+                        //       return u.id !== inviting.id;
+                        //     })
+                        //   );
+                        // }}
                         data-cy={`addBtn${index}`}
                         style={{
                           backgroundColor: "transparent",
