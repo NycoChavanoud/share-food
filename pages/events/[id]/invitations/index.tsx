@@ -21,29 +21,36 @@ const EditInvitations: NextPage = (props) => {
   const router = useRouter();
   const { id } = router.query;
   const { currentUserProfile } = useContext(CurrentUserContext);
-  const [guests, setGuests] = useState<IInvitation[]>([]);
+  const [guests, setGuests] = useState<IUser[]>([]);
   const [event, setEvent] = useState<IEvent>();
-  const [allUsers, setAllUsers] = useState<IUser[]>([]);
-  const [usersCanInvite, setUserCanInvite] = useState<IInvitation[]>([]);
+  const [invitableUsers, setInvitableUsers] = useState<IUser[]>([]);
+  const [invites, setInvites] = useState<IInvitation[]>([]);
 
-  const fetchAllUsersWithourCurrentUser = () => {
-    axios
-      .get(`/api/users`)
-      .then((res) =>
-        setAllUsers(
-          res.data.filter((u: IUser) => u.id !== currentUserProfile?.id)
+  const fetchUsersAndData = async () => {
+    const resInvites = await axios
+      .get<IInvitation[]>(`/api/events/${id}/invitations`)
+      .catch(console.error);
+
+    const resUsers = await axios
+      .get<IUser[]>(`/api/users`)
+      .catch(console.error);
+
+    if (resInvites && resUsers) {
+      const allUsers = resUsers.data.filter(
+        (u: IUser) => u.id !== currentUserProfile?.id
+      );
+      setGuests(
+        allUsers.filter((u: IUser) =>
+          resInvites.data.some((i) => i.guestId === u.id)
         )
-      )
-      .catch(console.error);
-  };
-
-  const fetchGuestList = () => {
-    axios
-      .get(`/api/events/${id}/invitations`)
-      .then((res) => {
-        setGuests(res.data);
-      })
-      .catch(console.error);
+      );
+      setInvitableUsers(
+        allUsers.filter(
+          (u: IUser) => !resInvites.data.some((i) => i.guestId === u.id)
+        )
+      );
+      setInvites(resInvites.data);
+    }
   };
 
   const fetchEvent = () => {
@@ -56,42 +63,30 @@ const EditInvitations: NextPage = (props) => {
   };
 
   useEffect(() => {
-    fetchGuestList();
-    fetchAllUsersWithourCurrentUser();
+    fetchUsersAndData();
     fetchEvent();
   }, []);
+  console.log(invites);
 
-  const handleAllUsersToShowListLikeGuests = allUsers?.map((u, index) => {
-    return {
-      id: index,
-      guestId: u.id,
-      eventId: event?.id,
-      guests: { firstname: u.firstname, lastname: u.lastname },
-    };
-  });
-  const filterList = handleAllUsersToShowListLikeGuests.filter((invit) => {
-    console.log("EEEEEEE", invit);
-    return invit.guestId !== guests.guestId;
-  });
+  const handleDelete = (userId: string) => {
+    const idTodelete = invites.find((item) => item.guestId === userId)?.id;
+    return axios
+      .delete(`/api/invitations/${idTodelete}`)
+      .then(() => fetchUsersAndData())
+      .catch(console.error);
+  };
 
-  useEffect(() => {
-    setUserCanInvite(filterList);
-  }, [guests]);
-  // const handleDelete = (invitId: number) => {
-  //   axios.delete(`/api/invitations/${invitId}`).catch(console.error);
-  // };
+  const handleCreate = (userId: string) => {
+    axios
+      .post(`/api/invitations/`, {
+        eventId: event?.id,
+        guestId: userId,
+        status: "PENDING",
+      })
+      .then(() => fetchUsersAndData())
+      .catch(console.error);
+  };
 
-  // const handleCreate = (userId: string) => {
-  //   axios
-  //     .post(`/api/invitations/`, {
-  //       eventId: event?.id,
-  //       guestId: userId,
-  //       status: "PENDING",
-  //     })
-  //     .then((res) => setGuests([...guests, res.data]))
-  //     .catch(console.error);
-  // };
-  console.log(event, guests, "&&", handleAllUsersToShowListLikeGuests);
   return (
     <LayoutCurrentUser
       pageTitle={`invitations : ${event ? event.title : "de l'évènement"} `}
@@ -118,32 +113,27 @@ const EditInvitations: NextPage = (props) => {
         />
 
         {guests?.length !== 0 ? (
-          <>
-            <div className={style.invitationsContainer}>
-              {guests?.map((invit: any, index: number) => {
+          <div className={style.invitationsContainer}>
+            {guests?.map(
+              (
+                { id, firstname, lastname, avatarUrl }: IUser,
+                index: number
+              ) => {
                 return (
-                  <div key={invit.id} className={style.listGuestsContainer}>
+                  <div key={id} className={style.listGuestsContainer}>
                     <InvitationsCard
-                      firstname={invit.guest?.firstname}
-                      lastname={invit.guest?.lastname}
-                      id={invit.guest?.id}
-                      avatarUrl={
-                        !invit.guest?.avatarUrl
-                          ? defaultAvatar.src
-                          : invit.guest?.avatarUrl
-                      }
+                      firstname={firstname}
+                      lastname={lastname}
+                      id={id}
+                      avatarUrl={avatarUrl || defaultAvatar.src}
                     />
                     {event?.authorId === currentUserProfile?.id && (
                       <button
                         className={style.deleteBtn}
-                        // onClick={() => {
-                        //   handleDelete(invit.id);
-                        //   setGuests(
-                        //     guests?.filter((g: any) => {
-                        //       return g.id !== invit.id;
-                        //     })
-                        //   );
-                        // }}
+                        onClick={() => {
+                          handleDelete(id);
+                          setGuests(guests.filter((u) => u.id !== id));
+                        }}
                         data-cy={`deleteBtn${index}`}
                         style={{
                           backgroundColor: "transparent",
@@ -161,9 +151,9 @@ const EditInvitations: NextPage = (props) => {
                     )}
                   </div>
                 );
-              })}
-            </div>
-          </>
+              }
+            )}
+          </div>
         ) : (
           <div className={style.invitationTitle}>
             vous pouvez ajouter des invités à votre évènement{" "}
@@ -179,7 +169,7 @@ const EditInvitations: NextPage = (props) => {
           </div>
         )}
 
-        {usersCanInvite?.length !== 0 ? (
+        {invitableUsers?.length !== 0 ? (
           <>
             <div className={style.addAllContainer}>
               <div className={style.titleSeparationAddAll}>
@@ -202,50 +192,44 @@ const EditInvitations: NextPage = (props) => {
               auront accès aux informations sur votre évènement.
             </div>
             <div className={style.invitationsContainer}>
-              {usersCanInvite?.map((inviting: IUser, index: any) => {
-                console.log("OOOOOKEKEKEKEK :", inviting?.guests.firstname);
-
-                return (
-                  <div key={index} className={style.listGuestsContainer}>
-                    <InvitationsCard
-                      firstname={inviting.guests.firstname}
-                      lastname={inviting.guests.lastname}
-                      avatarUrl={
-                        !inviting.avatarUrl
-                          ? defaultAvatar.src
-                          : inviting.avatarUrl
-                      }
-                      id={inviting.id}
-                    />
-                    {event?.authorId === currentUserProfile?.id && (
-                      <button
-                        className={style.deleteBtn}
-                        // onClick={() => {
-                        //   handleCreate(inviting.id);
-                        //   setUserCanInvite(
-                        //     usersCanInvite?.filter((u) => {
-                        //       return u.id !== inviting.id;
-                        //     })
-                        //   );
-                        // }}
-                        data-cy={`addBtn${index}`}
-                        style={{
-                          backgroundColor: "transparent",
-                          border: "none",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <Image
-                          src={addIcon}
-                          width={35}
-                          height={35}
-                          alt="logo-ajout-membre"
-                        />
-                      </button>
-                    )}
-                  </div>
-                );
-              })}
+              {invitableUsers?.map(
+                ({ firstname, lastname, avatarUrl, id }: IUser, index: any) => {
+                  return (
+                    <div key={index} className={style.listGuestsContainer}>
+                      <InvitationsCard
+                        firstname={firstname}
+                        lastname={lastname}
+                        avatarUrl={avatarUrl || defaultAvatar.src}
+                        id={id}
+                      />
+                      {event?.authorId === currentUserProfile?.id && (
+                        <button
+                          className={style.deleteBtn}
+                          onClick={() => {
+                            handleCreate(id);
+                            setInvitableUsers(
+                              invitableUsers.filter((u) => u.id !== id)
+                            );
+                          }}
+                          data-cy={`addBtn${index}`}
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                            cursor: "pointer",
+                          }}
+                        >
+                          <Image
+                            src={addIcon}
+                            width={35}
+                            height={35}
+                            alt="logo-ajout-membre"
+                          />
+                        </button>
+                      )}
+                    </div>
+                  );
+                }
+              )}
             </div>
           </>
         ) : (
