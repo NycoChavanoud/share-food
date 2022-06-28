@@ -61,6 +61,10 @@ export const createOneGuestForEvent = async ({
         eventId,
         status,
       },
+      include: {
+        event: true,
+        guest: true,
+      },
     })
     .catch((_) => false);
 };
