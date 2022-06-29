@@ -67,34 +67,22 @@ const EditInvitations: NextPage = (props) => {
     fetchEvent();
   }, [currentUserProfile]);
 
-  const handleDelete = (userId: string) => {
-    const idTodelete = invites.find((item) => item.guestId === userId)?.id;
-    axios
-      .delete(`/api/invitations/${idTodelete}`)
-      .then((res) => {
-        const inviteDeleted = res.data.guest;
-        setInvitableUsers([...invitableUsers, inviteDeleted]);
-        fetchUsersAndData();
-      })
-      .catch(console.error);
+  const handleDelete = (u: IUser) => {
+    setInvitableUsers([...invitableUsers, u]);
+    const idTodelete = invites.find((item) => item.guestId === u.id)?.id;
+    axios.delete(`/api/invitations/${idTodelete}`).catch(console.error);
   };
 
-  const handleCreate = (userId: string) => {
+  const handleCreate = (u: IUser) => {
+    setGuests([...guests, u]);
     axios
       .post(`/api/invitations/`, {
         eventId: event?.id,
-        guestId: userId,
+        guestId: u.id,
         status: "PENDING",
-      })
-      .then((res) => {
-        const newGuest = res.data.guest;
-        setGuests([...guests, newGuest]);
-        fetchUsersAndData();
       })
       .catch(console.error);
   };
-
-  console.log(guests);
 
   return (
     <LayoutCurrentUser
@@ -136,7 +124,7 @@ const EditInvitations: NextPage = (props) => {
                     <button
                       className={style.deleteBtn}
                       onClick={() => {
-                        handleDelete(u.id);
+                        handleDelete(u);
                         setGuests(guests.filter((g) => g.id !== u.id));
                       }}
                       data-cy={`deleteBtn${index}`}
@@ -209,7 +197,7 @@ const EditInvitations: NextPage = (props) => {
                       <button
                         className={style.deleteBtn}
                         onClick={() => {
-                          handleCreate(u.id);
+                          handleCreate(u);
                           setInvitableUsers(
                             invitableUsers.filter((g) => u.id !== g.id)
                           );
