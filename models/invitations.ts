@@ -1,6 +1,6 @@
-import { InvitationStatus } from "@prisma/client";
-import { NextApiRequest, NextApiResponse } from "next";
-import db from "../lib/prisma";
+import { InvitationStatus } from '@prisma/client';
+import { NextApiRequest, NextApiResponse } from 'next';
+import db from '../lib/prisma';
 
 export interface IInvitation {
   id: number;
@@ -58,17 +58,15 @@ export const createOneGuestForEvent = async ({
   eventId,
   status,
 }: IInvitation) => {
-  return await db.invitation
-    .create({
-      data: {
-        guestId,
-        eventId,
-        status,
-      },
-      include: {
-        event: true,
-        guest: true,
-      },
-    })
-    .catch((_) => false);
+  return await db.invitation.create({
+    data: {
+      guestId,
+      eventId,
+      status,
+    },
+    include: {
+      event: true,
+      guest: true,
+    },
+  });
 };
