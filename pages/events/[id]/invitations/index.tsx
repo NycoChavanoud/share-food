@@ -63,25 +63,42 @@ const EditInvitations: NextPage = (props) => {
   };
 
   useEffect(() => {
+    if (id) {
+      fetchEvent();
+    }
     fetchUsersAndData();
-    fetchEvent();
-  }, [currentUserProfile]);
+  }, [currentUserProfile, id]);
 
   const handleDelete = (u: IUser) => {
-    setInvitableUsers([...invitableUsers, u]);
-    const idTodelete = invites.find((item) => item.guestId === u.id)?.id;
-    axios.delete(`/api/invitations/${idTodelete}`).catch(console.error);
+    console.log("delete :", u);
+
+    if (u) {
+      setInvitableUsers([...invitableUsers, u]);
+      const idTodelete = invites.find((item) => item.guestId === u.id)?.id;
+      axios
+        .delete(`/api/invitations/${idTodelete}`)
+        .then(() => fetchUsersAndData())
+        .catch(console.error);
+    }
   };
 
-  const handleCreate = (u: IUser) => {
-    setGuests([...guests, u]);
-    axios
-      .post(`/api/invitations/`, {
-        eventId: event?.id,
-        guestId: u.id,
-        status: "PENDING",
-      })
-      .catch(console.error);
+  const handleCreate = async (u: IUser) => {
+    const fetchId = await axios.get(`/api/users/${u.id}`);
+    console.log("create :", u);
+    console.log("fetchIf :", fetchId);
+
+    if (u) {
+      setGuests([...guests, u]);
+      axios
+        .post(`/api/invitations/`, {
+          eventId: event?.id,
+          guestId: u.id,
+          status: "PENDING",
+          guest: u,
+        })
+        .then(() => fetchUsersAndData())
+        .catch(console.error);
+    }
   };
 
   return (
