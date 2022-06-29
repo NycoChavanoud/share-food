@@ -1,21 +1,21 @@
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import LayoutCurrentUser from '../../../../components/LayoutCurrentUser';
-import PrivateHeader from '../../../../components/PrivateHeader';
-import CurrentUserContext from '../../../../contexts/currentUserContext';
-import TitleSeparation from '../../../../components/TitleSeparation';
-import React, { useContext, useEffect, useState } from 'react';
-import style from '../../../../styles/EditEvent.module.css';
-import axios from 'axios';
-import { IEvent } from '../../../../models/event';
-import { IUser } from '../../../../models/user';
-import defaultAvatar from '../../../../public/img/avatar.png';
-import InvitationsCard from '../../../../components/InvitationsCard';
-import deleteIcon from '../../../../public/icons/deleteIcon.png';
-import addIcon from '../../../../public/icons/plus.png';
-import addAll from '../../../../public/icons/addAll.png';
-import Image from 'next/image';
-import { IInvitation } from '../../../../models/invitations';
+import { NextPage } from "next";
+import { useRouter } from "next/router";
+import LayoutCurrentUser from "../../../../components/LayoutCurrentUser";
+import PrivateHeader from "../../../../components/PrivateHeader";
+import CurrentUserContext from "../../../../contexts/currentUserContext";
+import TitleSeparation from "../../../../components/TitleSeparation";
+import React, { useContext, useEffect, useState } from "react";
+import style from "../../../../styles/EditEvent.module.css";
+import axios from "axios";
+import { IEvent } from "../../../../models/event";
+import { IUser } from "../../../../models/user";
+import defaultAvatar from "../../../../public/img/avatar.png";
+import InvitationsCard from "../../../../components/InvitationsCard";
+import deleteIcon from "../../../../public/icons/deleteIcon.png";
+import addIcon from "../../../../public/icons/plus.png";
+import addAll from "../../../../public/icons/addAll.png";
+import Image from "next/image";
+import { IInvitation } from "../../../../models/invitations";
 
 interface AsyncUser extends IUser {
   loading?: boolean;
@@ -73,25 +73,32 @@ const EditInvitations: NextPage = (props) => {
     fetchUsersAndData();
   }, [currentUserProfile, id]);
 
-  const handleDelete = (u: IUser) => {
-    console.log('delete :', u);
-    setInvitableUsers([...invitableUsers, u]);
+  const handleDelete = (u: AsyncUser) => {
+    setInvitableUsers([...invitableUsers, { ...u, loading: true }]);
     const idTodelete = invites.find((item) => item.guestId === u.id)?.id;
-    axios.delete(`/api/invitations/${idTodelete}`).catch(console.error);
+    axios
+      .delete(`/api/invitations/${idTodelete}`)
+      .then((res) => {
+        setInvites((old) => [...old, res.data]);
+        setInvitableUsers((old) =>
+          old.map((user) =>
+            user.id === u.id ? { ...user, loading: false } : user
+          )
+        );
+      })
+
+      .catch(console.error);
   };
 
   const handleCreate = (u: AsyncUser) => {
-    //const fetchId = await axios.get(`/api/users/${u.id}`);
-    console.log('create :', u);
-
-    //  console.log("fetchIf :", fetchId);
     setGuests([...guests, { ...u, loading: true }]);
     axios
       .post(`/api/invitations/`, {
         eventId: event?.id,
         guestId: u.id,
-        status: 'PENDING',
+        status: "PENDING",
         guest: u,
+        event: event,
       })
       .then((res) => {
         setInvites((old) => [...old, res.data]);
@@ -101,9 +108,9 @@ const EditInvitations: NextPage = (props) => {
           )
         );
       })
+
       .catch(console.error);
   };
-  console.log(invites);
 
   return (
     <LayoutCurrentUser
@@ -113,7 +120,7 @@ const EditInvitations: NextPage = (props) => {
         <PrivateHeader
           firstname={currentUserProfile?.firstname}
           lastname={currentUserProfile?.lastname}
-          title={`${event ? event.title : 'Détails de l’évènement'}`}
+          title={`${event ? event.title : "Détails de l’évènement"}`}
           router={() => {
             router.back();
           }}
@@ -123,10 +130,10 @@ const EditInvitations: NextPage = (props) => {
           title={
             guests?.length !== 0
               ? `nombre d'invités : ${guests.length} `
-              : 'aucun invité pour votre évènement'
+              : "aucun invité pour votre évènement"
           }
           content={
-            guests?.length !== 0 ? 'vous pouvez supprimer des invitations' : ''
+            guests?.length !== 0 ? "vous pouvez supprimer des invitations" : ""
           }
         />
 
@@ -137,7 +144,7 @@ const EditInvitations: NextPage = (props) => {
                 <div
                   key={u.id}
                   className={style.listGuestsContainer}
-                  style={{ opacity: u.loading ? 0.5 : 1 }}
+                  style={{ opacity: u.loading ? 0.3 : 1 }}
                 >
                   <InvitationsCard
                     firstname={u.firstname}
@@ -155,16 +162,16 @@ const EditInvitations: NextPage = (props) => {
                       }}
                       data-cy={`deleteBtn${index}`}
                       style={{
-                        backgroundColor: 'transparent',
-                        border: 'none',
-                        cursor: 'pointer',
+                        backgroundColor: "transparent",
+                        border: "none",
+                        cursor: "pointer",
                       }}
                     >
                       <Image
                         src={deleteIcon}
                         width={35}
                         height={35}
-                        alt='logo-delete'
+                        alt="logo-delete"
                       />
                     </button>
                   )}
@@ -174,12 +181,12 @@ const EditInvitations: NextPage = (props) => {
           </div>
         ) : (
           <div className={style.invitationTitle}>
-            vous pouvez ajouter des invités à votre évènement{' '}
+            vous pouvez ajouter des invités à votre évènement{" "}
             <span
               style={{
-                color: 'var(--redColor)',
-                fontSize: '1.2em',
-                fontWeight: 'bolder',
+                color: "var(--redColor)",
+                fontSize: "1.2em",
+                fontWeight: "bolder",
               }}
             >
               {event?.title}
@@ -195,13 +202,13 @@ const EditInvitations: NextPage = (props) => {
               </div>
               <button
                 className={style.btnHandleList}
-                style={{ visibility: 'hidden' }}
+                style={{ visibility: "hidden" }}
               >
                 <Image
                   src={addAll}
                   width={35}
                   height={35}
-                  alt='logo-ajout-membre'
+                  alt="logo-ajout-membre"
                 />
               </button>
             </div>
@@ -210,9 +217,13 @@ const EditInvitations: NextPage = (props) => {
               auront accès aux informations sur votre évènement.
             </div>
             <div className={style.invitationsContainer}>
-              {invitableUsers?.map((u: IUser, index: any) => {
+              {invitableUsers?.map((u: AsyncUser, index: any) => {
                 return (
-                  <div key={index} className={style.listGuestsContainer}>
+                  <div
+                    key={index}
+                    className={style.listGuestsContainer}
+                    style={{ opacity: u.loading ? 0.3 : 1 }}
+                  >
                     <InvitationsCard
                       firstname={u.firstname}
                       lastname={u.lastname}
@@ -221,6 +232,7 @@ const EditInvitations: NextPage = (props) => {
                     />
                     {event?.authorId === currentUserProfile?.id && (
                       <button
+                        disabled={!!u.loading}
                         className={style.deleteBtn}
                         onClick={() => {
                           handleCreate(u);
@@ -230,16 +242,16 @@ const EditInvitations: NextPage = (props) => {
                         }}
                         data-cy={`addBtn${index}`}
                         style={{
-                          backgroundColor: 'transparent',
-                          border: 'none',
-                          cursor: 'pointer',
+                          backgroundColor: "transparent",
+                          border: "none",
+                          cursor: "pointer",
                         }}
                       >
                         <Image
                           src={addIcon}
                           width={35}
                           height={35}
-                          alt='logo-ajout-membre'
+                          alt="logo-ajout-membre"
                         />
                       </button>
                     )}
