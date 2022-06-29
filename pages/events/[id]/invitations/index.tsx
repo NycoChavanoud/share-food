@@ -65,14 +65,17 @@ const EditInvitations: NextPage = (props) => {
   useEffect(() => {
     fetchUsersAndData();
     fetchEvent();
-  }, []);
-  console.log(invites);
+  }, [currentUserProfile]);
 
   const handleDelete = (userId: string) => {
     const idTodelete = invites.find((item) => item.guestId === userId)?.id;
-    return axios
+    axios
       .delete(`/api/invitations/${idTodelete}`)
-      .then(() => fetchUsersAndData())
+      .then((res) => {
+        const inviteDeleted = res.data.guest;
+        setInvitableUsers([...invitableUsers, inviteDeleted]);
+        fetchUsersAndData();
+      })
       .catch(console.error);
   };
 
@@ -83,9 +86,15 @@ const EditInvitations: NextPage = (props) => {
         guestId: userId,
         status: "PENDING",
       })
-      .then(() => fetchUsersAndData())
+      .then((res) => {
+        const newGuest = res.data.guest;
+        setGuests([...guests, newGuest]);
+        fetchUsersAndData();
+      })
       .catch(console.error);
   };
+
+  console.log(guests);
 
   return (
     <LayoutCurrentUser
@@ -114,45 +123,40 @@ const EditInvitations: NextPage = (props) => {
 
         {guests?.length !== 0 ? (
           <div className={style.invitationsContainer}>
-            {guests?.map(
-              (
-                { id, firstname, lastname, avatarUrl }: IUser,
-                index: number
-              ) => {
-                return (
-                  <div key={id} className={style.listGuestsContainer}>
-                    <InvitationsCard
-                      firstname={firstname}
-                      lastname={lastname}
-                      id={id}
-                      avatarUrl={avatarUrl || defaultAvatar.src}
-                    />
-                    {event?.authorId === currentUserProfile?.id && (
-                      <button
-                        className={style.deleteBtn}
-                        onClick={() => {
-                          handleDelete(id);
-                          setGuests(guests.filter((u) => u.id !== id));
-                        }}
-                        data-cy={`deleteBtn${index}`}
-                        style={{
-                          backgroundColor: "transparent",
-                          border: "none",
-                          cursor: "pointer",
-                        }}
-                      >
-                        <Image
-                          src={deleteIcon}
-                          width={35}
-                          height={35}
-                          alt="logo-delete"
-                        />
-                      </button>
-                    )}
-                  </div>
-                );
-              }
-            )}
+            {guests?.map((u: IUser, index: number) => {
+              return (
+                <div key={u.id} className={style.listGuestsContainer}>
+                  <InvitationsCard
+                    firstname={u.firstname}
+                    lastname={u.lastname}
+                    id={u.id}
+                    avatarUrl={u.avatarUrl || defaultAvatar.src}
+                  />
+                  {event?.authorId === currentUserProfile?.id && (
+                    <button
+                      className={style.deleteBtn}
+                      onClick={() => {
+                        handleDelete(u.id);
+                        setGuests(guests.filter((g) => g.id !== u.id));
+                      }}
+                      data-cy={`deleteBtn${index}`}
+                      style={{
+                        backgroundColor: "transparent",
+                        border: "none",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <Image
+                        src={deleteIcon}
+                        width={35}
+                        height={35}
+                        alt="logo-delete"
+                      />
+                    </button>
+                  )}
+                </div>
+              );
+            })}
           </div>
         ) : (
           <div className={style.invitationTitle}>
@@ -192,44 +196,42 @@ const EditInvitations: NextPage = (props) => {
               auront accès aux informations sur votre évènement.
             </div>
             <div className={style.invitationsContainer}>
-              {invitableUsers?.map(
-                ({ firstname, lastname, avatarUrl, id }: IUser, index: any) => {
-                  return (
-                    <div key={index} className={style.listGuestsContainer}>
-                      <InvitationsCard
-                        firstname={firstname}
-                        lastname={lastname}
-                        avatarUrl={avatarUrl || defaultAvatar.src}
-                        id={id}
-                      />
-                      {event?.authorId === currentUserProfile?.id && (
-                        <button
-                          className={style.deleteBtn}
-                          onClick={() => {
-                            handleCreate(id);
-                            setInvitableUsers(
-                              invitableUsers.filter((u) => u.id !== id)
-                            );
-                          }}
-                          data-cy={`addBtn${index}`}
-                          style={{
-                            backgroundColor: "transparent",
-                            border: "none",
-                            cursor: "pointer",
-                          }}
-                        >
-                          <Image
-                            src={addIcon}
-                            width={35}
-                            height={35}
-                            alt="logo-ajout-membre"
-                          />
-                        </button>
-                      )}
-                    </div>
-                  );
-                }
-              )}
+              {invitableUsers?.map((u: IUser, index: any) => {
+                return (
+                  <div key={index} className={style.listGuestsContainer}>
+                    <InvitationsCard
+                      firstname={u.firstname}
+                      lastname={u.lastname}
+                      avatarUrl={u.avatarUrl || defaultAvatar.src}
+                      id={u.id}
+                    />
+                    {event?.authorId === currentUserProfile?.id && (
+                      <button
+                        className={style.deleteBtn}
+                        onClick={() => {
+                          handleCreate(u.id);
+                          setInvitableUsers(
+                            invitableUsers.filter((g) => u.id !== g.id)
+                          );
+                        }}
+                        data-cy={`addBtn${index}`}
+                        style={{
+                          backgroundColor: "transparent",
+                          border: "none",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <Image
+                          src={addIcon}
+                          width={35}
+                          height={35}
+                          alt="logo-ajout-membre"
+                        />
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </>
         ) : (

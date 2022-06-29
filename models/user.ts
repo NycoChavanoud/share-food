@@ -8,9 +8,9 @@ export interface IUser {
   password: string;
   firstname: string;
   lastname: string;
-  nickName: string;
-  birthday: string;
-  favoritePlate: string;
+  nickName?: string;
+  birthday?: string;
+  favoritePlate?: string;
   city?: string;
   description?: string;
   avatarUrl?: string;

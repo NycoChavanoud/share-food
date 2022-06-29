@@ -45,6 +45,10 @@ export const deleteInvitationbyEventId = async (id: string) => {
       where: {
         id: parseInt(id, 10),
       },
+      include: {
+        event: true,
+        guest: true,
+      },
     })
     .catch((_) => false);
 };
