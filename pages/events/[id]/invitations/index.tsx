@@ -76,10 +76,10 @@ const EditInvitations: NextPage = (props) => {
     axios.delete(`/api/invitations/${idTodelete}`).catch(console.error);
   };
 
-  const handleCreate = async (u: IUser) => {
-    const fetchId = await axios.get(`/api/users/${u.id}`);
+  const handleCreate = (u: IUser) => {
+    //const fetchId = await axios.get(`/api/users/${u.id}`);
     console.log("create :", u);
-    console.log("fetchIf :", fetchId);
+    //  console.log("fetchIf :", fetchId);
     setGuests([...guests, u]);
     axios
       .post(`/api/invitations/`, {
@@ -90,6 +90,7 @@ const EditInvitations: NextPage = (props) => {
       })
       .catch(console.error);
   };
+  console.log(invites);
 
   return (
     <LayoutCurrentUser
