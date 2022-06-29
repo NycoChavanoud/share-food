@@ -79,7 +79,11 @@ const EditInvitations: NextPage = (props) => {
     axios
       .delete(`/api/invitations/${idTodelete}`)
       .then((res) => {
-        setInvites((old) => [...old, res.data]);
+        setInvites((old) =>
+          old.filter((i) => {
+            return i.id !== res.data.id;
+          })
+        );
         setInvitableUsers((old) =>
           old.map((user) =>
             user.id === u.id ? { ...user, loading: false } : user
@@ -101,7 +105,7 @@ const EditInvitations: NextPage = (props) => {
         event: event,
       })
       .then((res) => {
-        setInvites((old) => [...old, res.data]);
+        setInvites([...invites, res.data]);
         setGuests((old) =>
           old.map((user) =>
             user.id === u.id ? { ...user, loading: false } : user
