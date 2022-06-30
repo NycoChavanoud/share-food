@@ -94,9 +94,6 @@ describe("invitations", function () {
           cy.contains("nombre d'invités : 2");
           cy.get('[data-cy="addBtn0"]').click({ force: true });
           cy.contains("nombre d'invités : 3");
-          cy.contains("Tous vos amis sont déjà invités à cet évènement.");
-          cy.get('[data-cy="deleteBtn0"]').click({ force: true });
-          cy.contains("nombre d'invités : 3");
           cy.get('[data-cy="deleteBtn0"]').click({ force: true });
           cy.contains("nombre d'invités : 2");
           cy.get('[data-cy="deleteBtn0"]').click({ force: true });
