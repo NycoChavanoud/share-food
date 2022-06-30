@@ -208,6 +208,7 @@ const AddEventForm = () => {
       <Select
         id="selectbox"
         instanceId="selectbox"
+        closeMenuOnSelect={false}
         isMulti
         options={selectableUsersToCheck}
         value={usersInvited}

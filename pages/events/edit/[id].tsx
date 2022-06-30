@@ -75,7 +75,7 @@ const EditEvent: NextPage = (props) => {
             className={style.largeInputForm}
             autoComplete="off"
             required
-            value={event.title || " "}
+            value={event.title || ""}
             onChange={(e) => setEvent({ ...event, title: e.target.value })}
             maxLength={40}
           />
@@ -90,7 +90,7 @@ const EditEvent: NextPage = (props) => {
                 data-cy="datePicker"
                 className={style.littleInputForm}
                 autoComplete="off"
-                value={event.date || " "}
+                value={event.date || ""}
                 onChange={(e) => setEvent({ ...event, date: e.target.value })}
                 min={dateOfDay}
               />
