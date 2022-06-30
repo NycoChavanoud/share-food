@@ -9,16 +9,16 @@ const InvitationsCard = ({
   id,
 }: Partial<IUser>) => {
   return (
-    <Link href={`/profile/${id}`}>
-      <div className={style.invitationsCardContainer}>
+    <div className={style.invitationsCardContainer}>
+      <Link href={`/profile/${id}`}>
         <div className={style.imageContainer}>
           <img src={avatarUrl} alt={lastname} className={style.avatar} />
         </div>
-        <div className={style.nameContainer}>
-          {firstname} {lastname}
-        </div>
+      </Link>
+      <div className={style.nameContainer}>
+        {firstname} {lastname}
       </div>
-    </Link>
+    </div>
   );
 };
 
