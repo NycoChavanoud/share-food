@@ -2,7 +2,6 @@ import base from "../../../middlewares/common";
 import type { NextApiRequest, NextApiResponse } from "next";
 import {
   deleteInvitationbyEventId,
-  getInvitations,
   getOneInvite,
   IInvitation,
 } from "../../../models/invitations";
@@ -15,16 +14,6 @@ type NextApiRequestwithCurrentEvent = NextApiRequest & {
   };
   body: IInvitation;
   currentUser: IUser;
-};
-
-const handleGet = async (
-  { query: { id } }: NextApiRequestwithCurrentEvent,
-  res: NextApiResponse
-) => {
-  const idToGet = id.toString();
-  const invitations = await getInvitations(idToGet);
-  if (invitations) return res.send(invitations);
-  else res.status(404).send("not found");
 };
 
 const handleDelete = async (
@@ -42,7 +31,20 @@ const handleDelete = async (
   }
 };
 
+const handleGetOne = async (
+  req: NextApiRequestwithCurrentEvent,
+  res: NextApiResponse
+) => {
+  const id = req.query.id.toString();
+  const invitation = await getOneInvite(id);
+  if (invitation) {
+    if (invitation.event?.authorId !== req.currentUser.id)
+      return res.status(403).send("Forbidden");
+    res.status(201).send(invitation);
+  } else res.status(404).send("not found");
+};
+
 export default base()
   .use(requireCurrentUser)
-  .get(handleGet)
-  .delete(handleDelete);
+  .delete(handleDelete)
+  .get(handleGetOne);

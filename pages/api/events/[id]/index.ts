@@ -3,11 +3,11 @@ import {
   getOneEvent,
   IEvent,
   updateEvent,
-} from "../../../models/event";
-import base from "../../../middlewares/common";
-import requireCurrentUser from "../../../middlewares/requireCurrentUser";
+} from "../../../../models/event";
+import base from "../../../../middlewares/common";
+import requireCurrentUser from "../../../../middlewares/requireCurrentUser";
 import { NextApiResponse } from "next";
-import { IUser } from "../../../models/user";
+import { IUser } from "../../../../models/user";
 
 type requestEventType = {
   query: any;

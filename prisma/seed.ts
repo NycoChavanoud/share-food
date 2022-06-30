@@ -150,19 +150,12 @@ export async function seed() {
     ],
   });
 
-  await db.invitation.createMany({
-    data: [
-      {
-        guestId: user.id,
-        eventId: event.id,
-        status: "PENDING",
-      },
-      {
-        guestId: secondUser.id,
-        eventId: event.id,
-        status: "ACCEPTED",
-      },
-    ],
+  await db.invitation.create({
+    data: {
+      guestId: secondUser.id,
+      eventId: event.id,
+      status: "ACCEPTED",
+    },
   });
 
   await db.event.findUnique({
@@ -181,10 +174,6 @@ export async function seed() {
           {
             guestId: secondUser.id,
             status: "ACCEPTED",
-          },
-          {
-            guestId: user.id,
-            status: "PENDING",
           },
         ],
       },

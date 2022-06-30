@@ -8,9 +8,9 @@ export interface IUser {
   password: string;
   firstname: string;
   lastname: string;
-  nickName: string;
-  birthday: string;
-  favoritePlate: string;
+  nickName?: string;
+  birthday?: string;
+  favoritePlate?: string;
   city?: string;
   description?: string;
   avatarUrl?: string;
@@ -61,8 +61,8 @@ export const deleteManyUsers = db.user.deleteMany;
 
 export const deleteOneUser = db.user.delete;
 
-export const deleteUserById = (id: string) => {
-  return db.user
+export const deleteUserById = async (id: string) => {
+  return await db.user
     .delete({
       where: { id },
     })

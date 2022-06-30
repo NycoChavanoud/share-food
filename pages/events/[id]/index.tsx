@@ -51,7 +51,7 @@ const EventDetail: NextPage = (props) => {
 
   const fetchGuestList = () => {
     axios
-      .get(`/api/invitations/${id}`)
+      .get(`/api/events/${id}/invitations`)
       .then((res) => setGuests(res.data))
       .catch((err) => console.error(err));
   };
