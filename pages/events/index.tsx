@@ -8,8 +8,9 @@ import { useRouter } from "next/router";
 import EventCardContainer from "../../components/EventCardContainer";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/currentUserContext";
+import InviteValidation from "../../components/InviteValidation";
 
-const Event: NextPage = () => {
+const Event: NextPage = (props) => {
   const router = useRouter();
   const { currentUserProfile } = useContext(CurrentUserContext);
 
@@ -39,7 +40,9 @@ const Event: NextPage = () => {
             <EventCardContainer />
           </div>
 
-          <div className={style.separationLine}></div>
+          <span className={style.separationLine} />
+
+          <InviteValidation numberOfInvitationsPending={5} />
         </div>
       </LayoutCurrentUser>
     </>

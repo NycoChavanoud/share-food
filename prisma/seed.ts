@@ -117,6 +117,29 @@ export async function seed() {
       authorId: user.id,
     },
   });
+  const secondEvent = await db.event.create({
+    data: {
+      title: "other event",
+      description: "lorem ipsum patatum et tatadoum ",
+      date: randomDate(new Date(), new Date(2025, 0, 1)).toISOString(),
+      hour: "12:30",
+      address: "50 rue de la soif, LYON",
+      typeEvent: "Au bureau",
+      authorId: user.id,
+    },
+  });
+
+  const thirdEvent = await db.event.create({
+    data: {
+      title: "other event again",
+      description: "lorem ipsum patatum et tatadoum ",
+      date: randomDate(new Date(), new Date(2025, 0, 1)).toISOString(),
+      hour: "12:30",
+      address: "50 rue de la soif, LYON",
+      typeEvent: "Au bureau",
+      authorId: user.id,
+    },
+  });
 
   await db.event.createMany({
     data: [
@@ -127,7 +150,7 @@ export async function seed() {
         hour: "20:30",
         address: " 25 rue de la montée, LYON",
         typeEvent: "Au resto",
-        authorId: user.id,
+        authorId: secondUser.id,
       },
       {
         title: "un autre event",
@@ -136,7 +159,7 @@ export async function seed() {
         hour: "20:30",
         address: "rue du mistral",
         typeEvent: "Au bureau",
-        authorId: user.id,
+        authorId: secondUser.id,
       },
       {
         title: "et une dernier",
@@ -145,15 +168,29 @@ export async function seed() {
         hour: "20:30",
         address: "rue du mistral",
         typeEvent: "A la maison",
-        authorId: user.id,
+        authorId: secondUser.id,
       },
     ],
   });
 
   await db.invitation.create({
     data: {
-      guestId: secondUser.id,
+      guestId: user.id,
       eventId: event.id,
+      status: "PENDING",
+    },
+  });
+  await db.invitation.create({
+    data: {
+      guestId: user.id,
+      eventId: secondEvent.id,
+      status: "PENDING",
+    },
+  });
+  await db.invitation.create({
+    data: {
+      guestId: user.id,
+      eventId: thirdEvent.id,
       status: "ACCEPTED",
     },
   });
@@ -172,8 +209,8 @@ export async function seed() {
       invitations: {
         create: [
           {
-            guestId: secondUser.id,
-            status: "ACCEPTED",
+            guestId: user.id,
+            status: "REFUSED",
           },
         ],
       },
@@ -183,7 +220,7 @@ export async function seed() {
       hour: "12:30",
       address: "50 rue de la soif, LYON",
       typeEvent: "Au bureau",
-      authorId: user.id,
+      authorId: secondUser.id,
     },
   });
 }

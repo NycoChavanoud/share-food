@@ -1,6 +1,7 @@
-import { InvitationStatus } from '@prisma/client';
-import { NextApiRequest, NextApiResponse } from 'next';
-import db from '../lib/prisma';
+import { InvitationStatus } from "@prisma/client";
+import db from "../lib/prisma";
+import { IEvent } from "./event";
+import { IUser } from "./user";
 
 export interface IInvitation {
   id: number;
@@ -28,6 +29,17 @@ export const getInvitations = async (currentEventId: string) => {
     .catch((_) => false);
 };
 
+export const getInvitationsByUserId = async (currentUserId: String) => {
+  return await db.invitation.findMany({
+    where: {
+      guestId: currentUserId.toString(),
+    },
+    include: {
+      event: true,
+      guest: true,
+    },
+  });
+};
 export const getOneInvite = async (id: string) => {
   return await db.invitation.findUnique({
     where: { id: parseInt(id, 10) },
