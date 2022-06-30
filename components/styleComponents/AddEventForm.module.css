@@ -1,0 +1,180 @@
+.addEventFormContainer {
+  width: 90%;
+  max-width: 760px;
+  margin: 5px auto 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.labelForm {
+  margin: 9px auto 1px;
+  text-align: center;
+  font-size: 0.8em;
+  font-weight: normal;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+.inputForm {
+  border: none;
+  background-color: var(--inputColor);
+  height: 40px;
+  width: 80%;
+  border-radius: 10px;
+  text-align: center;
+  color: var(--ligthColor);
+  font-size: 1em;
+  font-weight: bolder;
+  letter-spacing: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.inputForm:focus,
+.littleInputForm {
+  border: none;
+  outline: none;
+}
+
+.littleInputForm {
+  border: none;
+  background-color: var(--inputColor);
+  height: 40px;
+  width: 90%;
+  border-radius: 10px;
+  text-align: center;
+  color: var(--ligthColor);
+  font-size: 1em;
+  font-weight: bolder;
+  letter-spacing: 2px;
+  outline: none;
+  cursor: pointer;
+  padding-right: 5px;
+}
+
+.largeInputForm {
+  border: none;
+  background-color: var(--inputColor);
+  height: 40px;
+  width: 96%;
+  border-radius: 10px;
+  text-align: center;
+  color: var(--ligthColor);
+  font-size: 1em;
+  font-weight: bolder;
+  letter-spacing: 2px;
+  outline: none;
+  cursor: pointer;
+  padding-right: 5px;
+}
+
+.selectInput {
+  border: none;
+  background-color: var(--inputColor);
+  height: 40px;
+  width: 96%;
+  border-radius: 10px;
+  text-align: center;
+  color: var(--ligthColor);
+  font-size: 1em;
+  font-weight: bolder;
+  letter-spacing: 2px;
+  outline: none;
+  cursor: pointer;
+  padding-right: 5px;
+}
+
+.textareaForm {
+  border: none;
+  background-color: var(--inputColor);
+  height: 180px;
+  width: 96%;
+  border-radius: 10px;
+  text-align: center;
+  color: var(--ligthColor);
+  font-size: 1.5em;
+  font-weight: normal;
+  letter-spacing: 2px;
+  outline: none;
+  cursor: pointer;
+  padding: 15px;
+  resize: none;
+}
+
+.containerMultiInput {
+  display: flex;
+
+  justify-content: space-between;
+  width: 100%;
+}
+
+.labelContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.btnForm {
+  margin: 25px auto 0px;
+  width: 55%;
+  height: 40px;
+  border: none;
+  background-color: var(--redColor);
+  color: var(--ligthColor);
+  font-family: "Amiko", sans-serif;
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: 3px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.btnForm:hover {
+  color: var(--darkColor);
+}
+.titleSeparationContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto 5px;
+}
+
+.titleSeparationTitle {
+  font-family: "Amiko", sans-serif;
+  font-weight: bold;
+  font-size: 1.2em;
+  letter-spacing: 3px;
+  margin-top: 5px;
+}
+
+.titleSeparationContent {
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.6em;
+  letter-spacing: 1px;
+  font-weight: 500;
+  width: 90%;
+}
+
+.btnOnForm {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: "Amiko", sans-serif;
+  color: var(--redColor);
+  margin: 10px auto;
+  font-weight: 600;
+}
+
+@media only screen and (min-width: 640px) {
+  .registerFormContainer {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+}

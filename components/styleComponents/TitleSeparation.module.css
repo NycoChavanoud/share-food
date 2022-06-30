@@ -1,0 +1,27 @@
+.titleSeparationContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px auto 5px;
+  border-top: solid 2px rgba(39, 36, 33, 0.5);
+  width: 85%;
+}
+
+.titleSeparationTitle {
+  font-family: "Amiko", sans-serif;
+  font-weight: bold;
+  font-size: 1.2em;
+  letter-spacing: 3px;
+  margin-top: 5px;
+  text-align: center;
+}
+
+.titleSeparationContent {
+  text-align: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.6em;
+  letter-spacing: 1px;
+  font-weight: 500;
+  width: 85%;
+}

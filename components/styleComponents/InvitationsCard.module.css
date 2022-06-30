@@ -1,0 +1,39 @@
+.invitationsCardContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 860px;
+  width: 100%;
+  margin: 5px auto;
+  padding: 0 15px;
+}
+
+.invitationsCardContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.imageContainer {
+  height: 34px;
+  width: 34px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.avatar {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  background-color: var(--ligthColor);
+}
+
+.nameContainer {
+  width: 90%;
+  font-size: 1em;
+  margin: 5px auto;
+  text-align: start;
+  letter-spacing: 2px;
+  cursor: pointer;
+}

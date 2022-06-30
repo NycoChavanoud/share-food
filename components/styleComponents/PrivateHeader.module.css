@@ -1,0 +1,39 @@
+.privateHeaderContainer {
+  width: 100%;
+  max-width: 860px;
+  height: 70px;
+  border-radius: 25px;
+  margin: 25px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 3px 5px var(--darkColor);
+  padding: 0 10px;
+}
+
+.privateInfoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.nameTitle {
+  font-family: "Amiko", sans-serif;
+  font-weight: bold;
+  letter-spacing: 3px;
+  color: var(--ligthColor);
+  font-size: 1.2em;
+  width: 95%;
+  overflow-y: scroll;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.subtitle {
+  font-family: "Poppins", sans-serif;
+  font-weight: medium;
+  letter-spacing: 3px;
+  color: var(--ligthColor);
+  font-size: 0.8em;
+}

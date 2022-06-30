@@ -1,16 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Amiko:wght@400;600;700&family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+
+:root {
+  --ligthColor: #fce6ce;
+  --inputColor: #cab8a5;
+  --redColor: #9c1309;
+  --darkColor: #272421;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--ligthColor);
+  color: var(--darkColor);
+  font-family: "Poppins", sans-serif;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  cursor: pointer;
 }
 
-* {
-  box-sizing: border-box;
+h1 {
+  font-family: "Amiko", sans-serif;
+  font-weight: bold;
+  letter-spacing: 5px;
+}
+
+h2 {
+  font-family: "Amiko", sans-serif;
+  font-weight: bold;
+  letter-spacing: 5px;
+}
+
+.uploadcare--widget__button.uploadcare--widget__button_type_open {
+  background-color: var(--redColor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  width: 125px;
+  height: 56px;
+  margin: 14px auto;
+  font-size: 0.8em;
+  white-space: normal;
+  letter-spacing: 3px;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0px;
+}
+
+.uploadcare--widget__button {
+  font-family: "Amiko", sans-serif;
+  font-size: 0.8em;
+  font-weight: 600;
+
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.uploadcare--widget__button.uploadcare--widget__button_type_open:hover {
+  color: var(--darkColor);
+  background-color: var(--redColor);
+  font-size: 0.8em;
+}
+
+.uploadcare--widget__text {
+  font-size: 0.6em;
+}
+
+.basic-multi-select {
+  width: 96%;
+  height: auto;
+  border-radius: 5px;
+  border: solid 1px var(--inputColor);
+}
+.select__control {
+  background-color: var(--inputColor);
+  border: none;
+}
+
+.select__value-container {
+  background-color: var(--inputColor);
+  padding: 5px;
+  border: none;
+}
+
+.select__indicators {
+  background: var(--darkColor);
+  border-radius: 0px 5px 5px 0px;
+  border: none;
+}
+
+.select__menu {
+  color: var(--darkColor);
+  background: var(--inputColor);
+}
+
+.select__menu-list {
+  background: var(--inputColor);
+  margin-bottom: 50px;
 }
