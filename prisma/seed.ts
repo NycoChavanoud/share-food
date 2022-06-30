@@ -114,7 +114,7 @@ export async function seed() {
       hour: "12:30",
       address: "50 rue de la soif, LYON",
       typeEvent: "Au bureau",
-      authorId: user.id,
+      authorId: secondUser.id,
     },
   });
   const secondEvent = await db.event.create({
@@ -125,7 +125,7 @@ export async function seed() {
       hour: "12:30",
       address: "50 rue de la soif, LYON",
       typeEvent: "Au bureau",
-      authorId: user.id,
+      authorId: secondUser.id,
     },
   });
 
@@ -137,7 +137,7 @@ export async function seed() {
       hour: "12:30",
       address: "50 rue de la soif, LYON",
       typeEvent: "Au bureau",
-      authorId: user.id,
+      authorId: secondUser.id,
     },
   });
 
@@ -150,7 +150,7 @@ export async function seed() {
         hour: "20:30",
         address: " 25 rue de la montée, LYON",
         typeEvent: "Au resto",
-        authorId: secondUser.id,
+        authorId: user.id,
       },
       {
         title: "un autre event",
@@ -159,7 +159,7 @@ export async function seed() {
         hour: "20:30",
         address: "rue du mistral",
         typeEvent: "Au bureau",
-        authorId: secondUser.id,
+        authorId: user.id,
       },
       {
         title: "et une dernier",
@@ -168,7 +168,7 @@ export async function seed() {
         hour: "20:30",
         address: "rue du mistral",
         typeEvent: "A la maison",
-        authorId: secondUser.id,
+        authorId: user.id,
       },
     ],
   });

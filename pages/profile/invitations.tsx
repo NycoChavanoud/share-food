@@ -39,9 +39,12 @@ const invitations: NextPage = (props) => {
           const dateFormat = dayjs(i.event.date)
             .locale("fr")
             .format("dddd DD MMMM YYYY");
+          console.log(i);
+
           return (
             <div key={i.id}>
               <InviteCard
+                linkId={i.event.id}
                 title={i.event.title}
                 date={dateFormat}
                 hour={i.event.hour}

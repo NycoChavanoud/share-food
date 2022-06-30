@@ -1,16 +1,19 @@
 import style from "./styleComponents/InviteCard.module.css";
-import AcceptedIcon from "../public/icons/valide.png";
-import RefusedIcon from "../public/icons/annule.png";
-import PendingIcon from "../public/icons/pending.png";
+import acceptedIcon from "../public/icons/valide.png";
+import refusedIcon from "../public/icons/annule.png";
+import pendingIcon from "../public/icons/pending.png";
+import Image from "next/image";
+import Link from "next/link";
 
 type PropsInviteCard = {
+  linkId: number;
   title: string;
   date: string;
   hour: string;
   status: string;
 };
 
-const InviteCard = ({ title, date, hour, status }: PropsInviteCard) => {
+const InviteCard = ({ linkId, title, date, hour, status }: PropsInviteCard) => {
   return (
     <div className={style.inviteCardContainer}>
       <div className={style.dateContainer}>
@@ -21,13 +24,34 @@ const InviteCard = ({ title, date, hour, status }: PropsInviteCard) => {
       </div>
       <div className={style.titleInviteContainer}>
         <span className={style.titleCardInvite}>{title}</span>{" "}
-        <span>
+        <span className={style.iconContainer}>
           {status === "PENDING" ? (
-            <div>A</div>
+            <Link href={`/events/${linkId}`}>
+              <Image
+                src={pendingIcon}
+                width={35}
+                height={35}
+                alt="logo-pending"
+              />
+            </Link>
           ) : status === "ACCEPTED" ? (
-            <div>B</div>
+            <Link href={`/events/${linkId}`}>
+              <Image
+                src={acceptedIcon}
+                width={35}
+                height={35}
+                alt="logo-accepted"
+              />
+            </Link>
           ) : (
-            <div>C</div>
+            <Link href={`/events/${linkId}`}>
+              <Image
+                src={refusedIcon}
+                width={35}
+                height={35}
+                alt="logo-refused"
+              />
+            </Link>
           )}
         </span>
       </div>
