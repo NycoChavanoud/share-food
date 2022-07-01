@@ -23,35 +23,31 @@ const InviteCard = ({ linkId, title, date, hour, status }: PropsInviteCard) => {
         </div>
       </div>
       <div className={style.titleInviteContainer}>
-        <span className={style.titleCardInvite}>{title}</span>{" "}
+        <Link href={`/events/${linkId}`}>
+          <span className={style.titleCardInvite}>{title}</span>
+        </Link>
         <span className={style.iconContainer}>
           {status === "PENDING" ? (
-            <Link href={`/events/${linkId}`}>
-              <Image
-                src={pendingIcon}
-                width={35}
-                height={35}
-                alt="logo-pending"
-              />
-            </Link>
+            <Image
+              src={pendingIcon}
+              width={30}
+              height={30}
+              alt="logo-pending"
+            />
           ) : status === "ACCEPTED" ? (
-            <Link href={`/events/${linkId}`}>
-              <Image
-                src={acceptedIcon}
-                width={35}
-                height={35}
-                alt="logo-accepted"
-              />
-            </Link>
+            <Image
+              src={acceptedIcon}
+              width={35}
+              height={35}
+              alt="logo-accepted"
+            />
           ) : (
-            <Link href={`/events/${linkId}`}>
-              <Image
-                src={refusedIcon}
-                width={35}
-                height={35}
-                alt="logo-refused"
-              />
-            </Link>
+            <Image
+              src={refusedIcon}
+              width={35}
+              height={35}
+              alt="logo-refused"
+            />
           )}
         </span>
       </div>

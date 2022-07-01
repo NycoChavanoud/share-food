@@ -10,14 +10,28 @@ import { IInvitation } from "../../models/invitations";
 import InviteCard from "../../components/InviteCard";
 import dayjs from "dayjs";
 import "dayjs/locale/fr";
+import acceptedIcon from "../../public/icons/valide.png";
+import refusedIcon from "../../public/icons/annule.png";
+import pendingIcon from "../../public/icons/pending.png";
+import reset from "../../public/icons/reset.png";
+
+import Image from "next/image";
 
 const invitations: NextPage = (props) => {
   const router = useRouter();
   const { currentUserProfile } = useContext(CurrentUserContext);
   const [invitations, setInvitations] = useState<IInvitation[]>([]);
+  const [filter, setFilter] = useState<string>("PENDING");
+  const [isActive, setIsActive] = useState<Boolean>(false);
 
   const fetchInvitations = () => {
     axios.get(`/api/invitations/`).then((res) => setInvitations(res.data));
+  };
+
+  const translateStatus = () => {
+    if (filter === "PENDING") return <span>Invitations en attentes</span>;
+    if (filter === "ACCEPTED") return <span>Invitations en acceptées</span>;
+    if (filter === "REFUSED") return <span>Invitations en refusées</span>;
   };
 
   useEffect(() => {
@@ -36,25 +50,85 @@ const invitations: NextPage = (props) => {
           }}
         />
         <div className={style.inviteTitle}> Gestion des invitations </div>
-        <div className={style.invitationManagerContainer}>
-          {invitations.map((i: any) => {
-            const dateFormat = dayjs(i.event.date)
-              .locale("fr")
-              .format("dddd DD MMMM YYYY");
-            console.log(i);
+        <div className={style.legendIcons}>
+          <div
+            className={style.iconsAndText}
+            onClick={() => {
+              setIsActive(true);
+              setFilter("PENDING");
+            }}
+          >
+            <Image
+              src={pendingIcon}
+              width={33}
+              height={33}
+              alt="logo-pending"
+            />
+            <div>en attente</div>
+          </div>
+          <div
+            className={style.iconsAndText}
+            onClick={() => {
+              setIsActive(true);
+              setFilter("ACCEPTED");
+            }}
+          >
+            <Image
+              src={acceptedIcon}
+              width={35}
+              height={35}
+              alt="logo-accepted"
+            />
+            <div>accepté</div>
+          </div>
+          <div
+            className={style.iconsAndText}
+            onClick={() => {
+              setIsActive(true);
+              setFilter("REFUSED");
+            }}
+          >
+            <Image
+              src={refusedIcon}
+              width={35}
+              height={35}
+              alt="logo-refused"
+            />
+            <div>refusé</div>
+          </div>
+          <div
+            className={style.iconsAndText}
+            onClick={() => {
+              setIsActive(false);
+            }}
+          >
+            <Image src={reset} width={35} height={35} alt="logo-refused" />
+            <div>reset</div>
+          </div>
+        </div>
 
-            return (
-              <div key={i.id}>
-                <InviteCard
-                  linkId={i.event.id}
-                  title={i.event.title}
-                  date={dateFormat}
-                  hour={i.event.hour}
-                  status={i.status}
-                />
-              </div>
-            );
-          })}
+        <div className={style.inviteTitle}>
+          {isActive ? translateStatus() : <span>Tous vos évènements</span>}
+        </div>
+        <div className={style.invitationManagerContainer}>
+          {invitations
+            .filter((list) => list.status === (isActive ? filter : list.status))
+            .map((i: any) => {
+              const dateFormat = dayjs(i.event.date)
+                .locale("fr")
+                .format("dddd DD MMMM YYYY");
+              return (
+                <div key={i.id}>
+                  <InviteCard
+                    linkId={i.event.id}
+                    title={i.event.title}
+                    date={dateFormat}
+                    hour={i.event.hour}
+                    status={i.status}
+                  />
+                </div>
+              );
+            })}
         </div>
       </div>
     </LayoutCurrentUser>
