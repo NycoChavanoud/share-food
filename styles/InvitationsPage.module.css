@@ -6,3 +6,26 @@
   flex-direction: column;
   max-width: 860px;
 }
+
+.invitationManagerContainer {
+  height: 100%;
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.invitationManagerContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.inviteTitle {
+  width: 90%;
+  max-width: 860px;
+  font-family: "Amiko", sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  letter-spacing: 3px;
+  border-bottom: solid 2px rgba(39, 36, 33, 0.3);
+  text-align: center;
+  position: relative;
+  margin: 30px auto;
+}

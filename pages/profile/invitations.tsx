@@ -35,24 +35,27 @@ const invitations: NextPage = (props) => {
             router.push("/events");
           }}
         />
-        {invitations.map((i: any) => {
-          const dateFormat = dayjs(i.event.date)
-            .locale("fr")
-            .format("dddd DD MMMM YYYY");
-          console.log(i);
+        <div className={style.inviteTitle}> Gestion des invitations </div>
+        <div className={style.invitationManagerContainer}>
+          {invitations.map((i: any) => {
+            const dateFormat = dayjs(i.event.date)
+              .locale("fr")
+              .format("dddd DD MMMM YYYY");
+            console.log(i);
 
-          return (
-            <div key={i.id}>
-              <InviteCard
-                linkId={i.event.id}
-                title={i.event.title}
-                date={dateFormat}
-                hour={i.event.hour}
-                status={i.status}
-              />
-            </div>
-          );
-        })}
+            return (
+              <div key={i.id}>
+                <InviteCard
+                  linkId={i.event.id}
+                  title={i.event.title}
+                  date={dateFormat}
+                  hour={i.event.hour}
+                  status={i.status}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
     </LayoutCurrentUser>
   );
