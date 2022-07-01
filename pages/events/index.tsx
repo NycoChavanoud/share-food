@@ -41,8 +41,9 @@ const Event: NextPage = (props) => {
           </div>
 
           <span className={style.separationLine} />
-
-          <InviteValidation numberOfInvitationsPending={5} />
+          <div className={style.actionPageInfo}>
+            <InviteValidation />
+          </div>
         </div>
       </LayoutCurrentUser>
     </>

@@ -17,7 +17,7 @@ import reset from "../../public/icons/reset.png";
 
 import Image from "next/image";
 
-const invitations: NextPage = (props) => {
+const invitations: NextPage = () => {
   const router = useRouter();
   const { currentUserProfile } = useContext(CurrentUserContext);
   const [invitations, setInvitations] = useState<IInvitation[]>([]);
