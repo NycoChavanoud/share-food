@@ -1,7 +1,5 @@
 import { InvitationStatus } from "@prisma/client";
 import db from "../lib/prisma";
-import { IEvent } from "./event";
-import { IUser } from "./user";
 
 export interface IInvitation {
   id: number;
@@ -85,6 +83,22 @@ export const createOneGuestForEvent = async ({
     include: {
       event: true,
       guest: true,
+    },
+  });
+};
+
+export const updateOneGuestStatus = async (data: IInvitation) => {
+  const id = data.id;
+  const eventId = data.eventId;
+  console.log("DATAAAAA :", data);
+
+  return await db.invitation.update({
+    where: { id },
+    data: {
+      id: data.id,
+      guestId: data.guestId,
+      eventId: data.eventId,
+      status: data.status,
     },
   });
 };

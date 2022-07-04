@@ -4,6 +4,7 @@ import {
   createOneGuestForEvent,
   getInvitationsByUserId,
   IInvitation,
+  updateOneGuestStatus,
 } from "../../../models/invitations";
 import requireCurrentUser from "../../../middlewares/requireCurrentUser";
 import { IUser } from "../../../models/user";
@@ -38,7 +39,25 @@ const handleGetInvitationsByUserId = async (
   else res.status(404).send("not found");
 };
 
+const handlePatch = async (
+  req: NextApiRequestBodyOfInvitation,
+  res: NextApiResponse
+) => {
+  console.log("reqqqqqq :", req.body);
+  const { id, eventId, guestId, status } = req.body;
+
+  const invitationToPatch = await updateOneGuestStatus({
+    id,
+    eventId,
+    guestId,
+    status,
+  });
+  if (invitationToPatch) res.status(201).send({ invitationToPatch });
+  else res.status(404).send("not found");
+};
+
 export default base()
   .use(requireCurrentUser)
   .post(handleCreateOne)
-  .get(handleGetInvitationsByUserId);
+  .get(handleGetInvitationsByUserId)
+  .patch(handlePatch);

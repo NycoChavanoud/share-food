@@ -15,6 +15,7 @@ import CurrentUserContext from "../../../contexts/currentUserContext";
 import InvitationsCard from "../../../components/InvitationsCard";
 import defaultAvatar from "../../../public/img/avatar.png";
 import { NextPage } from "next";
+import InvitationsManager from "../../../components/InvitationsManager";
 
 const EventDetail: NextPage = (props) => {
   const router = useRouter();
@@ -24,6 +25,7 @@ const EventDetail: NextPage = (props) => {
   const [deleteContainer, setDeleteContainer] = useState(false);
   const { addToast } = useToasts();
   const { currentUserProfile } = useContext(CurrentUserContext);
+  const [inviteIdOfCurrentUser, setInviteIdOfCurrentUser] = useState<number>(0);
 
   const notifySuccess = () => {
     addToast("🦄 Ton évènement est supprimé", {
@@ -59,6 +61,26 @@ const EventDetail: NextPage = (props) => {
   useEffect(() => {
     fetchGuestList();
   }, [event]);
+
+  const invitationsAccepted = guests?.filter((g) => g.status === "ACCEPTED");
+
+  const currentUserId = currentUserProfile?.id;
+  const showInvitationManager = guests?.filter(
+    (g) => g.status === "PENDING" || g.status === "REFUSED"
+  );
+
+  const currentUserIsNotAcceptedStatus = showInvitationManager?.some((i) =>
+    i.guestId.includes(currentUserId)
+  );
+
+  useEffect(() => {
+    if (currentUserIsNotAcceptedStatus) {
+      const invitation = guests?.filter((i) =>
+        i.guestId.includes(currentUserId)
+      );
+      if (invitation) setInviteIdOfCurrentUser(invitation[0].id);
+    }
+  }, [guests]);
 
   return (
     <LayoutCurrentUser pageTitle={`évènement : ${event.title}`}>
@@ -107,13 +129,19 @@ const EventDetail: NextPage = (props) => {
           </div>
         )}
 
-        {guests?.length !== 0 ? (
+        {invitationsAccepted?.length !== 0 &&
+        !currentUserIsNotAcceptedStatus ? (
           <>
             <div className={style.titleDescription}>
               <div className={style.titleWithEditContainer}>
                 <div className={style.titleMembers}>
-                  {" "}
-                  Membres invités : {guests?.length}
+                  <div>
+                    Membres déja présents : {invitationsAccepted?.length}
+                  </div>
+                  <div className={style.subtitle}>
+                    {" "}
+                    total d'invités possibles {guests?.length}{" "}
+                  </div>
                 </div>
                 {event.authorId === currentUserProfile?.id && (
                   <Link href={`/events/${id}/invitations`}>
@@ -128,7 +156,7 @@ const EventDetail: NextPage = (props) => {
               </div>
             </div>
             <div className={style.invitationsContainer}>
-              {guests?.map((guest, index) => {
+              {invitationsAccepted?.map((guest, index) => {
                 return (
                   <InvitationsCard
                     key={index}
@@ -144,6 +172,7 @@ const EventDetail: NextPage = (props) => {
                 );
               })}
             </div>
+            <div>ICI PREVOIR DE POUVOIR ANNULER SA PRESENCE</div>
           </>
         ) : (
           event.authorId === currentUserProfile?.id && (
@@ -159,6 +188,10 @@ const EventDetail: NextPage = (props) => {
               </div>
             </Link>
           )
+        )}
+
+        {currentUserIsNotAcceptedStatus && (
+          <InvitationsManager id={inviteIdOfCurrentUser} />
         )}
 
         {event.authorId === currentUserProfile?.id && (
