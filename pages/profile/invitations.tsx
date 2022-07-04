@@ -17,12 +17,12 @@ import reset from "../../public/icons/reset.png";
 
 import Image from "next/image";
 
-const invitations: NextPage = () => {
+const invitations: NextPage = (props) => {
   const router = useRouter();
   const { currentUserProfile } = useContext(CurrentUserContext);
   const [invitations, setInvitations] = useState<IInvitation[]>([]);
   const [filter, setFilter] = useState<string>("PENDING");
-  const [isActive, setIsActive] = useState<Boolean>(false);
+  const [isActive, setIsActive] = useState<Boolean>(true);
 
   const fetchInvitations = () => {
     axios.get(`/api/invitations/`).then((res) => setInvitations(res.data));
@@ -103,12 +103,12 @@ const invitations: NextPage = () => {
             }}
           >
             <Image src={reset} width={35} height={35} alt="logo-refused" />
-            <div>reset</div>
+            <div>tout</div>
           </div>
         </div>
 
         <div className={style.inviteTitle}>
-          {isActive ? translateStatus() : <span>Tous vos évènements</span>}
+          {isActive ? translateStatus() : <span>Tous les évènements</span>}
         </div>
         <div className={style.invitationManagerContainer}>
           {invitations

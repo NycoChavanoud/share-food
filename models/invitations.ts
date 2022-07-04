@@ -30,9 +30,15 @@ export const getInvitations = async (currentEventId: string) => {
 };
 
 export const getInvitationsByUserId = async (currentUserId: String) => {
+  const dateOfDay = new Date().toISOString().substring(0, 10);
   return await db.invitation.findMany({
     where: {
       guestId: currentUserId.toString(),
+      event: {
+        date: {
+          gte: dateOfDay,
+        },
+      },
     },
     include: {
       event: true,
