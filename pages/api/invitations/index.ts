@@ -33,8 +33,6 @@ const handleGetInvitationsByUserId = async (
   req: NextApiRequestBodyOfInvitation,
   res: NextApiResponse
 ) => {
-  console.log(req.currentUser.id);
-
   const invitations = await getInvitationsByUserId(req.currentUser.id);
   if (invitations) return res.status(201).send(invitations);
   else res.status(404).send("not found");

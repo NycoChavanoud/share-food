@@ -22,6 +22,8 @@ const EventCardContainer = () => {
     fetchEventList();
   }, []);
 
+  console.log(eventList);
+
   if (!eventList) return <Loading />;
 
   if (eventList.length !== 0) {

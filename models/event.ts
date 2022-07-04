@@ -80,6 +80,7 @@ export const getEvents = async (currentUser: IUser) => {
             invitations: {
               some: {
                 guestId: currentUserId,
+                status: "ACCEPTED",
               },
             },
           },

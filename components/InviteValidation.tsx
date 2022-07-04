@@ -11,7 +11,6 @@ const InviteValidation = () => {
   }, []);
 
   const pendingInvitations = invitations.filter((i) => i.status === "PENDING");
-  console.log(pendingInvitations.length);
 
   return (
     <Link href={"/profile/invitations"}>

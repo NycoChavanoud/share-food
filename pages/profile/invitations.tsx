@@ -86,7 +86,7 @@ const invitations: NextPage = (props) => {
               alt="logo-accepted"
             />
             <div className={filter === "ACCEPTED" ? "" : style.txtOpacity}>
-              accepté
+              acceptée
             </div>
           </div>
           <div
@@ -105,7 +105,7 @@ const invitations: NextPage = (props) => {
               alt="logo-refused"
             />
             <div className={filter === "REFUSED" ? "" : style.txtOpacity}>
-              refusé
+              refusée
             </div>
           </div>
           <div
@@ -121,7 +121,7 @@ const invitations: NextPage = (props) => {
         </div>
 
         <div className={style.inviteTitle}>
-          {isActive ? translateStatus() : <span>Tous les évènements</span>}
+          {isActive ? translateStatus() : <span>Toutes vos invitations</span>}
         </div>
         <div className={style.invitationManagerContainer}>
           {invitations
