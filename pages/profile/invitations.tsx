@@ -52,7 +52,9 @@ const invitations: NextPage = (props) => {
         <div className={style.inviteTitle}> Gestion des invitations </div>
         <div className={style.legendIcons}>
           <div
-            className={style.iconsAndText}
+            className={
+              filter === "PENDING" ? style.selectedIcon : style.iconsAndText
+            }
             onClick={() => {
               setIsActive(true);
               setFilter("PENDING");
@@ -64,10 +66,14 @@ const invitations: NextPage = (props) => {
               height={33}
               alt="logo-pending"
             />
-            <div>en attente</div>
+            <div className={filter === "PENDING" ? "" : style.txtOpacity}>
+              en attente
+            </div>
           </div>
           <div
-            className={style.iconsAndText}
+            className={
+              filter === "ACCEPTED" ? style.selectedIcon : style.iconsAndText
+            }
             onClick={() => {
               setIsActive(true);
               setFilter("ACCEPTED");
@@ -79,10 +85,14 @@ const invitations: NextPage = (props) => {
               height={35}
               alt="logo-accepted"
             />
-            <div>accepté</div>
+            <div className={filter === "ACCEPTED" ? "" : style.txtOpacity}>
+              accepté
+            </div>
           </div>
           <div
-            className={style.iconsAndText}
+            className={
+              filter === "REFUSED" ? style.selectedIcon : style.iconsAndText
+            }
             onClick={() => {
               setIsActive(true);
               setFilter("REFUSED");
@@ -94,16 +104,19 @@ const invitations: NextPage = (props) => {
               height={35}
               alt="logo-refused"
             />
-            <div>refusé</div>
+            <div className={filter === "REFUSED" ? "" : style.txtOpacity}>
+              refusé
+            </div>
           </div>
           <div
-            className={style.iconsAndText}
+            className={isActive ? style.iconsAndText : style.selectedIcon}
             onClick={() => {
               setIsActive(false);
+              setFilter("");
             }}
           >
             <Image src={reset} width={35} height={35} alt="logo-refused" />
-            <div>tout</div>
+            <div className={!isActive ? "" : style.txtOpacity}>tout</div>
           </div>
         </div>
 

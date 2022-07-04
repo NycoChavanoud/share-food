@@ -10,18 +10,21 @@ const InviteValidation = () => {
     axios.get(`/api/invitations/`).then((res) => setInvitations(res.data));
   }, []);
 
+  const pendingInvitations = invitations.filter((i) => i.status === "PENDING");
+  console.log(pendingInvitations.length);
+
   return (
     <Link href={"/profile/invitations"}>
       <div
         className={
-          invitations.length !== 0
+          pendingInvitations.length !== 0
             ? style.InviteValidationContainer
             : style.InviteValidationContainerAtZero
         }
       >
         <div className={style.textInvitations}>
           {" "}
-          {invitations.length !== 0 ? (
+          {pendingInvitations.length !== 0 ? (
             <span> Invitations en attentes </span>
           ) : (
             <span> aucune invitations en cours </span>
@@ -29,12 +32,12 @@ const InviteValidation = () => {
         </div>
         <div
           className={
-            invitations.length !== 0
+            pendingInvitations.length !== 0
               ? style.numberOfInvitations
               : style.numberOfInvitationsAtZero
           }
         >
-          {invitations.length}
+          {pendingInvitations.length}
         </div>
       </div>
     </Link>
