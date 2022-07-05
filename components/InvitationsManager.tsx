@@ -10,10 +10,8 @@ import CurrentUserContext from "../contexts/currentUserContext";
 
 const InvitationsManager = ({ id }: Partial<IInvitation>) => {
   const router = useRouter();
-  const eventId = parseInt(router.query.id, 10);
+  const eventId = parseInt(router.query.id as string, 10);
   const { currentUserProfile } = useContext(CurrentUserContext);
-
-  console.log(id, eventId, currentUserProfile?.id);
 
   const handlePatchStatus = async (status: string) => {
     await axios

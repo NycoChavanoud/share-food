@@ -33,14 +33,12 @@ const RemoveInvitation = () => {
     setInviteId(currentUserInviteId);
   }, [guests]);
 
-  console.log(inviteId, guests);
-
   const handleConfirm = async () => {
     axios
       .patch(`/api/invitations/`, {
         id: inviteId,
         guestId: currentUserProfile?.id,
-        eventId: parseInt(eventId, 10),
+        eventId: parseInt(eventId as string, 10),
         status: "REFUSED",
       })
       .then(() => setDeleteContainer(!deleteContainer))

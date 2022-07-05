@@ -43,7 +43,6 @@ const handlePatch = async (
   req: NextApiRequestBodyOfInvitation,
   res: NextApiResponse
 ) => {
-  console.log("reqqqqqq :", req.body);
   const { id, eventId, guestId, status } = req.body;
 
   const invitationToPatch = await updateOneGuestStatus({

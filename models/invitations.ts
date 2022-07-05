@@ -90,7 +90,6 @@ export const createOneGuestForEvent = async ({
 export const updateOneGuestStatus = async (data: IInvitation) => {
   const id = data.id;
   const eventId = data.eventId;
-  console.log("DATAAAAA :", data);
 
   return await db.invitation.update({
     where: { id },
