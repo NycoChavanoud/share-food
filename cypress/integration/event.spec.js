@@ -97,7 +97,7 @@ describe("event", function () {
           cy.task("createInvit", {
             guestId: user.id,
             eventId: e.id,
-            status: "PENDING",
+            status: "ACCEPTED",
           });
         });
       });
@@ -121,7 +121,7 @@ describe("event", function () {
               cy.task("createInvit", {
                 guestId: u.id,
                 eventId: e.id,
-                status: "PENDING",
+                status: "ACCEPTED",
               });
             })
           );

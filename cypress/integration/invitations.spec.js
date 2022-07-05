@@ -53,7 +53,7 @@ describe("invitations", function () {
               cy.task("createInvit", {
                 guestId: u.id,
                 eventId: e.id,
-                status: "PENDING",
+                status: "ACCEPTED",
               });
             });
           });
@@ -64,7 +64,7 @@ describe("invitations", function () {
     it(" can't acces to update invitations on event", function () {
       cy.visit("/events");
       cy.contains("mon event test").click();
-      cy.contains("Membres invités : ");
+      cy.contains("Membres déja présents : ");
     });
 
     it("can manage invitation", function () {
