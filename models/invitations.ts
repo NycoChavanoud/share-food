@@ -95,9 +95,9 @@ export const updateOneGuestStatus = async (data: IInvitation) => {
   return await db.invitation.update({
     where: { id },
     data: {
-      id: data.id,
+      id: id,
       guestId: data.guestId,
-      eventId: data.eventId,
+      eventId: eventId,
       status: data.status,
     },
   });

@@ -10,8 +10,7 @@ import CurrentUserContext from "../contexts/currentUserContext";
 
 const InvitationsManager = ({ id }: Partial<IInvitation>) => {
   const router = useRouter();
-  const eventId = router.query.id;
-
+  const eventId = parseInt(router.query.id, 10);
   const { currentUserProfile } = useContext(CurrentUserContext);
 
   console.log(id, eventId, currentUserProfile?.id);
@@ -21,7 +20,7 @@ const InvitationsManager = ({ id }: Partial<IInvitation>) => {
       .patch(`/api/invitations/`, {
         id: id,
         guestId: currentUserProfile?.id,
-        eventId: parseInt(eventId, 10),
+        eventId: eventId,
         status: status,
       })
       .then(() => router.push("/events"));

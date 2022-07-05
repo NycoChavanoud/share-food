@@ -16,6 +16,7 @@ import InvitationsCard from "../../../components/InvitationsCard";
 import defaultAvatar from "../../../public/img/avatar.png";
 import { NextPage } from "next";
 import InvitationsManager from "../../../components/InvitationsManager";
+import RemoveInvitation from "../../../components/RemoveInvitation";
 
 const EventDetail: NextPage = (props) => {
   const router = useRouter();
@@ -172,7 +173,7 @@ const EventDetail: NextPage = (props) => {
                 );
               })}
             </div>
-            <div>ICI PREVOIR DE POUVOIR ANNULER SA PRESENCE</div>
+            <RemoveInvitation />
           </>
         ) : (
           event.authorId === currentUserProfile?.id && (
