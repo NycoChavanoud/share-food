@@ -35,7 +35,7 @@ const RemoveInvitation = () => {
 
   const handleConfirm = async () => {
     axios
-      .patch(`/api/invitations/`, {
+      .patch(`/api/invitations/${inviteId}`, {
         id: inviteId,
         guestId: currentUserProfile?.id,
         eventId: parseInt(eventId as string, 10),

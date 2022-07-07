@@ -1,11 +1,13 @@
 import { InvitationStatus } from "@prisma/client";
 import db from "../lib/prisma";
+import { IUser } from "./user";
 
 export interface IInvitation {
   id: number;
   guestId: string;
   eventId: number;
   status: InvitationStatus;
+  guest: IUser;
 }
 
 const invitPropsToShow = {
@@ -55,6 +57,15 @@ export const getOneInvite = async (id: string) => {
   });
 };
 
+export const getOneInviteByUserId = async (userId: string, id: string) => {
+  return await db.invitation.findFirst({
+    where: {
+      id: parseInt(id, 10),
+      guestId: userId,
+    },
+  });
+};
+
 export const deleteInvitationbyEventId = async (id: string) => {
   return await db.invitation
     .delete({
@@ -88,7 +99,7 @@ export const createOneGuestForEvent = async ({
 };
 
 export const updateOneGuestStatus = async (data: IInvitation) => {
-  const id = data.id;
+  const id = parseInt(data.id as unknown as string, 10);
   const eventId = data.eventId;
 
   return await db.invitation.update({

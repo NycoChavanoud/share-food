@@ -17,7 +17,7 @@ export interface IEvent {
   author: IUser;
   guestId: string;
   status: string;
-  invitations: IInvitation;
+  invitations: IInvitation[];
 }
 
 const eventPropsToShow = {

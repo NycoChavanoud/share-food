@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import {
   createOneGuestForEvent,
   getInvitationsByUserId,
+  getOneInviteByUserId,
   IInvitation,
   updateOneGuestStatus,
 } from "../../../models/invitations";
@@ -39,24 +40,7 @@ const handleGetInvitationsByUserId = async (
   else res.status(404).send("not found");
 };
 
-const handlePatch = async (
-  req: NextApiRequestBodyOfInvitation,
-  res: NextApiResponse
-) => {
-  const { id, eventId, guestId, status } = req.body;
-
-  const invitationToPatch = await updateOneGuestStatus({
-    id,
-    eventId,
-    guestId,
-    status,
-  });
-  if (invitationToPatch) res.status(201).send({ invitationToPatch });
-  else res.status(404).send("not found");
-};
-
 export default base()
   .use(requireCurrentUser)
   .post(handleCreateOne)
-  .get(handleGetInvitationsByUserId)
-  .patch(handlePatch);
+  .get(handleGetInvitationsByUserId);

@@ -15,7 +15,7 @@ const InvitationsManager = ({ id }: Partial<IInvitation>) => {
 
   const handlePatchStatus = async (status: string) => {
     await axios
-      .patch(`/api/invitations/`, {
+      .patch(`/api/invitations/${id}`, {
         id: id,
         guestId: currentUserProfile?.id,
         eventId: eventId,
