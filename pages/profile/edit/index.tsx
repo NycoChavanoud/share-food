@@ -7,8 +7,10 @@ import ValidateDelete from "../../../components/ValidateDelete";
 import { useToasts } from "react-toast-notifications";
 import axios from "axios";
 import { signOut } from "next-auth/react";
+import LayoutCurrentUser from "../../../components/LayoutCurrentUser";
+import { NextPage } from "next";
 
-const index = () => {
+const index: NextPage = (props) => {
   const [openDelete, setOpenDelete] = useState(false);
   const [deleteContainer, setDeleteContainer] = useState(false);
   const { addToast } = useToasts();
@@ -36,7 +38,7 @@ const index = () => {
   };
 
   return (
-    <>
+    <LayoutCurrentUser pageTitle="Edition de profil">
       {openDelete && (
         <button
           className={style.deleteAccountBtn}
@@ -84,7 +86,7 @@ const index = () => {
           )}
         </div>
       </div>
-    </>
+    </LayoutCurrentUser>
   );
 };
 

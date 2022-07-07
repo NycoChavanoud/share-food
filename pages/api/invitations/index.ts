@@ -2,7 +2,10 @@ import base from "../../../middlewares/common";
 import type { NextApiRequest, NextApiResponse } from "next";
 import {
   createOneGuestForEvent,
+  getInvitationsByUserId,
+  getOneInviteByUserId,
   IInvitation,
+  updateOneGuestStatus,
 } from "../../../models/invitations";
 import requireCurrentUser from "../../../middlewares/requireCurrentUser";
 import { IUser } from "../../../models/user";
@@ -28,4 +31,16 @@ const handleCreateOne = async (
   }
 };
 
-export default base().use(requireCurrentUser).post(handleCreateOne);
+const handleGetInvitationsByUserId = async (
+  req: NextApiRequestBodyOfInvitation,
+  res: NextApiResponse
+) => {
+  const invitations = await getInvitationsByUserId(req.currentUser.id);
+  if (invitations) return res.status(201).send(invitations);
+  else res.status(404).send("not found");
+};
+
+export default base()
+  .use(requireCurrentUser)
+  .post(handleCreateOne)
+  .get(handleGetInvitationsByUserId);

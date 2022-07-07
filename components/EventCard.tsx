@@ -1,4 +1,3 @@
-import React from "react";
 import { IEvent } from "../models/event";
 import style from "./styleComponents/EventCard.module.css";
 

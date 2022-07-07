@@ -3,7 +3,9 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import {
   deleteInvitationbyEventId,
   getOneInvite,
+  getOneInviteByUserId,
   IInvitation,
+  updateOneGuestStatus,
 } from "../../../models/invitations";
 import requireCurrentUser from "../../../middlewares/requireCurrentUser";
 import { IUser } from "../../../models/user";
@@ -44,7 +46,31 @@ const handleGetOne = async (
   } else res.status(404).send("not found");
 };
 
+const handlePatch = async (
+  req: NextApiRequestwithCurrentEvent,
+  res: NextApiResponse
+) => {
+  const { eventId, guestId, status, guest } = req.body;
+  const { id } = req.query;
+  const currentUserInvite = await getOneInviteByUserId(
+    req.currentUser.id,
+    id.toString()
+  );
+  if (!currentUserInvite) return res.status(403).send("Forbidden");
+
+  const invitationToPatch = await updateOneGuestStatus({
+    id,
+    eventId,
+    guestId,
+    status,
+    guest,
+  });
+  if (invitationToPatch) res.status(201).send({ invitationToPatch });
+  else res.status(404).send("not found");
+};
+
 export default base()
   .use(requireCurrentUser)
   .delete(handleDelete)
-  .get(handleGetOne);
+  .get(handleGetOne)
+  .patch(handlePatch);
