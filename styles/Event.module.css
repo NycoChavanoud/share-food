@@ -1,5 +1,5 @@
 .eventPageContainer {
-  width: 90%;
+  width: 95%;
   height: 100%;
   margin: 0 auto;
   display: flex;
@@ -17,6 +17,17 @@
   flex-direction: column;
   align-items: center;
   height: 55vh;
+}
+
+.actionPageInfo {
+  max-width: 860px;
+  width: 100%;
+  margin: 10px auto 10px;
+  overflow-x: scroll;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .eventTitle {
@@ -148,4 +159,11 @@
 .titleMembers {
   width: 95%;
   margin-left: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+.subtitle {
+  font-size: 0.5em;
+  font-weight: 700;
 }

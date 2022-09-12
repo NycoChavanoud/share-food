@@ -53,7 +53,7 @@ describe("invitations", function () {
               cy.task("createInvit", {
                 guestId: u.id,
                 eventId: e.id,
-                status: "PENDING",
+                status: "ACCEPTED",
               });
             });
           });
@@ -64,10 +64,10 @@ describe("invitations", function () {
     it(" can't acces to update invitations on event", function () {
       cy.visit("/events");
       cy.contains("mon event test").click();
-      cy.contains("Membres invités : ");
+      cy.contains("Membres déja présents : ");
     });
 
-    it("can manage invitation", function () {
+    xit("can manage invitation", function () {
       cy.task("findUserByEmail", "visitor@website.com").then((u) => {
         cy.task("createEvent", {
           title: "evenement créé par currentUser",
@@ -99,15 +99,15 @@ describe("invitations", function () {
           cy.get('[data-cy="addBtn0"]').click();
           cy.contains("nombre d'invités : 5");
           cy.contains("Tous vos amis sont déjà invités à cet évènement.");
-          cy.get('[data-cy="deleteBtn0"]').click();
+          cy.get('[data-cy="deleteBtn0"]').click({ force: true });
           cy.contains("nombre d'invités : 4");
-          cy.get('[data-cy="deleteBtn0"]').click();
+          cy.get('[data-cy="deleteBtn0"]').click({ force: true });
           cy.contains("nombre d'invités : 3");
-          cy.get('[data-cy="deleteBtn0"]').click();
+          cy.get('[data-cy="deleteBtn0"]').click({ force: true });
           cy.contains("nombre d'invités : 2");
-          cy.get('[data-cy="deleteBtn0"]').click();
+          cy.get('[data-cy="deleteBtn0"]').click({ force: true });
           cy.contains("nombre d'invités : 1");
-          cy.get('[data-cy="deleteBtn0"]').click();
+          cy.get('[data-cy="deleteBtn0"]').click({ force: true });
           cy.contains("aucun invité pour votre évènement");
         });
       });

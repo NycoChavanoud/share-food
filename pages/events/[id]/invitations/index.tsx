@@ -90,7 +90,6 @@ const EditInvitations: NextPage = (props) => {
           )
         );
       })
-
       .catch(console.error);
   };
 
@@ -112,7 +111,6 @@ const EditInvitations: NextPage = (props) => {
           )
         );
       })
-
       .catch(console.error);
   };
 

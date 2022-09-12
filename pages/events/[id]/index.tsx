@@ -15,21 +15,22 @@ import CurrentUserContext from "../../../contexts/currentUserContext";
 import InvitationsCard from "../../../components/InvitationsCard";
 import defaultAvatar from "../../../public/img/avatar.png";
 import { NextPage } from "next";
+import InvitationsManager from "../../../components/InvitationsManager";
+import RemoveInvitation from "../../../components/RemoveInvitation";
+import { IEvent } from "../../../models/event";
+import { Loading } from "../../../components/Loading";
+import { IInvitation } from "../../../models/invitations";
+import { IUser } from "../../../models/user";
 
 const EventDetail: NextPage = (props) => {
   const router = useRouter();
   const { id } = router.query;
-  const [event, setEvent] = useState<any>("");
-  const [guests, setGuests] = useState<any[] | null>(null);
+  const [event, setEvent] = useState<IEvent | null>(null);
+  const [guests, setGuests] = useState<IInvitation[] | null>(null);
   const [deleteContainer, setDeleteContainer] = useState(false);
   const { addToast } = useToasts();
   const { currentUserProfile } = useContext(CurrentUserContext);
-
-  const notifySuccess = () => {
-    addToast("🦄 Ton évènement est supprimé", {
-      appearance: "success",
-    });
-  };
+  const [inviteIdOfCurrentUser, setInviteIdOfCurrentUser] = useState<number>(0);
 
   useEffect(() => {
     axios
@@ -37,17 +38,6 @@ const EventDetail: NextPage = (props) => {
       .then((res) => setEvent(res.data))
       .catch(console.error);
   }, [id]);
-
-  const handleConfirm = () => {
-    return axios
-      .delete(`/api/events/${id}`)
-      .then(() => router.push("/events"))
-      .then(() => notifySuccess())
-      .then(() => setDeleteContainer(!deleteContainer))
-      .catch((err) => console.error(err.response.status));
-  };
-
-  const dateFormat = dayjs(event.date).locale("fr").format("dddd DD MMMM YYYY");
 
   const fetchGuestList = () => {
     axios
@@ -59,6 +49,49 @@ const EventDetail: NextPage = (props) => {
   useEffect(() => {
     fetchGuestList();
   }, [event]);
+
+  useEffect(() => {
+    if (currentUserIsNotAcceptedStatus) {
+      const invitation = guests?.filter((i) =>
+        i.guestId.includes(currentUserId)
+      );
+      if (invitation) setInviteIdOfCurrentUser(invitation[0].id);
+    }
+  }, [guests]);
+
+  if (!currentUserProfile) return null;
+
+  const notifySuccess = () => {
+    addToast("🦄 Ton évènement est supprimé", {
+      appearance: "success",
+    });
+  };
+
+  const handleConfirm = () => {
+    return axios
+      .delete(`/api/events/${id}`)
+      .then(() => router.push("/events"))
+      .then(() => notifySuccess())
+      .then(() => setDeleteContainer(!deleteContainer))
+      .catch((err) => console.error(err.response.status));
+  };
+
+  const dateFormat = dayjs(event?.date)
+    .locale("fr")
+    .format("dddd DD MMMM YYYY");
+
+  const invitationsAccepted = guests?.filter((g) => g.status === "ACCEPTED");
+
+  const currentUserId = currentUserProfile?.id;
+  const showInvitationManager = guests?.filter(
+    (g) => g.status === "PENDING" || g.status === "REFUSED"
+  );
+
+  const currentUserIsNotAcceptedStatus = showInvitationManager?.some((i) =>
+    i.guestId.includes(currentUserId)
+  );
+
+  if (!event) return <Loading />;
 
   return (
     <LayoutCurrentUser pageTitle={`évènement : ${event.title}`}>
@@ -77,7 +110,7 @@ const EventDetail: NextPage = (props) => {
         date={dateFormat}
         hour={event.hour}
         address={event.address}
-        id={event.id}
+        id={event.id.toString()}
         author={event.author}
         rightElement={
           event.authorId === currentUserProfile?.id && (
@@ -107,13 +140,19 @@ const EventDetail: NextPage = (props) => {
           </div>
         )}
 
-        {guests?.length !== 0 ? (
+        {invitationsAccepted?.length !== 0 &&
+        !currentUserIsNotAcceptedStatus ? (
           <>
             <div className={style.titleDescription}>
               <div className={style.titleWithEditContainer}>
                 <div className={style.titleMembers}>
-                  {" "}
-                  Membres invités : {guests?.length}
+                  <div>
+                    Membres déja présents : {invitationsAccepted?.length}
+                  </div>
+                  <div className={style.subtitle}>
+                    {" "}
+                    total d'invités possibles {guests?.length}{" "}
+                  </div>
                 </div>
                 {event.authorId === currentUserProfile?.id && (
                   <Link href={`/events/${id}/invitations`}>
@@ -128,7 +167,7 @@ const EventDetail: NextPage = (props) => {
               </div>
             </div>
             <div className={style.invitationsContainer}>
-              {guests?.map((guest, index) => {
+              {invitationsAccepted?.map((guest, index) => {
                 return (
                   <InvitationsCard
                     key={index}
@@ -144,6 +183,8 @@ const EventDetail: NextPage = (props) => {
                 );
               })}
             </div>
+
+            {event.authorId !== currentUserProfile?.id && <RemoveInvitation />}
           </>
         ) : (
           event.authorId === currentUserProfile?.id && (
@@ -160,6 +201,11 @@ const EventDetail: NextPage = (props) => {
             </Link>
           )
         )}
+
+        {currentUserIsNotAcceptedStatus &&
+          event.authorId !== currentUserProfile?.id && (
+            <InvitationsManager id={inviteIdOfCurrentUser} />
+          )}
 
         {event.authorId === currentUserProfile?.id && (
           <>
