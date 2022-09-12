@@ -67,7 +67,7 @@ describe("invitations", function () {
       cy.contains("Membres déja présents : ");
     });
 
-    it("can manage invitation", function () {
+    xit("can manage invitation", function () {
       cy.task("findUserByEmail", "visitor@website.com").then((u) => {
         cy.task("createEvent", {
           title: "evenement créé par currentUser",
