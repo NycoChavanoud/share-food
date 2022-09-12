@@ -17,7 +17,7 @@ export interface IEvent {
   author: IUser;
   guestId: string;
   status: string;
-  invitations: IInvitation;
+  invitations: IInvitation[];
 }
 
 const eventPropsToShow = {
@@ -80,6 +80,7 @@ export const getEvents = async (currentUser: IUser) => {
             invitations: {
               some: {
                 guestId: currentUserId,
+                status: "ACCEPTED",
               },
             },
           },

@@ -1,12 +1,13 @@
-import { InvitationStatus } from '@prisma/client';
-import { NextApiRequest, NextApiResponse } from 'next';
-import db from '../lib/prisma';
+import { InvitationStatus } from "@prisma/client";
+import db from "../lib/prisma";
+import { IUser } from "./user";
 
 export interface IInvitation {
   id: number;
   guestId: string;
   eventId: number;
   status: InvitationStatus;
+  guest: IUser;
 }
 
 const invitPropsToShow = {
@@ -28,6 +29,23 @@ export const getInvitations = async (currentEventId: string) => {
     .catch((_) => false);
 };
 
+export const getInvitationsByUserId = async (currentUserId: String) => {
+  const dateOfDay = new Date().toISOString().substring(0, 10);
+  return await db.invitation.findMany({
+    where: {
+      guestId: currentUserId.toString(),
+      event: {
+        date: {
+          gte: dateOfDay,
+        },
+      },
+    },
+    include: {
+      event: true,
+      guest: true,
+    },
+  });
+};
 export const getOneInvite = async (id: string) => {
   return await db.invitation.findUnique({
     where: { id: parseInt(id, 10) },
@@ -35,6 +53,15 @@ export const getOneInvite = async (id: string) => {
     include: {
       event: true,
       guest: true,
+    },
+  });
+};
+
+export const getOneInviteByUserId = async (userId: string, id: string) => {
+  return await db.invitation.findFirst({
+    where: {
+      id: parseInt(id, 10),
+      guestId: userId,
     },
   });
 };
@@ -67,6 +94,21 @@ export const createOneGuestForEvent = async ({
     include: {
       event: true,
       guest: true,
+    },
+  });
+};
+
+export const updateOneGuestStatus = async (data: IInvitation) => {
+  const id = parseInt(data.id as unknown as string, 10);
+  const eventId = data.eventId;
+
+  return await db.invitation.update({
+    where: { id },
+    data: {
+      id: id,
+      guestId: data.guestId,
+      eventId: eventId,
+      status: data.status,
     },
   });
 };

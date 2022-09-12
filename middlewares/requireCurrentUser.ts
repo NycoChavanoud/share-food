@@ -1,6 +1,6 @@
-import { findByEmail, IUser } from "../models/user";
+import { findByEmail } from "../models/user";
 import { getSession } from "next-auth/react";
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
+import type { NextApiRequest, NextApiResponse } from "next";
 import { User } from "@prisma/client";
 
 type NextApiRequestWithCurrentUser = NextApiRequest & {

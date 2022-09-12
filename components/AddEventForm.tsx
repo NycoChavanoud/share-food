@@ -7,7 +7,6 @@ import { useToasts } from "react-toast-notifications";
 import Select from "react-select";
 import { IUser } from "../models/user";
 import CurrentUserContext from "../contexts/currentUserContext";
-import { IEvent } from "../models/event";
 
 export interface SelectableUserOption {
   value: string;

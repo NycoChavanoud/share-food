@@ -1,0 +1,14 @@
+.removeBtn {
+  width: 70%;
+  height: 40px;
+  border: none;
+  background-color: var(--redColor);
+  color: var(--ligthColor);
+  font-family: "Amiko", sans-serif;
+  font-size: 1em;
+  font-weight: 600;
+  letter-spacing: 3px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin: 20px auto;
+}

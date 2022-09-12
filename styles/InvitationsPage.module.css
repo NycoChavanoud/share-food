@@ -1,0 +1,63 @@
+.InvitationPageContainer {
+  width: 95%;
+  height: 100%;
+  margin: 0 auto 60px;
+  display: flex;
+  flex-direction: column;
+  max-width: 860px;
+}
+
+.invitationManagerContainer {
+  height: 100%;
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.invitationManagerContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.inviteTitle {
+  width: 90%;
+  max-width: 860px;
+  font-family: "Amiko", sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  letter-spacing: 3px;
+  border-bottom: solid 2px rgba(39, 36, 33, 0.3);
+  text-align: center;
+  position: relative;
+  margin: 30px auto;
+}
+
+.legendIcons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.iconsAndText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Amiko", sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.selectedIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: "Amiko", sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  transform: scale(1.3);
+  transition: 1s;
+  cursor: pointer;
+}
+
+.txtOpacity {
+  opacity: 0.5;
+}
